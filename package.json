@@ -35,6 +35,8 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "sentiment": "^4.0.1",
     "sequelize": "^4.8.3",
     "socket.io": "^2.0.3"
