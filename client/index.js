@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 
 import store from './store/index'
-import Main from './components/main'
+import Main from './components/Main'
 
 
 render(
