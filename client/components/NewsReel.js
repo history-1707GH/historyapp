@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 import store, {  } from '../store';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
 
 export default class NewsReel extends Component {
   constructor(props){
@@ -12,7 +13,9 @@ export default class NewsReel extends Component {
   render() {
       return (
           <div>
-
+            {
+              
+            }
           </div>
       )
   }
