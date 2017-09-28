@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const _ = require('lodash');
 const Sequelize = require('sequelize');
 
-const db = require('../builder');
+const db = require('../_db');
 
 const User = db.define('user', {
     username: {

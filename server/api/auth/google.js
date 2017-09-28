@@ -1,7 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const db = require('../../db/db')
+const db = require('../../db')
 const User = db.models.user
 
 
