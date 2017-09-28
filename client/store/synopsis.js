@@ -6,12 +6,18 @@ const getSynopsis  = synopsis => {
   return {type: GET_SYNOPSIS, synopsis}
 }
 
-export const fetchSynopsis = (location) => {
+export const fetchSynopsis = (pageId) => {
   return function thunk(dispatch) {
-    
-    return axios.get(``)
-      .then(res=>res.data)
-      .then((returnedData)=>console.log(returnedData))
+    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${pageId}&prop=extracts&redirects=true `)
+      .then(res=>{
+        return {
+          title: res.data.query.pages[pageId].title,
+          content: res.data.query.pages[pageId].extract
+        }
+      })
+      .then(synopsis=>{
+        dispatch(getSynopsis(synopsis))
+      })
       .catch(err=>console.log("there was an issue", err))
   }
 }
@@ -22,3 +28,5 @@ export default function (state={}, action){
     default: return state
   }
 }
+
+

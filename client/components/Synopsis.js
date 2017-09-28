@@ -8,23 +8,35 @@ import {fetchSynopsis} from '../store'
 class Synopsis extends Component {
 
   componentDidMount(){
-    this.props.fetchSynopsis()
+    this.props.fetchSynopsis(6549088) 
   }
 
   render(){
+    let content = ""
+    console.log(this.props.synopsis)
+    if(this.props.synopsis.content) {
+       content = this.props.synopsis.content
+    };
     return(
-      <div>xx</div>
+      <div>{content}</div>
     )
   }
 }
 
+
+const mapState = state => {
+  return {
+    synopsis: state.synopsis
+  }
+}
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: function(location) {
-      dispatch(fetchSynopsis(location))
+    fetchSynopsis: function(pageId) {
+      dispatch(fetchSynopsis(pageId))
     }
   }
 }
 
-export default connect(null, mapDispatch)(Synopsis)
+
+export default connect(mapState, mapDispatch)(Synopsis)
 
