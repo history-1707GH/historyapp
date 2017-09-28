@@ -1,10 +1,14 @@
 import axios from 'axios';
+import {secrets_NYT_API_KEY } from '../../secrets'
+
 
 // ACTION TYPE
 const SET_NEWS_HEADLINES = 'SET_NEWS_HEADLINES';
 
 // ACTION CREATOR
-export const setHeadlines = headlines => {type:SET_NEWS_HEADLINES, headlines};
+export const setHeadlines = headlines => {
+  return {type:SET_NEWS_HEADLINES, headlines}
+}
 
 // REDUCER 
 export default (headlines=[], action) => {
@@ -17,19 +21,14 @@ export default (headlines=[], action) => {
 
 // THUNKS 
 export const fetchHeadlines = query => dispatch => {
-  let fakeQuery = 'New York Stock Exchange Great Depression';
-  return Request({
-    uri: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-    qs: {
-      'api-key':'f91c4a6aa0254f31b9b3b807043fdff0',
-      q:`${fakeQuery}`,
-      sort:'oldest',
-      fl:'snippet, lead_paragraph, abstract, headline, keywords, pub_date, document_type, byline, _id, multimedia'
-    },
-    json:true
-  })
+  const api_key = secrets_NYT_API_KEY;
+  const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia'; 
+
+  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=oldest&fields=${fields}&api-key=${api_key}`)
   .then(res => {
-    dispatch(fetchHeadlines(res.data))
+    console.log(res.data.response.docs);
+    dispatch(setHeadlines(res.data.response.docs))
   })
   .catch(console.error);
 }
+ 
