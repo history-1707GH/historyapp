@@ -8,7 +8,7 @@ const path = require('path');
 
 const passport = require('passport');
 
-const db = require('./db/db');
+const db = require('./db');
 const User = db.models.user;
 
 // general purpose middleware
