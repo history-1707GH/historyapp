@@ -1,10 +1,23 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer } from 'react-leaflet'
+import {fetchNearbyPlaces} from '../store'
+import {connect} from 'react-redux'
 
 
-export default class MapComponent extends React.Component {
+class MapComponent extends React.Component {
+ 
+  constructor(props) {
+    super(props)
+    this.state = {
+      position: [40.705076, -74.00916]
+    }
+  }
 
+  componentDidMount(){
+    console.log("this.props", this.props)
+    this.props.fetchNearbyPlaces(this.state.position)
+  }
 
   render() {
     const position = [40.705076, -74.00916]
@@ -21,3 +34,18 @@ export default class MapComponent extends React.Component {
   }
 }
 
+const mapState = state => {
+  return {
+    nearbyPlaces: state.nearbyPlaces
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    fetchNearbyPlaces: function(position) {
+      dispatch(fetchNearbyPlaces(position))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(MapComponent)
