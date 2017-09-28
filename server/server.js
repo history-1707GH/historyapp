@@ -43,14 +43,6 @@ const port = process.env.PORT || 3000;
 // sync our database
 db.sync()
   .then(function () {
-    // then start listening with our express server once we have synced
-    // return https.createServer({
-    //     key: fs.readFileSync(path.join(__dirname, '../server.enc.key'), 'utf-8'),
-    //     certificate: fs.readFileSync(path.join(__dirname, '../server.crt'), 'utf-8'),
-    //     passphrase: 'histoire'
-    // }, app).listen(port, ()=>{
-    //   console.log('Initiating')
-    // })
     return app.listen(port, function () {
       console.log(`Server Starting: ${port}`);
     })

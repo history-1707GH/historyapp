@@ -8,6 +8,7 @@ export const setHeadlines = headlines => {type:SET_NEWS_HEADLINES, headlines};
 
 // REDUCER 
 export default (headlines=[], action) => {
+  console.log('action.type', action.type)
   switch (action.type){
     // I don't foresee us needing to "ADD" to the headlines so whenever we are fetching headlines i'm assuming we are resetting the Global State for the headlines of the current event/point of interest at a time 
     case SET_NEWS_HEADLINES: return action.headlines;

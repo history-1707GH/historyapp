@@ -3,8 +3,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
+import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Login from './Login'
+import Synopsis from './Synopsis'
 
 //import other components here
 
@@ -21,12 +23,15 @@ class Main extends Component {
         this.props.fetchCurrentUser()
     }
 
+
     render() {
         return (
             <div>
                 <Switch>
                     <Route exact path='/' component={Login}/>
+                    <Route exact path='/map' component={MapComponent}/>                    
                     <Route path='/headlines' component={NewsReel}/>
+                    <Route path='/synopsis' component={Synopsis} />
                     {/* <Route exact path='/signup' component={Signup}/>
                     <Route exact path='/login' component={Login}/>
                     <Route exact path='/' component={Home}/> */}
@@ -35,6 +40,7 @@ class Main extends Component {
         )
     }
 }
+
 
 const mapState = null
 
