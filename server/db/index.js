@@ -1,4 +1,4 @@
-const db = require('./builder');
+const db = require('./_db');
 
 const User = require('./models/user');
 const Route = require('./models/route');

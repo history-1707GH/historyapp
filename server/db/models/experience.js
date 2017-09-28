@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../builder');
+const db = require('../_db');
 
 const Experience = db.define('route', {
     latitude: {
