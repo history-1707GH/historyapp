@@ -1,10 +1,13 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
 
-const Nyt = db.define('nyt', {
+const Wiki = db.define('wiki', {
     url: { 
+        type: Sequelize.STRING
+    },
+    type: {
         type: Sequelize.STRING
     }
 })
 
-module.exports = Nyt;
+module.exports = Wiki;
