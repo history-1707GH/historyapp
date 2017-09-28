@@ -45,9 +45,12 @@ db.sync()
   .then(function () {
     // then start listening with our express server once we have synced
     // return https.createServer({
-    //     key: fs.readFileSync(path.join(__dirname, '../server.enc.key'), 'utf-8'),
-    //     certificate: fs.readFileSync(path.join(__dirname, '../server.crt'), 'utf-8'),
-    //     passphrase: 'histoire'
+    //     key: fs.readFileSync(path.join(__dirname, '../server.enc.key')),
+    //     certificate: fs.readFileSync(path.join(__dirname, '../server.crt')),
+    //     ciphers: ['RSA-AES128-GCM-SHA256', 
+    //     'RSA-AES256-GCM-SHA384',
+    //     'ECDHE-ECDSA-AES128-GCM-SHA256',
+    //     'ECDHE-ECDSA-AES256-GCM-SHA384'].join(':'),
     // }, app).listen(port, ()=>{
     //   console.log('Initiating')
     // })
