@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
+import MapComponent from './MapComponent'
 
 //import other components here
 
@@ -25,8 +26,8 @@ class Main extends Component {
                 <h1>Testing</h1>
                 <main>
                     <Switch>
-                        {/* <Route exact path='/signup' component={Signup}/>
-                        <Route exact path='/login' component={Login}/>
+                         <Route exact path='/map' component={MapComponent}/>
+                       {/* <Route exact path='/login' component={Login}/>
                         <Route exact path='/' component={Home}/> */}
                     </Switch>
                 </main>
