@@ -2,12 +2,16 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import NewsReelReducer from './newsreel';
+import headlines from './newsreel';
+import synopsis from './synopsis'
+import nearbyPlaces from './nearbyPlaces'
 
 //import stuff here
 
 const reducer = combineReducers({
-  headlines: NewsReelReducer
+  headlines,
+  synopsis,
+  nearbyPlaces
 });
 
 const store = createStore(
@@ -21,4 +25,7 @@ const store = createStore(
 export default store;
 
 export * from './newsreel';
+export * from './synopsis'
+export * from './nearbyPlaces'
+
 
