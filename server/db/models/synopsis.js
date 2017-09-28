@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
 
-const Wiki = db.define('wiki', {
+const Synopsis = db.define('synopsis', {
     url: { 
         type: Sequelize.STRING
     },

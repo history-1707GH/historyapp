@@ -2,50 +2,50 @@
 const router = require('express').Router()
 const db = require('../db/db')
 
-const Wiki = db.models.wiki;
+const Article = db.models.article;
 
 router.route('/')
     .get((req, res, next) => {
-        Wiki.findAll()
-            .then(wikiInfos => {
-                res.status(200).json(wikiInfos)
+        Article.findAll()
+            .then(articleInfos => {
+                res.status(200).json(articleInfos)
             })
             .catch(next)
     })
     .post((req, res, next) => {
-        Wiki.create(req.body)
-            .then(wikiInfo => {
-                res.status(201).json(wikiInfo)
+        Article.create(req.body)
+            .then(articleInfo => {
+                res.status(201).json(articleInfo)
             })
             .catch(next)
     })
 
 router.route('/:id')
     .get((req, res, next) => {
-        Wiki.findOne({
+        Article.findOne({
             where: {
                 id: req.params.id
             }
         })
-            .then(wikiInfo => {
-                res.status(200).json(wikiInfo)
+            .then(articleInfo => {
+                res.status(200).json(articleInfo)
             })
             .catch(next)
     })
     .put((req, res, next) => {
-        Wiki.update(req.body, {
+        Article.update(req.body, {
             where: {
                 id: req.params.id
             },
             returning: true
         })
-            .then(wikiInfo => {
-                res.status(202).json(wikiInfo)
+            .then(articleInfo => {
+                res.status(202).json(articleInfo)
             })
             .catch(next)
     })
     .delete((req, res, next) => {
-        Wiki.destroy({
+        Article.destroy({
             where: {
                 id: req.params.id
             }

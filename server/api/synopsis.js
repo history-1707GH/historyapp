@@ -2,50 +2,50 @@
 const router = require('express').Router()
 const db = require('../db/db')
 
-const Nyt = db.models.nyt;
+const Synopsis = db.models.synopsis;
 
 router.route('/')
     .get((req, res, next) => {
-        Nyt.findAll()
-            .then(nytInfos => {
-                res.status(200).json(nytInfos)
+        Synopsis.findAll()
+            .then(synopsisInfos => {
+                res.status(200).json(synopsisInfos)
             })
             .catch(next)
     })
     .post((req, res, next) => {
-        Nyt.create(req.body)
-            .then(nytInfo => {
-                res.status(201).json(nytInfo)
+        Synopsis.create(req.body)
+            .then(synopsisInfo => {
+                res.status(201).json(synopsisInfo)
             })
             .catch(next)
     })
 
 router.route('/:id')
     .get((req, res, next) => {
-        Nyt.findOne({
+        Synopsis.findOne({
             where: {
                 id: req.params.id
             }
         })
-            .then(nytInfo => {
-                res.status(200).json(nytInfo)
+            .then(synopsisInfo => {
+                res.status(200).json(synopsisInfo)
             })
             .catch(next)
     })
     .put((req, res, next) => {
-        Nyt.update(req.body, {
+        Synopsis.update(req.body, {
             where: {
                 id: req.params.id
             },
             returning: true
         })
-            .then(nytInfo => {
-                res.status(202).json(nytInfo)
+            .then(synopsisInfo => {
+                res.status(202).json(synopsisInfo)
             })
             .catch(next)
     })
     .delete((req, res, next) => {
-        Nyt.destroy({
+        Synopsis.destroy({
             where: {
                 id: req.params.id
             }
