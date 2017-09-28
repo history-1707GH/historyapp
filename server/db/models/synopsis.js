@@ -10,4 +10,4 @@ const Synopsis = db.define('synopsis', {
     }
 })
 
-module.exports = Wiki;
+module.exports = Synopsis;
