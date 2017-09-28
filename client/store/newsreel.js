@@ -23,10 +23,12 @@ export default (headlines=[], action) => {
 export const fetchHeadlines = query => dispatch => {
   const api_key = secrets_NYT_API_KEY;
   const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia'; 
+  // using options as a way to optionally construct publication date time frame
+  const options = '';
 
-  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=oldest&fields=${fields}&api-key=${api_key}`)
+  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=oldest&fields=${fields}${options}&api-key=${api_key}`)
   .then(res => {
-    console.log(res.data.response.docs);
+    console.log(res.data.response);
     dispatch(setHeadlines(res.data.response.docs))
   })
   .catch(console.error);

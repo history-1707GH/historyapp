@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+// import store from '../store';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { fetchHeadlines } from '../store';
@@ -13,7 +14,8 @@ class NewsReel extends Component {
 
   componentDidMount(){
     const fakeQuery = 'New York Stock Exchange Great Depression';
-    store.dispatch(fetchHeadlines(fakeQuery.toLowerCase().split(' ').join('+')));
+    // store.dispatch(fetchHeadlines(fakeQuery.toLowerCase().split(' ').join('+')));
+    this.props.setHeadlines(fakeQuery.toLowerCase().split(' ').join('+'));
   }
 
   render() {
@@ -23,7 +25,7 @@ class NewsReel extends Component {
       <div>
         {
           headlinesArr.length && headlinesArr.map(headline => {
-            return <p key={headlinesArr.indexOf(headline)}>{headline.snippet}</p>
+            return <p key={headlinesArr.indexOf(headline)}>{headline.pub_date}</p>
           })
         }
       </div>
@@ -37,7 +39,15 @@ const mapState = state => {
   }
 }
 
+const mapDispatch = dispatch => {
+  return {
+    setHeadlines: query => {
+       dispatch(fetchHeadlines(query));
+    }
+  } 
+}
 
-export default connect(mapState)(NewsReel);
+
+export default connect(mapState, mapDispatch)(NewsReel);
 
 
