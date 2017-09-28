@@ -8,7 +8,7 @@ const path = require('path');
 
 const passport = require('passport');
 
-const db = require('./db/db');
+const db = require('./db');
 const User = db.models.user;
 
 // general purpose middleware
@@ -43,17 +43,6 @@ const port = process.env.PORT || 3000;
 // sync our database
 db.sync()
   .then(function () {
-    // then start listening with our express server once we have synced
-    // return https.createServer({
-    //     key: fs.readFileSync(path.join(__dirname, '../server.enc.key')),
-    //     certificate: fs.readFileSync(path.join(__dirname, '../server.crt')),
-    //     ciphers: ['RSA-AES128-GCM-SHA256', 
-    //     'RSA-AES256-GCM-SHA384',
-    //     'ECDHE-ECDSA-AES128-GCM-SHA256',
-    //     'ECDHE-ECDSA-AES256-GCM-SHA384'].join(':'),
-    // }, app).listen(port, ()=>{
-    //   console.log('Initiating')
-    // })
     return app.listen(port, function () {
       console.log(`Server Starting: ${port}`);
     })
