@@ -3,6 +3,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
+import NewsReel from './NewsReel'
+import Login from './Login'
 
 //import other components here
 
@@ -22,14 +24,13 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <h1>Testing</h1>
-                <main>
-                    <Switch>
-                        {/* <Route exact path='/signup' component={Signup}/>
-                        <Route exact path='/login' component={Login}/>
-                        <Route exact path='/' component={Home}/> */}
-                    </Switch>
-                </main>
+                <Switch>
+                    <Route exact path='/' component={Login}/>
+                    <Route path='/headlines' component={NewsReel}/>
+                    {/* <Route exact path='/signup' component={Signup}/>
+                    <Route exact path='/login' component={Login}/>
+                    <Route exact path='/' component={Home}/> */}
+                </Switch>
             </div>
         )
     }

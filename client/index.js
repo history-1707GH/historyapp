@@ -2,16 +2,21 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom';
+import store from './store'
+import Main from './components/Main';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
-import store from './store/index'
-import Main from './components/Main'
-
+const App = () => (
+  <MuiThemeProvider >
+    <Main />
+  </MuiThemeProvider>
+);
 
 render(
   <Provider store={store}>
     <Router>
-      <Main />
+      <App />
     </Router>
   </Provider>,
   document.getElementById('main')
