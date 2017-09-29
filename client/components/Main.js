@@ -32,9 +32,6 @@ class Main extends Component {
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
-                    {/* <Route exact path='/signup' component={Signup}/>
-                    <Route exact path='/login' component={Login}/>
-                    <Route exact path='/' component={Home}/> */}
                 </Switch>
             </div>
         )

@@ -25,7 +25,7 @@ export const fetchHeadlines = query => dispatch => {
   // using options as a way to optionally construct publication date time frame
   const options = '';
 
-  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=oldest&fields=${fields}${options}&api-key=${api_key}`)
+  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&fields=${fields}${options}&api-key=${api_key}`)
   .then(res => {
     console.log(res.data.response);
     dispatch(setHeadlines(res.data.response.docs))
