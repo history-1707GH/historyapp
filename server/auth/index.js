@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const db = require('../../db')
+const db = require('../db')
 const User = db.models.user;
 
 //get user if logged in
@@ -20,7 +20,7 @@ router.post('/signup', (req, res, next) => {
         defaults: {
             password: req.body.password,
             username: req.body.username,
-            gold: 100
+            points: 0
         }
     })
         .spread((user, exist) => {
