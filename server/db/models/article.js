@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
 
-const Nyt = db.define('nyt', {
+const Article = db.define('article', {
     url: { 
         type: Sequelize.STRING
     },
@@ -10,4 +10,4 @@ const Nyt = db.define('nyt', {
     }
 })
 
-module.exports = Nyt;
+module.exports = Article;

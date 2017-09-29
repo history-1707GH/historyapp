@@ -11,8 +11,10 @@ export const fetchNearbyPlaces = (location) => {
     const lat = location[0]
     const long = location[1]
     return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&list=geosearch&gscoord=${lat}%7C${long}&gsradius=10000`)
+
       .then(res => res.data.query.geosearch)
       .then(locations => {
+
         dispatch(getNearbyPlaces(locations))
       })
       .catch(err => console.log("there was an issue", err))
