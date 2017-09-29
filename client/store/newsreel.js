@@ -21,14 +21,14 @@ export default (headlines=[], action) => {
 // THUNKS 
 export const fetchHeadlines = query => dispatch => {
   const api_key = secrets_NYT_API_KEY;
-  const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia'; 
+  const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia,news_desk,section_name,source,type_of_material,_id'; 
   // using options as a way to optionally construct publication date time frame
   const options = '';
 
-  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&fields=${fields}${options}&api-key=${api_key}`)
-  .then(res => {
-    console.log(res.data.response);
-    dispatch(setHeadlines(res.data.response.docs))
+  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&${fields}${options}&api-key=${api_key}`)
+  .then(res => {    
+    dispatch(setHeadlines(res.data.response.docs)); 
+    
   })
   .catch(console.error);
 }

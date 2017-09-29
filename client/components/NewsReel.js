@@ -31,13 +31,15 @@ class NewsReel extends Component {
                 <CardHeader
                   title={`${headline.headline.main.slice(0, 30)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
                 <CardMedia>
+                  <a href={headline.web_url}>
                   {
                     headline.multimedia.length ? 
                     <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
                     <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
                   }
+                  </a>
                 </CardMedia>
-                <CardTitle title={`${headline.headline.main.slice(0, 20)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
+                <CardTitle title={`${headline.headline.main.slice(0, 35)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
                 <CardText>
                   {headline.snippet}
                 </CardText>
