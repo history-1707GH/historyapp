@@ -49,6 +49,15 @@ export function logOut(){
     }
 }
 
+export function fetchUser(){
+    return function thunk(dispatch){
+        return axios.get('/auth/me')
+        .then(res => {
+            dispatch(getUser(res.data))
+        })
+    }
+}
+
 //REDUCER
 export default function reducer (state = {},action){
     switch (action.type){

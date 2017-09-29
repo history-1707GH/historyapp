@@ -3,7 +3,7 @@ const db = require('../db')
 const User = db.models.user;
 
 //get user if logged in
-router.get('/current', (req, res, next) => {
+router.get('/me', (req, res, next) => {
     if (req.user){
         res.json(req.user.sanitize())
     } else {
