@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
-import Login from './Login'
 import Synopsis from './Synopsis'
 import Auth from './Auth'
 
