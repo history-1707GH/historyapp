@@ -1,7 +1,6 @@
 'use strict'
 const router = require('express').Router()
 const db = require('../db')
-
 const Article = db.models.article;
 
 router.route('/')
@@ -13,11 +12,12 @@ router.route('/')
             .catch(next)
     })
     .post((req, res, next) => {
-        Article.create(req.body)
-            .then(articleInfo => {
-                res.status(201).json(articleInfo)
-            })
-            .catch(next)
+        let headlines = req.body;
+        Promise.all(headlines.map(headline => {
+            headline.source_id = headline._id
+            return Article.create(headline)
+        }))
+        .catch(next);
     })
 
 router.route('/:id')
