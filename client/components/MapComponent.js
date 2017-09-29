@@ -1,7 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { fetchNearbyPlaces } from '../store'
+import { fetchNearbyPlaces, selectPlace } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -14,6 +14,7 @@ class MapComponent extends React.Component {
     this.state = {
       position: [0, 0],
       error: null,
+      selected: false
     }
 
   }
@@ -32,6 +33,8 @@ class MapComponent extends React.Component {
     )
 
   }
+
+  
 
 
 
@@ -54,10 +57,15 @@ class MapComponent extends React.Component {
           {
             nearbyPlaces.length && nearbyPlaces.map(place => (
               <Marker position={[place.lat, place.lon]} key={place.pageid}>
-                <Popup> 
-                  <span><a href = "/synopsis"> {place.title} </a> </span>
+                <Popup>
+                  <span><a href="/synopsis"> {place.title} </a> <br/> <button> select me </button></span>
+                 
+                    
+                 
+
                 </Popup>
-              </Marker>)
+              </Marker>
+            )
             )
           }
         </Map>
@@ -76,7 +84,12 @@ const mapDispatch = dispatch => {
   return {
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
-    }
+    },
+    // handleClick: function(place){
+    //   console.log('selectedPlace', this.state.selected)
+    //   this.setState({selected: (!this.state.selected)})
+    //   dispatch(selectPlace(place))
+    // }
   }
 }
 

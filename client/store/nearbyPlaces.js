@@ -1,9 +1,14 @@
 import axios from 'axios'
 
 const GET_NEARBY_PLACES = 'GET_NEARBY_PLACES'
+const SELECTED_PLACE = 'SELECTED_PLACE'
 
 const getNearbyPlaces = places => {
   return { type: GET_NEARBY_PLACES, places }
+}
+
+const selectPlace = place => {
+  return { type: SELECTED_PLACE, place }
 }
 
 export const fetchNearbyPlaces = (location) => {
@@ -24,6 +29,7 @@ export const fetchNearbyPlaces = (location) => {
 export default function (state = [], action) {
   switch (action.type) {
     case GET_NEARBY_PLACES: return action.places
+    case SELECTED_PLACE: return action.place
     default: return state
   }
 }
