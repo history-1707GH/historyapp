@@ -4,8 +4,10 @@ import {connect} from 'react-redux'
  function NextExperience(props) {
   const textToParse = props.synopsis.content
   console.log("textToParse", textToParse)
-  const locations = nlp(textToParse).topics().data()
-  console.log('places', locations)
+  const topics = nlp(textToParse).topics().data()
+  locationsArray = topics.reduce(topic=>{
+
+  }, [])
 
     return (
       <div>Next Up!</div>
