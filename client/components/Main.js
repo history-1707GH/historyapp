@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
-import Login from './Login'
 import Synopsis from './Synopsis'
 import Auth from './Auth'
 
 //import other components here
 
-import store, {  } from '../store';
+import store, { fetchUser } from '../store';
 
 class Main extends Component {
 
@@ -49,7 +48,7 @@ const mapDispatch = function(dispatch){
             // dispatch(fetchItems())
         },
         fetchCurrentUser(){
-            // dispatch(fetchUser())
+            dispatch(fetchUser())
         }
     }
 }
