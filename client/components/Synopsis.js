@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {fetchSynopsis} from '../store'
+import NextExperience from './NextExperience'
 
 class Synopsis extends Component {
 
@@ -15,7 +16,10 @@ class Synopsis extends Component {
        content = this.props.synopsis.content
     };
     return(
-      <div>{content}</div>
+      <div>
+        {content}
+        <NextExperience/>
+      </div>
     )
   }
 }
