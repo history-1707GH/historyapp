@@ -1,26 +1,42 @@
 import React from 'react'
 import L from 'leaflet'
-import { Map, TileLayer } from 'react-leaflet'
-import {fetchNearbyPlaces} from '../store'
-import {connect} from 'react-redux'
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { fetchNearbyPlaces } from '../store'
+import { connect } from 'react-redux'
 
 
 class MapComponent extends React.Component {
- 
+
   constructor(props) {
     super(props)
     this.state = {
-      position: [40.705076, -74.00916]
+      position: [0, 0],
+      error: null,
     }
+
   }
 
-  componentDidMount(){
-    console.log("this.props", this.props)
-    this.props.fetchNearbyPlaces(this.state.position)
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          position: [position.coords.latitude, position.coords.longitude],
+          error: null,
+        });
+        this.props.fetchNearbyPlaces(this.state.position)
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    )
+
   }
+
+
 
   render() {
-    const position = [40.705076, -74.00916]
+    const position = this.state.position
+    const nearbyPlaces = this.props.nearbyPlaces
+
     return (
       <div id="mapid">
         <Map center={position} zoom={25}>
@@ -28,6 +44,20 @@ class MapComponent extends React.Component {
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             attribution={`&copy;  <a href=${'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}/> Contributors`}
           />
+          <Marker position={position}>
+            <Popup>
+              <span>You are here</span>
+            </Popup>
+          </Marker>
+          {
+            nearbyPlaces.length && nearbyPlaces.map(place => (
+              <Marker position={[place.lat, place.lon]} key={place.pageid}>
+                <Popup>
+                  <span>{place.title}</span>
+                </Popup>
+              </Marker>)
+            )
+          }
         </Map>
       </div>
     )
@@ -42,7 +72,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchNearbyPlaces: function(position) {
+    fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     }
   }
