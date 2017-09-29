@@ -17,7 +17,7 @@ const Article = db.define('article', {
     multimedia: {
         type: Sequelize.JSONB
     },
-    news_desk: {
+    new_desk: {
         type: Sequelize.STRING
     },
     pub_date: {
@@ -42,7 +42,9 @@ const Article = db.define('article', {
         type: Sequelize.STRING
     },
     source_id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false
     }
 })
 

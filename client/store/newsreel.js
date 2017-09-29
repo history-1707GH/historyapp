@@ -27,8 +27,11 @@ export const fetchHeadlines = query => dispatch => {
 
   axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&${fields}${options}&api-key=${api_key}`)
   .then(res => {    
-    dispatch(setHeadlines(res.data.response.docs)); 
-    
+    let headlines = res.data.response.docs;
+    dispatch(setHeadlines(headlines));
+    return axios.post('/api/article', headlines)
+    .then(articles => console.log('Successfully saved articles'))
+    .catch(console.error);
   })
   .catch(console.error);
 }
