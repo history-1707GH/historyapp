@@ -3,7 +3,7 @@ import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { fetchNearbyPlaces } from '../store'
 import { connect } from 'react-redux'
-
+import { secrets_TFOREST_API_KEY } from '../../secrets'
 
 class MapComponent extends React.Component {
 
@@ -36,13 +36,12 @@ class MapComponent extends React.Component {
   render() {
     const position = this.state.position
     const nearbyPlaces = this.props.nearbyPlaces
-
     return (
       <div id="mapid">
         <Map center={position} zoom={25}>
           <TileLayer
-            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-            attribution={`&copy;  <a href=${'http://{s}.tile.osm.org/{z}/{x}/{y}.png'}/> Contributors`}
+            url={`https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=${secrets_TFOREST_API_KEY}`}
+            attribution={`&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
           />
           <Marker position={position}>
             <Popup>
