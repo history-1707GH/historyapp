@@ -30,7 +30,9 @@ class NewsReel extends Component {
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      swipe: true,
+      swipeToScroll: true
     };
     return (
       <div>
