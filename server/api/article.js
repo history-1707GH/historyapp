@@ -15,7 +15,17 @@ router.route('/')
         let headlines = req.body;
         Promise.all(headlines.map(headline => {
             headline.source_id = headline._id
-            return Article.create(headline)
+            return Article.findOne({
+                where: {
+                    source_id: headline._id
+                }
+            })
+            .then(article =>{
+                if (!article) {
+                    return Article.create(headline);
+                } 
+            })
+            .catch(next);
         }))
         .catch(next);
     })
