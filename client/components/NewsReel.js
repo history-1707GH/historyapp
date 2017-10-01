@@ -34,19 +34,11 @@ class NewsReel extends Component {
     };
     return (
       <div>
-        {
-        // <div className='containerSlider'>
-        //   <Slider {...settings}>
-        //     <div><img src='http://placekitten.com/g/400/200' /></div>
-        //     <div><img src='http://placekitten.com/g/400/200' /></div>
-        //     <div><img src='http://placekitten.com/g/400/200' /></div>
-        //     <div><img src='http://placekitten.com/g/400/200' /></div>
-        //   </Slider>
-        // </div>
-        }
+        <div>
+          <Slider {...settings}>
          {
           headlinesArr.length && headlinesArr.map(headline =>  (              
-              <Card key={headlinesArr.indexOf(headline)}>
+              <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
                 <CardHeader
                   title={`${headline.headline.main.slice(0, 30)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
                 <CardMedia>
@@ -66,6 +58,8 @@ class NewsReel extends Component {
             )
           )
         }
+          </Slider>
+        </div>
       </div>
     )
   }
