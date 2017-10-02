@@ -9,16 +9,28 @@ class Synopsis extends Component {
   constructor(props){
     super()
     this.state = {
-      lock: true
+      lock: true,
+      synopsisText: ""
     }
     this.getDistance = this.getDistance.bind(this)
     this.degTorad = this.degTorad.bind(this)
     this.isLock = this.isLock.bind(this)
+    this.prepareSynopsisText = this.prepareSynopsisText.bind(this)
 }
 
   componentDidMount(){
-    this.props.fetchSynopsis(this.props.place.pageid)
+    // this.props.fetchSynopsis(this.props.place.title)
+    this.props.fetchSynopsis('dog')
     this.isLock() 
+  }
+
+  prepareSynopsisText(text){
+    const preparedText=text.replacemyString.replace(/<(?:.|\n)*?>/gm, '');
+    this.setState({synopsisText: preparedText})
+  }
+
+  componetDidReceiveProps(nextProps){
+    this.prepareSynopsisText
   }
 
   getDistance(lat1,lon1,lat2,lon2) {
@@ -49,18 +61,14 @@ class Synopsis extends Component {
   }
 
   render(){
-    let content = ""
-    if(this.props.text) {
-       content = this.props.text
-    };
+   
     
     return(
       <div>
-        {content}
+        {}
         <br />
-      
-        <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check in </button>
-       
+        <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check In </button>
+
         </div>
     )
   }
