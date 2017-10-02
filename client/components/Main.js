@@ -7,6 +7,7 @@ import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Auth from './Auth'
+import Login from './Login'
 
 //import other components here
 
@@ -28,11 +29,11 @@ class Main extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path='/map' component={MapComponent}/>                    
+                    <Route exact path='/' component={Login}/>
+                    <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
-                    <Route path='/auth' component={Auth} />
-                    {/* <Route exact path='/' component={Home}/>  */}
+                    <Route exact path='/auth' component={Auth}/>
                 </Switch>
             </div>
         )
