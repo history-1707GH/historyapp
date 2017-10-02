@@ -7,14 +7,15 @@ import NextExperience from './NextExperience'
 class Synopsis extends Component {
 
   componentDidMount(){
-    this.props.fetchSynopsis(6549088) 
+    this.props.fetchSynopsis("Hanover Square (IRT Third Avenue Line)") 
   }
 
   render(){
     let content = ""
-    if(this.props.synopsis.content) {
-       content = this.props.synopsis.content
+    if(this.props.text) {
+       content = this.props.text
     };
+    console.log('content', content)
     return(
       <div>
         {content}
@@ -27,14 +28,15 @@ class Synopsis extends Component {
 
 const mapState = state => {
   return {
-    synopsis: state.synopsis
+    title: state.synopsis.parse.displaytitle,
+    text: state.synopsis.parse.text.replace(/<(?:.|\n)*?>/gm, '')
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: pageId => {
-      dispatch(fetchSynopsis(pageId))
+    fetchSynopsis: pageTitle => {
+      dispatch(fetchSynopsis(pageTitle))
     }
   }
 }
