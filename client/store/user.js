@@ -24,8 +24,8 @@ export function newUser(account, history){
         return axios.post('/auth/me', account)
         .then(res => {
             dispatch(getUser(res.data))
-            //history.push to profile or not
         })
+        .catch(err => console.error(`Unable to create user`, err))
     }
 }
 
@@ -34,8 +34,8 @@ export function logIn(account, history){
         return axios.put('/auth/me', account)
         .then(res=>{
             dispatch(getUser(res.data))
-            //history.push to profile or not
         })
+        .catch(err => console.error(`Unable to log in user`, err))
     }
 }
 
@@ -44,8 +44,8 @@ export function logOut(){
         return axios.delete('/auth/me')
         .then(res => {
             dispatch(removeUser())
-            //history.push to profile or not
         })
+        .catch(err => console.error(`Unable to log out user`, err))
     }
 }
 
@@ -55,6 +55,7 @@ export function fetchUser(){
         .then(res => {
             dispatch(getUser(res.data))
         })
+        .catch(err => console.error(`Unable to get user`, err))
     }
 }
 

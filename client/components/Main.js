@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Auth from './Auth'
+import Login from './Login'
 
 //import other components here
 
@@ -28,18 +29,11 @@ class Main extends Component {
         return (
             <div>
                 <Switch>
-<<<<<<< HEAD
-                    <Route exact path='/map' component={MapComponent}/>                    
-                    <Route path='/headlines' component={NewsReel}/>
-                    <Route path='/synopsis' component={Synopsis} />
-                    <Route path='/auth' component={Auth} />
-                    {/* <Route exact path='/' component={Home}/>  */}
-=======
                     <Route exact path='/' component={Login}/>
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
->>>>>>> master
+                    <Route exact path='/auth' component={Auth}/>
                 </Switch>
             </div>
         )
