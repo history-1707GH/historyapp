@@ -3,6 +3,8 @@ import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { fetchNearbyPlaces } from '../store'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+
 
 
 class MapComponent extends React.Component {
@@ -52,8 +54,8 @@ class MapComponent extends React.Component {
           {
             nearbyPlaces.length && nearbyPlaces.map(place => (
               <Marker position={[place.lat, place.lon]} key={place.pageid}>
-                <Popup>
-                  <span>{place.title}</span>
+                <Popup> 
+                  <span><a href = "/synopsis"> {place.title} </a> </span>
                 </Popup>
               </Marker>)
             )
