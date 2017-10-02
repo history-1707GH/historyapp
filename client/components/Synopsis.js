@@ -16,7 +16,6 @@ class Synopsis extends Component {
 }
 
   componentDidMount(){
-   console.log(this.props)
     this.props.fetchSynopsis(this.props.place.pageid)
     this.isLock() 
   }
@@ -68,8 +67,6 @@ class Synopsis extends Component {
 
 
 const mapState = state => {
-  console.log('place', state.selectedPlace)
-  console.log('currentLocation', state.currentLocation)
   return {
     synopsis: state.synopsis,
     place: state.selectedPlace,

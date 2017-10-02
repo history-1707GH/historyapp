@@ -11,8 +11,6 @@ class MapComponent extends React.Component {
 
   constructor(props) {
     super(props)
-    
-
   }
 
   componentDidMount() {
@@ -29,8 +27,6 @@ class MapComponent extends React.Component {
   render() {
     const position = this.props.currentLocation
     const nearbyPlaces = this.props.nearbyPlaces
-    console.log('Position', position)
-    console.log('nearbyPlaces', nearbyPlaces)
     return (
       <div id="mapid">
         <Map center={position} zoom={25}>
