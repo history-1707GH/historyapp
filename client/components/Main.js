@@ -28,11 +28,10 @@ class Main extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path='/map' component={MapComponent}/>                    
+                    <Route exact path='/' component={Login}/>
+                    <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
-                    <Route path='/auth' component={Auth} />
-                    {/* <Route exact path='/' component={Home}/>  */}
                 </Switch>
             </div>
         )
