@@ -31,7 +31,7 @@ export function newUser(account, history){
 
 export function logIn(account, history){
     return function thunk(dispatch){
-        return axios.post('/auth/me', account)
+        return axios.put('/auth/me', account)
         .then(res=>{
             dispatch(getUser(res.data))
         })
