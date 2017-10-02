@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import Signup from './Signup'
 import Login from './Login'
 
-export default function Auth (){
-    return(
+export default function Auth() {
+    return (
         <div>
             <h2>Login</h2>
             <Login />

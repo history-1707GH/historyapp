@@ -51,14 +51,15 @@ class Signup extends Component {
                         required
                     />
                     <label>Password: </label>
-                    <small>(Must be at least 8 characters long)</small>
+                    <small>(Must be at 8-50 characters in length)</small>
                     <input 
                         name='password'
                         type='text'
                         onChange={this.handleChange}
                         required
                     />
-                    <button type='submit'>Create Account!</button>
+                    {dirty&&(this.state.password.length<8||this.state.password.length>50) ? (<p>Invalid password</p><button type='submit' disabled>Create Account!</button>) : 
+                    (<button type='submit'>Create Account!</button>) }
                 </form>
             </div>
         )
