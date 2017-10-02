@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { fetchHeadlines } from '../store';
+import Slider from 'react-slick';
+
 
 
 class NewsReel extends Component {
@@ -23,11 +25,22 @@ class NewsReel extends Component {
 
   render() {
     let headlinesArr = this.props.headlines;
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      swipe: true,
+      swipeToScroll: true
+    };
     return (
       <div>
-        {
+        <div>
+          <Slider {...settings}>
+         {
           headlinesArr.length && headlinesArr.map(headline =>  (              
-              <Card key={headlinesArr.indexOf(headline)}>
+              <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
                 <CardHeader
                   title={`${headline.headline.main.slice(0, 30)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
                 <CardMedia>
@@ -47,6 +60,8 @@ class NewsReel extends Component {
             )
           )
         }
+          </Slider>
+        </div>
       </div>
     )
   }
