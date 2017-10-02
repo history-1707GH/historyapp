@@ -7,8 +7,8 @@ import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Auth from './Auth'
+import Login from './Login'
 
-//import other components here
 
 import store, { fetchUser } from '../store';
 
