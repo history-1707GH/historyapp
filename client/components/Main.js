@@ -10,7 +10,7 @@ import Auth from './Auth'
 
 //import other components here
 
-import store, {  } from '../store';
+import store, { fetchUser } from '../store';
 
 class Main extends Component {
 
@@ -32,6 +32,7 @@ class Main extends Component {
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
+                    <Route exact path='/auth' component={Auth}/>
                 </Switch>
             </div>
         )
@@ -47,7 +48,7 @@ const mapDispatch = function(dispatch){
             // dispatch(fetchItems())
         },
         fetchCurrentUser(){
-            // dispatch(fetchUser())
+            dispatch(fetchUser())
         }
     }
 }
