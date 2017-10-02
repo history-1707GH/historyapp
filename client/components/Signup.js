@@ -58,7 +58,8 @@ class Signup extends Component {
                         onChange={this.handleChange}
                         required
                     />
-                    <button type='submit'>Create Account!</button>
+                    {dirty&&(this.state.password.length<8||this.state.password.length>50) ? (<p>Invalid password</p><button type='submit' disabled>Create Account!</button>) : 
+                    (<button type='submit'>Create Account!</button>) }
                 </form>
             </div>
         )
