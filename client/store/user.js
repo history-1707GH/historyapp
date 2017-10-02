@@ -25,6 +25,7 @@ export function newUser(account, history){
         .then(res => {
             dispatch(getUser(res.data))
         })
+        .catch(err => console.error(`Unable to create user`, err))
     }
 }
 
@@ -34,6 +35,7 @@ export function logIn(account, history){
         .then(res=>{
             dispatch(getUser(res.data))
         })
+        .catch(err => console.error(`Unable to log in user`, err))
     }
 }
 
@@ -43,6 +45,7 @@ export function logOut(){
         .then(res => {
             dispatch(removeUser())
         })
+        .catch(err => console.error(`Unable to log out user`, err))
     }
 }
 
@@ -52,6 +55,7 @@ export function fetchUser(){
         .then(res => {
             dispatch(getUser(res.data))
         })
+        .catch(err => console.error(`Unable to get user`, err))
     }
 }
 
