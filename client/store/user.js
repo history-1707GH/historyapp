@@ -59,14 +59,6 @@ export function fetchUser(){
     }
 }
 
-export function fetchUser(){
-    return function thunk(dispatch){
-        return axios.get('/auth/current')
-        .then(res => {
-            dispatch(getUser(res.data))
-        })
-    }
-}
 
 //REDUCER
 export default function reducer (state = {},action){
