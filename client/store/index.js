@@ -18,7 +18,7 @@ const reducer = combineReducers({
   synopsis,
   nearbyPlaces,
   selectedPlace,
-  currentLocation
+  currentLocation,
   user
 });
 

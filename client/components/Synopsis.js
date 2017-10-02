@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {fetchSynopsis} from '../store'
+import NextExperience from './NextExperience'
 
 class Synopsis extends Component {
 
