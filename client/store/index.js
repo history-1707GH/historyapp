@@ -5,13 +5,16 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import headlines from './newsreel';
 import synopsis from './synopsis'
 import nearbyPlaces from './nearbyPlaces'
+import selectedPlace from './selectedPlace'
+
 
 //import stuff here
 
 const reducer = combineReducers({
   headlines,
   synopsis,
-  nearbyPlaces
+  nearbyPlaces,
+  selectedPlace
 });
 
 const store = createStore(
@@ -27,5 +30,6 @@ export default store;
 export * from './newsreel';
 export * from './synopsis'
 export * from './nearbyPlaces'
+export * from './selectedPlace'
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { fetchNearbyPlaces, selectPlace } from '../store'
+import { fetchNearbyPlaces, selectedPlace } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -14,7 +14,6 @@ class MapComponent extends React.Component {
     this.state = {
       position: [0, 0],
       error: null,
-      selected: false
     }
 
   }
@@ -36,8 +35,6 @@ class MapComponent extends React.Component {
 
   
 
-
-
   render() {
     const position = this.state.position
     const nearbyPlaces = this.props.nearbyPlaces
@@ -56,13 +53,13 @@ class MapComponent extends React.Component {
           </Marker>
           {
             nearbyPlaces.length && nearbyPlaces.map(place => (
-              <Marker position={[place.lat, place.lon]} key={place.pageid}>
+              <Marker position={[place.lat, place.lon]} key={place.pageid} >
                 <Popup>
-                  <span><a href="/synopsis"> {place.title} </a> <br/> <button> select me </button></span>
-                 
+                  <span onClick = {()=>this.props.handleClick(place)}>
                     
-                 
-
+                      {place.title} 
+                    
+                  </span>
                 </Popup>
               </Marker>
             )
@@ -80,16 +77,15 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     },
-    // handleClick: function(place){
-    //   console.log('selectedPlace', this.state.selected)
-    //   this.setState({selected: (!this.state.selected)})
-    //   dispatch(selectPlace(place))
-    // }
+    handleClick: function(place){ 
+      dispatch(selectedPlace(place))
+      ownProps.history.push('/synopsis')
+    }
   }
 }
 

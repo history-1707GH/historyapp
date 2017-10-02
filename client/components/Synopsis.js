@@ -5,8 +5,13 @@ import {fetchSynopsis} from '../store'
 
 class Synopsis extends Component {
 
+  constructor(props){
+    super()
+}
+
   componentDidMount(){
-    this.props.fetchSynopsis(6549088) 
+   console.log(this.props)
+    this.props.fetchSynopsis(this.props.place.pageid) 
   }
 
   render(){
@@ -15,7 +20,10 @@ class Synopsis extends Component {
        content = this.props.synopsis.content
     };
     return(
-      <div>{content}</div>
+      <div>
+        {content}
+        {/* <button onClick = {place => (this.unlock(place))}> unlock me </button> */}
+        </div>
     )
   }
 }
@@ -23,7 +31,8 @@ class Synopsis extends Component {
 
 const mapState = state => {
   return {
-    synopsis: state.synopsis
+    synopsis: state.synopsis,
+    place: state.selectedPlace
   }
 }
 
