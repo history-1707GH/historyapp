@@ -3,7 +3,7 @@ const passport = require('passport');
 const db  = require('../db')
 const User = db.models.user;
 
-if (process.env.NODE_ENV !== 'production') require('../../secrets')
+if (process.env.NODE_ENV !== 'production') require('../../secrets_backend')
 
 
 // passport registration DEFINING FUNCTIONS HERE
