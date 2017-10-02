@@ -24,7 +24,6 @@ export function newUser(account, history){
         return axios.post('/auth/signup', account)
         .then(res => {
             dispatch(getUser(res.data))
-            //history.push to profile or not
         })
     }
 }
@@ -34,7 +33,6 @@ export function logIn(account, history){
         return axios.post('/auth/login', account)
         .then(res=>{
             dispatch(getUser(res.data))
-            //history.push to profile or not
         })
     }
 }
@@ -44,7 +42,6 @@ export function logOut(){
         return axios.delete('/auth/logout')
         .then(res => {
             dispatch(removeUser())
-            //history.push to profile or not
         })
     }
 }
