@@ -22,7 +22,7 @@ class Synopsis extends Component {
     return(
       <div>
         {content}
-        {/* <button onClick = {place => (this.unlock(place))}> unlock me </button> */}
+        <button> Check in </button>
         </div>
     )
   }

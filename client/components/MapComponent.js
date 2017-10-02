@@ -1,7 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { fetchNearbyPlaces, selectedPlace } from '../store'
+import { fetchNearbyPlaces, selectedPlace, fetchCurrentLocation } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -11,34 +11,26 @@ class MapComponent extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      position: [0, 0],
-      error: null,
-    }
+    
 
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          position: [position.coords.latitude, position.coords.longitude],
-          error: null,
-        });
-        this.props.fetchNearbyPlaces(this.state.position)
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    )
-
+        this.props.fetchCurrentLocation()
+        this.props.fetchNearbyPlaces(this.props.currentLocation)
+      
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.currentLocation !== this.props.currentLocation) this.props.fetchNearbyPlaces(nextProps.currentLocation)
+  }
   
 
   render() {
-    const position = this.state.position
+    const position = this.props.currentLocation
     const nearbyPlaces = this.props.nearbyPlaces
-
+    console.log('Position', position)
+    console.log('nearbyPlaces', nearbyPlaces)
     return (
       <div id="mapid">
         <Map center={position} zoom={25}>
@@ -73,15 +65,20 @@ class MapComponent extends React.Component {
 
 const mapState = state => {
   return {
-    nearbyPlaces: state.nearbyPlaces
+    nearbyPlaces: state.nearbyPlaces,
+    currentLocation: state.currentLocation
   }
 }
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
+    fetchCurrentLocation: function(){
+      dispatch(fetchCurrentLocation())
+    },
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     },
+    
     handleClick: function(place){ 
       dispatch(selectedPlace(place))
       ownProps.history.push('/synopsis')

@@ -16,6 +16,7 @@ export const fetchNearbyPlaces = (location) => {
 
       .then(res => res.data.query.geosearch)
       .then(locations => {
+        console.log('locations', locations)
 
         dispatch(getNearbyPlaces(locations))
       })

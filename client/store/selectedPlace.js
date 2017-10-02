@@ -11,8 +11,8 @@ export const selectedPlace = place => {
 export default function (state = {}, action) {
   switch (action.type) {
     
-    case SELECTED_PLACE: {
-      return Object.assign({}, state, action.place)}
+    case SELECTED_PLACE:
+      return action.place
     default: return state
   }
 }
