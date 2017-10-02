@@ -70,6 +70,6 @@ router.route('/me')
 
 //THIRD PARTY USER ACCOUNTS
 //Google Login
-router.use('/google', require('./google'))
+// router.use('/google', require('./google'))
 
 module.exports = router;

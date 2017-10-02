@@ -21,7 +21,7 @@ export function removeUser(){
 //THUNK
 export function newUser(account, history){
     return  function thunk(dispatch){
-        return axios.post('/auth/signup', account)
+        return axios.post('/auth/me', account)
         .then(res => {
             dispatch(getUser(res.data))
         })
@@ -31,7 +31,7 @@ export function newUser(account, history){
 
 export function logIn(account, history){
     return function thunk(dispatch){
-        return axios.post('/auth/login', account)
+        return axios.post('/auth/me', account)
         .then(res=>{
             dispatch(getUser(res.data))
         })
@@ -41,7 +41,7 @@ export function logIn(account, history){
 
 export function logOut(){
     return function thunk(dispatch){
-        return axios.delete('/auth/logout')
+        return axios.delete('/auth/me')
         .then(res => {
             dispatch(removeUser())
         })
