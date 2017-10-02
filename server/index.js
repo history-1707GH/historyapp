@@ -24,10 +24,33 @@ const dbStore = new SequelizeStore({ db: db });
 dbStore.sync();
 
 //session&passport
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'fluffykins the doggy',
+  store: dbStore,
+  resave: false,
+  saveUninitialized: true
+}));
 
+passport.serializeUser((user, done) => {
+  try {
+    done(null, user.id);
+  } catch (err) {
+    done(err);
+  }
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(done);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //serving routes
 app.use('/api', require('./api'));
+app.use('/auth', require('./auth'));
 
 //errorhandling
 app.use(require('./middleware/error'))

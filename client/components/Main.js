@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
-import Login from './Login'
 import Synopsis from './Synopsis'
+import Auth from './Auth'
+import Login from './Login'
 
 //import other components here
 
-import store, {  } from '../store';
+import store, { fetchUser } from '../store';
 
 class Main extends Component {
 
@@ -32,6 +33,7 @@ class Main extends Component {
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
+                    <Route exact path='/auth' component={Auth}/>
                 </Switch>
             </div>
         )
@@ -47,7 +49,7 @@ const mapDispatch = function(dispatch){
             // dispatch(fetchItems())
         },
         fetchCurrentUser(){
-            // dispatch(fetchUser())
+            dispatch(fetchUser())
         }
     }
 }
