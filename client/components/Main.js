@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'

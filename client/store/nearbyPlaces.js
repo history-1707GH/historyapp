@@ -6,6 +6,8 @@ const getNearbyPlaces = places => {
   return { type: GET_NEARBY_PLACES, places }
 }
 
+
+
 export const fetchNearbyPlaces = (location) => {
   return function thunk(dispatch) {
     const lat = location[0]
@@ -14,6 +16,7 @@ export const fetchNearbyPlaces = (location) => {
 
       .then(res => res.data.query.geosearch)
       .then(locations => {
+        console.log('locations', locations)
 
         dispatch(getNearbyPlaces(locations))
       })
