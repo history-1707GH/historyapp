@@ -9,7 +9,8 @@ class Synopsis extends Component {
   constructor(props){
     super()
     this.state = {
-      lock: true
+      lock: true,
+      synopsisText: ""
     }
     this.getDistance = this.getDistance.bind(this)
     this.degTorad = this.degTorad.bind(this)
@@ -18,7 +19,31 @@ class Synopsis extends Component {
 
   componentDidMount(){
     this.props.fetchSynopsis(this.props.place.pageid)
-    this.isLock() 
+    this.isLock()
+   
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.synopsis !== this.props.synopsis) {
+        let content = nextProps.synopsis.content
+        let index = 0
+        let selector = ""
+        if(content.includes('<span id="Menus">Menus</span>'))
+            selector = '<span id="Menus">Menus</span>'
+        else if(content.includes('<span id="Image_gallery">Image gallery</span>')) 
+            selector = '<span id="Image_gallery">Image gallery</span>'
+        else if(content.includes('<span id="See_also">See also</span>')) 
+            selector = '<span id="See_also">See also</span>'
+            else if (content.includes('<span id="References">References</span>'))
+                selector = '<span id="References">References</span>'
+                else if(content.includes('<span id="External_links">External links</span>'))
+                    selector = '<span id="External_links">External links</span>'
+                    
+        
+        index = content.indexOf(selector)
+        const preparedText= content.slice(0, index);
+        this.setState({synopsisText: preparedText})
+    }
   }
 
   getDistance(lat1,lon1,lat2,lon2) {
@@ -29,10 +54,9 @@ class Synopsis extends Component {
       Math.sin(dLat/2) * Math.sin(dLat/2) +
       Math.cos(this.degTorad(lat1)) * Math.cos(this.degTorad(lat2)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2)
-      ; 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    const d = R * c; // Distance in m
-    return d;
+    const d = R * c // Distance in m
+    return d
   }
   
   degTorad(deg) {
@@ -49,16 +73,12 @@ class Synopsis extends Component {
   }
 
   render(){
-    let content = ""
-    if(this.props.synopsis.content) {
-       content = this.props.synopsis.content
-    };
+    const html = {__html: this.state.synopsisText}
     
     return(
-      <div>
-        {content}
+        <div>
+      <div dangerouslySetInnerHTML = {html}/> 
         <br />
-      
         <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check in </button>
        
         </div>
@@ -85,4 +105,3 @@ const mapDispatch = dispatch => {
 
 
 export default connect(mapState, mapDispatch)(Synopsis)
-
