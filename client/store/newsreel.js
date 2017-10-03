@@ -20,11 +20,13 @@ export default (headlines=[], action) => {
 
 // THUNKS 
 export const fetchHeadlines = query => dispatch => {
+  // OB/FF: notSoSecret
   const api_key = secrets_NYT_API_KEY;
   const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia,news_desk,section_name,source,type_of_material,_id'; 
   // using options as a way to optionally construct publication date time frame
   const options = '';
 
+  // OB/FF: don't have to build query string manually (see `nearbyPlaces` reducer)
   axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&${fields}${options}&api-key=${api_key}`)
   .then(res => {    
     let headlines = res.data.response.docs;

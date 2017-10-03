@@ -22,6 +22,7 @@ class Synopsis extends Component {
       let content = nextProps.synopsis.content
       let index = 0
       let selector = ""
+      // OB/FF: move any data-cleaning operations as far "back" as you can
       if (content.includes('<span id="Menus">Menus</span>'))
         selector = '<span id="Menus">Menus</span>'
       else if (content.includes('<span id="Image_gallery">Image gallery</span>'))
@@ -47,6 +48,7 @@ class Synopsis extends Component {
 
     return (
       <div>
+        {/* OB/FF: watch out for XSS attacks */}
         <div dangerouslySetInnerHTML={html} />
         <br />
         <Checkout />

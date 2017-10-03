@@ -12,6 +12,7 @@ export default class Home extends Component {
   }
 
   componentDidMount(){
+    // OB/FF: this can lead to weird bugs
     document.body.className="home";
   }
 

@@ -8,6 +8,7 @@ const getSynopsis  = synopsis => {
 
 export const fetchSynopsis = (pageId) => {
   return function thunk(dispatch) {
+    // OB/FF: consider making a wikipediaQuery utility
     return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${pageId}&prop=extracts&redirects=true `)
       .then(res=>{
         return {

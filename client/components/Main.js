@@ -14,6 +14,7 @@ import store, { fetchUser } from '../store'
 
 class Main extends Component {
 
+    // OB/FF: unnecessary constructor
     constructor(props){
         super(props)
     }

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// OB/FF: not yet living code?
 //router.use('/google', require('./google'));
 router.use('/me', require('./me'));
 
