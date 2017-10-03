@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {secrets_NYT_API_KEY } from '../../secrets'
+import {secrets_NYT_API_KEY } from '../../secrets_frontend'
 
 
 // ACTION TYPE
