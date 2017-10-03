@@ -31,6 +31,3 @@ export default function (state={}, action){
   }
 }
 
-
-// `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${pageId}&prop=extracts&redirects=true
-//`https://en.wikipedia.org/w/api.php?origin=*&action=parse&page=${pageTitle}`
