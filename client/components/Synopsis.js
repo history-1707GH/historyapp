@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {fetchSynopsis} from '../store'
 import NextExperience from './NextExperience'
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class Synopsis extends Component {
 
@@ -77,10 +79,9 @@ class Synopsis extends Component {
     
     return(
         <div>
-      <div dangerouslySetInnerHTML = {html}/> 
-        <br />
-        <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check in </button>
-       
+          <div dangerouslySetInnerHTML = {html}/> 
+          <br />
+          <div><RaisedButton label="Check in" primary={true} style={{margin:12}} disabled={this.state.lock} /></div>
         </div>
     )
   }
