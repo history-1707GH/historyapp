@@ -41,7 +41,7 @@ export function logIn(account, history){
 
 export function logOut(){
     return function thunk(dispatch){
-        return axios.post('/auth/me/logout')
+        return axios.delete('/auth/me')
         .then(() => {
             dispatch(removeUser())
         })
