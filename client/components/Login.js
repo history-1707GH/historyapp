@@ -55,7 +55,7 @@ const mapState = null
 
 const mapDispatch = function (dispatch, ownProps) {
     return {
-        logInUser(e){
+        logInUser: e => {
             e.preventDefault();
             dispatch(logIn({email:e.target.email.value,password:e.target.password.value},ownProps.history))
         }
