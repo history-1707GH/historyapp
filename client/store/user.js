@@ -34,6 +34,7 @@ export function logIn(account, history){
         return axios.put('/auth/me', account)
         .then(res=>{
             dispatch(getUser(res.data))
+            history.goBack()
         })
         .catch(err => console.error(`Unable to log in user`, err))
     }
