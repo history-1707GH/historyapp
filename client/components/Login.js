@@ -29,24 +29,30 @@ class Login extends Component {
             <img src="/meander-logo-white.png" className="meander-logo"/>
           </div>
         </Center>
-        <div>
-            <form onSubmit={this.props.logInUser}>
-                <label>Email: </label>
-                <input
-                  name='email'
-                  type='text'
-                  required
-                />
-                <label>Password: </label>
-                <input
-                  name='password'
-                  type='text'
-                  required
-                />
-            <button type='submit'>Sign in</button>
-            </form>
-        </div>
-        <Google />
+        <Center>
+          <div>
+              <form onSubmit={this.props.logInUser}>
+                  <label>Email: </label>
+                  <input
+                    name='email'
+                    type='text'
+                    required
+                  />
+                  <label>Password: </label>
+                  <input
+                    name='password'
+                    type='text'
+                    required
+                  />
+              <button type='submit'>Sign in</button>
+              </form>
+          </div>
+        </Center>
+        <br />
+        <Center>
+          <Google />
+        </Center>
+        <br /> 
         <Center>
           <div>
             <Link to="/signup">
