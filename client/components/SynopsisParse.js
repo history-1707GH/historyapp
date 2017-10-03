@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {fetchSynopsis} from '../store'
+import { fetchSynopsisParse} from '../store'
 import NextExperience from './NextExperience'
 
 class Synopsis extends Component {
@@ -15,28 +15,21 @@ class Synopsis extends Component {
     this.getDistance = this.getDistance.bind(this)
     this.degTorad = this.degTorad.bind(this)
     this.isLock = this.isLock.bind(this)
+   
 }
 
   componentDidMount(){
-    this.props.fetchSynopsis(this.props.place.pageid)
-    this.isLock()
-    // let content = ""
-    // if(this.props.synopsis.content) {
-    //    content = this.props.synopsis.content
-    // }; 
-    // console.log('content', content)
-    // const preparedText= this.props.synopsis && this.props.synopsis.content.replacemyString.replace(/<(?:.|\n)*?>/gm, '');
-    // this.setState({synopsisText: preparedText})
+   
+    
+    this.props.fetchSynopsisParse(this.props.place.title)
+    this.isLock() 
   }
 
   componentWillReceiveProps(nextProps){
-      console.log("next", nextProps)
-      console.log('this', this.props)
     if(nextProps.synopsis !== this.props.synopsis) {
-        let content = nextProps.synopsis.content
-        const preparedText= content.replace(/<(?:.|\n)*?>/gm, '');
-        this.setState({synopsisText: preparedText})
-    }
+    const preparedText= nextProps.synopsis && nextProps.synopsis.text['*'] //text.replacemyString.replace(/<(?:.|\n)*?>/gm, '');
+    this.setState({synopsisText: preparedText})
+   }
   }
 
   getDistance(lat1,lon1,lat2,lon2) {
@@ -67,17 +60,18 @@ class Synopsis extends Component {
   }
 
   render(){
-    const html = {__html: this.props.synopsis.content}
+    let content = ""
+    if(this.props.synopsisContent.content) {
+       content = this.props.synopsisContent.content
+    }
     
     return(
-        <div>
-      <div dangerouslySetInnerHTML = {html}/> 
-        {/* {this.state.synopsisText} */}
-        {/* {this.props.synopsis.content} */}
+      <div>
+        
+        {content}
         <br />
-      
-        <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check in </button>
-       
+        <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check In </button>
+
         </div>
     )
   }
@@ -85,9 +79,9 @@ class Synopsis extends Component {
 
 
 const mapState = state => {
-    console.log('synopsis', state.synopsis)
   return {
-    synopsis: state.synopsis,
+    synopsis: state.synopsisParse.parse,
+    
     place: state.selectedPlace,
     currentLocation: state.currentLocation
   }
@@ -95,11 +89,12 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: pageId => {
-      dispatch(fetchSynopsis(pageId))
+    fetchSynopsis: pageTitle => {
+      dispatch(fetchSynopsisParse(pageTitle))
     }
   }
 }
 
 
 export default connect(mapState, mapDispatch)(Synopsis)
+

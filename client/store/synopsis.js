@@ -6,11 +6,17 @@ const getSynopsis  = synopsis => {
   return {type: GET_SYNOPSIS, synopsis}
 }
 
-export const fetchSynopsis = (pageTitle) => {
+export const fetchSynopsis = (pageId) => {
   return function thunk(dispatch) {
-    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=parse&page=${pageTitle}&format=json`)
+    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${pageId}&prop=extracts&redirects=true `)
       .then(res=>{
-        dispatch(getSynopsis(res.data))
+        return {
+          title: res.data.query.pages[pageId].title,
+          content: res.data.query.pages[pageId].extract
+        }
+      })
+      .then(synopsis=>{
+        dispatch(getSynopsis(synopsis))
       })
       .catch(err=>console.log("there was an issue", err))
   }
@@ -22,7 +28,3 @@ export default function (state={}, action){
     default: return state
   }
 }
-
-
-// `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${pageId}&prop=extracts&redirects=true
-//`https://en.wikipedia.org/w/api.php?origin=*&action=parse&page=${pageTitle}`
