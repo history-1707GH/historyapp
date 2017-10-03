@@ -15,6 +15,7 @@ router.route('/')
         let headlines = req.body;
         Promise.all(headlines.map(headline => {
             headline.source_id = headline._id
+            // OB/FF: could use `findOrCreate`
             return Article.findOne({
                 where: {
                     source_id: headline._id
@@ -25,7 +26,8 @@ router.route('/')
                     return Article.create(headline);
                 } 
             })
-            .catch(next);
+            // OB/FF: not sending response for this request, consider 204
+            .catch(next); // OB/FF: don't need this .catch given the one below
         }))
         .catch(next);
     })
@@ -50,6 +52,7 @@ router.route('/:id')
             returning: true
         })
             .then(articleInfo => {
+                // OB/FF: might as well be 200, 202 means something different
                 res.status(202).json(articleInfo)
             })
             .catch(next)
@@ -61,7 +64,7 @@ router.route('/:id')
             }
         })
         .then(()=> {
-            res.sendStatus(200)
+            res.sendStatus(200) // OB/FF: could be 204
         })
         .catch(next)
     })

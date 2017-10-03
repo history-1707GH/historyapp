@@ -11,6 +11,7 @@ class Checkout extends Component {
         this.state = {
             lock: true,
         }
+        // OB/FF: if you enable arrow function class syntax (add some babel preset to webpack / .babelrc)
         this.getDistance = this.getDistance.bind(this)
         this.degTorad = this.degTorad.bind(this)
         this.isLock = this.isLock.bind(this)
@@ -21,6 +22,7 @@ class Checkout extends Component {
     }
 
 
+    // OB/FF: could be a standalone util method (plus degTorad below)
     getDistance(lat1, lon1, lat2, lon2) {
         const R = 6371 * 1000 // Radius of the earth in m
         const dLat = this.degTorad(lat2 - lat1)
@@ -38,7 +40,7 @@ class Checkout extends Component {
         return deg * (Math.PI / 180)
     }
 
-    isLock() {
+    isLock = () => {
         const lat1 = this.props.place.lat
         const lon1 = this.props.place.lon
         const lat2 = this.props.currentLocation[0]

@@ -28,7 +28,7 @@ class MapComponent extends React.Component {
     const position = this.props.currentLocation
     const nearbyPlaces = this.props.nearbyPlaces
 
-    
+    // OB/FF: could be constants (don't need to be defined in render)   
     var placeIcon = L.icon({
       iconUrl: '/magnifier.png',
       iconSize: [30, 42],

@@ -23,6 +23,7 @@ class Signup extends Component {
         const field = e.target.name;
         const content = e.target.value;
         const newInfo = Object.assign({}, this.state.account, { [field]: content })
+        // OB/FF: anytime you do `x ? true : false`, could just replace that with `x`
         this.setState({ account: newInfo, dirty: field == 'password' ? true : false })
 
     }
@@ -32,6 +33,7 @@ class Signup extends Component {
         //submitting data to thunker
         this.props.createAccount(this.state.account)
         //clearing input fields
+        // OB/FF: DOM mutation below, beware! `value=` below to make inputs "controlled"
         e.target.username.value=''
         e.target.email.value=''
         e.target.password.value=''

@@ -2,6 +2,8 @@ const router = require('express').Router();
 const db = require('../db')
 const User = db.models.user;
 
+// OB/FF: inconsistent indentation
+
 router.route('/') 
   .get((req, res, next) => {              //get user
       if (req.user) {
@@ -11,6 +13,7 @@ router.route('/')
       }
   })
   .post((req, res, next) => {           // create user
+    // OB/FF: signup might not be secure, could just always create
     User.findOrCreate({
         where: {
             email: req.body.email
@@ -18,7 +21,7 @@ router.route('/')
         defaults: {
             password: req.body.password,
             username: req.body.username,
-            points: 0
+            points: 0 // OB/FF: could be defaultValue
         }
     })
     .spread((user, exist) => {
@@ -41,6 +44,7 @@ router.route('/')
             }
         })
         .then(user => {
+            // OB/FF: maybe this could be refactored with `else..if`s and `else`s
             if (!user) res.status(401).send('Wrong email or password');
             if (user && !user.correctPassword(req.body.password)) res.status(401).send('Wrong email or password');
             if (user && user.correctPassword(req.body.password)) req.login(user, error => {

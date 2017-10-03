@@ -1,3 +1,4 @@
+// OB/FF: dead depedencies below (fs, https)
 const fs = require('fs');
 const https = require('https');
 const express = require('express');
@@ -32,6 +33,7 @@ app.use(session({
 }));
 
 passport.serializeUser((user, done) => {
+  // OB/FF: try..catch here not needed?
   try {
     done(null, user.id);
   } catch (err) {
@@ -47,6 +49,8 @@ passport.deserializeUser((id, done) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// OB/FF: awesome comments
 
 //serving routes
 app.use('/api', require('./api'));

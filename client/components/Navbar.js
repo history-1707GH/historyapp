@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import { logOut } from '../store'
+// OB/FF: undead code, sppooooky
 // import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 

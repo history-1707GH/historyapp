@@ -1,0 +1,13 @@
+- Delete old branches after merging PRs
+- Great issues (well documented)
+- Maybe more issues (in general there should be 1 or more issues per PR)
+- For removing stuff you want ignored (e.g. .DS_Store)
+  - status should be empty
+  - git rm -rf --cached .
+  - git add .
+  - git commit -m "cleanup"
+- Digging the trend towards consistent commit messages
+- Put some stuff in README
+- Consider making an .eslintrc file
+- Consider utility function instead of repeated/copied code in api (if it remains so similar)
+- Consider squashing together synopsisParse and synopsis in reducer / redux store

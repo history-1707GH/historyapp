@@ -5,6 +5,8 @@
   return { type: GET_CURRENTLOCATION, location }
 }
 
+// OB/FF: consider another thunk that constantly updates, e.g. `constantlyUpdateCurrentLocation`
+// OB/FF: you'll want another thing to dispatch `stopConstantlyUpdating`
 export const fetchCurrentLocation = () => {
     return function thunk(dispatch) {
         navigator.geolocation.getCurrentPosition(

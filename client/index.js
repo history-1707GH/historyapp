@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store'
 import Main from './components/Main';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// OB/FF: unused dependency
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import './index.scss';

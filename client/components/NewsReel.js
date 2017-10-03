@@ -20,6 +20,7 @@ class NewsReel extends Component {
   } 
 
   createDate(dateNum){
+    // OB/FF: check out moment.js
     return new Date(dateNum).toString().split(' ').slice(0,4).join(' ');
   }
 
