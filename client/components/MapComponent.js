@@ -4,7 +4,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { fetchNearbyPlaces, selectedPlace, fetchCurrentLocation } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { secrets_TFOREST_API_KEY } from '../../secrets'
+import { secrets_TFOREST_API_KEY } from '../../secrets_frontend'
 
 
 class MapComponent extends React.Component {
@@ -98,6 +98,7 @@ const mapDispatch = (dispatch, ownProps) => {
     },
     
     handleClick: function(place){ 
+      console.log('in handleclick on props')
       dispatch(selectedPlace(place))
       ownProps.history.push('/synopsis')
     }
