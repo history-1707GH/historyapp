@@ -4,6 +4,7 @@ import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import headlines from './newsreel';
 import synopsis from './synopsis'
+import synopsisParse from './synopsisParse'
 import nearbyPlaces from './nearbyPlaces'
 
 import selectedPlace from './selectedPlace'
@@ -16,6 +17,7 @@ import user from './user'
 const reducer = combineReducers({
   headlines,
   synopsis,
+  synopsisParse,
   nearbyPlaces,
   selectedPlace,
   currentLocation,
@@ -32,8 +34,9 @@ const store = createStore(
 
 export default store;
 
-export * from './newsreel';
+export * from './newsreel'
 export * from './synopsis'
+export * from './synopsisParse'
 export * from './nearbyPlaces'
 export * from './selectedPlace'
 export * from './currentLocation'
