@@ -98,7 +98,6 @@ const mapDispatch = (dispatch, ownProps) => {
     },
     
     handleClick: function(place){ 
-      console.log('in handleclick on props')
       dispatch(selectedPlace(place))
       ownProps.history.push('/synopsis')
     }
