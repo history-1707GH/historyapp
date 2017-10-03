@@ -30,7 +30,7 @@ class MapComponent extends React.Component {
 
     
     var placeIcon = L.icon({
-      iconUrl: 'https://cdn.pixabay.com/photo/2015/12/14/20/36/magnifier-1093184_1280.png',
+      iconUrl: '/magnifier.png',
       iconSize: [30, 42],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
