@@ -9,7 +9,6 @@ import Synopsis from './Synopsis'
 import Auth from './Auth'
 import Login from './Login'
 
-//import other components here
 
 import store, { fetchUser } from '../store';
 
@@ -33,7 +32,7 @@ class Main extends Component {
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
-                    <Route exact path='/auth' component={Auth}/>
+                    <Route path='/auth' component={Auth} />
                 </Switch>
             </div>
         )
