@@ -16,23 +16,35 @@ class Synopsis extends Component {
     this.getDistance = this.getDistance.bind(this)
     this.degTorad = this.degTorad.bind(this)
     this.isLock = this.isLock.bind(this)
-    this.prepareSynopsisText = this.prepareSynopsisText.bind(this)
-    this.handleClick = this.handleClick.bind(this)
 }
 
   componentDidMount(){
-    // this.props.fetchSynopsis(this.props.place.title)
-    this.props.fetchSynopsis('dog')
-    this.isLock() 
+    this.props.fetchSynopsis(this.props.place.pageid)
+    this.isLock()
+   
   }
 
-  prepareSynopsisText(text){
-    const preparedText=text.replacemyString.replace(/<(?:.|\n)*?>/gm, '');
-    this.setState({synopsisText: preparedText})
-  }
-
-  componetDidReceiveProps(nextProps){
-    this.prepareSynopsisText
+  componentWillReceiveProps(nextProps){
+    if(nextProps.synopsis !== this.props.synopsis) {
+        let content = nextProps.synopsis.content
+        let index = 0
+        let selector = ""
+        if(content.includes('<span id="Menus">Menus</span>'))
+            selector = '<span id="Menus">Menus</span>'
+        else if(content.includes('<span id="Image_gallery">Image gallery</span>')) 
+            selector = '<span id="Image_gallery">Image gallery</span>'
+        else if(content.includes('<span id="See_also">See also</span>')) 
+            selector = '<span id="See_also">See also</span>'
+            else if (content.includes('<span id="References">References</span>'))
+                selector = '<span id="References">References</span>'
+                else if(content.includes('<span id="External_links">External links</span>'))
+                    selector = '<span id="External_links">External links</span>'
+                    
+        
+        index = content.indexOf(selector)
+        const preparedText= content.slice(0, index);
+        this.setState({synopsisText: preparedText})
+    }
   }
 
   getDistance(lat1,lon1,lat2,lon2) {
@@ -43,10 +55,9 @@ class Synopsis extends Component {
       Math.sin(dLat/2) * Math.sin(dLat/2) +
       Math.cos(this.degTorad(lat1)) * Math.cos(this.degTorad(lat2)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2)
-      ; 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    const d = R * c; // Distance in m
-    return d;
+    const d = R * c // Distance in m
+    return d
   }
   
   degTorad(deg) {
@@ -67,14 +78,14 @@ class Synopsis extends Component {
   }
 
   render(){
-   
+    const html = {__html: this.state.synopsisText}
     
     return(
-      <div>
-        <NextExperience />
+        <div>
+      <div dangerouslySetInnerHTML = {html}/> 
         <br />
-        <button type="button" className="btn btn-success" disabled = {this.state.lock} onClick = {this.handleClick}> Check In </button>
-
+        <button type="button" className="btn btn-success" disabled = {this.state.lock}> Check in </button>
+       
         </div>
     )
   }
@@ -91,15 +102,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: pageTitle => {
-      dispatch(fetchSynopsis(pageTitle))
-    },
-    fetchNearbyPlaces: position => {
-      dispatch(fetchNearbyPlaces(position))
+    fetchSynopsis: pageId => {
+      dispatch(fetchSynopsis(pageId))
     }
   }
 }
 
 
 export default connect(mapState, mapDispatch)(Synopsis)
-

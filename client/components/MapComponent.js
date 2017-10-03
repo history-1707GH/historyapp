@@ -4,7 +4,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { fetchNearbyPlaces, selectedPlace, fetchCurrentLocation } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { secrets_TFOREST_API_KEY } from '../../secretsFrontEnd'
+import { secrets_TFOREST_API_KEY } from '../../secrets_frontend'
 
 
 class MapComponent extends React.Component {
@@ -30,7 +30,7 @@ class MapComponent extends React.Component {
 
     
     var placeIcon = L.icon({
-      iconUrl: 'https://cdn.pixabay.com/photo/2015/12/14/20/36/magnifier-1093184_1280.png',
+      iconUrl: '/magnifier.png',
       iconSize: [30, 42],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
@@ -62,7 +62,7 @@ class MapComponent extends React.Component {
           </Marker>
           {
             nearbyPlaces.length && nearbyPlaces.map(place => (
-              <Marker position={[place.lat, place.lon]} key={place.pageid} >
+              <Marker position={[place.lat, place.lon]} key={place.pageid} icon={placeIcon}>
                 <Popup>
                   <span onClick = {()=>this.props.handleClick(place)}>
                     

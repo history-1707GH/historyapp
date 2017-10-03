@@ -31,7 +31,7 @@ export function newUser(account, history){
 
 export function logIn(account, history){
     return function thunk(dispatch){
-        return axios.post('/auth/me', account)
+        return axios.put('/auth/me', account)
         .then(res=>{
             dispatch(getUser(res.data))
         })
@@ -42,7 +42,7 @@ export function logIn(account, history){
 export function logOut(){
     return function thunk(dispatch){
         return axios.delete('/auth/me')
-        .then(res => {
+        .then(() => {
             dispatch(removeUser())
         })
         .catch(err => console.error(`Unable to log out user`, err))
@@ -58,6 +58,7 @@ export function fetchUser(){
         .catch(err => console.error(`Unable to get user`, err))
     }
 }
+
 
 //REDUCER
 export default function reducer (state = {},action){
