@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logIn } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
-
-
-// import { connect } from 'react-redux';
+import Google from './Google'
 
 class Login extends Component {
   constructor(props){
@@ -48,6 +46,7 @@ class Login extends Component {
             <button type='submit'>Sign in</button>
             </form>
         </div>
+        <Google />
         <Center>
           <div>
             <Link to="/signup">
