@@ -12,7 +12,7 @@ export const fetchCurrentLocation = () => {
                 let curLocation = [position.coords.latitude, position.coords.longitude]
                 dispatch(getCurrentLocation(curLocation))
             },
-            (error) => this.setState({ error: error.message }),
+            (error) => console.log(error),
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
         )
             
@@ -21,9 +21,7 @@ export const fetchCurrentLocation = () => {
 
 export default function (state = [0, 0], action) {
   switch (action.type) {
-    
     case GET_CURRENTLOCATION: 
-       
       return action.location
     default: return state
   }
