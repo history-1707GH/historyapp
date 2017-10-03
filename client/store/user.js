@@ -42,7 +42,7 @@ export function logIn(account, history){
 export function logOut(){
     return function thunk(dispatch){
         return axios.delete('/auth/me')
-        .then(res => {
+        .then(() => {
             dispatch(removeUser())
         })
         .catch(err => console.error(`Unable to log out user`, err))

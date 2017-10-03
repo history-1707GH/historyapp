@@ -62,7 +62,7 @@ class MapComponent extends React.Component {
           </Marker>
           {
             nearbyPlaces.length && nearbyPlaces.map(place => (
-              <Marker position={[place.lat, place.lon]} key={place.pageid} >
+              <Marker position={[place.lat, place.lon]} key={place.pageid} icon={placeIcon}>
                 <Popup>
                   <span onClick = {()=>this.props.handleClick(place)}>
                     
