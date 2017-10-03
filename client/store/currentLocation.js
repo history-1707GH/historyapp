@@ -21,9 +21,7 @@ export const fetchCurrentLocation = () => {
 
 export default function (state = [0, 0], action) {
   switch (action.type) {
-    
     case GET_CURRENTLOCATION: 
-       
       return action.location
     default: return state
   }
