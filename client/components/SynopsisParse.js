@@ -40,10 +40,9 @@ class Synopsis extends Component {
       Math.sin(dLat/2) * Math.sin(dLat/2) +
       Math.cos(this.degTorad(lat1)) * Math.cos(this.degTorad(lat2)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2)
-      ; 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    const d = R * c; // Distance in m
-    return d;
+    const d = R * c // Distance in m
+    return d
   }
   
   degTorad(deg) {
