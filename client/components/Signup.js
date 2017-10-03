@@ -32,10 +32,6 @@ class Signup extends Component {
         e.preventDefault();
         //submitting data to thunker
         this.props.createAccount(this.state.account)
-        //clearing input fields
-        e.target.username.value=''
-        e.target.email.value=''
-        e.target.password.value=''
         //clearing local state
         this.setState({
             account: {
@@ -55,6 +51,7 @@ class Signup extends Component {
                     <input
                         name='username'
                         type='text'
+                        value={this.state.account.username}
                         onChange={this.handleChange}
                         required
                     />
@@ -62,6 +59,7 @@ class Signup extends Component {
                     <input
                         name='email'
                         type='text'
+                        value={this.state.account.email}
                         onChange={this.handleChange}
                         required
                     />
@@ -70,6 +68,7 @@ class Signup extends Component {
                     <input
                         name='password'
                         type='text'
+                        value={this.state.account.password}
                         onChange={this.handleChange}
                         required
                     />
