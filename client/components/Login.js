@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import store from '../store';
-import AppBar from 'material-ui/AppBar';
-import {teal900} from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import FlatButton from 'material-ui/FlatButton';
+import store from '../store';;
 import Center from 'react-center';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logIn } from '../store/index';
+import Navbar from './Navbar'
 
 // import { connect } from 'react-redux';
 
@@ -27,19 +23,9 @@ class Login extends Component {
   
 
   render(props){
-    const styles = {
-      title: {
-        cursor: 'pointer',
-      },
-    };
     return(
       <div>
-      <AppBar
-        title={<span style={styles.title}>meander</span>}
-        iconElementLeft={<IconButton></IconButton>}
-        iconElementRight={<FlatButton label="Login / Sign Up" />}
-        style={{backgroundColor:teal900}}
-      />
+      <Navbar />
         <Center>
           <div>
             <img src="/meander-logo-white.png" className="meander-logo"/>
