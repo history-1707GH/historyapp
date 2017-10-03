@@ -9,15 +9,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import './index.scss';
 
-// const muiTheme = getMuiTheme({
-//   palette: {
-//     textColor: teal500,
-//   },
-//   appBar: {
-//     height: 50,
-//   },
-// });
-
 const App = () => (
   <MuiThemeProvider >
     <Main />
