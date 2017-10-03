@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import store from '../store';;
-import Center from 'react-center';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logIn } from '../store/index';
+import React, {Component} from 'react'
+import store from '../store'
+import Center from 'react-center'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logIn } from '../store/index'
+import FlatButton from 'material-ui/FlatButton'
+
 
 // import { connect } from 'react-redux';
 
@@ -33,19 +35,26 @@ class Login extends Component {
             <form onSubmit={this.props.logInUser}>
                 <label>Email: </label>
                 <input
-                    name='email'
-                    type='text'
-                    required
+                  name='email'
+                  type='text'
+                  required
                 />
                 <label>Password: </label>
                 <input
-                    name='password'
-                    type='text'
-                    required
+                  name='password'
+                  type='text'
+                  required
                 />
             <button type='submit'>Sign in</button>
             </form>
         </div>
+        <Center>
+          <div>
+            <Link to="/signup">
+              <FlatButton label="Create a new account" />            
+            </Link>
+          </div>
+        </Center>
       </div>
     )
   }
