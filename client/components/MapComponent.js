@@ -64,7 +64,7 @@ class MapComponent extends React.Component {
             nearbyPlaces.length && nearbyPlaces.map(place => (
               <Marker position={[place.lat, place.lon]} key={place.pageid} icon={placeIcon}>
                 <Popup>
-                  <span onClick = {()=>this.props.handleClick(place)}>
+                  <span onClick={()=>this.props.handleClick(place)} style={{cursor:"pointer"}}>
                     
                       {place.title} 
                     
