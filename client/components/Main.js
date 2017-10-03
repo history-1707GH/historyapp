@@ -27,6 +27,7 @@ class Main extends Component {
     render() {
         return (
             <div>
+                <Navbar />
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/>  

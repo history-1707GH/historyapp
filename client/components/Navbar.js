@@ -3,36 +3,30 @@ import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import {teal900} from 'material-ui/styles/colors'
 import IconButton from 'material-ui/IconButton'
-import { connect } from 'react-redux';
-// import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
+import { logOut } from '../store'
+// import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 
-class Navbar extends Component{
-    constructor(props){
-        super(props)
-    }
-
-    render(props){
-        let buttonText, buttonRoute
-        const styles = {
-            title: {
-            cursor: 'pointer',
-            }
+export const Navbar = (props) => {
+    let iconRight
+    const styles = {
+        title: {
+        cursor: 'pointer',
         }
-        this.props.currentUser.id ? (buttonText="Logout", buttonRoute="/logout") : (buttonText="Login", buttonRoute="/login")
-
-        return(
-            <div>
-                <AppBar
+    }
+    props.currentUser.id ? (iconRight=(<Link to='/'><FlatButton type="button" label='Logout' onClick={props.handleLogout}/></Link>)) : (iconRight=(<Link to='/login'><FlatButton label='Login' /> </Link>))
+    return (
+        <div>
+            <AppBar
                 title={<span style={styles.title}>meander</span>}
                 iconElementLeft={<IconButton></IconButton>}
-                iconElementRight={<Link to={buttonRoute}><FlatButton label={buttonText} /> </Link>}
+                iconElementRight={iconRight}
                 style={{backgroundColor:teal900}}
-                />
-            </div>
-        )
-    }
+            />
+        </div>
+    )
 }
 
 const mapState = state => {
@@ -41,4 +35,12 @@ const mapState = state => {
     }
 }
 
-export default connect(mapState)(Navbar)
+const mapDispatch = (dispatch, ownProps) => {
+    return {
+        handleLogout: () => {
+            dispatch(logOut(ownProps.history))
+        }
+    }
+}
+
+export default connect(mapState, mapDispatch)(Navbar)

@@ -4,7 +4,6 @@ import Center from 'react-center';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logIn } from '../store/index';
-import Navbar from './Navbar'
 
 // import { connect } from 'react-redux';
 
@@ -25,7 +24,6 @@ class Login extends Component {
   render(props){
     return(
       <div>
-      <Navbar />
         <Center>
           <div>
             <img src="/meander-logo-white.png" className="meander-logo"/>

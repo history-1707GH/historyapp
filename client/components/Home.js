@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Center from 'react-center';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar'
 
 
 export default class Home extends Component {
@@ -21,7 +20,6 @@ export default class Home extends Component {
   render(props){
     return(
       <div>
-        <Navbar />
         <Center>
           <div>
             <img src="/meander-logo-white.png" className="meander-logo"/>
