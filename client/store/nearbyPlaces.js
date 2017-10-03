@@ -6,14 +6,17 @@ const getNearbyPlaces = places => {
   return { type: GET_NEARBY_PLACES, places }
 }
 
+
+
 export const fetchNearbyPlaces = (location) => {
   return function thunk(dispatch) {
     const lat = location[0]
     const long = location[1]
-    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&list=geosearch&gscoord=${lat}%7C${long}&gsradius=10000`)
+    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&list=geosearch&gscoord=${lat}%7C${long}&gsradius=10000&gslimit=50`)
 
       .then(res => res.data.query.geosearch)
       .then(locations => {
+        console.log('locations', locations)
 
         dispatch(getNearbyPlaces(locations))
       })

@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store'
 import Main from './components/Main';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import './index.scss';
 
 
 const App = () => (
