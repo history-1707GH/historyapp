@@ -31,22 +31,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-passport.serializeUser((user, done) => {
-  try {
-    done(null, user.id);
-  } catch (err) {
-    done(err);
-  }
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(require('./middleware/passport'));
 
 //serving routes
 app.use('/api', require('./api'));

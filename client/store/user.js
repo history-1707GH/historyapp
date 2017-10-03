@@ -59,7 +59,6 @@ export function fetchUser(){
     }
 }
 
-
 //REDUCER
 export default function reducer (state = {},action){
     switch (action.type){

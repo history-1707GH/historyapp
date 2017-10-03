@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { newUser } from '../store/index';
+import Google from './Google'
 
 class Signup extends Component {
 
@@ -65,16 +66,17 @@ class Signup extends Component {
                         required
                     />
                     <label>Password: </label>
-                    <small>(Must be at least 8 characters long)</small>
+                    <small>(Must be at least 6 characters long)</small>
                     <input
                         name='password'
                         type='text'
                         onChange={this.handleChange}
                         required
                     />
-                    {this.state.dirty && (this.state.account.password.length < 8 || this.state.account.password.length > 50) ? (<p>Invalid password</p>) : null}
-                    <button type='submit' disabled={(this.state.account.password.length < 8) || (this.state.account.password.length > 50)}>Create Account!</button>
+                    {this.state.dirty && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? (<p>Invalid password</p>) : null}
+                    <button type='submit' disabled={(this.state.account.password.length < 6) || (this.state.account.password.length > 50)}>Create Account!</button>
                 </form>
+                <Google />
             </div>
         )
     }
