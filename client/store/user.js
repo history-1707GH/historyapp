@@ -31,7 +31,7 @@ export function newUser(account, history){
 
 export function logIn(account, history){
     return function thunk(dispatch){
-        return axios.post('/auth/me', account)
+        return axios.put('/auth/me', account)
         .then(res=>{
             dispatch(getUser(res.data))
         })
@@ -58,6 +58,7 @@ export function fetchUser(){
         .catch(err => console.error(`Unable to get user`, err))
     }
 }
+
 
 //REDUCER
 export default function reducer (state = {},action){

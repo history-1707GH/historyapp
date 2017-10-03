@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Auth from './Auth'
 import Login from './Login'
-
-//import other components here
-
-import store, { fetchUser } from '../store';
+import Signup from './Signup'
+import Home from './Home'
+import store, { fetchUser } from '../store'
 
 class Main extends Component {
 
@@ -29,11 +28,12 @@ class Main extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path='/' component={Login}/>
+                    <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
-                    <Route exact path='/auth' component={Auth}/>
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/signup' component={Signup} />
                 </Switch>
             </div>
         )
