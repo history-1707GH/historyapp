@@ -30,6 +30,7 @@ class Main extends Component {
                 <Navbar />
                 <Switch>
                     <Route exact path='/' component={Home}/>
+                    <Route exact path='/home' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/>  
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />

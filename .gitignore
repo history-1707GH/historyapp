@@ -1,6 +1,7 @@
 node_modules
 bundle.js
 bundle.js.map
-secrets_frontend.js
+secrets.js
 npm-debug.log
 secrets_backend.js
+secrets_frontend.js
