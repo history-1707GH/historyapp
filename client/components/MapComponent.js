@@ -62,7 +62,6 @@ class MapComponent extends React.Component {
           </Marker>
           {
             mapMarkers.length && mapMarkers.map(place => {
-              console.log('place', place)
               return (
                 <Marker position={[place.lat, place.lon]} key={place.pageid} icon={placeIcon}>
                   <Popup>
