@@ -8,7 +8,7 @@ const User = db.define('user', {
     username: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false
+        allowNull: true
     },
     email: {
         type: Sequelize.STRING,
@@ -20,15 +20,18 @@ const User = db.define('user', {
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
-            len: [8, 50]
+            len: [6, 50]
         }
     },
     points: {
         type: Sequelize.INTEGER
     },
     salt: {
+        type: Sequelize.STRING
+    },
+    googleId : {
         type: Sequelize.STRING
     }
 }, {

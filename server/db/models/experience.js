@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
 
-const Experience = db.define('route', {
+const Experience = db.define('experience', {
     latitude: {
         type: Sequelize.FLOAT,
         allowNull: false
