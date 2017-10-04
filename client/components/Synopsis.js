@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { fetchSynopsis } from '../store'
 import Checkout from './Checkout'
+import RaisedButton from 'material-ui/RaisedButton'
+import ReactTextCollapse from 'react-text-collapse'
+
 
 class Synopsis extends Component {
 
@@ -45,10 +48,25 @@ class Synopsis extends Component {
   render() {
     const html = { __html: this.state.synopsisText }
 
+    const TEXT_COLLAPSE_OPTIONS = {
+      collapse: false, // default state when component rendered
+      collapseText: '... show more', // text to show when collapsed
+      expandText: 'show less', // text to show when expanded
+      minHeight: 100, // component height when closed
+      maxHeight: 2000 // expanded to
+    }
+
     return (
       <div>
-        <div dangerouslySetInnerHTML={html} />
-        <br />
+        <ReactTextCollapse
+          options = {TEXT_COLLAPSE_OPTIONS}> 
+          <p>
+            <div dangerouslySetInnerHTML={html} />
+          </p>
+        </ReactTextCollapse> 
+        <div>    
+          <RaisedButton label="Headlines" fullWidth={true} />
+        </div>
         <Checkout />
 
       </div>
