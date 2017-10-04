@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchSynopsis } from '../store'
+import { fetchSynopsis, fetchSynopsisParse } from '../store'
 import Checkout from './Checkout'
 import RaisedButton from 'material-ui/RaisedButton'
 import ReactTextCollapse from 'react-text-collapse'
+import Center from 'react-center'
 
 
 class Synopsis extends Component {
@@ -18,6 +19,7 @@ class Synopsis extends Component {
 
   componentDidMount() {
     this.props.fetchSynopsis(this.props.place.pageid)
+    this.props.fetchSynopsisInfo(this.props.place.title)    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,7 +55,7 @@ class Synopsis extends Component {
       collapseText: '... show more', // text to show when collapsed
       expandText: 'show less', // text to show when expanded
       minHeight: 100, // component height when closed
-      maxHeight: 2000 // expanded to
+      maxHeight: 3000 // expanded to
     }
 
     return (
@@ -67,7 +69,9 @@ class Synopsis extends Component {
         <div>    
           <RaisedButton label="Headlines" fullWidth={true} />
         </div>
-        <Checkout />
+        <Center>
+          <Checkout />
+        </Center>
 
       </div>
     )
@@ -79,7 +83,7 @@ const mapState = state => {
   return {
     synopsis: state.synopsis,
     place: state.selectedPlace,
-    currentLocation: state.currentLocation
+    currentLocation: state.currentLocation,
   }
 }
 
@@ -87,6 +91,9 @@ const mapDispatch = dispatch => {
   return {
     fetchSynopsis: pageId => {
       dispatch(fetchSynopsis(pageId))
+    },
+    fetchSynopsisInfo: pageTitle => {
+      dispatch(fetchSynopsisParse(pageTitle))
     }
   }
 }
