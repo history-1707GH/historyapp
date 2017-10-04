@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -15,8 +15,8 @@ class NewsReel extends Component {
   }
 
   componentDidMount(){
-    const fakeQuery = 'New York Stock Exchange Great Depression';
-    this.props.setHeadlines(fakeQuery.toLowerCase().split(' ').join('+'));
+    this.props.setHeadlines(`"${this.props.selectedPlace.title}"+"New York"`);
+    console.log(`"${this.props.selectedPlace.title}"+"New York"`);
   } 
 
   createDate(dateNum){
@@ -46,7 +46,7 @@ class NewsReel extends Component {
                 <CardMedia>
                   <a href={headline.web_url}>
                   {
-                    headline.multimedia.length ? 
+                    headline.multimedia.length > 1 ? 
                     <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
                     <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
                   }
@@ -62,6 +62,11 @@ class NewsReel extends Component {
         }
           </Slider>
         </div>
+        <div>
+          <NavLink to="/synopsis">
+            <FlatButton type="button" label="BACK"/>
+          </NavLink>
+        </div>
       </div>
     )
   }
@@ -69,7 +74,8 @@ class NewsReel extends Component {
 
 const mapState = state => {
   return {
-    headlines: state.headlines
+    headlines: state.headlines,
+    selectedPlace: state.selectedPlace
   }
 }
 
