@@ -69,7 +69,7 @@ class Signup extends Component {
                     <small>(Must be at least 6 characters long)</small>
                     <input
                         name='password'
-                        type='text'
+                        type='password'
                         value={this.state.account.password}
                         onChange={this.handleChange}
                         required
