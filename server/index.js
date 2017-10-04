@@ -55,13 +55,4 @@ db.sync()
       console.log(`Server Starting: ${port}`);
     })
   })
-  .then(server => {
-    const io = require('socket.io')(server);
-    io.on('connection', function (socket) {
-      console.log('connected')
-      socket.on('buy-item', items => {
-        console.log('buy-item')
-        socket.broadcast.emit('buy-item', items)
-      })
-    })
-  })
+  .catch(console.error);
