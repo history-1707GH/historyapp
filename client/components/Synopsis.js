@@ -50,38 +50,35 @@ class Synopsis extends Component {
 
   render() {
     const html = { __html: this.state.synopsisText }
-    const info = this.state.synopsisParse
+    const info = this.props.synopsisParse
+    let getImg;
+    let num = 1;
+    if (info ) {
+      info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'
+      console.log(getImg)
+    }
     return (
       <div>
-      {
-        // <Card>
-        // <CardHeader
-        //   title={info.displayTitle}
-        //   subtitle="Subtitle"
-        // />
-        // <CardMedia
-        //   overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-        // >
-        //   <img src="images/nature-600-337.jpg" alt="" />
-        // </CardMedia>
-        // <CardTitle title="Card title" subtitle="Card subtitle" />
-        // <CardText>
-        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        //   Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-        //   Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-        //   Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-        // </CardText>
-        // <CardActions>
-        //   <FlatButton label="Action1" />
-        //   <FlatButton label="Action2" />
-        // </CardActions>
-        // </Card>
+      { 
+        info ? (
+          <Card>
+          <CardHeader
+            title={`Location: ${num}`}
+          />
+          <CardMedia>
+            <img src={getImg} className="synopsis-main-image" alt="" />
+          </CardMedia>
+          <CardTitle title={info.displaytitle} />
+          <CardText>
+            <div dangerouslySetInnerHTML={html} />
+          </CardText>
+          <CardActions>
+            <FlatButton label="News Reel" />
+          </CardActions>
+          </Card>
+        ) : null
 
       }
-        <div dangerouslySetInnerHTML={html} />
-        <div>    
-          <RaisedButton label="Headlines" fullWidth={true} />
-        </div>
         <Center>
           <Checkout />
         </Center>
