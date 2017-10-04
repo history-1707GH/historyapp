@@ -14,7 +14,7 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
-        this.props.fetchCurrentLocation()
+        
         this.props.fetchNearbyPlaces(this.props.currentLocation)
       
   }
@@ -90,9 +90,7 @@ const mapState = state => {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    fetchCurrentLocation: function(){
-      dispatch(fetchCurrentLocation())
-    },
+    
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     },
