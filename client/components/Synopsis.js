@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchSynopsis, fetchSynopsisParse } from '../store'
 import Checkout from './Checkout'
@@ -61,7 +61,7 @@ class Synopsis extends Component {
       <div>
       { 
         info ? (
-          <Card>
+          <Card className="synopsis">
           <CardHeader
             title={`Location: ${num}`}
           />
@@ -69,15 +69,16 @@ class Synopsis extends Component {
             <img src={getImg} className="synopsis-main-image" alt="" />
           </CardMedia>
           <CardTitle title={info.displaytitle} />
+          <CardActions>
+            <NavLink to='headlines'>
+              <FlatButton type="button" label="News Reel"/>
+            </NavLink>
+        </CardActions>
           <CardText>
             <div dangerouslySetInnerHTML={html} />
           </CardText>
-          <CardActions>
-            <FlatButton label="News Reel" />
-          </CardActions>
           </Card>
         ) : null
-
       }
         <Center>
           <Checkout />
