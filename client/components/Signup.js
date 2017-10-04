@@ -31,7 +31,8 @@ class Signup extends Component {
     handleSubmit(e) {
         e.preventDefault();
         //submitting data to thunker
-        this.props.createAccount(this.state.account)
+        let query = this.props.location.search
+        this.props.createAccount(this.state.account, query)
         //clearing local state
         this.setState({
             account: {
@@ -41,6 +42,7 @@ class Signup extends Component {
             },
             dirty: false
         })
+
     }
 
     render() {
@@ -67,7 +69,7 @@ class Signup extends Component {
                     <small>(Must be at least 6 characters long)</small>
                     <input
                         name='password'
-                        type='text'
+                        type='password'
                         value={this.state.account.password}
                         onChange={this.handleChange}
                         required
@@ -89,8 +91,8 @@ const mapState = function (state) {
 
 const mapDispatch = function (dispatch, ownProps) {
     return {
-        createAccount(account) {
-            dispatch(newUser(account, ownProps.history))
+        createAccount(account, query) {
+            dispatch(newUser(account, ownProps.history, query))
         }
     }
 }

@@ -9,7 +9,8 @@ const getSynopsisParse  = synopsisParse => {
 
 export const fetchSynopsisParse = (pageTitle) => {
   return function thunk(dispatch) {
-    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=parse&page=${pageTitle}&format=json`)
+    const propOptions="text|categories|links|images|externallinks|sections|displaytitle|iwlinks"
+    return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=parse&prop=${propOptions}&page=${pageTitle}&format=json`)
       .then(res=>{
         dispatch(getSynopsisParse(res.data))
       })
