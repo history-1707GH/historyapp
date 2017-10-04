@@ -21,7 +21,7 @@ export const fetchNearbyPlaces = (location) => {
   }
 }
 
-export const fetchNearbyPlacesNextExperience = (lat, lon) => {
+export const fetchAllNext = (lat, lon) => {
   return function thunk(dispatch) {
     return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&list=geosearch&gscoord=${lat}%7C${lon}&gsradius=10000&gslimit=500`)
       .then(res => {

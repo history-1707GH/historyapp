@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSynopsis, fetchNearbyPlacesNextExperience } from '../store'
+import { fetchSynopsis, fetchAllNext } from '../store'
 import NextExperience from './NextExperience'
 
 class CheckIn extends Component {
@@ -20,7 +20,7 @@ class CheckIn extends Component {
 
     componentDidMount() {
         this.isLock()
-        this.props.fetchNearbyPlacesNextExperience(this.props.place.lat, this.props.place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
+        this.props.fetchAllNext(this.props.place.lat, this.props.place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
     }
 
     handleClick(event){
@@ -76,8 +76,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
     return {
-        fetchNearbyPlacesNextExperience: function (lat, long) {
-            dispatch(fetchNearbyPlacesNextExperience(lat, long))
+        fetchAllNext: (lat, long) => {
+            dispatch(fetchAllNext(lat, long))
         }
     }
 }
