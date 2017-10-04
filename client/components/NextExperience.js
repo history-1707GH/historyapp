@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import MapComponent from './MapComponent'
 import { Route} from 'react-router-dom'
+import {getNextExperiences} from '../store'
 
 
 
@@ -11,7 +12,7 @@ function NextExperience(props) {
   const textToParse = props.synopsis.content
   const topics = nlp(textToParse).nouns().data()
   const nearbyPlaces = props.nearbyPlaces
-  let nextPlaceChoices = []
+  let nextExperiences = []
 
   //determine the topic with the greatest similarity score to each nearby place; add to the nearby place object
   if (topics[0]) {
@@ -30,8 +31,8 @@ function NextExperience(props) {
       return b.maxSimilarity.similarity - a.maxSimilarity.similarity
     })
     //remove any stray html tags from from the nouns
-    nextPlaceChoices = rankedNearbyPlaces.slice(0, 2)
-    nextPlaceChoices.forEach(place=>{
+    nextExperiences = rankedNearbyPlaces.slice(0, 2)
+    nextExperiences.forEach(place=>{
       let noun = place.maxSimilarity.noun
       while(noun.indexOf('<')!==-1){
         let indexOfEndOfTag = noun.indexOf('>')
@@ -40,8 +41,8 @@ function NextExperience(props) {
       }
      })
   }
-  //put the next places on the store
-  props.getNextPlaces(nextPlaceChoices)
+  //put the next experiences on the store
+  props.getNextExperiences(nextExperiences)
 
   //uses editDistance (based on Levenshtein distance algorithm) to calculate a distance score between two strings (0 to 1)
   function similarity(s1, s2) {
@@ -88,7 +89,7 @@ function NextExperience(props) {
 
   return (
     <div>
-      {nextPlaceChoices.map((nextPlaceChoice, idx) => {
+      {nextExperiences.map((nextPlaceChoice, idx) => {
         return (
           <div key={nextPlaceChoice.pageid}>
             {`Choice ${idx + 1}`}: 
@@ -118,5 +119,13 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(NextExperience)
+const mapDispatch=dispatch => {
+  return {
+    getNextExperiences: function(nextExperiences){
+      dispatch(getNextExperiences(nextExperiences))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(NextExperience)
 

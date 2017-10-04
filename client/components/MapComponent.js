@@ -13,10 +13,10 @@ class MapComponent extends React.Component {
     super(props)
   }
 
-  componentDidMount() {
-        
-        this.props.fetchNearbyPlaces(this.props.currentLocation)
-      
+  componentDidMount() {    
+    if(!this.props.nextExperiences){
+      this.props.fetchNearbyPlaces(this.props.currentLocation)
+    } 
   }
 
   componentWillReceiveProps(nextProps){
@@ -27,8 +27,6 @@ class MapComponent extends React.Component {
   render() {
     const position = this.props.currentLocation
     const nearbyPlaces = this.props.nearbyPlaces
-    console.log("this.props", this.props)
-    
     var placeIcon = L.icon({
       iconUrl: '/magnifier.png',
       iconSize: [30, 42],
@@ -84,17 +82,16 @@ class MapComponent extends React.Component {
 const mapState = state => {
   return {
     nearbyPlaces: state.nearbyPlaces,
-    currentLocation: state.currentLocation
+    currentLocation: state.currentLocation,
+    nextExperiences: state.nextExperiences
   }
 }
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     },
-    
     handleClick: function(place){ 
       dispatch(selectedPlace(place))
       ownProps.history.push('/synopsis')
