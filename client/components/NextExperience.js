@@ -2,21 +2,76 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 function NextExperience(props) {
-  //const textToParse =  pull from the thunk
-  const textToParse = "For many years, Hanover Square was the center of New York's commodity market, with the New York Cotton Exchange at 1 Hanover Square, New York Cocoa Exchange (now the New York Board of Trade) and others located nearby. The square was also known as 'Printing House Square,' and it was here that the Great Fire of New York broke out on December 16, 1835, decimating much of Lower Manhattan.[4] 3 Hanover Square, a former home to the New York Cotton Exchange, and 10 Hanover Square, a former office building, have been converted to residential use."
+  const textToParse = props.synopsis.content
   const topics = nlp(textToParse).nouns().data()
-  console.log("topics", topics)
-  const nearbyPlacesObj = props.nearbyPlaces.reduce((obj, place)=>{
-    obj[place.title]=place
-  }, {})
-  console.log('nearbyPlacesObj', nearbyPlacesObj)
-  const possibleNextExperiences = [];
-  topics.forEach(topic=>{
-    if(nearbyPlacesObj[topic.singular]){
-      possibleNextExperiences.push(nearbyPlacesObj[topic.singular])
+  const nearbyPlaces = props.nearbyPlaces
+
+  //add to nearby places an array of similarity scores that determines the 
+  if (topics[0]) {
+    console.log("topics", topics)
+    nearbyPlaces.forEach(place => {
+      place.maxSimilarity = { noun: topics[0].singular, similarity: similarity(place.title, topics[0].singular) }
+      for (let i = 0; i < topics.length; i++) {
+        let newSim = similarity(place.title, topics[i].singular)
+        if (newSim > place.maxSimilarity.similarity) {
+          place.maxSimilarity = { noun: topics[i].singular, similarity: newSim }
+        }
+      }
+    })
+    console.log('nearbyPlaces after added similarity score', nearbyPlaces)
+    const rankedNearbyPlaces = nearbyPlaces.sort((a,b)=>{
+      return b.maxSimilarity.similarity - a.maxSimilarity.similarity
+    })
+    console.log('rankedNearbyPlaces', rankedNearbyPlaces)    
+  }
+
+  //Find place with highest maximum match
+
+
+  //uses editDistance (based on Levenshtein distance algorithm) to calculate a distance score between two strings (0 to 1)
+  function similarity(s1, s2) {
+    var longer = s1;
+    var shorter = s2;
+    if (s1.length < s2.length) {
+      longer = s2;
+      shorter = s1;
     }
-  })
-  console.log(possibleNextExperiences)
+    var longerLength = longer.length;
+    if (longerLength == 0) {
+      return 1.0;
+    }
+    return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+  }
+
+  //determines the edit distance between two strings
+  function editDistance(s1, s2) {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+
+    var costs = new Array();
+    for (var i = 0; i <= s1.length; i++) {
+      var lastValue = i;
+      for (var j = 0; j <= s2.length; j++) {
+        if (i == 0)
+          costs[j] = j;
+        else {
+          if (j > 0) {
+            var newValue = costs[j - 1];
+            if (s1.charAt(i - 1) != s2.charAt(j - 1))
+              newValue = Math.min(Math.min(newValue, lastValue),
+                costs[j]) + 1;
+            costs[j - 1] = lastValue;
+            lastValue = newValue;
+          }
+        }
+      }
+      if (i > 0)
+        costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
+  }
+
+
 
   return (
     <div>Next Up!</div>
@@ -33,4 +88,3 @@ const mapState = state => {
 
 export default connect(mapState)(NextExperience)
 
-//get a lits of all landmarks within 1 or 0.5 miles of user and parse text looking for a referece to that like I did w the map OR compare the topics array or nouns array to that

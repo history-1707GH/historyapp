@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import {fetchSynopsis, fetchNearbyPlaces} from '../store'
-import NextExperience from './NextExperience'
-=======
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchSynopsis } from '../store'
-import Checkout from './Checkout'
->>>>>>> origin/refactor-checkout
-
+import CheckIn from './CheckIn'
 
 class Synopsis extends Component {
 
@@ -28,28 +19,9 @@ class Synopsis extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.synopsis !== this.props.synopsis) {
-      let content = nextProps.synopsis.content
-      let index = 0
-      let selector = ""
-      if (content.includes('<span id="Menus">Menus</span>'))
-        selector = '<span id="Menus">Menus</span>'
-      else if (content.includes('<span id="Image_gallery">Image gallery</span>'))
-        selector = '<span id="Image_gallery">Image gallery</span>'
-      else if (content.includes('<span id="See_also">See also</span>'))
-        selector = '<span id="See_also">See also</span>'
-      else if (content.includes('<span id="References">References</span>'))
-        selector = '<span id="References">References</span>'
-      else if (content.includes('<span id="External_links">External links</span>'))
-        selector = '<span id="External_links">External links</span>'
-
-
-      index = content.indexOf(selector)
-      const preparedText = content.slice(0, index);
-      this.setState({ synopsisText: preparedText })
+      this.setState({ synopsisText: nextProps.synopsis.content })
     }
   }
-
-
 
   render() {
     const html = { __html: this.state.synopsisText }
@@ -58,7 +30,7 @@ class Synopsis extends Component {
       <div>
         <div dangerouslySetInnerHTML={html} />
         <br />
-        <Checkout />
+        <CheckIn />
 
       </div>
     )

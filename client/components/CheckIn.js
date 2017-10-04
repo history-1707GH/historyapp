@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSynopsis } from '../store'
+import { fetchSynopsis, fetchNearbyPlaces } from '../store'
 import NextExperience from './NextExperience'
 
-class Checkout extends Component {
+class CheckIn extends Component {
 
     constructor(props) {
         super()
@@ -18,6 +18,9 @@ class Checkout extends Component {
 
     componentDidMount() {
         this.isLock()
+        this.props.fetchNearbyPlaces(this.props.place)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
+
+        //GO TO A DIFFERENT ROUTE AND QUERY FOR 100,000 FEET AND MAX POSSIBLITIES
     }
 
 
@@ -50,7 +53,10 @@ class Checkout extends Component {
     render() {
 
         return (
-            <button type="button" className="btn btn-success" disabled={this.state.lock}> Check in </button>
+            <div>
+                <button type="button" className="btn btn-success" disabled={this.state.lock} >Check In</button>
+                <NextExperience />
+            </div>
         )
     }
 }
@@ -63,4 +69,12 @@ const mapState = state => {
     }
 }
 
-export default connect(mapState)(Checkout)
+const mapDispatch = dispatch => {
+    return {
+        fetchNearbyPlaces: function (place) {
+            dispatch(fetchNearbyPlaces(place))
+        }
+    }
+}
+
+export default connect(mapState, mapDispatch)(CheckIn)

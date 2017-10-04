@@ -18,7 +18,6 @@ export default class Home extends Component {
   componentWillUnmount(props){
     document.body.className=null;
   }
-  
 
   render(props){
     return(
