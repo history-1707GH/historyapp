@@ -18,7 +18,7 @@ const App = () => (
 render(
   <Provider store={store}>
     <Router>
-      <App />
+        <App />
     </Router>
   </Provider>,
   document.getElementById('main')

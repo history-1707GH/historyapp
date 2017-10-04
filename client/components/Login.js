@@ -5,13 +5,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logIn } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
-
-
-// import { connect } from 'react-redux';
+import Google from './Google'
 
 class Login extends Component {
   constructor(props){
     super(props)
+    this.checkRedirect = this.checkRedirect.bind(this)
   }
 
   componentDidMount(){
@@ -21,7 +20,12 @@ class Login extends Component {
   componentWillUnmount(props){
     document.body.className=null;
   }
-  
+
+  checkRedirect(e) {
+    e.preventDefault();
+    let query = this.props.location.search
+    this.props.logInUser({email:e.target.email.value,password:e.target.password.value}, query)
+  }
 
   render(props){
     return(
@@ -32,7 +36,7 @@ class Login extends Component {
           </div>
         </Center>
         <div>
-            <form onSubmit={this.props.logInUser}>
+            <form onSubmit={this.checkRedirect}>
                 <label>Email: </label>
                 <input
                   name='email'
@@ -48,6 +52,7 @@ class Login extends Component {
             <button type='submit'>Sign in</button>
             </form>
         </div>
+        <Google />
         <Center>
           <div>
             <Link to="/signup">
@@ -64,9 +69,8 @@ const mapState = null
 
 const mapDispatch = function (dispatch, ownProps) {
     return {
-        logInUser: e => {
-            e.preventDefault();
-            dispatch(logIn({email:e.target.email.value,password:e.target.password.value},ownProps.history))
+        logInUser: (logInInfo,query) => {
+            dispatch(logIn(logInInfo, ownProps.history, query))
         }
     }
 }
