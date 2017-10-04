@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -61,6 +61,11 @@ class NewsReel extends Component {
           )
         }
           </Slider>
+        </div>
+        <div>
+          <NavLink to="/synopsis">
+            <FlatButton type="button" label="BACK"/>
+          </NavLink>
         </div>
       </div>
     )
