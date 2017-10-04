@@ -1,7 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { fetchNearbyPlaces, selectedPlace, fetchCurrentLocation } from '../store'
+import { fetchNearbyPlaces, selectedPlace } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { secrets_TFOREST_API_KEY } from '../../secrets_frontend'
@@ -14,7 +14,7 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
-        this.props.fetchCurrentLocation()
+        
         this.props.fetchNearbyPlaces(this.props.currentLocation)
       
   }
@@ -90,9 +90,7 @@ const mapState = state => {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    fetchCurrentLocation: function(){
-      dispatch(fetchCurrentLocation())
-    },
+    
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     },

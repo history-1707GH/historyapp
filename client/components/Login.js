@@ -46,7 +46,7 @@ class Login extends Component {
                 <label>Password: </label>
                 <input
                   name='password'
-                  type='text'
+                  type='password'
                   required
                 />
             <button type='submit'>Sign in</button>
@@ -55,7 +55,7 @@ class Login extends Component {
         <Google />
         <Center>
           <div>
-            <Link to="/signup">
+            <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
               <FlatButton label="Create a new account" />            
             </Link>
           </div>
