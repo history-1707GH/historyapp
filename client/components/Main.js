@@ -10,6 +10,7 @@ import Navbar from './Navbar'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import NextExperience from './NextExperience'
 import store, { fetchUser } from '../store'
 
 class Main extends Component {
@@ -35,6 +36,7 @@ class Main extends Component {
                     <Route path='/synopsis' component={Synopsis} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
+                    <Route exact path='/next_experience' component={NextExperience} />                
                 </Switch>
             </div>
         )

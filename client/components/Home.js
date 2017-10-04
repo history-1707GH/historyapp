@@ -29,7 +29,7 @@ export default class Home extends Component {
         </Center>
         <Center>
           <div>
-            <Link to="/login">
+            <Link to="/login?redirect=map">
               <RaisedButton label="Login" style={{margin:12}} />
             </Link>
           </div>

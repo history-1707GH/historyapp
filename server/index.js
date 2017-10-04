@@ -31,22 +31,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-passport.serializeUser((user, done) => {
-  try {
-    done(null, user.id);
-  } catch (err) {
-    done(err);
-  }
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(require('./middleware/passport'));
 
 //serving routes
 app.use('/api', require('./api'));
@@ -70,13 +55,4 @@ db.sync()
       console.log(`Server Starting: ${port}`);
     })
   })
-  .then(server => {
-    const io = require('socket.io')(server);
-    io.on('connection', function (socket) {
-      console.log('connected')
-      socket.on('buy-item', items => {
-        console.log('buy-item')
-        socket.broadcast.emit('buy-item', items)
-      })
-    })
-  })
+  .catch(console.error);

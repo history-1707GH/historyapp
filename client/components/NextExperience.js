@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+
 
 function NextExperience(props) {
+  //get a list of all nouns in the Wiki text 
   const textToParse = props.synopsis.content
   const topics = nlp(textToParse).nouns().data()
   const nearbyPlaces = props.nearbyPlaces
+  let nextPlaceChoices = []
 
-  //add to nearby places an array of similarity scores that determines the 
+  //determine the topic with the greatest similarity score to each nearby place; add to the nearby place object
   if (topics[0]) {
-    console.log("topics", topics)
     nearbyPlaces.forEach(place => {
       place.maxSimilarity = { noun: topics[0].singular, similarity: similarity(place.title, topics[0].singular) }
       for (let i = 0; i < topics.length; i++) {
@@ -18,15 +21,14 @@ function NextExperience(props) {
         }
       }
     })
-    console.log('nearbyPlaces after added similarity score', nearbyPlaces)
-    const rankedNearbyPlaces = nearbyPlaces.sort((a,b)=>{
+
+    //rank nearby places by maximum similarity score 
+    const rankedNearbyPlaces = nearbyPlaces.sort((a, b) => {
       return b.maxSimilarity.similarity - a.maxSimilarity.similarity
     })
-    console.log('rankedNearbyPlaces', rankedNearbyPlaces)    
+    nextPlaceChoices = rankedNearbyPlaces.slice(0, 2)
+    console.log('nextPlaceChoices', nextPlaceChoices)
   }
-
-  //Find place with highest maximum match
-
 
   //uses editDistance (based on Levenshtein distance algorithm) to calculate a distance score between two strings (0 to 1)
   function similarity(s1, s2) {
@@ -71,10 +73,27 @@ function NextExperience(props) {
     return costs[s2.length];
   }
 
-
-
   return (
-    <div>Next Up!</div>
+    <div>
+      {nextPlaceChoices.map((nextPlaceChoice, idx) => {
+        return (
+          <div key={nextPlaceChoice.pageid}>
+            {`Choice ${idx + 1}`}: 
+              {nextPlaceChoice.title}
+            <br />
+            Association: 
+              {nextPlaceChoice.maxSimilarity.noun.toUpperCase()}
+            <br />
+            Association Score: 
+                {`${(Math.ceil(nextPlaceChoice.maxSimilarity.similarity*10000)/100)}%`}
+            <br />
+            Distance: 
+              {Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}
+          </div>
+        )
+      })}
+      <Link to={'/map'}>Take Me To The Map!</Link>      
+    </div>
   )
 
 }
