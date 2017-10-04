@@ -55,7 +55,7 @@ class Login extends Component {
         <Google />
         <Center>
           <div>
-            <Link to="/signup">
+            <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
               <FlatButton label="Create a new account" />            
             </Link>
           </div>

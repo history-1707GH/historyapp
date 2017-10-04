@@ -19,11 +19,16 @@ export function removeUser(){
 }
 
 //THUNK
-export function newUser(account, history){
+export function newUser(account, history, query){
     return  function thunk(dispatch){
         return axios.post('/auth/me', account)
         .then(res => {
             dispatch(getUser(res.data))
+            if (query.length) {
+                history.push('/map')
+            } else {
+                history.go(-2)
+            }
         })
         .catch(err => console.error(`Unable to create user`, err))
     }
