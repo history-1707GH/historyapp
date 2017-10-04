@@ -15,17 +15,15 @@ router.route('/')
         let headlines = req.body;
         Promise.all(headlines.map(headline => {
             headline.source_id = headline._id
-            return Article.findOne({
+            return Article.findOrCreate({
                 where: {
                     source_id: headline._id
-                }
+                },
+                defaults: headline
             })
-            .then(article =>{
-                if (!article) {
-                    return Article.create(headline);
-                } 
+            .spread( headline => {
+                res.sendStatus(204);
             })
-            .catch(next);
         }))
         .catch(next);
     })
