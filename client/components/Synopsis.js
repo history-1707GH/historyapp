@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import { fetchSynopsis, fetchSynopsisParse } from '../store'
 import Checkout from './Checkout'
 import RaisedButton from 'material-ui/RaisedButton'
-import ReactTextCollapse from 'react-text-collapse'
 import Center from 'react-center'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 
 class Synopsis extends Component {
@@ -49,23 +50,35 @@ class Synopsis extends Component {
 
   render() {
     const html = { __html: this.state.synopsisText }
-
-    const TEXT_COLLAPSE_OPTIONS = {
-      collapse: false, // default state when component rendered
-      collapseText: '... show more', // text to show when collapsed
-      expandText: 'show less', // text to show when expanded
-      minHeight: 100, // component height when closed
-      maxHeight: 3000 // expanded to
-    }
-
+    const info = this.state.synopsisParse
     return (
       <div>
-        <ReactTextCollapse
-          options = {TEXT_COLLAPSE_OPTIONS}> 
-          <p>
-            <div dangerouslySetInnerHTML={html} />
-          </p>
-        </ReactTextCollapse> 
+      {
+        // <Card>
+        // <CardHeader
+        //   title={info.displayTitle}
+        //   subtitle="Subtitle"
+        // />
+        // <CardMedia
+        //   overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+        // >
+        //   <img src="images/nature-600-337.jpg" alt="" />
+        // </CardMedia>
+        // <CardTitle title="Card title" subtitle="Card subtitle" />
+        // <CardText>
+        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        //   Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+        //   Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+        //   Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+        // </CardText>
+        // <CardActions>
+        //   <FlatButton label="Action1" />
+        //   <FlatButton label="Action2" />
+        // </CardActions>
+        // </Card>
+
+      }
+        <div dangerouslySetInnerHTML={html} />
         <div>    
           <RaisedButton label="Headlines" fullWidth={true} />
         </div>
@@ -84,6 +97,7 @@ const mapState = state => {
     synopsis: state.synopsis,
     place: state.selectedPlace,
     currentLocation: state.currentLocation,
+    synopsisParse: state.synopsisParse.parse
   }
 }
 
