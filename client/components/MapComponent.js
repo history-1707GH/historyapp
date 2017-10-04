@@ -1,7 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { fetchNearbyPlaces, selectedPlace, fetchCurrentLocation } from '../store'
+import { fetchNearbyPlaces, selectedPlace } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { secrets_TFOREST_API_KEY } from '../../secrets_frontend'
