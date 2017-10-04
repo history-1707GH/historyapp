@@ -11,19 +11,21 @@ import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
 import NextExperience from './NextExperience'
-import store, { fetchUser } from '../store'
+import store, { fetchUser, fetchCurrentLocation, watchId } from '../store'
+
 
 class Main extends Component {
 
-    constructor(props){
-        super(props)
-    }
 
     componentDidMount(){
         this.props.fetchData()
         this.props.fetchCurrentUser()
+        this.props.fetchCurrentLocation()
     }
 
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(watchId);
+      }
 
     render() {
         return (
@@ -53,7 +55,10 @@ const mapDispatch = function(dispatch){
         },
         fetchCurrentUser(){
             dispatch(fetchUser())
-        }
+        },
+        fetchCurrentLocation(){
+            dispatch(fetchCurrentLocation())
+        },
     }
 }
 

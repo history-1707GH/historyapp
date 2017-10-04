@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import MapComponent from './MapComponent'
+import { Route} from 'react-router-dom'
+
 
 
 function NextExperience(props) {
@@ -26,9 +29,19 @@ function NextExperience(props) {
     const rankedNearbyPlaces = nearbyPlaces.sort((a, b) => {
       return b.maxSimilarity.similarity - a.maxSimilarity.similarity
     })
+    //remove any stray html tags from from the nouns
     nextPlaceChoices = rankedNearbyPlaces.slice(0, 2)
-    console.log('nextPlaceChoices', nextPlaceChoices)
+    nextPlaceChoices.forEach(place=>{
+      let noun = place.maxSimilarity.noun
+      while(noun.indexOf('<')!==-1){
+        let indexOfEndOfTag = noun.indexOf('>')
+        noun = noun.slice(indexOfEndOfTag+1)
+        place.maxSimilarity.noun = noun
+      }
+     })
   }
+  //put the next places on the store
+  props.getNextPlaces(nextPlaceChoices)
 
   //uses editDistance (based on Levenshtein distance algorithm) to calculate a distance score between two strings (0 to 1)
   function similarity(s1, s2) {
@@ -92,7 +105,7 @@ function NextExperience(props) {
           </div>
         )
       })}
-      <Link to={'/map'}>Take Me To The Map!</Link>      
+      <Link to={'/map'} >Take Me To The Map!</Link>      
     </div>
   )
 
