@@ -16,20 +16,20 @@ const mockStore = configureMockStore(middlewares)
 chai.use(chaiEnzyme());
 chai.use(sinonChai);
 
-//***bypassing a L from leaflet import that was causing a bug
-GLOBAL.window = {};
-GLOBAL.document = {
-  documentElement: {
-    style: {}
-  },
-  getElementsByTagName: function () { return []; },
-  createElement: function () { return {}; }
-};
-GLOBAL.navigator = {
-  userAgent: 'nodejs'
-};
-GLOBAL.L = require('leaflet');
-//***
+// //***bypassing a L from leaflet import that was causing a bug
+// GLOBAL.window = {};
+// GLOBAL.document = {
+//   documentElement: {
+//     style: {}
+//   },
+//   getElementsByTagName: function () { return []; },
+//   createElement: function () { return {}; }
+// };
+// GLOBAL.navigator = {
+//   userAgent: 'nodejs'
+// };
+// GLOBAL.L = require('leaflet');
+// //***
 
 describe('does checkout button disable/enable?', () => {
   const fakeLocFar = [55, 50]
