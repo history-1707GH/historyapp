@@ -6,8 +6,4 @@ npm-debug.log
 secrets_backend.js
 secrets_frontend.js
 .DS_Store
-<<<<<<< HEAD
 ngrok
-=======
-ngrok
->>>>>>> master

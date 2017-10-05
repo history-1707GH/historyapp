@@ -8,13 +8,15 @@
     "start-dev": "webpack -w & nodemon server/index.js",
     "build": "webpack",
     "build-watch": "webpack -w",
-    "test": "mocha ./spec/*.spec.js --compilers js:babel-register"
+    "test": "mocha ./tests/*.test.js --watch --compilers js:babel-register",
+    "test-react": "mocha ./tests/react.test.js --watch --compilers js:babel-register"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.18.0",
+    "chai-enzyme": "^0.8.0",
     "connect-session-sequelize": "^4.1.0",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
@@ -43,6 +45,8 @@
     "request-promise": "^4.2.2",
     "sentiment": "^4.0.1",
     "sequelize": "^4.8.3",
+    "sinon": "^4.0.1",
+    "sinon-chai": "^2.14.0",
     "slick-carousel": "^1.7.1",
     "socket.io": "^2.0.3"
   },
@@ -57,6 +61,8 @@
     "enzyme": "^2.9.1",
     "mocha": "^3.5.3",
     "node-sass": "^4.5.3",
+    "react-dom": "^15.6.2",
+    "react-test-renderer": "^15.6.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "supertest": "^3.0.0",

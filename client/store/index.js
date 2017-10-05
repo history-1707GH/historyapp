@@ -14,7 +14,7 @@ import user from './user'
 
 //import stuff here
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   headlines,
   synopsis,
   synopsisParse,
