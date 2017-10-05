@@ -14,21 +14,21 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
-        
-        this.props.fetchNearbyPlaces(this.props.currentLocation)
-      
+    if (!this.props.nextExperiences.length) {
+      this.props.fetchNearbyPlaces(this.props.currentLocation)
+    }
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.currentLocation !== this.props.currentLocation) this.props.fetchNearbyPlaces(nextProps.currentLocation)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentLocation !== this.props.currentLocation) this.props.fetchNearbyPlaces(nextProps.currentLocation)
   }
-  
+
 
   render() {
     const position = this.props.currentLocation
-    const nearbyPlaces = this.props.nearbyPlaces
+    const mapMarkers = this.props.nextExperiences.length ? this.props.nextExperiences : this.props.nearbyPlaces
+    const mapZoom = this.props.nextExperiences.length ? 12 : 25
 
-    
     var placeIcon = L.icon({
       iconUrl: '/magnifier.png',
       iconSize: [30, 42],
@@ -50,7 +50,7 @@ class MapComponent extends React.Component {
 
     return (
       <div id="mapid">
-        <Map center={position} zoom={25}>
+        <Map center={position} zoom={mapZoom}>
           <TileLayer
             url={`https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=${secrets_TFOREST_API_KEY}`}
             attribution={`&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
@@ -61,19 +61,20 @@ class MapComponent extends React.Component {
             </Popup>
           </Marker>
           {
-            nearbyPlaces.length && nearbyPlaces.map(place => (
-              <Marker position={[place.lat, place.lon]} key={place.pageid} icon={placeIcon}>
-                <Popup>
-                  <span onClick={()=>this.props.handleClick(place)} style={{cursor:"pointer"}}>
-                    
-                      {place.title} 
-                    
-                  </span>
+            mapMarkers.length && mapMarkers.map(place => {
+              return (
+                <Marker position={[place.lat, place.lon]} key={place.pageid} icon={placeIcon}>
+                  <Popup>
+                    <span onClick={() => this.props.handleClick(place)} style={{ cursor: "pointer" }}>
 
-                </Popup>
-              </Marker>
-            )
-            )
+                      {place.title}
+
+                    </span>
+
+                  </Popup>
+                </Marker>
+              )
+            })
           }
         </Map>
       </div>
@@ -84,18 +85,17 @@ class MapComponent extends React.Component {
 const mapState = state => {
   return {
     nearbyPlaces: state.nearbyPlaces,
-    currentLocation: state.currentLocation
+    currentLocation: state.currentLocation,
+    nextExperiences: state.nextExperiences
   }
 }
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    
     fetchNearbyPlaces: function (position) {
       dispatch(fetchNearbyPlaces(position))
     },
-    
-    handleClick: function(place){ 
+    handleClick: function (place) {
       dispatch(selectedPlace(place))
       ownProps.history.push('/synopsis')
     }

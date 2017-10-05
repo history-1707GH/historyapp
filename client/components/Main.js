@@ -11,6 +11,7 @@ import ProgressBar from './ProgressBar'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import NextExperience from './NextExperience'
 import store, { fetchUser, fetchCurrentLocation, watchId } from '../store'
 
 
@@ -39,6 +40,7 @@ class Main extends Component {
                     <Route exact path='/progress' component={ProgressBar} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
+                    <Route exact path='/next_experience' component={NextExperience} />                
                 </Switch>
             </div>
         )

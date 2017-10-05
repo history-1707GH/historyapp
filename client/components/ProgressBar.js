@@ -42,7 +42,6 @@ class ProgressBar extends React.Component {
   render() {
 
     const { finished, placeIndex } = this.state
-    // const {totalPlaces} = this.props
     const places = this.createPlacesArr()
 
     console.log('places', places)
@@ -70,7 +69,6 @@ class ProgressBar extends React.Component {
                       primary={true}
                       onClick={this.handleNext}
                       style={{ marginRight: 12 }}
-                    
                     />
                     
                   </div>

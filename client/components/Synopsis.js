@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import CheckIn from './CheckIn'
 import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { fetchSynopsis, fetchSynopsisParse } from '../store'
-import Checkout from './Checkout'
 import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 
@@ -20,68 +20,48 @@ class Synopsis extends Component {
 
   componentDidMount() {
     this.props.fetchSynopsis(this.props.place.pageid)
-    this.props.fetchSynopsisInfo(this.props.place.title)    
+    this.props.fetchSynopsisInfo(this.props.place.title)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.synopsis !== this.props.synopsis) {
-      let content = nextProps.synopsis.content
-      let index = 0
-      let selector = ""
-      if (content.includes('<span id="Menus">Menus</span>'))
-        selector = '<span id="Menus">Menus</span>'
-      else if (content.includes('<span id="Image_gallery">Image gallery</span>'))
-        selector = '<span id="Image_gallery">Image gallery</span>'
-      else if (content.includes('<span id="See_also">See also</span>'))
-        selector = '<span id="See_also">See also</span>'
-      else if (content.includes('<span id="References">References</span>'))
-        selector = '<span id="References">References</span>'
-      else if (content.includes('<span id="External_links">External links</span>'))
-        selector = '<span id="External_links">External links</span>'
-
-
-      index = content.indexOf(selector)
-      const preparedText = content.slice(0, index);
-      this.setState({ synopsisText: preparedText })
+      this.setState({ synopsisText: nextProps.synopsis.content })
     }
   }
-
-
 
   render() {
     const html = { __html: this.state.synopsisText }
     const info = this.props.synopsisParse
     let getImg;
     let num = 1;
-    if (info ) {
+    if (info) {
       info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'
-      console.log(getImg)
     }
     return (
       <div>
-      { 
-        info ? (
-          <Card className="synopsis">
-          <CardHeader
-            title={`Location: ${num}`}
-          />
-          <CardMedia>
-            <img src={getImg} className="synopsis-main-image" alt="" />
-          </CardMedia>
-          <CardTitle title={info.displaytitle} />
-          <CardActions>
-            <NavLink to='headlines'>
-              <FlatButton type="button" label="News Reel"/>
-            </NavLink>
-        </CardActions>
-          <CardText>
-            <div dangerouslySetInnerHTML={html} />
-          </CardText>
-          </Card>
-        ) : null
-      }
+        {
+          info ? (
+            <Card className="synopsis">
+              <CardHeader
+                title={`Location: ${num}`}
+              />
+              <CardMedia>
+                <img src={getImg} className="synopsis-main-image" alt="" />
+              </CardMedia>
+              <CardTitle title={info.displaytitle} />
+              <CardActions>
+                <NavLink to='headlines'>
+                  <FlatButton type="button" label="News Reel" />
+                </NavLink>
+              </CardActions>
+              <CardText>
+                <div dangerouslySetInnerHTML={html} />
+              </CardText>
+            </Card>
+          ) : null
+        }
         <Center>
-          <Checkout />
+          <CheckIn />
         </Center>
 
       </div>
