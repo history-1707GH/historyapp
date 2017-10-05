@@ -18,11 +18,10 @@ export default class Home extends Component {
   componentWillUnmount(props){
     document.body.className=null;
   }
-  
 
   render(props){
     return(
-      <div>
+      <div className="home-root">
         <Center>
           <div>
             <img src="/meander-logo-white.png" className="meander-logo"/>
