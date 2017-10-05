@@ -30,16 +30,7 @@ class CheckIn extends Component {
 
     handleClick(event){
         event.preventDefault()
-        this.setState({hideNextPlaces: false, hideGame: false
-        })
-        // const experience = {
-        //     lat: this.place.lat,
-        //     lon: this.place.lon,
-        //     wikiPageId: selectedPlace.pageId,
-        //     // ???  newsReelPgIds: []
-        // }
-        // this.props.getExperience(experience)
-
+        this.setState({hideNextPlaces: false, hideGame: false})
     }
 
 
