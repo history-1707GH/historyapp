@@ -4,6 +4,11 @@ import {setHeadlines} from './newsreel'
 import {secrets_NYT_API_KEY } from '../../secrets_frontend'
 import axios from 'axios'
 
+const GET_CURRENT_EXPERIENCE = 'GET_CURRENT_EXPERIENCE'
+
+
+
+
 export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) => {
     console.log('params in thunk creator', wikiPageId, wikiPageTitle, headlineQuery)
     return function thunk(dispatch) {
@@ -63,3 +68,4 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             .catch(err => console.log("there was an issue", err))
     }
 }
+
