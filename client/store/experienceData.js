@@ -61,7 +61,7 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
                 const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia,news_desk,section_name,source,type_of_material,_id';
                 // using options as a way to optionally construct publication date time frame
                 const options = '';
-                return axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${headlineQuery}&sort=newest&${fields}${options}&api-key=${api_key}`)
+                return axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=${headlineQuery}&sort=newest&${fields}${options}&api-key=${api_key}`)
             })
             .then(res => {
                 let headlines = res.data.response.docs;

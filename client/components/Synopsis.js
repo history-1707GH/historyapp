@@ -20,7 +20,7 @@ class Synopsis extends Component {
 
   componentDidMount() {
     const place = this.props.place
-    const headlineQuery = `"${place.title}"+"New York"`
+    const headlineQuery = `body.search("${place.title}")ANDglocations:("New York City")`
     this.props.fetchExperienceData(place.pageid, place.title, headlineQuery)   
   }
 
