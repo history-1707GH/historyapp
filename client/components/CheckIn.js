@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSynopsis, fetchAllNext } from '../store'
+import { fetchSynopsis, fetchAllNext, getExperience } from '../store'
 import NextExperience from './NextExperience'
 
 class CheckIn extends Component {
@@ -26,6 +26,13 @@ class CheckIn extends Component {
     handleClick(event){
         event.preventDefault()
         this.setState({hideNextPlaces: false})
+        // const experience = {
+        //     lat: this.place.lat,
+        //     lon: this.place.lon,
+        //     wikiPageId: selectedPlace.pageId,
+        //     // ???  newsReelPgIds: []
+        // }
+        // this.props.getExperience(experience)
     }
 
 
@@ -70,7 +77,9 @@ class CheckIn extends Component {
 const mapState = state => {
     return {
         place: state.selectedPlace,
-        currentLocation: state.currentLocation
+        currentLocation: state.currentLocation,
+        synopsis: state.synopsis,
+
     }
 }
 
@@ -78,6 +87,9 @@ const mapDispatch = dispatch => {
     return {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
+        },
+        getExperience: (experience) => {
+            dispatch(getExperience(experience))
         }
     }
 }

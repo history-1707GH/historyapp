@@ -1,6 +1,3 @@
-import axios from 'axios';
-import {secrets_NYT_API_KEY } from '../../secrets_frontend'
-
 
 // ACTION TYPE
 const SET_NEWS_HEADLINES = 'SET_NEWS_HEADLINES';
@@ -25,7 +22,7 @@ export const fetchHeadlines = query => dispatch => {
   // using options as a way to optionally construct publication date time frame
   const options = '';
 
-  axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&${fields}${options}&api-key=${api_key}`)
+  return axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&sort=newest&${fields}${options}&api-key=${api_key}`)
   .then(res => {    
     let headlines = res.data.response.docs;
     dispatch(setHeadlines(headlines));
