@@ -1,0 +1,29 @@
+{
+  "short_name": "meander",
+  "name": "meander",
+  "icons": [
+    {
+      "src":"/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },{  
+      "src": "/icon.png",  
+      "sizes": "256x256",  
+      "type": "image/png"  
+    },  
+    {  
+      "src": "/icon.png",  
+      "sizes": "384x384",  
+      "type": "image/png"  
+    },  
+    {  
+      "src": "/icon.png",  
+      "sizes": "512x512",  
+      "type": "image/png"  
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#004D40",
+  "theme_color": "#004D40",
+  "display": "standalone"
+}
