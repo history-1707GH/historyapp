@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CheckIn from './CheckIn'
 import { NavLink } from 'react-router-dom'
-import { fetchSynopsis, fetchSynopsisParse } from '../store'
+import { fetchExperienceData } from '../store'
 import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 
@@ -19,8 +19,9 @@ class Synopsis extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSynopsis(this.props.place.pageid)
-    this.props.fetchSynopsisInfo(this.props.place.title)    
+    const place = this.props.place
+    const headlineQuery = `"${place.title}"+"New York"`
+    this.props.fetchExperienceData(place.pageid, place.title, headlineQuery)   
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,34 +35,34 @@ class Synopsis extends Component {
     const info = this.props.synopsisParse
     let getImg;
     let num = 1;
-    if (info ) {
+    if (info) {
       info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'
       console.log ( nlp(info.text['*']).dates().data())
       console.log ( nlp(info.text['*']).organizations().data())      
     }
     return (
       <div>
-      { 
-        info ? (
-          <Card className="synopsis">
-          <CardHeader
-            title={`Location: ${num}`}
-          />
-          <CardMedia>
-            <img src={getImg} className="synopsis-main-image" alt="" />
-          </CardMedia>
-          <CardTitle title={info.displaytitle} />
-          <CardActions>
-            <NavLink to='headlines'>
-              <FlatButton type="button" label="News Reel"/>
-            </NavLink>
-        </CardActions>
-          <CardText>
-            <div dangerouslySetInnerHTML={html} />
-          </CardText>
-          </Card>
-        ) : null
-      }
+        {
+          info ? (
+            <Card className="synopsis">
+              <CardHeader
+                title={`Location: ${num}`}
+              />
+              <CardMedia>
+                <img src={getImg} className="synopsis-main-image" alt="" />
+              </CardMedia>
+              <CardTitle title={info.displaytitle} />
+              <CardActions>
+                <NavLink to='headlines'>
+                  <FlatButton type="button" label="News Reel" />
+                </NavLink>
+              </CardActions>
+              <CardText>
+                <div dangerouslySetInnerHTML={html} />
+              </CardText>
+            </Card>
+          ) : null
+        }
         <Center>
           <CheckIn />
         </Center>
@@ -83,11 +84,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: pageId => {
-      dispatch(fetchSynopsis(pageId))
-    },
-    fetchSynopsisInfo: pageTitle => {
-      dispatch(fetchSynopsisParse(pageTitle))
+    fetchExperienceData: (wikiPageId, wikiPageTitle, headlineQuery) => {
+      dispatch(fetchExperienceData(wikiPageId, wikiPageTitle, headlineQuery))
     }
   }
 }

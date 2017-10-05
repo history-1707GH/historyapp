@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSynopsis, fetchAllNext } from '../store'
+import { fetchSynopsis, fetchAllNext, getExperience } from '../store'
 import NextExperience from './NextExperience'
 
 class CheckIn extends Component {
@@ -10,7 +10,8 @@ class CheckIn extends Component {
         super()
         this.state = {
             lock: true,
-            hideNextPlaces: true
+            hideNextPlaces: true,
+            hideGame: true
         }
         this.getDistance = this.getDistance.bind(this)
         this.degTorad = this.degTorad.bind(this)
@@ -23,9 +24,13 @@ class CheckIn extends Component {
         this.props.fetchAllNext(this.props.place.lat, this.props.place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.currentLocation !== this.props.currentLocation) this.isLock()
+      }
+
     handleClick(event){
         event.preventDefault()
-        this.setState({hideNextPlaces: false})
+        this.setState({hideNextPlaces: false, hideGame: false})
     }
 
 
@@ -52,7 +57,8 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        if (distance < 50) this.setState({ lock: false })
+        if (distance <= 50) this.setState({ lock: false })
+        if (distance > 50) this.setState({ lock: true })
     }
 
     render() {
@@ -60,7 +66,9 @@ class CheckIn extends Component {
         return (
             <div>
                 <button type="button" className="btn btn-success" disabled={this.state.lock} onClick = {this.handleClick}>Check In</button>
-                <Link to={'/next_experience'} hidden = {this.state.hideNextPlaces}>Onward!</Link>
+                <Link  to={'/next_experience'} hidden = {this.state.hideNextPlaces}>Onward!</Link>
+                
+                <Link to={'/game'} hidden = {this.state.hideGame}>Play a game!</Link>
             </div>
         )
     }
@@ -70,7 +78,9 @@ class CheckIn extends Component {
 const mapState = state => {
     return {
         place: state.selectedPlace,
-        currentLocation: state.currentLocation
+        currentLocation: state.currentLocation,
+        synopsis: state.synopsis,
+
     }
 }
 
@@ -78,6 +88,9 @@ const mapDispatch = dispatch => {
     return {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
+        },
+        getExperience: (experience) => {
+            dispatch(getExperience(experience))
         }
     }
 }
