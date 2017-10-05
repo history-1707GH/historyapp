@@ -8,7 +8,7 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
     console.log('params in thunk creator', wikiPageId, wikiPageTitle, headlineQuery)
     return function thunk(dispatch) {
         //fetch and format synopsis, call synopsis action creator
-        return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${wikiPageId}&prop=extracts&redirects=true `)
+        return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${wikiPageId}&prop=extracts&redirects=true`)
             .then(res => {
                 const wikiInfo = res.data.query.pages[wikiPageId]
                 let content = wikiInfo.extract
@@ -29,12 +29,18 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
                 const preparedText = content.slice(0, index);
 
                 return {
+                    pageID: wikiPageId,
                     title: wikiInfo.title,
                     content: preparedText
                 }
             })
             .then(synopsis => {
                 dispatch(getSynopsis(synopsis))
+                return axios.post('api/synopsis', synopsis)
+                    .then(synposis=>{
+                        console.log('succesfully saved synopsis')
+                    })
+                    .catch(err=>console.log('there was an issue', err))
             })
             //fetch synopsis info, call synopsis info action creator 
             .then(() => {
