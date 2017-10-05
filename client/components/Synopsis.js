@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CheckIn from './CheckIn'
 import { NavLink } from 'react-router-dom'
-import { fetchSynopsis, fetchSynopsisParse } from '../store'
+import { fetchExperienceData } from '../store'
 import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
@@ -19,8 +19,9 @@ class Synopsis extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSynopsis(this.props.place.pageid)
-    this.props.fetchSynopsisInfo(this.props.place.title)
+    const place = this.props.place
+    const headlineQuery = `"${place.title}"+"New York"`
+    this.props.fetchExperienceData(place.pageid, place.title, headlineQuery)   
   }
 
   componentWillReceiveProps(nextProps) {
@@ -81,11 +82,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: pageId => {
-      dispatch(fetchSynopsis(pageId))
-    },
-    fetchSynopsisInfo: pageTitle => {
-      dispatch(fetchSynopsisParse(pageTitle))
+    fetchExperienceData: (wikiPageId, wikiPageTitle, headlineQuery) => {
+      dispatch(fetchExperienceData(wikiPageId, wikiPageTitle, headlineQuery))
     }
   }
 }
