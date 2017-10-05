@@ -1,7 +1,7 @@
  const GET_CURRENTLOCATION = 'GET_CURRENTLOCATION'
  export let watchId
 
- const getCurrentLocation = location => {
+export const getCurrentLocation = location => {
   return { type: GET_CURRENTLOCATION, location }
 }
 
