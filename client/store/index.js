@@ -23,6 +23,7 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences
+
 });
 
 const store = createStore(
@@ -44,5 +45,6 @@ export * from './currentLocation'
 export * from './user'
 export * from './nextExperiences'
 export * from './experienceData'
+
 
 
