@@ -10,5 +10,6 @@ Route.belongsTo(Experience)
 Route.belongsTo(User)
 
 Experience.belongsTo(Article)
+Experience.belongsTo(Synopsis)
 
 module.exports = db;
