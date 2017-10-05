@@ -6,7 +6,7 @@ import headlines from './newsreel';
 import synopsis from './synopsis'
 import synopsisParse from './synopsisParse'
 import nearbyPlaces from './nearbyPlaces'
-import totalPlaces from './totalPlaces'
+
 import selectedPlace from './selectedPlace'
 import currentLocation from './currentLocation'
 import user from './user'
@@ -21,7 +21,7 @@ const reducer = combineReducers({
   nearbyPlaces,
   selectedPlace,
   currentLocation,
-  totalPlaces,
+  
   user
 });
 
@@ -42,6 +42,6 @@ export * from './nearbyPlaces'
 export * from './selectedPlace'
 export * from './currentLocation'
 export * from './user'
-export * from './totalPlaces'
+
 
 

@@ -59,7 +59,7 @@ class ProgressBar extends React.Component {
                 <StepLabel>Place's title</StepLabel>
                 <StepContent>
                   <p>
-                    What did you see when you see the building from your phone camera?
+                    User's notes show here.
                   </p>
                   <div style={{ margin: '12px 0' }}>
                     
@@ -100,9 +100,7 @@ class ProgressBar extends React.Component {
 }
 
 const mapState = state => {
-  // console.log(state.totalPlaces)
   return {
-    // totalPlaces = state.totalPlaces
   }
 }
 
