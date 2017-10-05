@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchSynopsis, fetchAllNext, getExperience } from '../store'
 import NextExperience from './NextExperience'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class CheckIn extends Component {
 
@@ -10,8 +11,7 @@ class CheckIn extends Component {
         super()
         this.state = {
             lock: true,
-            hideNextPlaces: true,
-            hideGame: true
+            checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
         this.degTorad = this.degTorad.bind(this)
@@ -26,11 +26,11 @@ class CheckIn extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.currentLocation !== this.props.currentLocation) this.isLock()
-      }
+    }
 
-    handleClick(event){
+    handleClick(event) {
         event.preventDefault()
-        this.setState({hideNextPlaces: false, hideGame: false})
+        this.setState({ checkin: true })
     }
 
 
@@ -63,14 +63,28 @@ class CheckIn extends Component {
 
     render() {
 
-        return (
-            <div>
-                <button type="button" className="btn btn-success" disabled={this.state.lock} onClick = {this.handleClick}>Check In</button>
-                <Link  to={'/next_experience'} hidden = {this.state.hideNextPlaces}>Onward!</Link>
-                
-                <Link to={'/game'} hidden = {this.state.hideGame}>Play a game!</Link>
-            </div>
+        if (this.state.lock) {
+            return (
+                <p> You are too far to check in! Please approaching this place!</p>
+            )
+        }
+        else if (this.state.checkin) {
+            return (
+                <div>
+                    <Link to={'/next_experience'} >
+                        <RaisedButton label="Onward!" style={{ margin: 12 }} />
+                    </Link>
+                    <Link to={'/game'} >
+                        <RaisedButton label="Play a game!" style={{ margin: 12 }} />
+                    </Link>
+                </div>
+            )
+        }
+        else return (
+            <button type="button" className="btn btn-success" onClick={this.handleClick}>Check In</button>
         )
+
+
     }
 }
 
