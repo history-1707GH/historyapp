@@ -49,7 +49,7 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             })
             //fetch synopsis info, call synopsis info action creator 
             .then(() => {
-                const propOptions = "text|categories|links|images|externallinks|sections|displaytitle|iwlinks"
+                const propOptions = "text|links|displaytitle"
                 return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=parse&prop=${propOptions}&page=${wikiPageTitle}&format=json`)
             })
             .then(res => {
