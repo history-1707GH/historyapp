@@ -21,7 +21,7 @@ export default class Home extends Component {
 
   render(props){
     return(
-      <div>
+      <div className="home-root">
         <Center>
           <div>
             <img src="/meander-logo-white.png" className="meander-logo"/>
