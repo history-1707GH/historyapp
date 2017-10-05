@@ -10,6 +10,7 @@ import Navbar from './Navbar'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import Notes from './Notes'
 import NextExperience from './NextExperience'
 import store, { fetchUser, fetchCurrentLocation, watchId } from '../store'
 
@@ -33,7 +34,8 @@ class Main extends Component {
                 <Navbar />
                 <Switch>
                     <Route exact path='/' component={Home}/>
-                    <Route exact path='/map' component={MapComponent}/>  
+                    <Route exact path='/map' component={MapComponent}/> 
+                    <Route exact path='/notes' component={Notes}/>   
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
                     <Route exact path='/login' component={Login} />
