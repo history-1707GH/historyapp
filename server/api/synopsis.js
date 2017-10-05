@@ -13,10 +13,21 @@ router.route('/')
             .catch(next)
     })
     .post((req, res, next) => {
-        Synopsis.create(req.body)
-            .then(synopsisInfo => {
-                res.status(201).json(synopsisInfo)
+        Synopsis.findOrCreate({
+            where: {
+                pageId: req.body.pageId
+            }
+        })
+            .spread((synopsis, created) => {
+                if (created) {
+                    synopsis.update({
+                        title: req.body.title,
+                        content: req.body.content
+                    })
+                }
+                return synopsis
             })
+            .then(synopsis => res.status(201).json(synopsis))
             .catch(next)
     })
 
@@ -50,10 +61,10 @@ router.route('/:id')
                 id: req.params.id
             }
         })
-        .then(()=> {
-            res.sendStatus(200)
-        })
-        .catch(next)
+            .then(() => {
+                res.sendStatus(200)
+            })
+            .catch(next)
     })
 
 module.exports = router;
