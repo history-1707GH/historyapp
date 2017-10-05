@@ -10,7 +10,8 @@ import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
 import currentLocation from './currentLocation'
 import user from './user'
-
+import currentExperience from './experience'
+import route from './route'
 
 //import stuff here
 
@@ -22,7 +23,9 @@ const reducer = combineReducers({
   selectedPlace,
   currentLocation,
   user,
-  nextExperiences
+  nextExperiences,
+  currentExperience,
+  route
 });
 
 const store = createStore(
@@ -43,6 +46,8 @@ export * from './selectedPlace'
 export * from './currentLocation'
 export * from './user'
 export * from './nextExperiences'
-export * from './experienceData'
+export * from './experience'
+export * from './route'
+
 
 

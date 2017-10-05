@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSynopsis, fetchAllNext, getExperience } from '../store'
+import { fetchSynopsis, fetchAllNext, gettingExperience } from '../store'
 import NextExperience from './NextExperience'
 
 class CheckIn extends Component {
@@ -21,7 +21,15 @@ class CheckIn extends Component {
 
     componentDidMount() {
         this.isLock()
-        this.props.fetchAllNext(this.props.place.lat, this.props.place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
+        const place = this.props.place
+        this.props.fetchAllNext(place.lat, place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
+        const experience = {
+            lat: place.lat,
+            lon: place.lon,
+            wikiPageId: place.pageid,
+            headlines: this.props.newsReel
+        }
+        this.props.gettingExperience(experience)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -31,6 +39,8 @@ class CheckIn extends Component {
     handleClick(event){
         event.preventDefault()
         this.setState({hideNextPlaces: false, hideGame: false})
+        
+
     }
 
 
@@ -80,7 +90,7 @@ const mapState = state => {
         place: state.selectedPlace,
         currentLocation: state.currentLocation,
         synopsis: state.synopsis,
-
+        headlines: state.headlines
     }
 }
 
@@ -89,8 +99,8 @@ const mapDispatch = dispatch => {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
         },
-        getExperience: (experience) => {
-            dispatch(getExperience(experience))
+        gettingExperience: (experience) => {
+            dispatch(gettingExperience(experience))
         }
     }
 }

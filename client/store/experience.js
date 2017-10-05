@@ -2,10 +2,40 @@ import {getSynopsis} from './synopsis'
 import {getSynopsisParse} from './synopsisParse'
 import {setHeadlines} from './newsreel'
 import {secrets_NYT_API_KEY } from '../../secrets_frontend'
+import {getRoute} from './route'
 import axios from 'axios'
 
+const GET_CURRENT_EXPERIENCE = 'GET_CURRENT_EXPERIENCE'
+
+const getCurrentExperience = experience => {
+    return {type: GET_CURRENT_EXPERIENCE, experience}
+}
+
+export default function (state = {}, action) {
+    switch(action.type) {
+        case GET_CURRENT_EXPERIENCE: return action.experience
+        default: return state
+    }
+}
+
+
+export const gettingExperience = experience => {
+    return function thunk(dispatch) {
+        return axios.post('/api/experience', experience)
+            .then(res=> {
+                const experience = res.data
+                dispatch(getCurrentExperience(experience))
+                return axios.post('/api/route', experience)
+            })
+            .then(res=>{
+                const route = res.data
+                dispatch(getRoute(route))
+            })
+            .catch(err=>console.log('There was an error in saving the route or experience', error))
+    }
+}
+
 export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) => {
-    console.log('params in thunk creator', wikiPageId, wikiPageTitle, headlineQuery)
     return function thunk(dispatch) {
         //fetch and format synopsis, call synopsis action creator
         return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&pageids=${wikiPageId}&prop=extracts&redirects=true`)
@@ -69,3 +99,5 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             .catch(err => console.log("there was an issue", err))
     }
 }
+
+
