@@ -15,8 +15,10 @@ class NewsReel extends Component {
   }
 
   componentDidMount(){
-    this.props.setHeadlines(`"${this.props.selectedPlace.title}"+"New York"`);
-    console.log(`"${this.props.selectedPlace.title}"+"New York"`);
+    let nytQuery = this.props.selectedPlace.title
+    nytQuery.includes(' (') ?  nytQuery = nytQuery.split('(')[0] : null
+    this.props.setHeadlines(`"${nytQuery}"+"New York"`);
+    console.log(`"${nytQuery}"+"New York"`);
   } 
 
   createDate(dateNum){

@@ -36,7 +36,8 @@ class Synopsis extends Component {
     let num = 1;
     if (info ) {
       info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'
-      console.log(getImg)
+      console.log ( nlp(info.text['*']).dates().data())
+      console.log ( nlp(info.text['*']).organizations().data())      
     }
     return (
       <div>
