@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { fetchSynopsis, fetchAllNext, checkinPlace} from '../store'
+import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+// import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 
 class Notes extends Component {
@@ -13,12 +17,12 @@ class Notes extends Component {
     render() {  
         return (
            
-               <div className="container review">
+               <div className="container notes">
         <br />
-        <h3 className="review-header"> Ratings & Reviews </h3>
+        <h3 className="note-header"> Notes </h3>
           {
-          <div className='add-review-form'>
-            <RaisedButton label="Add a Review"
+          <div className='add-note-form'>
+            <RaisedButton label="Add a Note"
               primary={true}
              
             />
@@ -27,10 +31,10 @@ class Notes extends Component {
               title={`Write a Note for ${this.props.checkinPlace.title}`}
               
               modal={true}
-              open={this.state.open}
+              
               autoScrollBodyContent={true}
             >
-              <form onSubmit={this.onSubmit}>
+              <form >
                
                 <TextField
                   hintText="Write your note here"
