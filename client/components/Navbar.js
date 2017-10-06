@@ -1,5 +1,5 @@
 import React, { Component }from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import {teal900} from 'material-ui/styles/colors'
 import IconButton from 'material-ui/IconButton'
@@ -22,7 +22,7 @@ export const Navbar = (props) => {
         <div>
             <AppBar
                 title={<span style={styles.title}>meander</span>}
-                iconElementLeft={<IconButton touch={true}> <MapIcon /></IconButton>}
+                iconElementLeft={<NavLink to="/map"><IconButton touch={true}> <MapIcon /></IconButton></NavLink>}
                 iconElementRight={iconRight}
                 style={{backgroundColor:teal900}}
             />

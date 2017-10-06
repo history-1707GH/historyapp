@@ -38,7 +38,7 @@ class Login extends Component {
             <img src="/meander-logo-white.png" className="meander-logo"/>
           </div>
         </Center>
-        <div>
+        <div className="login-form">
           <Center>
             <form onSubmit={this.checkRedirect}>
                 <TextField
