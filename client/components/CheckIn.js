@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSynopsis, fetchAllNext, checkinPlace} from '../store'
+
+import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
+
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -93,7 +95,9 @@ class CheckIn extends Component {
 const mapState = state => {
     return {
         place: state.selectedPlace,
-        currentLocation: state.currentLocation
+        currentLocation: state.currentLocation,
+        synopsis: state.synopsis,
+
     }
 }
 
@@ -102,8 +106,14 @@ const mapDispatch = dispatch => {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
         },
+
         fetchCheckinPlace:(place) =>{
         dispatch(checkinPlace(place))
+        },
+
+        getExperience: (experience) => {
+            dispatch(getExperience(experience))
+
         }
     }
 }

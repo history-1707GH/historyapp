@@ -3,7 +3,6 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import { fetchHeadlines } from '../store';
 import Slider from 'react-slick';
 
 
@@ -13,11 +12,7 @@ class NewsReel extends Component {
       super(props)
       this.createDate = this.createDate.bind(this);
   }
-
-  componentDidMount(){
-    this.props.setHeadlines(`"${this.props.selectedPlace.title}"+"New York"`);
-    console.log(`"${this.props.selectedPlace.title}"+"New York"`);
-  } 
+ 
 
   createDate(dateNum){
     return new Date(dateNum).toString().split(' ').slice(0,4).join(' ');
@@ -79,15 +74,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    setHeadlines: query => {
-       dispatch(fetchHeadlines(query));
-    }
-  } 
-}
 
-
-export default connect(mapState, mapDispatch)(NewsReel);
+export default connect(mapState)(NewsReel);
 
 
