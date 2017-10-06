@@ -27,8 +27,12 @@ router.route('/')
                         })
                         .then(experience => {
                             if (req.body.headlines.length) {
-                                return experience.setArticles(req.body.headlines)
-                            } else return experience 
+                               const articleIds = req.body.headlines.map(article=>{
+                                   return article._id
+                               })
+                               return experience.setArticles(articleIds)
+                            } 
+                            else return experience 
                         })
                 } else {
                     return experience
