@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom'
 import { logIn } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
 import Google from './Google'
-import TextField from 'material-ui/TextField';
-
-
 
 class Login extends Component {
   constructor(props){
@@ -38,37 +35,46 @@ class Login extends Component {
             <img src="/meander-logo-white.png" className="meander-logo"/>
           </div>
         </Center>
-        <div className="login-form">
-          <Center>
-            <form onSubmit={this.checkRedirect}>
-                <TextField
-                  hintText="Email"
-                  name='email'
-                  type='text'
-                  required
-                /><br />
-                <br />
-                <TextField
-                hintText="Password"
-                name='password'
-                type='password'
-                required
-              /><br />
-              <br />
-            <Center>
-              <button type='submit'>Sign in</button>
-            </Center>
-            </form>
-          </Center>
-        </div>
+        <br/>
+        <br/>
         <Center>
           <Google />
         </Center>
+        <br/>
+        <br/>
+        <div>
         <Center>
-          <div>
-            <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
-              <FlatButton label="Create a new account" />            
-            </Link>
+          <form onSubmit={this.checkRedirect}>
+            <label>Email: </label>
+            <input
+              name='email'
+              type='text'
+              required
+            />
+            <br/>
+            <br/>
+            <label>Password: </label>
+            <input
+              name='password'
+              type='password'
+              required
+            />
+            <br/>
+            <Center>
+              <div>
+                <FlatButton type='submit'>SIGN IN</FlatButton>
+              </div>
+            </Center>
+            </form>
+        </Center>
+        <br/>
+        <br/>
+        </div>
+          <Center>
+            <div>
+              <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
+                <FlatButton label="Create a new account" />            
+              </Link>
           </div>
         </Center>
       </div>
