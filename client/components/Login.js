@@ -12,15 +12,7 @@ class Login extends Component {
     super(props)
     this.checkRedirect = this.checkRedirect.bind(this)
   }
-
-  componentDidMount(){
-    document.body.className="home";
-  }
-
-  componentWillUnmount(props){
-    document.body.className=null;
-  }
-
+  
   checkRedirect(e) {
     e.preventDefault();
     let query = this.props.location.search

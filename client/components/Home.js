@@ -12,14 +12,6 @@ export default class Home extends Component {
     super(props)
   }
 
-  componentDidMount(){
-    document.body.className="home";
-  }
-
-  componentWillUnmount(props){
-    document.body.className=null;
-  }
-
   render(props){
     return(
       <div className="home-root">

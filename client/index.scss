@@ -1,3 +1,11 @@
+body {
+  margin: 0px
+}
+
+.main{
+  min-height: 100vh;
+}
+
 .leaflet-container {
   height: 1000px;
   width: 100%;
@@ -23,7 +31,7 @@
 
 .home {
   background-size: 2000% 2000%;
-  background-color: #004D40;
+  background-color: white;
 } 
 
 .appBar {
@@ -41,4 +49,10 @@
 .archives-banner {
   width: 100%;
   height: 100%
+}
+
+.home-root {
+  background-color: #004D40;
+  min-height: calc(100vh - 64px);
+  
 }
