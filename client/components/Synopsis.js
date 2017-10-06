@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import {  teal500, white } from 'material-ui/styles/colors'
+
 
 
 class Synopsis extends Component {
@@ -54,10 +56,10 @@ class Synopsis extends Component {
               <CardTitle title={info.displaytitle} />
               <CardActions>
                 <NavLink to='/headlines'>
-                  <FlatButton type="button" label="News Reel" />
+                  <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
                 </NavLink>
                   <NavLink to='/archives'>
-                <FlatButton type="button" label="Archives" />
+                <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
               </NavLink>
               </CardActions>
               <CardActions>
@@ -69,6 +71,7 @@ class Synopsis extends Component {
             </Card>
           ) : null
         }
+
       </div>
     )
   }

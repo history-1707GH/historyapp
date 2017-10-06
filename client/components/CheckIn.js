@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import {  teal500, white } from 'material-ui/styles/colors'
 import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
-
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -75,11 +74,9 @@ class CheckIn extends Component {
             return (
                 <div>
                     <Link to={'/next_experience'} >
-                        <RaisedButton label="Onward!" style={{ margin: 12 }} fullWidth={true}/>
+                        <RaisedButton label="Onward!" style={{color:white, backgroundColor:teal500 }} fullWidth={true}/>
                     </Link>
-                    <Link to={'/game'} >
-                        <RaisedButton label="Play a game!" style={{ margin: 12 }} />
-                    </Link>
+    
                 </div>
             )
         }
