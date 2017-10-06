@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { fetchSynopsis, fetchAllNext, gettingExperience } from '../store'
-=======
-
-import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
-
->>>>>>> 385ad53e37f5ad01c5c4315df3b6821874fb7f87
+import { fetchSynopsis, fetchAllNext, gettingExperience, checkinPlace } from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 
