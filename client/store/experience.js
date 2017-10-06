@@ -1,9 +1,9 @@
 import {getSynopsis} from './synopsis'
 import {getSynopsisParse} from './synopsisParse'
-import {setHeadlines} from './newsreel'
-import {secrets_NYT_API_KEY } from '../../secrets_frontend'
-import {getRoute} from './route'
+import { setHeadlines, setArchives } from './'
+import { NYT_API_KEY } from '../../frontend_keys'
 import axios from 'axios'
+import {getRoute} from './route'
 
 const GET_CURRENT_EXPERIENCE = 'GET_CURRENT_EXPERIENCE'
 
@@ -74,7 +74,7 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             })
             //fetch synopsis info, call synopsis info action creator 
             .then(() => {
-                const propOptions = "text|categories|links|images|externallinks|sections|displaytitle|iwlinks"
+                const propOptions = "text|links|displaytitle"
                 return axios.get(`https://en.wikipedia.org/w/api.php?origin=*&action=parse&prop=${propOptions}&page=${wikiPageTitle}&format=json`)
             })
             .then(res => {
@@ -82,19 +82,16 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             })
             //fetch newsreel articles, call newsreel info action creator
             .then(() => {
-                const api_key = secrets_NYT_API_KEY;
-                const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia,news_desk,section_name,source,type_of_material,_id';
+                // NEWS REEL CALL
+                const fields = 'snippet,lead_paragraph,abstract,headline,keywords,pub_date,document_type,byline,_id,multimedia,news_desk,section_name,source,type_of_material,web_url';
                 // using options as a way to optionally construct publication date time frame
-                const options = '';
-                return axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${headlineQuery}&sort=newest&${fields}${options}&api-key=${api_key}`)
+                return axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=${headlineQuery}&fl=${fields}&api-key=${NYT_API_KEY}`)
             })
             .then(res => {
                 let headlines = res.data.response.docs;
                 dispatch(setHeadlines(headlines));
-                //save article to the db
                 return axios.post('/api/article', headlines)
                     .then(articles => console.log('Successfully saved articles'))
-                    .catch(console.error);
             })
             .catch(err => console.log("there was an issue", err))
     }
