@@ -9,14 +9,13 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import FlatButton from 'material-ui/FlatButton';
 import {  teal500, white } from 'material-ui/styles/colors'
 
-
-
 class Synopsis extends Component {
 
   constructor(props) {
     super()
     this.state = {
-      synopsisText: ""
+      synopsisText: "",
+      expanded: false
     }
   }
 
@@ -30,7 +29,7 @@ class Synopsis extends Component {
     if (nextProps.synopsis !== this.props.synopsis) {
       this.setState({ synopsisText: nextProps.synopsis.content })
     }
-  }
+  } 
 
   render() {
     const html = { __html: this.state.synopsisText }
@@ -58,9 +57,9 @@ class Synopsis extends Component {
                 <NavLink to='/headlines'>
                   <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
                 </NavLink>
-                  <NavLink to='/archives'>
-                <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-              </NavLink>
+                <NavLink to='/archives'>
+                  <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+                </NavLink>
               </CardActions>
               <CardActions>
                 <CheckIn />
