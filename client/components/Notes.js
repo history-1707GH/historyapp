@@ -24,18 +24,10 @@ class Notes extends Component {
           <div className='add-note-form'>
             <RaisedButton label="Add a Note"
               primary={true}
-             
             />
             <br />
-            <Dialog
-              title={`Write a Note for ${this.props.checkinPlace.title}`}
-              
-              modal={true}
-              
-              autoScrollBodyContent={true}
-            >
               <form >
-               
+
                 <TextField
                   hintText="Write your note here"
                   floatingLabelText="Note"
@@ -47,7 +39,7 @@ class Notes extends Component {
               
                 <br />
               </form>
-            </Dialog>
+            
             <br />
             </div>
           }
