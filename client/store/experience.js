@@ -31,7 +31,7 @@ export const gettingExperience = experience => {
                 const route = res.data
                 dispatch(getRoute(route))
             })
-            .catch(err=>console.log('There was an error in saving the route or experience', error))
+            .catch(err=>console.log('There was an error in saving the route or experience', err))
     }
 }
 
@@ -59,7 +59,7 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
                 const preparedText = content.slice(0, index);
 
                 return {
-                    pageID: wikiPageId,
+                    pageId: wikiPageId,
                     title: wikiInfo.title,
                     content: preparedText
                 }

@@ -23,7 +23,7 @@ router.route('/')
             .then(article =>{
                 if (!article) {
                     return Article.create(headline);
-                } 
+                }
             })
             .catch(next);
         }))

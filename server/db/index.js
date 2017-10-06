@@ -7,13 +7,13 @@ const Synopsis = require('./models/synopsis');
 const Article = require('./models/article');
 
 //Route is associated to many experiences; an individual experience can be a part of multiple routes
-Route.belongsToMany(Experience)
+Route.belongsToMany(Experience, {through: 'Route-Experience'})
 //A route has a single user and a user can have multiple routes
 Route.belongsTo(User)
-User.hasMany(Routes)
+User.hasMany(Route)
 
 //Experience is associated to multiple articles and single synopsis
-Article.hasMany(Experience)
-Experience.belongsTo(Synopsis)
+Experience.belongsToMany(Article, {through: 'Experience-Article'})
+Experience.belongsTo(Synopsis, {targetKey: 'pageId'})
 
 module.exports = db;

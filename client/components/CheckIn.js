@@ -21,26 +21,26 @@ class CheckIn extends Component {
 
     componentDidMount() {
         this.isLock()
-        const place = this.props.place
+        const place = this.props.place        
         this.props.fetchAllNext(place.lat, place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
-        const experience = {
-            lat: place.lat,
-            lon: place.lon,
-            wikiPageId: place.pageid,
-            headlines: this.props.newsReel
-        }
-        this.props.gettingExperience(experience)
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentLocation !== this.props.currentLocation) this.isLock()
+        if (nextProps.currentLocation !== this.props.currentLocation) this.isLock()      
       }
 
     handleClick(event){
         event.preventDefault()
         this.setState({hideNextPlaces: false, hideGame: false})
-        
-
+        const place = this.props.place
+        const experience = {  
+            lat: place.lat,
+            lon: place.lon,
+            wikiPageId: place.pageid,
+            headlines: this.props.headlines
+        }
+        console.log('experience', experience)
+        this.props.gettingExperience(experience)        
     }
 
 
