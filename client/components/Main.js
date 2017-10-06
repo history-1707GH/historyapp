@@ -11,6 +11,7 @@ import Notes from './Notes'
 import ProgressBar from './ProgressBar'
 import Login from './Login'
 import Signup from './Signup'
+import Archives from './Archives'
 import Home from './Home'
 
 import NextExperience from './NextExperience'
@@ -43,7 +44,8 @@ class Main extends Component {
                     <Route exact path='/progress' component={ProgressBar} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
-                    <Route exact path='/next_experience' component={NextExperience} />                
+                    <Route exact path='/next_experience' component={NextExperience} />  
+                    <Route exact path='/archives' component={Archives}     />          
                 </Switch>
             </div>
         )
