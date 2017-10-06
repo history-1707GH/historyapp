@@ -18,6 +18,7 @@ class ProgressBar extends React.Component {
   state = {
     finished: false,
     placeIndex: 0,
+    visitedPlace: []
   }
 
   createPlacesArr() {
@@ -27,6 +28,19 @@ class ProgressBar extends React.Component {
     }
     return placesArr;
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.checkinPlace !== this.props.checkinPlace) {
+      if(this.state.visitedPlace.length < 5)
+      this.state.visitedPlace.push(nextProps.checkinPlace)
+      else {
+        this.state.visitedPlace = []
+        this.state.visitedPlace.push(nextProps.checkinPlace)
+      }
+    }
+}
+
+  
 
   handleNext = () => {
     const { placeIndex } = this.state;
@@ -41,8 +55,9 @@ class ProgressBar extends React.Component {
 
   render() {
 
-    const { finished, placeIndex } = this.state
+    const { finished, placeIndex, visitedPlace } = this.state
     const placeIds = this.createPlacesArr()
+
 
     return (
       <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
@@ -52,7 +67,7 @@ class ProgressBar extends React.Component {
           {
             placeIds && placeIds.map(placeId => (
               <Step key={placeId}>  
-                <StepLabel>Place's title</StepLabel>
+                <StepLabel>{visitedPlace[placeId]? visitedPlace[placeId].title : "to be explored"}</StepLabel>
                 <StepContent>
                   <p>
                     User's notes show here.
@@ -96,6 +111,7 @@ class ProgressBar extends React.Component {
 
 const mapState = state => {
   return {
+    checkinPlace : state.checkinPlace
   }
 }
 

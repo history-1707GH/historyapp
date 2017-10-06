@@ -31,6 +31,7 @@ class CheckIn extends Component {
     handleClick(event) {
         event.preventDefault()
         this.setState({ checkin: true })
+        dispatch(checkinPlace(this.props.place))
     }
 
 
