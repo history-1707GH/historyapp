@@ -42,10 +42,7 @@ class ProgressBar extends React.Component {
   render() {
 
     const { finished, placeIndex } = this.state
-    const places = this.createPlacesArr()
-
-    console.log('places', places)
-
+    const placeIds = this.createPlacesArr()
 
     return (
       <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
@@ -53,8 +50,8 @@ class ProgressBar extends React.Component {
 
         <Stepper activeStep={placeIndex} orientation="vertical">
           {
-            places && places.map(place => (
-              <Step key={place}>
+            placeIds && placeIds.map(placeId => (
+              <Step key={placeId}>  
                 <StepLabel>Place's title</StepLabel>
                 <StepContent>
                   <p>

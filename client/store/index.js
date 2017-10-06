@@ -8,6 +8,7 @@ import synopsisParse from './synopsisParse'
 import nearbyPlaces from './nearbyPlaces'
 import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
+import checkinPlace from './checkinPlace'
 import currentLocation from './currentLocation'
 import user from './user'
 
@@ -22,7 +23,8 @@ const reducer = combineReducers({
   selectedPlace,
   currentLocation,
   user,
-  nextExperiences
+  nextExperiences,
+  checkinPlace
 
 });
 
@@ -42,6 +44,7 @@ export * from './synopsisParse'
 export * from './nearbyPlaces'
 export * from './selectedPlace'
 export * from './currentLocation'
+export * from './checkinPlace'
 export * from './user'
 export * from './nextExperiences'
 
