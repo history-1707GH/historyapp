@@ -4,7 +4,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { fetchNearbyPlaces, selectedPlace } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { secrets_TFOREST_API_KEY } from '../../secrets_frontend'
+import { secrets_TFOREST_API_KEY } from '../../frontend_keys'
 
 
 class MapComponent extends React.Component {
