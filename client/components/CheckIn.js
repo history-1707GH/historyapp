@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
-
+import { fetchSynopsis, fetchAllNext, gettingExperience, checkinPlace } from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -23,7 +21,8 @@ class CheckIn extends Component {
 
     componentDidMount() {
         this.isLock()
-        this.props.fetchAllNext(this.props.place.lat, this.props.place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
+        const place = this.props.place
+        this.props.fetchAllNext(place.lat, place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
     }
 
     componentWillReceiveProps(nextProps) {
@@ -32,6 +31,15 @@ class CheckIn extends Component {
 
     handleClick(event) {
         event.preventDefault()
+        this.setState({ hideNextPlaces: false, hideGame: false })
+        const place = this.props.place
+        const experience = {
+            lat: place.lat,
+            lon: place.lon,
+            wikiPageId: place.pageid,
+            headlines: this.props.headlines
+        }
+        this.props.gettingExperience(experience)
         this.setState({ checkin: true })
         this.props.fetchCheckinPlace(this.props.place)
     }
@@ -97,7 +105,7 @@ const mapState = state => {
         place: state.selectedPlace,
         currentLocation: state.currentLocation,
         synopsis: state.synopsis,
-
+        headlines: state.headlines
     }
 }
 
@@ -106,15 +114,13 @@ const mapDispatch = dispatch => {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
         },
-
-        fetchCheckinPlace:(place) =>{
-        dispatch(checkinPlace(place))
+        gettingExperience: (experience) => {
+            dispatch(gettingExperience(experience))
+        },
+        fetchCheckinPlace: (place) => {
+            dispatch(checkinPlace(place))
         },
 
-        getExperience: (experience) => {
-            dispatch(getExperience(experience))
-
-        }
     }
 }
 

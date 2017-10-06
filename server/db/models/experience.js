@@ -1,12 +1,13 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
+const Synopsis = db.models.synopsis
 
 const Experience = db.define('experience', {
-    latitude: {
+    lat: {
         type: Sequelize.FLOAT,
         allowNull: false
     },
-    longitude: {
+    lon: {
         type: Sequelize.FLOAT,
         allowNull: false
     }
