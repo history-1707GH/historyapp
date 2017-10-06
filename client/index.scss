@@ -1,15 +1,33 @@
+body {
+  margin: 0px
+}
+
+.main{
+  min-height: 100vh;
+}
+
+.meander-logo {
+  width: 250px
+}
+
+.home-root {
+  background-color: #004D40;
+  min-height: calc(100vh - 64px);
+  color: white;
+}
+
+.appBar {
+  background-color: #004D40
+} 
+
+.google-button {
+  width:175px
+}
+
 .leaflet-container {
   height: 1000px;
   width: 100%;
   margin: 0 auto;
-}
-
-.containerSlider {
-  margin: 0 auto;
-  padding: 40px;
-  width: 80%;
-  color: #333;
-  background: white;
 }
 
 .headline-reel {
@@ -21,21 +39,12 @@
   height: 350px; 
 }
 
-.home {
-  background-size: 2000% 2000%;
-  background-color: #004D40;
-} 
-
-.appBar {
-  background-color: #004D40
-} 
-
-.meander-logo {
-  width: 250px
-}
-
-.google-button {
-  width:175px
+.containerSlider {
+  margin: 0 auto;
+  padding: 40px;
+  width: 80%;
+  color: #333;
+  background: white;
 }
 
 .archives-banner {

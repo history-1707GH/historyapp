@@ -3,21 +3,13 @@ import Center from 'react-center'
 import { Link } from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import {  teal500} from 'material-ui/styles/colors'
+import {  teal500, white } from 'material-ui/styles/colors'
+import { connect } from 'react-redux'
 
 
-
-export default class Home extends Component {
+class Home extends Component {
   constructor(props){
     super(props)
-  }
-
-  componentDidMount(){
-    document.body.className="home";
-  }
-
-  componentWillUnmount(props){
-    document.body.className=null;
   }
 
   render(props){
@@ -43,12 +35,16 @@ export default class Home extends Component {
             <br/>
             <br/>
             <Center>
-            <Link to="/login?redirect=map">
-              <RaisedButton 
-                label="Login / Sign Up" 
-                backgroundColor={teal500}
-               />
-            </Link>
+              {
+                this.props.currentUser.email ? null :
+                <Link to="/login?redirect=map">
+                  <RaisedButton 
+                    label="Login / Sign Up" 
+                    backgroundColor={teal500}
+                    labelColor={white}
+                  />
+                </Link>
+              }
             </Center>
           </div>
         </Center>
@@ -57,7 +53,7 @@ export default class Home extends Component {
         <Center>
           <div>
             <Link to="/map">
-              <FlatButton label="Continue to map -->" />            
+              <FlatButton style={{color:white}} label="Continue to map -->"/>            
             </Link>
           </div>
         </Center>
@@ -65,4 +61,14 @@ export default class Home extends Component {
     )
   }
 }
+
+const mapState = state => {
+  return {
+    currentUser: state.user
+  }
+}
+
+const mapDispatch = null
+
+export default connect(mapState, mapDispatch)(Home)
 

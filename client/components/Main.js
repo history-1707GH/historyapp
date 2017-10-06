@@ -30,7 +30,7 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
+            <div className="main">
                 <Navbar />
                 <Switch>
                     <Route exact path='/' component={Home}/>
