@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import headlines from './newsreel';
+import archives from './archives';
 import synopsis from './synopsis'
 import synopsisParse from './synopsisParse'
 import nearbyPlaces from './nearbyPlaces'
@@ -16,6 +17,7 @@ import user from './user'
 
 const reducer = combineReducers({
   headlines,
+  archives,
   synopsis,
   synopsisParse,
   nearbyPlaces,
@@ -36,6 +38,7 @@ const store = createStore(
 export default store;
 
 export * from './newsreel'
+export * from './archives'
 export * from './synopsis'
 export * from './synopsisParse'
 export * from './nearbyPlaces'
