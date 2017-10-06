@@ -3,6 +3,7 @@ import Center from 'react-center'
 import { Link } from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
+import {  amber800 } from 'material-ui/styles/colors'
 
 
 
@@ -30,7 +31,9 @@ export default class Home extends Component {
         <Center>
           <div>
             <Link to="/login?redirect=map">
-              <RaisedButton label="Login" style={{margin:12}} />
+              <RaisedButton label="Login / Sign Up" 
+              style={{color:amber800, margin: 12}}
+               />
             </Link>
           </div>
         </Center>

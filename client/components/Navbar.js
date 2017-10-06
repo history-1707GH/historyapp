@@ -6,7 +6,8 @@ import IconButton from 'material-ui/IconButton'
 import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import { logOut } from '../store'
-// import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import MapIcon from 'material-ui/svg-icons/maps/map'
+
 
 
 export const Navbar = (props) => {
@@ -21,7 +22,7 @@ export const Navbar = (props) => {
         <div>
             <AppBar
                 title={<span style={styles.title}>meander</span>}
-                iconElementLeft={<IconButton></IconButton>}
+                iconElementLeft={<IconButton touch={true}> <MapIcon /></IconButton>}
                 iconElementRight={iconRight}
                 style={{backgroundColor:teal900}}
             />
