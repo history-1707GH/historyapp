@@ -27,12 +27,9 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences,
-<<<<<<< HEAD
   authValidation
-=======
   checkinPlace
 
->>>>>>> master
 });
 
 const store = createStore(
