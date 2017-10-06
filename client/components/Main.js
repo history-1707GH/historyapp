@@ -9,20 +9,24 @@ import Synopsis from './Synopsis'
 import Navbar from './Navbar'
 import Login from './Login'
 import Signup from './Signup'
+import Archives from './Archives'
 import Home from './Home'
-import store, { fetchUser } from '../store'
+import NextExperience from './NextExperience'
+import store, { fetchUser, fetchCurrentLocation, watchId } from '../store'
+
 
 class Main extends Component {
 
-    constructor(props){
-        super(props)
-    }
 
     componentDidMount(){
         this.props.fetchData()
         this.props.fetchCurrentUser()
+        this.props.fetchCurrentLocation()
     }
 
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(watchId);
+      }
 
     render() {
         return (
@@ -35,6 +39,8 @@ class Main extends Component {
                     <Route path='/synopsis' component={Synopsis} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
+                    <Route exact path='/next_experience' component={NextExperience} />  
+                    <Route exact path='/archives' component={Archives}     />          
                 </Switch>
             </div>
         )
@@ -51,7 +57,10 @@ const mapDispatch = function(dispatch){
         },
         fetchCurrentUser(){
             dispatch(fetchUser())
-        }
+        },
+        fetchCurrentLocation(){
+            dispatch(fetchCurrentLocation())
+        },
     }
 }
 

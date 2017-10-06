@@ -31,22 +31,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-passport.serializeUser((user, done) => {
-  try {
-    done(null, user.id);
-  } catch (err) {
-    done(err);
-  }
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(require('./middleware/passport'));
 
 //serving routes
 app.use('/api', require('./api'));
@@ -54,6 +39,14 @@ app.use('/auth', require('./auth'));
 
 //errorhandling
 app.use(require('./middleware/error'))
+
+// Middleware to return .js.gz so you can still load bundle.js from HTML but will receive bundle.js.gz
+// needed to reduce bundle size and improve performance
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 
 // serve index.html for all non-api routes
 app.get('*', function (req, res) {

@@ -3,10 +3,11 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import headlines from './newsreel';
+import archives from './archives';
 import synopsis from './synopsis'
 import synopsisParse from './synopsisParse'
 import nearbyPlaces from './nearbyPlaces'
-
+import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
 import currentLocation from './currentLocation'
 import user from './user'
@@ -16,12 +17,14 @@ import user from './user'
 
 const reducer = combineReducers({
   headlines,
+  archives,
   synopsis,
   synopsisParse,
   nearbyPlaces,
   selectedPlace,
   currentLocation,
-  user
+  user,
+  nextExperiences
 });
 
 const store = createStore(
@@ -35,11 +38,14 @@ const store = createStore(
 export default store;
 
 export * from './newsreel'
+export * from './archives'
 export * from './synopsis'
 export * from './synopsisParse'
 export * from './nearbyPlaces'
 export * from './selectedPlace'
 export * from './currentLocation'
 export * from './user'
+export * from './nextExperiences'
+export * from './experienceData'
 
 

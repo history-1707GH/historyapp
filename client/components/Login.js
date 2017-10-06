@@ -5,13 +5,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logIn } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
-
-
-// import { connect } from 'react-redux';
+import Google from './Google'
 
 class Login extends Component {
   constructor(props){
     super(props)
+    this.checkRedirect = this.checkRedirect.bind(this)
   }
 
   componentDidMount(){
@@ -21,7 +20,12 @@ class Login extends Component {
   componentWillUnmount(props){
     document.body.className=null;
   }
-  
+
+  checkRedirect(e) {
+    e.preventDefault();
+    let query = this.props.location.search
+    this.props.logInUser({email:e.target.email.value,password:e.target.password.value}, query)
+  }
 
   render(props){
     return(
@@ -31,28 +35,46 @@ class Login extends Component {
             <img src="/meander-logo-white.png" className="meander-logo"/>
           </div>
         </Center>
-        <div>
-            <form onSubmit={this.props.logInUser}>
-                <label>Email: </label>
-                <input
-                  name='email'
-                  type='text'
-                  required
-                />
-                <label>Password: </label>
-                <input
-                  name='password'
-                  type='text'
-                  required
-                />
-            <button type='submit'>Sign in</button>
-            </form>
-        </div>
+        <br/>
+        <br/>
         <Center>
-          <div>
-            <Link to="/signup">
-              <FlatButton label="Create a new account" />            
-            </Link>
+          <Google />
+        </Center>
+        <br/>
+        <br/>
+        <div>
+        <Center>
+          <form onSubmit={this.checkRedirect}>
+            <label>Email: </label>
+            <input
+              name='email'
+              type='text'
+              required
+            />
+            <br/>
+            <br/>
+            <label>Password: </label>
+            <input
+              name='password'
+              type='password'
+              required
+            />
+            <br/>
+            <Center>
+              <div>
+                <FlatButton type='submit'>SIGN IN</FlatButton>
+              </div>
+            </Center>
+            </form>
+        </Center>
+        <br/>
+        <br/>
+        </div>
+          <Center>
+            <div>
+              <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
+                <FlatButton label="Create a new account" />            
+              </Link>
           </div>
         </Center>
       </div>
@@ -64,9 +86,8 @@ const mapState = null
 
 const mapDispatch = function (dispatch, ownProps) {
     return {
-        logInUser: e => {
-            e.preventDefault();
-            dispatch(logIn({email:e.target.email.value,password:e.target.password.value},ownProps.history))
+        logInUser: (logInInfo,query) => {
+            dispatch(logIn(logInInfo, ownProps.history, query))
         }
     }
 }

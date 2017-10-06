@@ -1,5 +1,5 @@
  const GET_CURRENTLOCATION = 'GET_CURRENTLOCATION'
-
+ export let watchId
 
  const getCurrentLocation = location => {
   return { type: GET_CURRENTLOCATION, location }
@@ -7,7 +7,7 @@
 
 export const fetchCurrentLocation = () => {
     return function thunk(dispatch) {
-        navigator.geolocation.getCurrentPosition(
+      watchId =  navigator.geolocation.watchPosition(
             (position) => {
                 let curLocation = [position.coords.latitude, position.coords.longitude]
                 dispatch(getCurrentLocation(curLocation))
@@ -19,9 +19,12 @@ export const fetchCurrentLocation = () => {
     }
   }
 
+
 export default function (state = [0, 0], action) {
   switch (action.type) {
+    
     case GET_CURRENTLOCATION: 
+      
       return action.location
     default: return state
   }
