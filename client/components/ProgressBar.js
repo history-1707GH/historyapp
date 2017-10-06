@@ -15,11 +15,17 @@ import FlatButton from 'material-ui/FlatButton';
 
 class ProgressBar extends React.Component {
 
-  state = {
-    finished: false,
-    placeIndex: 0,
-    visitedPlace: []
+  constructor(props) {
+    super()
+    this.state = {
+      finished: false,
+      placeIndex: 0,
+      visitedPlace: []
+    }
+
   }
+
+
 
   createPlacesArr() {
     let placesArr = [];
@@ -28,30 +34,34 @@ class ProgressBar extends React.Component {
     }
     return placesArr;
   }
+  checkRepeat() {
+    for (let i = 0; i < this.state.visitedPlace.length; i++) {
+      if (this.state.visitedPlace[i] === this.props.checkinPlace) return false
+    }
+    return true
+  }
+  componentDidMount() {
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.checkinPlace !== this.props.checkinPlace) {
-      if(this.state.visitedPlace.length < 5)
-      this.state.visitedPlace.push(nextProps.checkinPlace)
+    if (this.checkRepeat()) {
+      if (this.state.visitedPlace.length < 5) {
+        this.setState({ visitedPlace: [...this.state.visitedPlace, this.props.checkinPlace] })
+      }
+
       else {
         this.state.visitedPlace = []
-        this.state.visitedPlace.push(nextProps.checkinPlace)
+        this.setState({ visitedPlace: [...this.state.visitedPlace, this.props.checkinPlace] })
       }
     }
-}
 
-  
+  }
 
   handleNext = () => {
     const { placeIndex } = this.state;
     this.setState({
       placeIndex: placeIndex + 1,
-      finished: placeIndex >= 4 
+      finished: placeIndex >= 4
     })
   }
-
-
-
 
   render() {
 
@@ -66,14 +76,14 @@ class ProgressBar extends React.Component {
         <Stepper activeStep={placeIndex} orientation="vertical">
           {
             placeIds && placeIds.map(placeId => (
-              <Step key={placeId}>  
-                <StepLabel>{visitedPlace[placeId]? visitedPlace[placeId].title : "to be explored"}</StepLabel>
+              <Step key={placeId}>
+                <StepLabel>{visitedPlace[placeId] ? visitedPlace[placeId].title : "to be explored"}</StepLabel>
                 <StepContent>
                   <p>
                     User's notes show here.
                   </p>
                   <div style={{ margin: '12px 0' }}>
-                    
+
                     <FlatButton
                       label={placeIndex === 4 ? 'Congratulations!' : 'Next'}
                       disableTouchRipple={true}
@@ -82,7 +92,7 @@ class ProgressBar extends React.Component {
                       onClick={this.handleNext}
                       style={{ marginRight: 12 }}
                     />
-                    
+
                   </div>
                 </StepContent>
               </Step>
@@ -93,16 +103,16 @@ class ProgressBar extends React.Component {
 
         {finished && (
           <Link to='/map'>
-          <RaisedButton
-                      label={'START A NEW JOURNEY'}
-                      disableTouchRipple={true}
-                      disableFocusRipple={true}
-                      primary={true}
-                      
-                      style={{ marginRight: 12 }}
-                    />
-            </Link>
-          
+            <RaisedButton
+              label={'START A NEW JOURNEY'}
+              disableTouchRipple={true}
+              disableFocusRipple={true}
+              primary={true}
+
+              style={{ marginRight: 12 }}
+            />
+          </Link>
+
         )}
       </div>
     );
@@ -111,7 +121,7 @@ class ProgressBar extends React.Component {
 
 const mapState = state => {
   return {
-    checkinPlace : state.checkinPlace
+    checkinPlace: state.checkinPlace
   }
 }
 

@@ -114,6 +114,9 @@ function NextExperience(props) {
       <Link to={'/notes'} >
       <RaisedButton label="I want to say something about this place!" style={{ margin: 12 }} />
       </Link>
+      <Link to={'/progress'} >
+      <RaisedButton label="Check my progress" style={{ margin: 12 }} />
+      </Link>
     </div>
   )
 
