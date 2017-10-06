@@ -21,7 +21,7 @@ class CheckIn extends Component {
 
     componentDidMount() {
         this.isLock()
-        const place = this.props.place        
+        const place = this.props.place
         this.props.fetchAllNext(place.lat, place.lon)  //get list of nearby places in the event that the user checks in to this location, so you are ready to render next location
     }
 
@@ -31,15 +31,15 @@ class CheckIn extends Component {
 
     handleClick(event) {
         event.preventDefault()
-        this.setState({hideNextPlaces: false, hideGame: false})
+        this.setState({ hideNextPlaces: false, hideGame: false })
         const place = this.props.place
-        const experience = {  
+        const experience = {
             lat: place.lat,
             lon: place.lon,
             wikiPageId: place.pageid,
             headlines: this.props.headlines
         }
-        this.props.gettingExperience(experience)        
+        this.props.gettingExperience(experience)
         this.setState({ checkin: true })
         this.props.fetchCheckinPlace(this.props.place)
     }
@@ -114,20 +114,13 @@ const mapDispatch = dispatch => {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
         },
-<<<<<<< HEAD
         gettingExperience: (experience) => {
             dispatch(gettingExperience(experience))
-=======
-
-        fetchCheckinPlace:(place) =>{
-        dispatch(checkinPlace(place))
+        },
+        fetchCheckinPlace: (place) => {
+            dispatch(checkinPlace(place))
         },
 
-        getExperience: (experience) => {
-            dispatch(getExperience(experience))
-
->>>>>>> 385ad53e37f5ad01c5c4315df3b6821874fb7f87
-        }
     }
 }
 
