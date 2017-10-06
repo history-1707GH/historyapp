@@ -69,10 +69,6 @@ class Synopsis extends Component {
             </Card>
           ) : null
         }
-        <Center>
-          <CheckIn />
-        </Center>
-
       </div>
     )
   }

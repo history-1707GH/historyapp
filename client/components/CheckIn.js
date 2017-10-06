@@ -68,14 +68,14 @@ class CheckIn extends Component {
 
         if (this.state.lock) {
             return (
-                <p> You are too far to check in! Please approaching this place!</p>
+                <RaisedButton disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
         else if (this.state.checkin) {
             return (
                 <div>
                     <Link to={'/next_experience'} >
-                        <RaisedButton label="Onward!" style={{ margin: 12 }} />
+                        <RaisedButton label="Onward!" style={{ margin: 12 }} fullWidth={true}/>
                     </Link>
                     <Link to={'/game'} >
                         <RaisedButton label="Play a game!" style={{ margin: 12 }} />
