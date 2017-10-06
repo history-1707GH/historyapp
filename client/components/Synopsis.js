@@ -20,8 +20,8 @@ class Synopsis extends Component {
 
   componentDidMount() {
     const place = this.props.place
-    const headlineQuery = `body.search("${place.title}")ANDglocations:("New York City")`
-    this.props.fetchExperienceData(place.pageid, place.title, headlineQuery)   
+    const query = `body.search("${place.title}")ANDglocations:("New York City")`
+    this.props.fetchExperienceData(place.pageid, place.title, query)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,7 +39,7 @@ class Synopsis extends Component {
       info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'
       // console.log ( nlp(info.text['*']).dates().data())
       // console.log ( nlp(info.text['*']).organizations().data())
-      console.log( nlp(info.text['*']).people().data() )     
+      //console.log( nlp(info.text['*']).people().data() )     
     }
     return (
       <div>
@@ -54,9 +54,12 @@ class Synopsis extends Component {
               </CardMedia>
               <CardTitle title={info.displaytitle} />
               <CardActions>
-                <NavLink to='headlines'>
+                <NavLink to='/headlines'>
                   <FlatButton type="button" label="News Reel" />
                 </NavLink>
+                  <NavLink to='/archives'>
+                <FlatButton type="button" label="Archives" />
+              </NavLink>
               </CardActions>
               <CardText>
                 <div dangerouslySetInnerHTML={html} />
