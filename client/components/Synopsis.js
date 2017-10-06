@@ -44,7 +44,9 @@ class Synopsis extends Component {
           info ? (
             <Card className="synopsis">
               <CardHeader
-                title={`Location: ${num}`}
+                title={`Location: ${num}`} 
+                actAsExpander={true}
+                showExpandableButton={true}
               />
               <CardMedia>
                 <img src={getImg} className="synopsis-main-image" alt="" />
@@ -58,7 +60,10 @@ class Synopsis extends Component {
                 <FlatButton type="button" label="Archives" />
               </NavLink>
               </CardActions>
-              <CardText>
+              <CardActions>
+                <CheckIn />
+              </CardActions>
+              <CardText expandable={true}>
                 <div dangerouslySetInnerHTML={html} />
               </CardText>
             </Card>
