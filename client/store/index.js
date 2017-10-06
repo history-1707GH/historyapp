@@ -9,6 +9,7 @@ import nearbyPlaces from './nearbyPlaces'
 import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
 import currentLocation from './currentLocation'
+import authValidation from './authValidation'
 import user from './user'
 
 
@@ -22,7 +23,8 @@ const reducer = combineReducers({
   selectedPlace,
   currentLocation,
   user,
-  nextExperiences
+  nextExperiences,
+  authValidation
 });
 
 const store = createStore(
@@ -44,5 +46,6 @@ export * from './currentLocation'
 export * from './user'
 export * from './nextExperiences'
 export * from './experienceData'
+export * from './authValidation'
 
 

@@ -23,6 +23,7 @@ export function newUser(account, history, query){
     return  function thunk(dispatch){
         return axios.post('/auth/me', account)
         .then(res => {
+            console.log(res.data)
             dispatch(getUser(res.data))
             if (query.length) {
                 history.push('/map')
