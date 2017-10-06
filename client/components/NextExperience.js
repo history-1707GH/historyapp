@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import MapComponent from './MapComponent'
 import { Route} from 'react-router-dom'
 import {getNextExperiences} from '../store'
+import RaisedButton from 'material-ui/RaisedButton'
 
 
 
@@ -106,7 +107,16 @@ function NextExperience(props) {
           </div>
         )
       })}
-      <Link to={'/map'} >Take Me To The Map!</Link>      
+      <Link to={'/map'} >
+      
+      <RaisedButton label="Take Me To The Map!" style={{ margin: 12 }} />
+      </Link>      
+      <Link to={'/notes'} >
+      <RaisedButton label="I want to say something about this place!" style={{ margin: 12 }} />
+      </Link>
+      <Link to={'/progress'} >
+      <RaisedButton label="Check my progress" style={{ margin: 12 }} />
+      </Link>
     </div>
   )
 

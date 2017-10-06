@@ -4,9 +4,12 @@ bundle.js.map
 secrets.js
 npm-debug.log
 secrets_backend.js
-secrets_frontend.js
+frontend_keys.js
 .DS_Store
 ngrok
 bundle.js.gz
+<<<<<<< HEAD
 frontend_keys.js
 secretsBackend.js
+=======
+>>>>>>> master

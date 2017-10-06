@@ -4,7 +4,11 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { fetchNearbyPlaces, selectedPlace } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+<<<<<<< HEAD
 import { secrets_TFOREST_API_KEY } from '../../frontend_keys'
+=======
+import { TFOREST_API_KEY } from '../../frontend_keys'
+>>>>>>> master
 
 
 class MapComponent extends React.Component {
@@ -52,7 +56,7 @@ class MapComponent extends React.Component {
       <div id="mapid">
         <Map center={position} zoom={mapZoom}>
           <TileLayer
-            url={`https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=${secrets_TFOREST_API_KEY}`}
+            url={`https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=${TFOREST_API_KEY}`}
             attribution={`&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
           />
           <Marker position={position} icon={userIcon}>
