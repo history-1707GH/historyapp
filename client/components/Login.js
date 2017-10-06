@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import { logIn } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
 import Google from './Google'
+import TextField from 'material-ui/TextField';
+
+
 
 class Login extends Component {
   constructor(props){
@@ -36,23 +39,31 @@ class Login extends Component {
           </div>
         </Center>
         <div>
+          <Center>
             <form onSubmit={this.checkRedirect}>
-                <label>Email: </label>
-                <input
+                <TextField
+                  hintText="Email"
                   name='email'
                   type='text'
                   required
-                />
-                <label>Password: </label>
-                <input
-                  name='password'
-                  type='password'
-                  required
-                />
-            <button type='submit'>Sign in</button>
+                /><br />
+                <br />
+                <TextField
+                hintText="Password"
+                name='password'
+                type='password'
+                required
+              /><br />
+              <br />
+            <Center>
+              <button type='submit'>Sign in</button>
+            </Center>
             </form>
+          </Center>
         </div>
-        <Google />
+        <Center>
+          <Google />
+        </Center>
         <Center>
           <div>
             <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
