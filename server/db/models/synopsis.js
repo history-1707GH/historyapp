@@ -2,11 +2,15 @@ const Sequelize = require('sequelize');
 const db = require('../_db');
 
 const Synopsis = db.define('synopsis', {
-    url: { 
+    pageId: { 
+        type: Sequelize.INTEGER,
+        unique: true
+    },
+    title: {
         type: Sequelize.STRING
     },
-    type: {
-        type: Sequelize.STRING
+    content: {
+        type: Sequelize.TEXT
     }
 })
 

@@ -35,29 +35,46 @@ class Login extends Component {
             <img src="/meander-logo-white.png" className="meander-logo"/>
           </div>
         </Center>
-        <div>
-            <form onSubmit={this.checkRedirect}>
-                <label>Email: </label>
-                <input
-                  name='email'
-                  type='text'
-                  required
-                />
-                <label>Password: </label>
-                <input
-                  name='password'
-                  type='password'
-                  required
-                />
-            <button type='submit'>Sign in</button>
-            </form>
-        </div>
-        <Google />
+        <br/>
+        <br/>
         <Center>
-          <div>
-            <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
-              <FlatButton label="Create a new account" />            
-            </Link>
+          <Google />
+        </Center>
+        <br/>
+        <br/>
+        <div>
+        <Center>
+          <form onSubmit={this.checkRedirect}>
+            <label>Email: </label>
+            <input
+              name='email'
+              type='text'
+              required
+            />
+            <br/>
+            <br/>
+            <label>Password: </label>
+            <input
+              name='password'
+              type='password'
+              required
+            />
+            <br/>
+            <Center>
+              <div>
+                <FlatButton type='submit'>SIGN IN</FlatButton>
+              </div>
+            </Center>
+            </form>
+        </Center>
+        <br/>
+        <br/>
+        </div>
+          <Center>
+            <div>
+              <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
+                <FlatButton label="Create a new account" />            
+              </Link>
           </div>
         </Center>
       </div>

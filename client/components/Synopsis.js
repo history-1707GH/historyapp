@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CheckIn from './CheckIn'
 import { NavLink } from 'react-router-dom'
-import { fetchSynopsis, fetchSynopsisParse } from '../store'
+import { fetchExperienceData } from '../store'
 import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
@@ -19,8 +19,9 @@ class Synopsis extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSynopsis(this.props.place.pageid)
-    this.props.fetchSynopsisInfo(this.props.place.title)
+    const place = this.props.place
+    const query = `body.search("${place.title}")ANDglocations:("New York City")`
+    this.props.fetchExperienceData(place.pageid, place.title, query)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,7 +36,7 @@ class Synopsis extends Component {
     let getImg;
     let num = 1;
     if (info) {
-      info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'
+      info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'  
     }
     return (
       <div>
@@ -50,9 +51,12 @@ class Synopsis extends Component {
               </CardMedia>
               <CardTitle title={info.displaytitle} />
               <CardActions>
-                <NavLink to='headlines'>
+                <NavLink to='/headlines'>
                   <FlatButton type="button" label="News Reel" />
                 </NavLink>
+                  <NavLink to='/archives'>
+                <FlatButton type="button" label="Archives" />
+              </NavLink>
               </CardActions>
               <CardText>
                 <div dangerouslySetInnerHTML={html} />
@@ -81,11 +85,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSynopsis: pageId => {
-      dispatch(fetchSynopsis(pageId))
-    },
-    fetchSynopsisInfo: pageTitle => {
-      dispatch(fetchSynopsisParse(pageTitle))
+    fetchExperienceData: (wikiPageId, wikiPageTitle, headlineQuery) => {
+      dispatch(fetchExperienceData(wikiPageId, wikiPageTitle, headlineQuery))
     }
   }
 }

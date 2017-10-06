@@ -3,57 +3,45 @@ const router = require('express').Router()
 const db = require('../db')
 
 const Experience = db.models.experience;
+const Synopsis = db.models.synopsis
+
+
 
 router.route('/')
-    .get((req, res, next) => {
-        Experience.findAll()
-            .then(experiences => {
-                res.status(200).json(experiences)
-            })
-            .catch(next)
-    })
     .post((req, res, next) => {
-        Experience.create(req.body)
+        Experience.findOne({
+            where: {  //how to validate on associations
+                lat: req.body.lat,
+                lon: req.body.lon,
+                synopsisId: req.body.wikiPageId
+            }
+        })
+            .then(experience => {
+                if (!experience) {
+                    return Experience.create({
+                        lat: req.body.lat,
+                        lon: req.body.lon
+                    })
+                        .then(experience => {
+                            return experience.setSynopsis(req.body.wikiPageId)
+                        })
+                        .then(experience => {
+                            if (req.body.headlines.length) {
+                               const articleIds = req.body.headlines.map(article=>{
+                                   return article._id
+                               })
+                               return experience.setArticles(articleIds)
+                            } 
+                            else return experience 
+                        })
+                } else {
+                    return experience
+                }
+            })
             .then(experience => {
                 res.status(201).json(experience)
             })
             .catch(next)
     })
 
-router.route('/:id')
-    .get((req, res, next) => {
-        Experience.findOne({
-            where: {
-                id: req.params.id
-            }
-        })
-            .then(experience => {
-                res.status(200).json(experience)
-            })
-            .catch(next)
-    })
-    .put((req, res, next) => {
-        Experience.update(req.body, {
-            where: {
-                id: req.params.id
-            },
-            returning: true
-        })
-            .then(experience => {
-                res.status(202).json(experience)
-            })
-            .catch(next)
-    })
-    .delete((req, res, next) => {
-        Experience.destroy({
-            where: {
-                id: req.params.id
-            }
-        })
-        .then(()=> {
-            res.sendStatus(200)
-        })
-        .catch(next)
-    })
-
-module.exports = router;
+module.exports = router; 
