@@ -51,49 +51,44 @@ class Synopsis extends Component {
   render() {
     const html = { __html: this.state.synopsisText }
     const info = this.props.synopsisParse
-    let getImg;
+    let getImg='https://media.timeout.com/images/101705313/image.jpg'
     let num = 1;
   }
   if (info) {
-    info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'  
+    getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` 
     return (
       <div>
-        {
-          info ? (
-            <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
-              <CardHeader
-                title={`${num}  -  ${info.displaytitle}`} 
-                actAsExpander={true}
-              />
-              <CardMedia>
-                <img src={getImg} className="synopsis-main-image" alt="" />
-              </CardMedia>
-              <CardTitle title={info.displaytitle} />
-              <CardActions>
-                <NavLink to='/headlines'>
-                  <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
-                </NavLink>
-                <NavLink to='/archives'>
-                  <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-                </NavLink>
-                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>                
-              </CardActions>
-              <CardActions>
-                <CheckIn style={{labelColor:teal500, color:teal900}}/>
-              </CardActions>
-              <CardText expandable={true}>
-                <div dangerouslySetInnerHTML={html} />
-              </CardText>
-              {
-                this.state.expanded ? 
-                <CardActions>
-                  <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
-                </CardActions> : null
-              }
-            </Card>
-          ) : null
-        }
-
+        <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
+          <CardHeader
+            title={`${num}  -  ${info.displaytitle}`} 
+            actAsExpander={true}
+          />
+          <CardMedia>
+            <img src={getImg} className="synopsis-main-image" alt="" />
+          </CardMedia>
+          <CardTitle title={info.displaytitle} />
+          <CardActions>
+            <NavLink to='/headlines'>
+              <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
+            </NavLink>
+            <NavLink to='/archives'>
+              <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+            </NavLink>
+            <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>                
+          </CardActions>
+          <CardActions>
+            <CheckIn style={{labelColor:teal500, color:teal900}}/>
+          </CardActions>
+          <CardText expandable={true}>
+            <div dangerouslySetInnerHTML={html} />
+          </CardText>
+          {
+            this.state.expanded ? 
+            <CardActions>
+              <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
+            </CardActions> : null
+          }
+        </Card>
       </div>
     )
   }
