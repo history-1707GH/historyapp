@@ -3,11 +3,37 @@ import {getSynopsisParse} from './synopsisParse'
 import { setHeadlines, setArchives } from './'
 import { NYT_API_KEY } from '../../frontend_keys'
 import axios from 'axios'
+import {getRoute} from './route'
 
 const GET_CURRENT_EXPERIENCE = 'GET_CURRENT_EXPERIENCE'
 
+const getCurrentExperience = experience => {
+    return {type: GET_CURRENT_EXPERIENCE, experience}
+}
+
+export default function (state = {}, action) {
+    switch(action.type) {
+        case GET_CURRENT_EXPERIENCE: return action.experience
+        default: return state
+    }
+}
 
 
+export const gettingExperience = experience => {
+    return function thunk(dispatch) {
+        return axios.post('/api/experience', experience)
+            .then(res=> {
+                const experience = res.data
+                dispatch(getCurrentExperience(experience))
+                return axios.post('/api/route', experience)
+            })
+            .then(res=>{
+                const route = res.data
+                dispatch(getRoute(route))
+            })
+            .catch(err=>console.log('There was an error in saving the route or experience', err))
+    }
+}
 
 export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) => {
     return function thunk(dispatch) {
@@ -33,7 +59,7 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
                 const preparedText = content.slice(0, index);
 
                 return {
-                    pageID: wikiPageId,
+                    pageId: wikiPageId,
                     title: wikiInfo.title,
                     content: preparedText
                 }
@@ -70,4 +96,5 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             .catch(err => console.log("there was an issue", err))
     }
 }
+
 
