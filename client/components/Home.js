@@ -19,7 +19,7 @@ class Home extends Component {
         <br /> 
         <Center>
           <div>
-            <img src="/meander-logo-white.png" className="meander-logo"/>
+            <img src="/images/meander-logo-white.png" className="meander-logo"/>
           </div>
         </Center>
         <Center>
@@ -27,7 +27,7 @@ class Home extends Component {
             <br/>
             <br/>
             <Center>
-              <div><img src="/girl.png"/></div>
+              <div><img src="/images/girl.png"/></div>
             </Center>
             <br/>
             <br/>

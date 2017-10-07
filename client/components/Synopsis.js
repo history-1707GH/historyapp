@@ -78,22 +78,22 @@ class Synopsis extends Component {
               <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
             </CardActions>
             <CardActions>
-              <NavLink to="/notes">
-                <FlatButton label="Leave a note" fullWidth={true} style={{ color:white, backgroundColor:teal500 }}/> 
-              </NavLink>
-            </CardActions>
-            <CardActions>
-              <CheckIn style={{labelColor:teal500, color:teal900}}/>
+            <CheckIn style={{labelColor:teal500, color:teal900}}/>
             </CardActions>
             <CardText expandable={true}>
-              <div dangerouslySetInnerHTML={html} />
+            <div dangerouslySetInnerHTML={html} />
             </CardText>
             {
               this.state.expanded ? 
               <CardActions>
-                <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
+              <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
               </CardActions> : null
             }
+            <CardActions>
+              <NavLink to="/notes">
+                <FlatButton label="Leave a note" fullWidth={true} style={{ color:white, backgroundColor:teal500 }}/> 
+              </NavLink>
+            </CardActions>
           </Card>
         }
       </div>

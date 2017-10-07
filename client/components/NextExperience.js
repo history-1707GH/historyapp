@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import MapComponent from './MapComponent'
 import { Route} from 'react-router-dom'
-import {getNextExperiences} from '../store'
+import { getNextExperiences } from '../store'
 import RaisedButton from 'material-ui/RaisedButton'
+import {  teal500, teal900, white } from 'material-ui/styles/colors'
+import {GridList, GridTile} from 'material-ui/GridList'
+import ProgressBar from './ProgressBar'
+import Center from 'react-center'
 
 
 
@@ -87,39 +90,50 @@ function NextExperience(props) {
     }
     return costs[s2.length];
   }
+  
+  const styles = {
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+    },
+    gridList: {
+      overflowY: 'auto',
+      margin: 20
+    },
+  }
 
   return (
     <div>
-      {nextExperiences.map((nextPlaceChoice, idx) => {
-        return (
-          <div key={nextPlaceChoice.pageid}>
-            {`Choice ${idx + 1}`}: 
-              {nextPlaceChoice.title}
-            <br />
-            Association: 
-              {nextPlaceChoice.maxSimilarity.noun.toUpperCase()}
-            <br />
-            Association Score: 
-                {`${(Math.ceil(nextPlaceChoice.maxSimilarity.similarity*10000)/100)}%`}
-            <br />
-            Distance: 
-              {Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}
-          </div>
-        )
-      })}
-      <Link to={'/map'} >
-      
-      <RaisedButton label="Take Me To The Map!" style={{ margin: 12 }} />
-      </Link>      
-      <Link to={'/notes'} >
-      <RaisedButton label="I want to say something about this place!" style={{ margin: 12 }} />
-      </Link>
-      <Link to={'/progress'} >
-      <RaisedButton label="Check my progress" style={{ margin: 12 }} />
-      </Link>
+      <div style={styles.root}>
+        <GridList
+          style={styles.gridList}
+          >
+          {
+            nextExperiences.length > 1 && nextExperiences.map(nextPlaceChoice => {
+              return (
+                <GridTile
+                  key={nextPlaceChoice.pageid}
+                  title={nextPlaceChoice.title}
+                  subtitle={<span>Distance: <b>{Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}</b></span>}
+                >
+                  <img className="next-icon" src="/images/cityscape.png" />
+                </GridTile>
+              )}
+            )
+          }
+        </GridList> 
+      </div>
+      <Center>
+        <Link to={'/map'} >
+          <RaisedButton label="Take Me To The Map!" labelColor={white} backgroundColor={teal500}/>
+        </Link>  
+      </Center>
+        <div>
+          <ProgressBar /> 
+        </div>   
     </div>
   )
-
 }
 
 const mapState = state => {

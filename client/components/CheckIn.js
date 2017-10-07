@@ -90,7 +90,7 @@ class CheckIn extends Component {
             )
         }
         else return (
-            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" style={{labelColor:teal500, color:teal900}}/>
+            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" labelColor={white} backgroundColor={teal900}/>
         )
     }
 }

@@ -26,7 +26,7 @@ class Login extends Component {
       <div>
         <Center>
           <div>
-            <img src="/meander-logo-white.png" className="meander-logo"/>
+            <img src="/.png" className="meander-logo"/>
           </div>
         </Center>
         <br/>
