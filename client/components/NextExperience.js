@@ -8,6 +8,8 @@ import {  teal500, teal900, white } from 'material-ui/styles/colors'
 import {GridList, GridTile} from 'material-ui/GridList'
 import ProgressBar from './ProgressBar'
 import Center from 'react-center'
+import InfoIcon from 'material-ui/svg-icons/action/info'
+import IconButton from 'material-ui/IconButton'
 
 
 
@@ -115,7 +117,9 @@ function NextExperience(props) {
                 <GridTile
                   key={nextPlaceChoice.pageid}
                   title={nextPlaceChoice.title}
-                  subtitle={<span>Distance: <b>{Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}</b></span>}
+                  actionIcon={<IconButton><InfoIcon color="white" /></IconButton>}                  
+                  subtitle={<span>Distance: <b>{Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}
+                  </b></span>}
                 >
                   <img className="next-icon" src="/images/cityscape.png" />
                 </GridTile>
