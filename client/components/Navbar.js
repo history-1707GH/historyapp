@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import { logOut } from '../store'
 import MapIcon from 'material-ui/svg-icons/maps/map'
-
+import Menu from './Menu'
 
 
 export const Navbar = (props) => {
@@ -17,7 +17,10 @@ export const Navbar = (props) => {
         cursor: 'pointer',
         }
     }
-    props.currentUser.id ? (iconRight=(<Link to='/'><FlatButton type="button" label='Logout' onClick={props.handleLogout} style={{backgroundColor:teal500, color:white}}/></Link>)) : (iconRight=(<Link to='/login'><FlatButton label='Login' style={{backgroundColor:teal500, color:white}} /> </Link>))
+    props.currentUser.id ? 
+        iconRight=(<Link to='/'><FlatButton type="button" label='Logout' onClick={props.handleLogout} style={{backgroundColor:teal500, color:white}}/></Link>) 
+        : 
+        iconRight=(<Link to='/login'><FlatButton label='Login' style={{backgroundColor:teal500, color:white}} /> </Link>)
     return (
         <div>
             <AppBar

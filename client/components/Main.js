@@ -37,7 +37,6 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/> 
-                       
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
                     <Route exact path='/progress' component={ProgressBar} />

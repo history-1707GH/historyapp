@@ -49,7 +49,7 @@ class Synopsis extends Component {
 
   render() {
     const html = { __html: this.state.synopsisText }
-    const info = this.props.synopsisParse
+    const { info, archives, headlines } = this.props
     let getImg='https://media.timeout.com/images/101705313/image.jpg'
     let num = 1;
     if (info) {
@@ -68,15 +68,24 @@ class Synopsis extends Component {
               <img src={getImg} className="synopsis-main-image" alt="" />
             </CardMedia>
             <CardTitle title={info.displaytitle} />
-            <CardActions>
-              <NavLink to='/headlines'>
-                <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
-              </NavLink>
-              <NavLink to='/archives'>
-                <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-              </NavLink>             
-              <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
-            </CardActions>
+            {
+              (headlines.length > 1 || archives.length > 1) ? 
+              <CardActions>
+                {
+                  headlines.length > 1 ? 
+                  <NavLink to='/headlines'>
+                    <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
+                  </NavLink> : null
+                }
+                {
+                  archives.length > 1 ? 
+                  <NavLink to='/archives'>
+                    <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+                  </NavLink> : null            
+                }
+                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
+              </CardActions> : null
+            }
             <CardActions>
             <CheckIn style={{labelColor:teal500, color:teal900}}/>
             </CardActions>
@@ -107,7 +116,9 @@ const mapState = state => {
     synopsis: state.synopsis,
     place: state.selectedPlace,
     currentLocation: state.currentLocation,
-    synopsisParse: state.synopsisParse.parse
+    info: state.synopsisParse.parse,
+    headlines: state.headlines,
+    archives: state.archives
   }
 }
 
