@@ -7,7 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import {  teal500, white } from 'material-ui/styles/colors'
+import {  teal500, teal900, white } from 'material-ui/styles/colors'
+
 
 class Synopsis extends Component {
 
@@ -17,6 +18,9 @@ class Synopsis extends Component {
       synopsisText: "",
       expanded: false
     }
+    this.handleExpand = this.handleExpand.bind(this)
+    this.handleExpandChange = this.handleExpandChange.bind(this)
+    this.handleReduce = this.handleReduce.bind(this)
   }
 
   componentDidMount() {
@@ -31,23 +35,35 @@ class Synopsis extends Component {
     }
   } 
 
+  handleExpandChange = expanded => {
+    this.setState({expanded: expanded});
+  };
+
+  handleExpand = () => {
+    this.setState({expanded: true});
+  };
+
+  handleReduce = () => {
+    this.setState({expanded: false});
+  };
+
+
   render() {
     const html = { __html: this.state.synopsisText }
     const info = this.props.synopsisParse
     let getImg;
     let num = 1;
-    if (info) {
-      info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'  
-    }
+  }
+  if (info) {
+    info ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg = 'https://media.timeout.com/images/101705313/image.jpg'  
     return (
       <div>
         {
           info ? (
-            <Card className="synopsis">
+            <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
               <CardHeader
-                title={`Location: ${num}`} 
+                title={`${num}  -  ${info.displaytitle}`} 
                 actAsExpander={true}
-                showExpandableButton={true}
               />
               <CardMedia>
                 <img src={getImg} className="synopsis-main-image" alt="" />
@@ -60,13 +76,20 @@ class Synopsis extends Component {
                 <NavLink to='/archives'>
                   <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
                 </NavLink>
+                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>                
               </CardActions>
               <CardActions>
-                <CheckIn />
+                <CheckIn style={{labelColor:teal500, color:teal900}}/>
               </CardActions>
               <CardText expandable={true}>
                 <div dangerouslySetInnerHTML={html} />
               </CardText>
+              {
+                this.state.expanded ? 
+                <CardActions>
+                  <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
+                </CardActions> : null
+              }
             </Card>
           ) : null
         }

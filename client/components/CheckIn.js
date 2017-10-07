@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import {  teal900, teal500, white } from 'material-ui/styles/colors'
 import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
+
 
 class CheckIn extends Component {
 
@@ -73,12 +74,12 @@ class CheckIn extends Component {
         else if (this.state.checkin) {
             return (
                 <Link to={'/next_experience'} >
-                    <RaisedButton type="button" label="Onward!" fullWidth={true} style={{labelColor:teal500}}/>
+                    <RaisedButton type="button" label="Onward!" fullWidth={true} style={{labelColor:teal500, color:teal900}}/>
                 </Link>
             )
         }
         else return (
-            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" style={{labelColor:teal500}}/>
+            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" style={{labelColor:teal500, color:teal900}}/>
         )
     }
 }
