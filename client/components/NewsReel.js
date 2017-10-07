@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Slider from 'react-slick';
+import React, { Component } from 'react'
+import { NavLink, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import RaisedButton from 'material-ui/RaisedButton'
+import Slider from 'react-slick'
+import {  teal500, teal900, white } from 'material-ui/styles/colors'
+import Center from 'react-center'
 
 
 
@@ -67,10 +69,14 @@ class NewsReel extends Component {
         }
           </Slider>
         </div>
+        <br />
+        <br />
         <div>
+          <Center>
           <NavLink to="/synopsis">
-            <FlatButton type="button" label="BACK"/>
+            <RaisedButton type="button" label="BACK" backgroundColor={ teal500 } labelColor={white}/>
           </NavLink>
+          </Center>
         </div>
       </div>
     )

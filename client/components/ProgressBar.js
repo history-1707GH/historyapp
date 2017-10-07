@@ -1,14 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  Step,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper'
+import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import {  teal500, teal900, white, grey400 } from 'material-ui/styles/colors'
+
 
 
 
@@ -76,24 +73,12 @@ class ProgressBar extends React.Component {
         <Stepper activeStep={placeIndex} orientation="vertical">
           {
             placeIds && placeIds.map(placeId => (
-              <Step key={placeId}>
-                <StepLabel>{visitedPlace[placeId] ? visitedPlace[placeId].title : "to be explored"}</StepLabel>
+              <Step key={placeId} style={{ color:grey400, backgroundColor:teal900}}>
+                <StepLabel style={{color:white}}>{visitedPlace[placeId] ? visitedPlace[placeId].title : `Location ${placeId+1}: ????` } </StepLabel>  
                 <StepContent>
                   <p>
                     User's notes show here.
                   </p>
-                  <div style={{ margin: '12px 0' }}>
-
-                    <FlatButton
-                      label={placeIndex === 4 ? 'Congratulations!' : 'Next'}
-                      disableTouchRipple={true}
-                      disableFocusRipple={true}
-                      primary={true}
-                      onClick={this.handleNext}
-                      style={{ marginRight: 12 }}
-                    />
-
-                  </div>
                 </StepContent>
               </Step>
 

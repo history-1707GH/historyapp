@@ -68,24 +68,21 @@ class Synopsis extends Component {
               <img src={getImg} className="synopsis-main-image" alt="" />
             </CardMedia>
             <CardTitle title={info.displaytitle} />
-            {
-              (headlines.length > 1 || archives.length > 1) ? 
-              <CardActions>
-                {
-                  headlines.length > 1 ? 
-                  <NavLink to='/headlines'>
-                    <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
-                  </NavLink> : null
-                }
-                {
-                  archives.length > 1 ? 
-                  <NavLink to='/archives'>
-                    <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-                  </NavLink> : null            
-                }
-                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
-              </CardActions> : null
-            }
+            <CardActions>
+              {
+                headlines.length > 1 ? 
+                <NavLink to='/headlines'>
+                  <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
+                </NavLink> : null
+              }
+              {
+                archives.length > 1 ? 
+                <NavLink to='/archives'>
+                  <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+                </NavLink> : null            
+              }
+              <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
+            </CardActions>
             <CardActions>
             <CheckIn style={{labelColor:teal500, color:teal900}}/>
             </CardActions>

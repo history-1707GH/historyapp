@@ -129,7 +129,7 @@ function NextExperience(props) {
           <RaisedButton label="Take Me To The Map!" labelColor={white} backgroundColor={teal500}/>
         </Link>  
       </Center>
-        <div>
+        <div className="progress-next">
           <ProgressBar /> 
         </div>   
     </div>
