@@ -39,13 +39,23 @@ class NewsReel extends Component {
                 <CardHeader
                   title={`${headline.headline.main.slice(0, 30)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
                 <CardMedia>
-                  <a href={headline.web_url}>
                   {
-                    headline.multimedia.length > 1 ? 
-                    <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
-                    <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
+                    !headline.web_url.includes("query") ? 
+                    <a href={headline.web_url} target="_blank">
+                    {
+                      headline.multimedia.length > 1 ? 
+                      <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
+                      <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
+                    }
+                    </a> : <a href={`http://timesmachine.nytimes.com/svc/tmach/v1/refer?res=${headline.web_url.split("res=")[1]}`} target="_blank">
+                    {
+                      headline.multimedia.length > 1 ? 
+                      <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
+                      <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
+                    }
+                    </a>
+
                   }
-                  </a>
                 </CardMedia>
                 <CardTitle title={`${headline.headline.main.slice(0, 35)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
                 <CardText>
