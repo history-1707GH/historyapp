@@ -69,7 +69,7 @@ const reducer = function (state = [], action) {
       return action.user_notes
     case GET_PLACE_NOTES:
       return action.place_notes
-    case ADD_REVIEW:
+    case ADD_NOTE:
       return [...state, action.note]
     default:
       return state
