@@ -18,6 +18,6 @@ Experience.belongsToMany(Article, {through: 'Experience-Article'})
 Experience.belongsTo(Synopsis, {targetKey: 'pageId'})
 
 Note.belongsTo(User)
-Experience.belongsTo(Note)
+Note.belongsTo(Experience)
 
 module.exports = db;

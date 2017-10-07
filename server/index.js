@@ -57,7 +57,7 @@ app.get('*', function (req, res) {
 const port = process.env.PORT || 3000;
 
 // sync our database
-db.sync({force: true})
+db.sync()
   .then(function () {
     return app.listen(port, function () {
       console.log(`Server Starting: ${port}`);

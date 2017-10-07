@@ -17,16 +17,7 @@ router.route('/')
             .catch(next);
     })
 
-router.route('/:experence')
-    .get((req, res, next) => {
-        Note.findAll({
-            where: {
-              productId: req.params.productId
-            }
-          })
-          .then(reviews => res.json(reviews))
-          .catch(next);
-    })
+
     
 
 module.exports = router;
