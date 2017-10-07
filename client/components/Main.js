@@ -7,6 +7,7 @@ import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Navbar from './Navbar'
+import Notes from './Notes'
 import ProgressBar from './ProgressBar'
 import Login from './Login'
 import Signup from './Signup'
@@ -37,7 +38,7 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/> 
-                       
+                    <Route exact path='/notes' component={Notes}/> 
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
                     <Route exact path='/progress' component={ProgressBar} />
