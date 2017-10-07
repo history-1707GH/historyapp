@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import CheckIn from './CheckIn'
 import { NavLink } from 'react-router-dom'
 import { fetchExperienceData } from '../store'
 import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 import {  teal500, teal900, white } from 'material-ui/styles/colors'
-
 
 class Synopsis extends Component {
 
@@ -75,8 +74,13 @@ class Synopsis extends Component {
               </NavLink>
               <NavLink to='/archives'>
                 <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+              </NavLink>             
+              <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
+            </CardActions>
+            <CardActions>
+              <NavLink to="/notes">
+                <FlatButton label="Leave a note" fullWidth={true} style={{ color:white, backgroundColor:teal500 }}/> 
               </NavLink>
-              <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>                
             </CardActions>
             <CardActions>
               <CheckIn style={{labelColor:teal500, color:teal900}}/>
