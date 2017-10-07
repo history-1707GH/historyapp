@@ -181,7 +181,7 @@ class NextExperience extends Component{
           modal={false}
           open={this.state.open1}
           onRequestClose={this.handleClose1}
-          >  The actions in this window were passed in as an array of React objects.
+          >  {`Association: ${nextExperiences[0].maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(nextExperiences[0].maxSimilarity.similarity*10000)/100)}%`}`}
           </Dialog>
           <Dialog
           title={nextExperiences[1].title}
@@ -189,7 +189,7 @@ class NextExperience extends Component{
           modal={false}
           open={this.state.open2}
           onRequestClose={this.handleClose2}
-          >  The actions in this window were passed in as an array of React objects.
+          >  {`Association: ${nextExperiences[1].maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(nextExperiences[1].maxSimilarity.similarity*10000)/100)}%`}`}
           </Dialog>
         </div>
         <Center>
