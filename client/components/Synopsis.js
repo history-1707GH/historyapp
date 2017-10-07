@@ -92,7 +92,8 @@ class Synopsis extends Component {
             {
               this.state.expanded ? 
               <CardActions>
-              <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
+                <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
+                <FlatButton label="Listen" onClick={()=>(responsiveVoice.speak($(this.state.synopsisText).text()))} style={{ color:white, backgroundColor:teal500 }} ></FlatButton>
               </CardActions> : null
             }
             <CardActions>
