@@ -2,11 +2,11 @@ const Sequelize = require('sequelize');
 const db = require('../_db');
 
 const Route = db.define('route', {
-    previous: {
-        type: Sequelize.INTEGER
+    startTime: {
+        type: Sequelize.TIME
     },
-    next: {
-        type: Sequelize.INTEGER
+    endTime: {
+        type: Sequelize.TIME
     }
 })
 
