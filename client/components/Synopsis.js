@@ -15,11 +15,14 @@ class Synopsis extends Component {
     super()
     this.state = {
       synopsisText: "",
-      expanded: false
+      expanded: false,
+      voice: false
     }
     this.handleExpand = this.handleExpand.bind(this)
     this.handleExpandChange = this.handleExpandChange.bind(this)
     this.handleReduce = this.handleReduce.bind(this)
+    this.handleListen= this.handleListen.bind(this)
+    this.handleStopListen = this.handleStopListen.bind(this)
   }
 
   componentDidMount() {
@@ -36,16 +39,25 @@ class Synopsis extends Component {
 
   handleExpandChange = expanded => {
     this.setState({expanded: expanded});
-  };
+  }
 
   handleExpand = () => {
     this.setState({expanded: true});
-  };
+  }
 
   handleReduce = () => {
     this.setState({expanded: false});
-  };
+  }
 
+  handleListen = () => {
+    this.setState({voice:true})
+    responsiveVoice.speak($(this.state.synopsisText).text())
+  } 
+
+  handleStopListen = () => {
+    this.setState({voice:false})
+    responsiveVoice.cancel()
+  }
 
   render() {
     const html = { __html: this.state.synopsisText }
@@ -93,7 +105,11 @@ class Synopsis extends Component {
               this.state.expanded ? 
               <CardActions>
                 <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
-                <FlatButton label="Listen" onClick={()=>(responsiveVoice.speak($(this.state.synopsisText).text()))} style={{ color:white, backgroundColor:teal500 }} ></FlatButton>
+                {
+                  !this.state.voice ? 
+                  <FlatButton label="Listen" onClick={this.handleListen} style={{ color:white, backgroundColor:teal500 }} /> : 
+                  <FlatButton label="Stop" onClick={this.handleStopListen} style={{ color:white, backgroundColor:teal500 }} /> 
+                }
               </CardActions> : null
             }
             <CardActions>
