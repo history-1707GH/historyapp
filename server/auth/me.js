@@ -30,7 +30,7 @@ router.route('/')
                         res.json(u)
                     }
                 });
-                if (!notExist) res.json({error: 'Failed to create account. User might already exist.'})
+                if (!notExist) res.json({signupError: 'Failed to create account. User might already exist.'})
             })
             .catch(next)
     })
@@ -42,8 +42,8 @@ router.route('/')
             }
         })
             .then(user => {
-                if (!user) res.json({error:'Wrong email or password'});
-                if (user && !user.correctPassword(req.body.password)) res.json({error:'Wrong email or password'});
+                if (!user) res.json({loginError:'Failed to log in. Wrong email or password'});
+                if (user && !user.correctPassword(req.body.password)) res.json({loginError:'Failed to log in. Wrong email or password'});
                 if (user && user.correctPassword(req.body.password)) req.login(user, error => {
                     if (error) {
                         next(error)

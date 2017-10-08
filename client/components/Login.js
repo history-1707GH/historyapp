@@ -15,6 +15,7 @@ class Login extends Component {
 
   componentDidMount(){
     document.body.className="home";
+    this.props.user.loginError = null
   }
 
   componentWillUnmount(props){
@@ -63,6 +64,7 @@ class Login extends Component {
             <Center>
               <div>
                 <FlatButton type='submit'>SIGN IN</FlatButton>
+                {this.props.user.loginError ? <p>{this.props.user.loginError}</p> : null}
               </div>
             </Center>
             </form>
@@ -82,7 +84,11 @@ class Login extends Component {
   }
 }
 
-const mapState = null
+const mapState = function (state){
+  return {
+    user: state.user
+  }
+}
 
 const mapDispatch = function (dispatch, ownProps) {
     return {

@@ -23,6 +23,10 @@ class Signup extends Component {
         this.usernameCheck = this.usernameCheck.bind(this)
     }
 
+    componentDidMount(){
+        this.props.user.signupError = null
+    }
+
     usernameCheck(){
         this.props.usernameAvail({username: this.state.account.username})
     }
@@ -99,7 +103,7 @@ class Signup extends Component {
                     />
                     {this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? (<p>Invalid password</p>) : null}
                     <button type='submit' disabled={(this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (this.state.account.email.length===0)}>Create Account!</button>
-                    {(typeof this.props.user==='string') ? <p>{this.props.user}</p> : null}
+                    {(this.props.user.signupError) ? <p>{this.props.user.signupError}</p> : null}
                 </form>
                 <Google />
             </div>

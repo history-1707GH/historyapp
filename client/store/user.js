@@ -31,8 +31,8 @@ export function newUser(account, history, query) {
     return function thunk(dispatch) {
         return axios.post('/auth/me', account)
             .then(res => {
-                if (res.data.error.length) {
-                    dispatch(errorUser(res.data.error))
+                if (res.data.signupError) {
+                    dispatch(errorUser(res.data))
                 } else {
                     dispatch(getUser(res.data))
                     if (query.length) {
@@ -50,8 +50,12 @@ export function logIn(account, history, query) {
     return function thunk(dispatch) {
         return axios.put('/auth/me', account)
             .then(res => {
-                dispatch(getUser(res.data))
-                query.length ? history.push('/map') : history.goBack()
+                if (res.data.loginError) {
+                    dispatch(errorUser(res.data))
+                } else {
+                    dispatch(getUser(res.data))
+                    query.length ? history.push('/map') : history.goBack()
+                }
             })
             .catch(err => console.error(`Unable to log in user`, err))
     }
