@@ -28,12 +28,9 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences,
-<<<<<<< HEAD
   checkUsername,
-=======
   currentExperience,
   route,
->>>>>>> master
   checkinPlace
 
 });
@@ -58,14 +55,10 @@ export * from './currentLocation'
 export * from './checkinPlace'
 export * from './user'
 export * from './nextExperiences'
-<<<<<<< HEAD
-export * from './experienceData'
 export * from './checkUsername'
-=======
 export * from './experience'
 export * from './route'
 
->>>>>>> master
 
 
 
