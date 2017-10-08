@@ -12,7 +12,7 @@ body {
 
 .home-root {
   background-color: #004D40;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px - 56px);
   color: white;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 .leaflet-container {
-  height: 1000px;
+  min-height: calc(100vh - 64px - 56px);
   width: 100%;
   margin: 0 auto;
 }
