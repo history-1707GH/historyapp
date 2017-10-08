@@ -79,7 +79,7 @@ class Synopsis extends Component {
     const html = { __html: this.state.synopsisText }
     const { info, archives, headlines } = this.props
     let getImg='https://media.timeout.com/images/101705313/image.jpg'
-    let num = 1;
+    let num = 1
     if (info) {
       getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` 
     }

@@ -5,11 +5,10 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import Paper from 'material-ui/Paper'
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on'
 import { teal500, teal900, white } from 'material-ui/styles/colors'
-
-
-const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>
-const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>
-const nearbyIcon = <IconLocationOn />
+import InfoIcon from 'material-ui/svg-icons/action/info'
+import AccountIcon from 'material-ui/svg-icons/action/account-box'
+import RouteIcon from 'material-ui/svg-icons/maps/person-pin-circle'
+import StarIcon from 'material-ui/svg-icons/action/stars'
 
 /**
  * A simple example of `BottomNavigation`, with three labels and icons
@@ -26,22 +25,29 @@ export default class BottomNavbar extends Component {
   render() {
     return (
       <Paper zDepth={1} >
-        <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900}} >
+        <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900, textDecorationColor:white}} >
           <BottomNavigationItem
-            label="Recents"
-            icon={recentsIcon}
+            label="Account"
+            
+            icon={<AccountIcon color={white} />}
             onClick={() => this.select(0)}
           />
           <BottomNavigationItem
-            label="Favorites"
-            icon={favoritesIcon}
+            label="Routes"
+
+            icon={<RouteIcon color={white} />}
             onClick={() => this.select(1)}
           />
           <BottomNavigationItem
-            label="Nearby"
-            icon={nearbyIcon}
+            label="Leaderboard"
+            icon={<StarIcon color={white} />}          
             onClick={() => this.select(2)}
           />
+          <BottomNavigationItem
+          label="Info"          
+          icon={<InfoIcon color={white} />}
+          onClick={() => this.select(3)}
+        />
         </BottomNavigation>
       </Paper>
     );
