@@ -11,7 +11,6 @@ router.route('/')
         }
     })
     .post((req, res, next) => {           // create user
-        console.log('***req.body',req.body)
         User.findOrCreate({
             where: {
                 email: req.body.email
@@ -31,7 +30,7 @@ router.route('/')
                         res.json(u)
                     }
                 });
-                if (!notExist) res.status(401).json({error: 'User exists. Please log in.'})
+                if (!notExist) res.json({error: 'Failed to create account. User might already exist.'})
             })
             .catch(next)
     })
@@ -43,8 +42,8 @@ router.route('/')
             }
         })
             .then(user => {
-                if (!user) res.status(401).send('Wrong email or password');
-                if (user && !user.correctPassword(req.body.password)) res.status(401).send('Wrong email or password');
+                if (!user) res.json({error:'Wrong email or password'});
+                if (user && !user.correctPassword(req.body.password)) res.json({error:'Wrong email or password'});
                 if (user && user.correctPassword(req.body.password)) req.login(user, error => {
                     if (error) {
                         next(error)
@@ -70,9 +69,9 @@ router.route('/checkUsername')
         })
         .then(user => {
             if (user) {
-                res.status(200).json({message: 'Username not available'})
+                res.status(200).json({userAvailability: 'Username not available'})
             } else {
-                res.status(200).json({message: 'Username available'})
+                res.status(200).json({userAvailability: 'Username available'})
             }
                        
         })

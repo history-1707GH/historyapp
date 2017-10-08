@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { newUser, checkUsername } from '../store/index';
+import { newUser, checkUsername, clearMessage } from '../store/index';
 import Google from './Google'
 
 class Signup extends Component {
@@ -15,7 +15,8 @@ class Signup extends Component {
                 password: ''
             },
             dirtyPassword: false,
-            dirtyEmail: false
+            dirtyEmail: false,
+            dirtyUsername: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -41,6 +42,9 @@ class Signup extends Component {
         if (field==='email'){
             this.setState({dirtyEmail: true})
         }
+        if (field==='username'){
+            this.setState({dirtyUsername: true})
+        }
     }
 
     handleSubmit(e) {
@@ -58,11 +62,10 @@ class Signup extends Component {
             dirtyPassword: false,
             dirtyEmail: false
         })
-
+        this.props.clearCheckAvail()
     }
 
     render() {
-        console.log(this.validateEmail(this.state.account.email))
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -84,7 +87,7 @@ class Signup extends Component {
                         onChange={this.handleChange}
                         
                     />
-                    {(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? (<p>Please enter a valid email</p>) : null}
+                    {(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? (<p>Please enter an email of format: this@example.com</p>) : null}
                     <label>Password: </label>
                     <small>(Must be at least 6 characters long)</small>
                     <input
@@ -96,6 +99,7 @@ class Signup extends Component {
                     />
                     {this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? (<p>Invalid password</p>) : null}
                     <button type='submit' disabled={(this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (this.state.account.email.length===0)}>Create Account!</button>
+                    {(typeof this.props.user==='string') ? <p>{this.props.user}</p> : null}
                 </form>
                 <Google />
             </div>
@@ -105,7 +109,8 @@ class Signup extends Component {
 
 const mapState = function (state) {
     return {
-        message: state.authValidation
+        message: state.checkUsername,
+        user: state.user
     }
 }
 
@@ -116,6 +121,9 @@ const mapDispatch = function (dispatch, ownProps) {
         },
         usernameAvail(name){
             dispatch(checkUsername(name))
+        },
+        clearCheckAvail(){
+            dispatch(clearMessage())
         }
     }
 }

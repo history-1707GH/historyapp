@@ -11,7 +11,7 @@ import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
 import checkinPlace from './checkinPlace'
 import currentLocation from './currentLocation'
-import authValidation from './authValidation'
+import checkUsername from './checkUsername'
 import user from './user'
 
 
@@ -27,7 +27,7 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences,
-  authValidation
+  checkUsername,
   checkinPlace
 
 });
@@ -53,7 +53,7 @@ export * from './checkinPlace'
 export * from './user'
 export * from './nextExperiences'
 export * from './experienceData'
-export * from './authValidation'
+export * from './checkUsername'
 
 
 
