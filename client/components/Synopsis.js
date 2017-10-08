@@ -104,7 +104,7 @@ class Synopsis extends Component {
                 </NavLink> : null
               }
               {
-                archives.length > 1 ? 
+                archives.length > 0 ? 
                 <NavLink to='/archives'>
                   <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
                 </NavLink> : null            
