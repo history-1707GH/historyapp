@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
 const Synopsis = db.models.synopsis
+const Article = db.models.artcle
 
 const Experience = db.define('experience', {
     lat: {
@@ -10,7 +11,7 @@ const Experience = db.define('experience', {
     lon: {
         type: Sequelize.FLOAT,
         allowNull: false
-    }
+    } 
 })
 
 module.exports = Experience;

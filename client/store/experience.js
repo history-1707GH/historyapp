@@ -3,7 +3,8 @@ import {getSynopsisParse} from './synopsisParse'
 import { setHeadlines, setArchives } from './'
 import { NYT_API_KEY } from '../../frontend_keys'
 import axios from 'axios'
-import {getRoute} from './route'
+import {getRouteId} from './routeId'
+import {getCurrentRoute} from './currentRoute'
 
 const GET_CURRENT_EXPERIENCE = 'GET_CURRENT_EXPERIENCE'
 
@@ -19,17 +20,19 @@ export default function (state = {}, action) {
 }
 
 
-export const gettingExperience = experience => {
+export const gettingExperience = (experience, routeId, userId) => {
     return function thunk(dispatch) {
         return axios.post('/api/experience', experience)
             .then(res=> {
                 const experience = res.data
                 dispatch(getCurrentExperience(experience))
-                return axios.post('/api/route', experience)
+                dispatch(getCurrentRoute(experience))
+                const payload = {experience, routeId, userId}
+                return axios.post('/api/route', payload)
             })
             .then(res=>{
-                const route = res.data
-                dispatch(getRoute(route))
+                const routeId = res.data
+                dispatch(getRouteId(routeId))
             })
             .catch(err=>console.log('There was an error in saving the route or experience', err))
     }
