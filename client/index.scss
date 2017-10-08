@@ -30,6 +30,12 @@ body {
   margin: 0 auto;
 }
 
+.synopsis-page {
+  min-height: calc(100vh - 64px - 56px);
+  width: 100%;
+  margin: 0 auto;
+}
+
 .headline-reel {
   height: 635px; 
   margin: 0 auto;

@@ -84,7 +84,7 @@ class Synopsis extends Component {
       getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` 
     }
     return (
-      <div>
+      <div className="synopsis-page">
         {
           (!info) ? null : 
           <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>

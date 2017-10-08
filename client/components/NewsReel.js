@@ -32,7 +32,7 @@ class NewsReel extends Component {
       swipeToScroll: true
     };
     return (
-      <div>
+      <div className="newsreel-page">
         <div>
           <Slider {...settings}>
          {
