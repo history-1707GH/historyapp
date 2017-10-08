@@ -27,13 +27,10 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences,
-<<<<<<< HEAD
   currentExperience,
-  route
-=======
+  route,
   checkinPlace
 
->>>>>>> 385ad53e37f5ad01c5c4315df3b6821874fb7f87
 });
 
 const store = createStore(
