@@ -44,7 +44,8 @@ const Article = db.define('article', {
     source_id: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     }
 })
 

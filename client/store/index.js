@@ -13,7 +13,8 @@ import checkinPlace from './checkinPlace'
 import currentLocation from './currentLocation'
 import checkUsername from './checkUsername'
 import user from './user'
-
+import currentExperience from './experience'
+import route from './route'
 
 //import stuff here
 
@@ -27,7 +28,12 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences,
+<<<<<<< HEAD
   checkUsername,
+=======
+  currentExperience,
+  route,
+>>>>>>> master
   checkinPlace
 
 });
@@ -52,8 +58,14 @@ export * from './currentLocation'
 export * from './checkinPlace'
 export * from './user'
 export * from './nextExperiences'
+<<<<<<< HEAD
 export * from './experienceData'
 export * from './checkUsername'
+=======
+export * from './experience'
+export * from './route'
+
+>>>>>>> master
 
 
 
