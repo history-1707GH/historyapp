@@ -8,6 +8,9 @@ import Center from 'react-center'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import {  teal500, teal900, white } from 'material-ui/styles/colors'
+import Pause from 'material-ui/svg-icons/av/pause-circle-filled'
+import Play from 'material-ui/svg-icons/av/play-circle-outline'
+import IconButton from 'material-ui/IconButton'
 
 class Synopsis extends Component {
 
@@ -16,13 +19,16 @@ class Synopsis extends Component {
     this.state = {
       synopsisText: "",
       expanded: false,
-      voice: false
+      voice: false,
+      pauseVoice: false
     }
     this.handleExpand = this.handleExpand.bind(this)
     this.handleExpandChange = this.handleExpandChange.bind(this)
     this.handleReduce = this.handleReduce.bind(this)
     this.handleListen= this.handleListen.bind(this)
     this.handleStopListen = this.handleStopListen.bind(this)
+    this.handlePause = this.handlePause.bind(this)
+    this.handleResume = this.handleResume.bind(this)
   }
 
   componentDidMount() {
@@ -57,6 +63,16 @@ class Synopsis extends Component {
   handleStopListen = () => {
     this.setState({voice:false})
     responsiveVoice.cancel()
+  }
+
+  handlePause = () => {
+    this.setState({pauseVoice:true})
+    responsiveVoice.pause()
+  } 
+
+  handleResume = () => {
+    this.setState({pauseVoice:false})
+    responsiveVoice.resume()
   }
 
   render() {
@@ -107,9 +123,12 @@ class Synopsis extends Component {
                 <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
                 {
                   !this.state.voice ? 
-                  <FlatButton label="Listen" onClick={this.handleListen} style={{ color:white, backgroundColor:teal500 }} /> : 
+                  <FlatButton label="Listen" onClick={this.handleListen} style={{ color:white, backgroundColor:teal500 }}/> : 
                   <FlatButton label="Stop" onClick={this.handleStopListen} style={{ color:white, backgroundColor:teal500 }} /> 
                 }
+                {
+                  this.state.voice && !this.state.pauseVoice ? <IconButton onClick={this.handlePause}><Pause color={teal900} /></IconButton> : <IconButton onClick={this.handleResume}><Play  color={teal900} /></IconButton>
+                } 
               </CardActions> : null
             }
             <CardActions>
