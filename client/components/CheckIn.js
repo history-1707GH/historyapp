@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchSynopsis, fetchAllNext, gettingExperience, checkinPlace } from '../store'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import {  teal900, teal500, white } from 'material-ui/styles/colors'
+import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
+import { gettingExperience } from '../store'
+
 
 class CheckIn extends Component {
 
     constructor(props) {
         super()
         this.state = {
-            lock: true,
+            lock: false,
             checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
@@ -68,34 +71,27 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        if (distance <= 200) this.setState({ lock: false })
-        if (distance > 200) this.setState({ lock: true })
+        // if (distance <= 50) this.setState({ lock: false })
+        // if (distance > 50) this.setState({ lock: true })
     }
 
     render() {
 
         if (this.state.lock) {
             return (
-                <p> You are too far to check in! Please approaching this place!</p>
+                <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
         else if (this.state.checkin) {
             return (
-                <div>
-                    <Link to={'/next_experience'} >
-                        <RaisedButton label="Onward!" style={{ margin: 12 }} />
-                    </Link>
-                    <Link to={'/game'} >
-                        <RaisedButton label="Play a game!" style={{ margin: 12 }} />
-                    </Link>
-                </div>
+                <Link to={'/next_experience'} >
+                    <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900}/>
+                </Link>
             )
         }
         else return (
-            <button type="button" className="btn btn-success" onClick={this.handleClick}>Check In</button>
+            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" labelColor={white} backgroundColor={teal900}/>
         )
-
-
     }
 }
 
