@@ -14,6 +14,8 @@ import Archives from './Archives'
 import Home from './Home'
 import EndRoute from './EndRoute'
 import UserRoutes from './UserRoutes'
+import Notes from './Notes'
+
 
 import NextExperience from './NextExperience'
 import store, { fetchUser, fetchCurrentLocation, watchId } from '../store'
@@ -48,7 +50,9 @@ class Main extends Component {
                     <Route exact path='/next_experience' component={NextExperience} />  
                     <Route exact path='/archives' component={Archives}/>
                     <Route exact path='/end' component={EndRoute}/>  
-                    <Route exact path='/routes' component={UserRoutes}/>           
+                    <Route exact path='/routes' component={UserRoutes}/>
+                    <Route exact path='/notes' component={Notes}/> 
+                    
                 </Switch>
             </div>
         )

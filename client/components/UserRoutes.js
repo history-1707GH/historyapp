@@ -5,11 +5,10 @@ import { fetchAllRoutes } from '../store'
 class UserRoutes extends Component {
 
     componentDidMount() {
-        this.props.fetchAllRoutes(this.props.userId)
+        if(this.props.userId) this.props.fetchAllRoutes(this.props.userId)
     }
 
     render() {
-
         return (
             <ul>
                 {this.props.userRoutes && this.props.userRoutes.map(route => {

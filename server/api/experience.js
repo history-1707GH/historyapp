@@ -5,7 +5,7 @@ const db = require('../db')
 const Experience = db.models.experience;
 const Synopsis = db.models.synopsis
 const Article = db.models.article
-
+const Note = db.models.note
 
 
 router.route('/')
@@ -18,7 +18,8 @@ router.route('/')
             }, 
             include: [  //IF THIS COMMENT IS STILL HERE, REJECT PR AND TELL ME TO PUT IN A DEFAULT SCOPE HELP TICKET!
                 {model: Synopsis},
-                {model: Article}
+                {model: Article},
+                {model: Note}
             ]
         })
             .then(experience => {
@@ -43,7 +44,8 @@ router.route('/')
                                             }, 
                                             include: [
                                                 {model: Synopsis},
-                                                {model: Article}
+                                                {model: Article},
+                                                {model: Note}
                                             ]
                                         })
                                     })
@@ -55,7 +57,8 @@ router.route('/')
                                     }, 
                                     include: [
                                         {model: Synopsis},
-                                        {model: Article}
+                                        {model: Article},
+                                        {model: Note}
                                     ]
                                 })
                             }       
@@ -69,6 +72,22 @@ router.route('/')
                 res.status(201).json(experience)
             })
             .catch(next)
+    })
+
+router.route('/:experienceId')
+    .get((req, res, next)=> {
+        Experience.findOne({
+            where: {
+                id: req.params.experienceId
+            }, 
+            include: [
+                {model: Synopsis},
+                {model: Article},
+                {model: Note}
+            ]
+        })
+        .then(experience=>res.json(experience))
+        .catch(next)
     })
 
 module.exports = router; 
