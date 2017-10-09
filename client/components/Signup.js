@@ -117,7 +117,7 @@ class Signup extends Component {
                             </div>
                         </Center>
                         <Center>
-                            <div style='color: red'>
+                            <div>
                                 {(this.props.user.signupError) ? <p>{this.props.user.signupError}</p> : null}
                             </div>
                         </Center>
