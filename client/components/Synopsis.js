@@ -78,7 +78,7 @@ class Synopsis extends Component {
   render() {
     const html = { __html: this.state.synopsisText }
     const { info, archives, headlines } = this.props
-    let getImg='https://media.timeout.com/images/101705313/image.jpg'
+    let getImg='/images/default-synopsis-img.jpg'
     let num = 1
     if (info) {
       getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` 
@@ -97,18 +97,12 @@ class Synopsis extends Component {
             </CardMedia>
             <CardTitle title={info.displaytitle} />
             <CardActions>
-              {
-                headlines.length > 1 ? 
-                <NavLink to='/headlines'>
-                  <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
-                </NavLink> : null
-              }
-              {
-                archives.length > 0 ? 
-                <NavLink to='/archives'>
-                  <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-                </NavLink> : null            
-              }
+              <NavLink to='/headlines'>
+                <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
+              </NavLink> 
+              <NavLink to='/archives'>
+                <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+              </NavLink> 
               <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
             </CardActions>
             <CardActions>

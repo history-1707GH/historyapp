@@ -36,7 +36,9 @@ class NewsReel extends Component {
         <div>
           <Slider {...settings}>
          {
-          headlinesArr.length && headlinesArr.map(headline =>  (              
+          headlinesArr.length && headlinesArr.map(headline =>  {
+            let xlgUrl = headline.multimedia.filter(x => {if (x.subtype === 'xlarge') return x.url})
+            return (              
               <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
                 <CardHeader
                   title={`${headline.headline.main.slice(0, 30)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
@@ -45,8 +47,8 @@ class NewsReel extends Component {
                     !headline.web_url.includes("query") ? 
                     <a href={headline.web_url} target="_blank">
                     {
-                      headline.multimedia.length > 1 ? 
-                      <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
+                      headline.multimedia.length >= 1 ? 
+                      <img src={`https://static01.nyt.com/${headline.multimedia[0].url}`} alt="" /> : 
                       <img src="/images/history-pic.jpg" alt="" />
                     }
                     </a> : <a href={`http://timesmachine.nytimes.com/svc/tmach/v1/refer?res=${headline.web_url.split("res=")[1]}`} target="_blank">
@@ -65,7 +67,7 @@ class NewsReel extends Component {
                 </CardText>
               </Card>
             )
-          )
+          })
         }
           </Slider>
         </div>
