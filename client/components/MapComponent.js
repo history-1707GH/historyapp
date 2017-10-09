@@ -30,7 +30,7 @@ class MapComponent extends React.Component {
     const mapZoom = this.props.nextExperiences.length ? 12 : 25
 
     var placeIcon = L.icon({
-      iconUrl: '/magnifier.png',
+      iconUrl: '/images/magnifier.png',
       iconSize: [30, 42],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
