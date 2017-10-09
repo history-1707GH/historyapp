@@ -4,4 +4,9 @@ npm-debug.log
 secrets_backend.js
 .DS_Store
 ngrok
-
+bundle.js
+bundle.js.map
+bundle.js.gz
+public/bundle.js
+public/bundle.js.map
+public/bundle.js.gz
