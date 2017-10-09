@@ -21,7 +21,6 @@ class Login extends Component {
   }
 
   render(props){
-    console.log(this.props.currentUser)
     return(
       <div>
         <Center>

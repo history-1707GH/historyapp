@@ -47,13 +47,13 @@ class NewsReel extends Component {
                     {
                       headline.multimedia.length > 1 ? 
                       <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
-                      <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
+                      <img src="/images/history-pic.jpg" alt="" />
                     }
                     </a> : <a href={`http://timesmachine.nytimes.com/svc/tmach/v1/refer?res=${headline.web_url.split("res=")[1]}`} target="_blank">
                     {
                       headline.multimedia.length > 1 ? 
                       <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
-                      <img src="http://www.utoledo.edu/al/history/images/historypic2.jpg" alt="" />
+                      <img src="/images/history-pic.jpg" alt="" />
                     }
                     </a>
 
