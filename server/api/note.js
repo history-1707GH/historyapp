@@ -12,6 +12,7 @@ router.route('/')
             .catch(next)
     })
     .post((req, res, next) => {
+
         Note.create(req.body)
             .then(note => res.json(note))
             .catch(next);

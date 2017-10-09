@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { fetchSynopsis, fetchAllNext, checkinPlace} from '../store'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
  import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { postNote, fetchPlaceNotes } from '../store'
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 
 class Notes extends Component {
@@ -21,7 +22,15 @@ class Notes extends Component {
           this.handleOpen = this.handleOpen.bind(this);
           this.handleClose = this.handleClose.bind(this);
           this.handleSubmit = this.handleSubmit.bind(this);
+          this.changeNote = this.changeNote.bind(this);
     }
+
+    componentDidMount() {
+		this.props.getNotesForPlace(this.props.currentExperience.experienceId)
+			.then(notes => {
+				this.setState({notes: notes})
+			});
+	};
 
     handleOpen() {
 		this.setState({ open: true });
@@ -29,21 +38,26 @@ class Notes extends Component {
   handleClose() {
 		this.setState({ open: false, dirty: false  });
     }
-    
+    changeNote(evt) {
+        this.setState({
+          userNote: evt.target.value,
+          dirty: true
+        })
+      };
+
+
     handleSubmit(evt) {
         evt.preventDefault();
-    
         const note = {
           content: this.state.userNote,
           
-          experienceId: this.props.experienceId,
-          userId: this.props.user.id || null
+          experienceId: this.props.currentExperience.experienceId,
+          userId: this.props.currentUser.id || null
         }
     
         this.props.addNewNote(note)
         this.setState({
           open: false,
-         
           userNote: '',
           dirty: false
         })
@@ -57,6 +71,7 @@ class Notes extends Component {
           <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} disabled={disableSubmit}/>
         ];
         let disableSubmit = inputValue.length > 500 || inputValue.length<=0;
+        const notes = this.state.notes
         return (
            
                <div className="container notes">
@@ -70,7 +85,7 @@ class Notes extends Component {
             />
             <br />
             <Dialog
-              title={`Write a Note for ${this.props.checkinPlace.title}`}
+              title={`Write a Note for `}
               actions={actions}
               modal={true}
               open={this.state.open}
@@ -84,6 +99,7 @@ class Notes extends Component {
                   name="note"
                   fullWidth={true}
                   multiLine={true}
+                  onChange={this.changeNote}
                   
                 />
               
@@ -93,6 +109,17 @@ class Notes extends Component {
             
             <br />
             </div>
+          }
+          {
+          notes && notes.map( note => (
+            <Card key={note.id}>
+              <CardHeader
+                title={`note for `}
+              />
+              
+              <CardText> {note.content} </CardText>
+            </Card>
+          ))
           }
          
            </div>
@@ -105,15 +132,18 @@ class Notes extends Component {
 
 const mapState = state => {
     return {
-        checkinPlace: state.checkinPlace,
+        
         notes: state.notes,
         currentUser: state.user,
-        experience: state.experience
+        currentExperience: state.currentExperience
     }
 }
 
 const mapDispatch = dispatch => {
     return {
+        getNotesForPlace: function (experienceId) {
+			return dispatch(fetchPlaceNotes(experienceId))
+		},
         addNewNote: function (note) {
             return dispatch(postNote(note))
           }
