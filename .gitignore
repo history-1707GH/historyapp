@@ -1,12 +1,7 @@
 node_modules
-bundle.js
-bundle.js.map
 secrets.js
 npm-debug.log
 secrets_backend.js
 .DS_Store
 ngrok
-bundle.js.gz
-public/bundle.js
-public/bundle.js.gz
-public/bundle.js.map
+
