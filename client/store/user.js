@@ -1,9 +1,9 @@
 import axios from 'axios'
+import { errorUser } from './userError'
 
 //TYPES
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const USER_ERROR = 'USER_ERROR'
 
 //CREATORS
 export function getUser(user) {
@@ -16,13 +16,6 @@ export function getUser(user) {
 export function removeUser() {
     return {
         type: REMOVE_USER
-    }
-}
-
-export function errorUser(error) {
-    return {
-        type: USER_ERROR,
-        error: error
     }
 }
 
@@ -86,7 +79,6 @@ export default function reducer(state = {}, action) {
     switch (action.type) {
         case GET_USER: return action.user || state
         case REMOVE_USER: return {}
-        case USER_ERROR: return action.error || state
         default: return state
     }
 }

@@ -14,13 +14,14 @@ class Login extends Component {
     this.checkRedirect = this.checkRedirect.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount(props) {
     document.body.className = "home";
-    this.props.user.loginError = null
+    this.props.userError.loginError = null
   }
 
   componentWillUnmount(props) {
     document.body.className = null;
+    this.props.userError.loginError = null
   }
 
   checkRedirect(e) {
@@ -69,7 +70,7 @@ class Login extends Component {
               </Center>
               <Center>
                 <div>
-                  {this.props.user.loginError ? <p>{this.props.user.loginError}</p> : null}
+                  {this.props.userError.loginError ? <p>{this.props.userError.loginError}</p> : null}
                 </div>
               </Center>
             </form>
@@ -91,7 +92,7 @@ class Login extends Component {
 
 const mapState = function (state) {
   return {
-    user: state.user
+    userError: state.userError
   }
 }
 

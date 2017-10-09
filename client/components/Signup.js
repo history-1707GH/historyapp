@@ -26,8 +26,12 @@ class Signup extends Component {
         this.usernameCheck = this.usernameCheck.bind(this)
     }
 
-    componentDidMount() {
-        this.props.user.signupError = null
+    componentDidMount(props) {
+        this.props.userError.signupError = null
+    }
+
+    componentWillUnmount(props){
+        this.props.userError.signupError = null
     }
 
     usernameCheck() {
@@ -84,7 +88,7 @@ class Signup extends Component {
                             value={this.state.account.username}
                             onChange={this.handleChange}
                             errorStyle={(this.props.message && this.props.message==='Username available') ? {color: 'green'} : {color: 'red'}}
-                            errorText={(typeof this.props.message === 'string') ? this.props.message : null}
+                            errorText={this.props.message} 
                         />
                         <br />
                         <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>
@@ -113,12 +117,12 @@ class Signup extends Component {
                         <br />
                         <Center>
                             <div>
-                                <FlatButton type='submit' disabled={(this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (this.state.account.email.length === 0)}>Create Account!</FlatButton>
+                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) || (this.props.message==='Username not available'))}>Create Account!</FlatButton> 
                             </div>
                         </Center>
                         <Center>
                             <div>
-                                {(this.props.user.signupError) ? <p>{this.props.user.signupError}</p> : null}
+                                 {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null} 
                             </div>
                         </Center>
                     </form>
@@ -136,7 +140,7 @@ class Signup extends Component {
 const mapState = function (state) {
     return {
         message: state.checkUsername,
-        user: state.user
+        userError: state.userError
     }
 }
 
