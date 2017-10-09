@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { newUser, checkUsername, clearMessage } from '../store/index';
+import TextField from 'material-ui/TextField'
+import FlatButton from 'material-ui/FlatButton'
+import Center from 'react-center'
 import Google from './Google'
 
 class Signup extends Component {
@@ -23,15 +26,15 @@ class Signup extends Component {
         this.usernameCheck = this.usernameCheck.bind(this)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.user.signupError = null
     }
 
-    usernameCheck(){
-        this.props.usernameAvail({username: this.state.account.username})
+    usernameCheck() {
+        this.props.usernameAvail({ username: this.state.account.username })
     }
 
-    validateEmail(email){
+    validateEmail(email) {
         return /\S+@\S+\.\S+/.test(email)
     }
 
@@ -39,15 +42,15 @@ class Signup extends Component {
         const field = e.target.name;
         const content = e.target.value;
         const newInfo = Object.assign({}, this.state.account, { [field]: content })
-        this.setState({ account: newInfo})
-        if (field==='password'){
-            this.setState({dirtyPassword: true})
+        this.setState({ account: newInfo })
+        if (field === 'password') {
+            this.setState({ dirtyPassword: true })
         }
-        if (field==='email'){
-            this.setState({dirtyEmail: true})
+        if (field === 'email') {
+            this.setState({ dirtyEmail: true })
         }
-        if (field==='username'){
-            this.setState({dirtyUsername: true})
+        if (field === 'username') {
+            this.setState({ dirtyUsername: true })
         }
     }
 
@@ -72,40 +75,59 @@ class Signup extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Username: </label>
-                    <input
-                        name='username'
-                        type='text'
-                        value={this.state.account.username}
-                        onChange={this.handleChange}
-                        
-                    />
-                    <button type='button' onClick={this.usernameCheck}>Check Availability</button>
-                     {(typeof this.props.message==='string') ? (<p>{this.props.message}</p>) : null} 
-                    <label>Email: </label>
-                    <input
-                        name='email'
-                        type='text'
-                        value={this.state.account.email}
-                        onChange={this.handleChange}
-                        
-                    />
-                    {(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? (<p>Please enter an email of format: this@example.com</p>) : null}
-                    <label>Password: </label>
-                    <small>(Must be at least 6 characters long)</small>
-                    <input
-                        name='password'
-                        type='password'
-                        value={this.state.account.password}
-                        onChange={this.handleChange}
-                        
-                    />
-                    {this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? (<p>Invalid password</p>) : null}
-                    <button type='submit' disabled={(this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (this.state.account.email.length===0)}>Create Account!</button>
-                    {(this.props.user.signupError) ? <p>{this.props.user.signupError}</p> : null}
-                </form>
-                <Google />
+                <Center>
+                    <form onSubmit={this.handleSubmit}>
+                        <TextField
+                            name='username'
+                            floatingLabelText='Username'
+                            type='input'
+                            value={this.state.account.username}
+                            onChange={this.handleChange}
+                            errorStyle={(this.props.message && this.props.message==='Username available') ? {color: 'green'} : {color: 'red'}}
+                            errorText={(typeof this.props.message === 'string') ? this.props.message : null}
+                        />
+                        <br />
+                        <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>
+                        <br />
+                        <br />
+                        <TextField
+                            name='email'
+                            floatingLabelText='Email'
+                            type='email'
+                            value={this.state.account.email}
+                            onChange={this.handleChange}
+                            errorText={(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? 'Please enter an email of format: this@example.com' : null}
+                        />
+                        <br />
+                        <br />
+                        <TextField
+                            name='password'
+                            type='password'
+                            floatingLabelText='Password'
+                            hintText='(Must be at least 6 characters long)'
+                            hintStyle={{ fontSize: '10px' }}
+                            value={this.state.account.password}
+                            onChange={this.handleChange}
+                            errorText={this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? 'Invalid password' : null}
+                        />
+                        <br />
+                        <Center>
+                            <div>
+                                <FlatButton type='submit' disabled={(this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (this.state.account.email.length === 0)}>Create Account!</FlatButton>
+                            </div>
+                        </Center>
+                        <Center>
+                            <div style='color: red'>
+                                {(this.props.user.signupError) ? <p>{this.props.user.signupError}</p> : null}
+                            </div>
+                        </Center>
+                    </form>
+                </Center>
+                <Center>
+                    <div>
+                        <Google />
+                    </div>
+                </Center>
             </div>
         )
     }
@@ -123,10 +145,10 @@ const mapDispatch = function (dispatch, ownProps) {
         createAccount(account, query) {
             dispatch(newUser(account, ownProps.history, query))
         },
-        usernameAvail(name){
+        usernameAvail(name) {
             dispatch(checkUsername(name))
         },
-        clearCheckAvail(){
+        clearCheckAvail() {
             dispatch(clearMessage())
         }
     }
