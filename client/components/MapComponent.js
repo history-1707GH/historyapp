@@ -53,7 +53,7 @@ class MapComponent extends React.Component {
         <Map center={position} zoom={mapZoom}>
           <TileLayer
             url={`https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=${TFOREST_API_KEY}`}
-            attribution={`&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
+            attribution={`&copy; <a href="https://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
           />
           <Marker position={position} icon={userIcon}>
             <Popup>
