@@ -12,7 +12,7 @@ class CheckIn extends Component {
     constructor(props) {
         super()
         this.state = {
-            lock: false,  //CHANGE BACK AFTER TEST
+            lock: true,  
             checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
@@ -72,9 +72,8 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        //CHANGE BACK AFTER TEST
-        // if (distance <= 2000) this.setState({ lock: false })
-        // if (distance > 2000) this.setState({ lock: true })
+        if (distance <= 2000) this.setState({ lock: false })
+        if (distance > 2000) this.setState({ lock: true })
     }
 
     render() {
