@@ -36,7 +36,7 @@ class NewsReel extends Component {
         <div>
           <Slider {...settings}>
          {
-          headlinesArr.length && headlinesArr.map(headline =>  {
+          headlinesArr.length ? headlinesArr.map(headline =>  {
             let xlgUrl = headline.multimedia.filter(x => {if (x.subtype === 'xlarge') return x.url})
             return (              
               <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
@@ -67,7 +67,8 @@ class NewsReel extends Component {
                 </CardText>
               </Card>
             )
-          })
+          }) :
+          <div>EMPTY EMPTY EMPTY EMPTY</div>
         }
           </Slider>
         </div>

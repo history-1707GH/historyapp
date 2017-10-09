@@ -27,16 +27,11 @@ class Archives extends Component {
     let archivesArr = this.props.archives
     return (
       <div>
-        <div>
-          <NavLink to="/synopsis">
-            <RaisedButton type="button" label="BACK" backgroundColor={ teal500 } labelColor={white}/>
-          </NavLink>
-        </div>
         <br/>
         <List>
           <div><img src="/images/archive.jpg" className="archives-banner"/></div>
           {
-            archivesArr.length > 1 && archivesArr.map(entry => {
+            archivesArr.length  ?  archivesArr.map(entry => {
               if (entry.web_url.includes('query.nytimes')) {
                 let timeMachine_id = entry.web_url.split("res=")[1]
                 let timeMachineUrl = `http://timesmachine.nytimes.com/svc/tmach/v1/refer?res=${timeMachine_id}`
@@ -45,9 +40,10 @@ class Archives extends Component {
                     <ListItem primaryText={entry.headline.main.slice(0,49)}
                               secondaryText={this.createDate(entry.pub_date)}> </ListItem>
                   </a>
-              )}
-            } 
-          )
+                )} 
+              } 
+            ) : 
+            <div> EMPTY EMPTY EMPTY STATE </div>
           }
         </List>
         <br />
