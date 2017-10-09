@@ -15,7 +15,6 @@ class Login extends Component {
     this.checkRedirect = this.checkRedirect.bind(this)
   }
 
-<<<<<<< HEAD
   componentDidMount(props) {
     document.body.className = "home";
     this.props.userError.loginError = null
@@ -26,8 +25,6 @@ class Login extends Component {
     this.props.userError.loginError = null
   }
 
-=======
->>>>>>> master
   checkRedirect(e) {
     e.preventDefault();
     let query = this.props.location.search
@@ -39,11 +36,7 @@ class Login extends Component {
       <div>
         <Center>
           <div>
-<<<<<<< HEAD
-            <img src="/meander-logo-white.png" className="meander-logo" />
-=======
             <img src="/.png" className="meander-logo"/>
->>>>>>> master
           </div>
         </Center>
         <br />
@@ -86,19 +79,11 @@ class Login extends Component {
           <br />
           <br />
         </div>
-<<<<<<< HEAD
         <Center>
           <div>
             <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}>
               <FlatButton label="Create a new account" />
             </Link>
-=======
-          <Center>
-            <div>
-              <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}> 
-                <FlatButton label="Create a new account" />            
-              </Link> 
->>>>>>> master
           </div>
         </Center>
       </div>
@@ -112,18 +97,10 @@ const mapState = function (state) {
   }
 }
 
-<<<<<<< HEAD
 const mapDispatch = function (dispatch, ownProps) {
   return {
     logInUser: (logInInfo, query) => {
       dispatch(logIn(logInInfo, ownProps.history, query))
-=======
-const mapDispatch = (dispatch, ownProps) => {
-    return {
-        logInUser: (logInInfo,query) => {
-            dispatch(logIn(logInInfo, ownProps.history, query))
-        }
->>>>>>> master
     }
   }
 }

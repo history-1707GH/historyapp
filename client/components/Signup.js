@@ -89,6 +89,8 @@ class Signup extends Component {
                             onChange={this.handleChange}
                             errorStyle={(this.props.message && this.props.message==='Username available') ? {color: 'green'} : {color: 'red'}}
                             errorText={this.props.message} 
+                            hintText='(Check availability before creating account)'
+                            hintStyle={{ fontSize: '10px' }}
                         />
                         <br />
                         <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>
@@ -117,7 +119,7 @@ class Signup extends Component {
                         <br />
                         <Center>
                             <div>
-                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) || (this.props.message==='Username not available'))}>Create Account!</FlatButton> 
+                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) || (this.props.message==='Username not available') || (this.props.message===''))}>Create Account!</FlatButton> 
                             </div>
                         </Center>
                         <Center>

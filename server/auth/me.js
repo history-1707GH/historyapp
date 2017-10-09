@@ -22,15 +22,16 @@ router.route('/')
             }
         })
             .spread((user, notExist) => {
-                if (notExist) req.login(user, error => {
+                if (notExist) {req.login(user, error => {
                     if (error) {
                         next(error)
                     } else {
                         let u = user.sanitize()
                         res.json(u)
                     }
-                });
-                if (!notExist) res.json({signupError: 'Failed to create account. User might already exist.'})
+                })} else {
+                    res.json({signupError: 'Failed to create account. User might already exist.'})
+                }
             })
             .catch(next)
     })
