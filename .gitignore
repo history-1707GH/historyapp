@@ -8,3 +8,5 @@ frontend_keys.js
 .DS_Store
 ngrok
 bundle.js.gz
+frontend_keys.js
+secretsBackend.js
