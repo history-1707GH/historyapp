@@ -7,3 +7,6 @@ secrets_backend.js
 .DS_Store
 ngrok
 bundle.js.gz
+public/bundle.js
+public/bundle.js.gz
+public/bundle.js.map
