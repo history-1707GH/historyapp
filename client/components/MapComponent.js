@@ -39,7 +39,7 @@ class MapComponent extends React.Component {
     });
 
     var userIcon = L.icon({
-      iconUrl: 'http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-13/512/User-Orange-icon.png',
+      iconUrl: '/images/user-icon.png',
       iconSize: [45, 45],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
