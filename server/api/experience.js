@@ -1,3 +1,4 @@
+
 'use strict'
 const router = require('express').Router()
 const db = require('../db')
@@ -8,15 +9,16 @@ const Article = db.models.article
 const Note = db.models.note
 
 
+
 router.route('/')
     .post((req, res, next) => {
         Experience.findOne({
-            where: {  //how to validate on associations
+            where: {  
                 lat: req.body.lat,
                 lon: req.body.lon,
                 synopsisId: req.body.wikiPageId
             }, 
-            include: [  //IF THIS COMMENT IS STILL HERE, REJECT PR AND TELL ME TO PUT IN A DEFAULT SCOPE HELP TICKET!
+            include: [ 
                 {model: Synopsis},
                 {model: Article},
                 {model: Note}
@@ -74,11 +76,11 @@ router.route('/')
             .catch(next)
     })
 
-router.route('/:experienceId')
+router.route('/:userId')
     .get((req, res, next)=> {
-        Experience.findOne({
+        return Experience.findOne({
             where: {
-                id: req.params.experienceId
+                id: req.params.userId
             }, 
             include: [
                 {model: Synopsis},
@@ -87,7 +89,6 @@ router.route('/:experienceId')
             ]
         })
         .then(experience=>res.json(experience))
-        .catch(next)
     })
 
 module.exports = router; 

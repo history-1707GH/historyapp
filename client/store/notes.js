@@ -19,7 +19,7 @@ export function postNote(note, experienceId) {
     return axios.post(`/api/note/`, note)
       .then(res => res.data)
       .then(note => {
-        dispatch(addNote(note));
+        dispatch(addNote(note))
         dispatch(fetchExperience(experienceId))
       })
       .catch(err => console.log(err))

@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import {  teal900, teal500, white } from 'material-ui/styles/colors'
 import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute } from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
+
 
 class CheckIn extends Component {
 
@@ -79,26 +81,19 @@ class CheckIn extends Component {
 
         if (this.state.lock) {
             return (
-                <p> You are too far to check in! Please approach this place!</p>
+                <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
         else if (this.state.checkin) {
             return (
-                <div>
-                    <Link to={'/next_experience'} >
-                        <RaisedButton label="Onward!" style={{ margin: 12 }} />
-                    </Link>
-                    <Link to={'/game'} >
-                        <RaisedButton label="Play a game!" style={{ margin: 12 }} />
-                    </Link>
-                </div>
+                <Link to={'/next_experience'} >
+                    <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900}/>
+                </Link>
             )
         }
         else return (
-            <button type="button" className="btn btn-success" onClick={this.handleClick}>Check In</button>
+            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" labelColor={white} backgroundColor={teal900}/>
         )
-
-
     }
 }
 

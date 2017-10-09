@@ -5,7 +5,6 @@ const Note = db.models.note;
 
 router.route('/')
     .post((req, res, next) => {
-
         Note.create(req.body)
             .then(note => res.json(note))
             .catch(next);

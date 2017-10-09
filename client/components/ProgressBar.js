@@ -1,16 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-  Step,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper'
+import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import {  teal500, teal900, white, grey400 } from 'material-ui/styles/colors'
 import EndRoute from './EndRoute'
 import UserRoutes from './UserRoutes'
+
+
 
 
 class ProgressBar extends React.Component {
@@ -41,8 +39,8 @@ class ProgressBar extends React.Component {
           {
             this.props.currentRoute.map((experience, idx) => {
               return (
-              <Step key={idx}>
-                <StepLabel>{experience.synopsis ? experience.synopsis.title : "To Be Explored"}</StepLabel>
+              <Step key={idx} style={{ color:grey400, backgroundColor:teal900}}>
+                <StepLabel style={{color:white}}>{experience.synopsis ? experience.synopsis.title : "To Be Explored"}</StepLabel>
                 <StepContent>
                   <p>
                     User's notes show here.

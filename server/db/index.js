@@ -10,7 +10,7 @@ const Note = require('./models/note')
 
 //Route is associated to many experiences; an individual experience can be a part of multiple routes
 Route.belongsToMany(Experience, {through: Route_Experience})
-Experience.hasMany(Route)
+Experience.belongsToMany(Route, {through: Route_Experience})
 
 //A route has a single user and a user can have multiple routes
 Route.belongsTo(User)

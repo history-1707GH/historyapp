@@ -12,6 +12,14 @@ class UserRoutes extends Component {
         return (
             <ul>
                 {this.props.userRoutes && this.props.userRoutes.map(route => {
+                    // const dateTimeArr = route.route_experience.createdAt.split('T')
+                    // const dateArr = dateTimeArr[0].split("-")
+                    // const date = `${dateArr[2]}-${dateArr[1]}-${dateArr[0]}`
+                    // const timeArr = dateTimeArr[1].split(':')
+                    // const hours = timeArr[0]<=12 ? timeArr[0] : timeArr[0]-12
+                    // const minutes = timeArr[1]
+                    // const time = `${hours}:${minutes}`
+                    
                     return (
                         <li>
                             Started at: {route.createdAt}
@@ -19,7 +27,7 @@ class UserRoutes extends Component {
                                 return (
                                     <li>
                                         <span> Title:{experience.synopsis.title} </span>
-                                        <span> Arrived At: {experience.route_experience.createdAt} </span>
+                                        <span> Arrived At: {/*`${date}, ${time}`*/} </span>
                                     </li>
                                 )
                             })}

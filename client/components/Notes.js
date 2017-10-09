@@ -100,14 +100,23 @@ class Notes extends Component {
                     </div>
                 }
                 {
-                    notes && notes.map(note => (
-                        <Card key={note.id}>
-                            <CardHeader
-                                title={`${this.props.currentExperience.synopsis.title}`}
-                            />
-                            <CardText> {note.content} </CardText>
-                        </Card>
-                    ))
+                    notes && notes.map(note => {
+                        const dateTimeArr = note.createdAt.split('T')
+                        const dateArr = dateTimeArr[0].split("-")
+                        const date = `${dateArr[2]}-${dateArr[1]}-${dateArr[0]}`
+                        const timeArr = dateTimeArr[1].split(':')
+                        const hours = timeArr[0]<=12 ? timeArr[0] : timeArr[0]-12
+                        const minutes = timeArr[1]
+                        const time = `${hours}:${minutes}`
+                        return (
+                            <Card key={note.id}>
+                                <CardHeader title={`${date}, ${time}`}
+                                />
+                                <CardText> {note.content} </CardText>
+                            </Card>
+                        )
+                    }
+                    )
                 }
 
             </div>

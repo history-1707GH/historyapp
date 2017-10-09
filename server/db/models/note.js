@@ -10,7 +10,8 @@ const Note = db.define('note', {
       len: [1, 500]
     }
   }
-  
-});
+
+
+  });
 
 module.exports = Note;

@@ -21,6 +21,8 @@ router.route('/')
         handlingRoute.then(route=> {
             return route.setUser(req.body.userId)
         })
+        
+        
         .then(route => {
             return route.addExperience(req.body.experience.id)
         })
@@ -32,7 +34,6 @@ router.route('/')
     })
 
 router.get('/:userId', (req, res, next) => {
-    console.log(req.params.userId)
     Route.findAll({
         where: {
             userId: req.params.userId
