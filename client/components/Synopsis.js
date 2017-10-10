@@ -125,11 +125,11 @@ class Synopsis extends Component {
                 } 
               </CardActions> : null
             }
-            <CardActions>
+            {/*<CardActions>
               <NavLink to="/notes">
                 <FlatButton label="Leave a note" fullWidth={true} style={{ color:white, backgroundColor:teal500 }}/> 
               </NavLink>
-            </CardActions>
+            </CardActions> */}
           </Card>
         }
       </div>

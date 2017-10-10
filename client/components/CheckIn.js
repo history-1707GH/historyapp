@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {  teal900, teal500, white } from 'material-ui/styles/colors'
-import { fetchSynopsis, fetchAllNext,getExperience, checkinPlace} from '../store'
+import { teal900, teal500, white } from 'material-ui/styles/colors'
+import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute } from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
-import { gettingExperience } from '../store'
+import FlatButton from 'material-ui/FlatButton'
+
 
 
 class CheckIn extends Component {
@@ -13,7 +14,7 @@ class CheckIn extends Component {
     constructor(props) {
         super()
         this.state = {
-            lock: true,
+            lock: false,  //chnage back
             checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
@@ -34,17 +35,19 @@ class CheckIn extends Component {
 
     handleClick(event) {
         event.preventDefault()
+        if (this.props.routeId < 1) {
+            this.props.deleteCurrentRoute()
+        }
         this.setState({ hideNextPlaces: false, hideGame: false })
         const place = this.props.place
         const experience = {
             lat: place.lat,
             lon: place.lon,
             wikiPageId: place.pageid,
-            headlines: this.props.headlines
+            headlines: this.props.headlines,
         }
-        this.props.gettingExperience(experience)
+        this.props.gettingExperience(experience, this.props.routeId, this.props.userId)
         this.setState({ checkin: true })
-        this.props.fetchCheckinPlace(this.props.place)
     }
 
 
@@ -71,8 +74,8 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        if (distance <= 50) this.setState({ lock: false })
-        if (distance > 50) this.setState({ lock: true })
+        // if (distance <= 2000) this.setState({ lock: false })
+        // if (distance > 2000) this.setState({ lock: true })
     }
 
     render() {
@@ -84,13 +87,25 @@ class CheckIn extends Component {
         }
         else if (this.state.checkin) {
             return (
-                <Link to={'/next_experience'} >
-                    <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900}/>
-                </Link>
+                <div>
+                    <div>
+                        <Link to={'/next_experience'} >
+                            <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900} />
+                        </Link>
+                    </div>
+
+                    <div>
+                        <NavLink to="/notes">
+                            <FlatButton label="Leave a note" fullWidth={true} style={{ color: white, backgroundColor: teal500 }} />
+                        </NavLink>
+                    </div>
+                </div>
             )
         }
         else return (
-            <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" labelColor={white} backgroundColor={teal900}/>
+            <div>
+                <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" labelColor={white} backgroundColor={teal900} />
+            </div>
         )
     }
 }
@@ -101,7 +116,9 @@ const mapState = state => {
         place: state.selectedPlace,
         currentLocation: state.currentLocation,
         synopsis: state.synopsis,
-        headlines: state.headlines
+        headlines: state.headlines,
+        routeId: state.routeId,
+        userId: state.user.id
     }
 }
 
@@ -110,13 +127,12 @@ const mapDispatch = dispatch => {
         fetchAllNext: (lat, long) => {
             dispatch(fetchAllNext(lat, long))
         },
-        gettingExperience: (experience) => {
-            dispatch(gettingExperience(experience))
+        gettingExperience: (experience, routeId, userId) => {
+            dispatch(gettingExperience(experience, routeId, userId))
         },
-        fetchCheckinPlace: (place) => {
-            dispatch(checkinPlace(place))
-        },
-
+        deleteCurrentRoute: () => {
+            dispatch(deleteCurrentRoute())
+        }
     }
 }
 
