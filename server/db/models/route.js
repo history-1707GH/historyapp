@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 const db = require('../_db');
+const User = db.models.user
+const Experience = db.models.experience
 
 const Route = db.define('route', {
-    startTime: {
-        type: Sequelize.TIME
-    },
-    endTime: {
-        type: Sequelize.TIME
+}, {
+    defaultScope: {
+        include: [{model: User}]
     }
 })
 

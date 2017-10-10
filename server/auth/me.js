@@ -2,10 +2,38 @@ const router = require('express').Router();
 const db = require('../db')
 const User = db.models.user;
 
+<<<<<<< HEAD
 router.route('/')
     .get((req, res, next) => {              //get user
         if (req.user) {
             res.json(req.user.sanitize())
+=======
+router.route('/') 
+  .get((req, res, next) => {              //get user
+      if (req.user) {
+          res.json(req.user.sanitize())
+      } else {
+          res.json({})
+      }
+  })
+
+  .post((req, res, next) => {           // create user
+    User.findOrCreate({
+        where: {
+            email: req.body.email
+        },
+        defaults: {
+            password: req.body.password,
+            username: req.body.username,
+            points: 0
+        }
+    })
+
+    .spread((user, exist) => {
+      if (exist) req.login(user, error => {
+        if (error) {
+            next(error)
+>>>>>>> master
         } else {
             res.json({})
         }
@@ -20,6 +48,8 @@ router.route('/')
                 username: req.body.username,
                 points: 0
             }
+        }, {
+            include: [{model: Note}]
         })
             .spread((user, notExist) => {
                 if (notExist) {req.login(user, error => {
