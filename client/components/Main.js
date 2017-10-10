@@ -15,6 +15,7 @@ import Home from './Home'
 import EndRoute from './EndRoute'
 import UserRoutes from './UserRoutes'
 import Notes from './Notes'
+import UserRankings from './UserRankings'
 
 
 import NextExperience from './NextExperience'
@@ -51,7 +52,7 @@ class Main extends Component {
                     <Route exact path='/end' component={EndRoute}/>  
                     <Route exact path='/routes' component={UserRoutes}/>
                     <Route exact path='/notes' component={Notes}/> 
-                    
+                    <Route exact path='/rankings' component={UserRankings}/>
                 </Switch>
             </div>
         )
