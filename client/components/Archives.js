@@ -29,8 +29,8 @@ class Archives extends Component {
     return (
       <div className="archives-page">
         <br/>
+        <div><img src="/images/archive.jpg" className="archives-banner"/></div>
         <List>
-          <div><img src="/images/archive.jpg" className="archives-banner"/></div>
           {
             archivesArr.length  ?  archivesArr.map(entry => {
               if (entry.web_url.includes('query.nytimes')) {
