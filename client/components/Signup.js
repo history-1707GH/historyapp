@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { newUser, checkUsername, clearMessage } from '../store/index';
+import { newUser } from '../store/index';
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
@@ -19,11 +19,9 @@ class Signup extends Component {
             },
             dirtyPassword: false,
             dirtyEmail: false,
-            dirtyUsername: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.usernameCheck = this.usernameCheck.bind(this)
     }
 
     componentDidMount(props) {
@@ -32,12 +30,7 @@ class Signup extends Component {
 
     componentWillUnmount(props){
         this.props.userError.signupError = null
-        this.props.clearCheckAvail()
     }
-
-    // usernameCheck() {
-    //     this.props.usernameAvail({ username: this.state.account.username })
-    // }
 
     validateEmail(email) {
         return /\S+@\S+\.\S+/.test(email)
@@ -54,16 +47,12 @@ class Signup extends Component {
         if (field === 'email') {
             this.setState({ dirtyEmail: true })
         }
-        if (field === 'username') {
-            this.setState({ dirtyUsername: true })
-        }
     }
 
     handleSubmit(e) {
         e.preventDefault();
         //submitting data to thunker
         let query = this.props.location.search
-        this.props.usernameAvail({ username: this.state.account.username })
         this.props.createAccount(this.state.account, query)
         //clearing local state
         this.setState({
@@ -75,7 +64,6 @@ class Signup extends Component {
             dirtyPassword: false,
             dirtyEmail: false
         })
-        // this.props.clearCheckAvail()
     }
 
     render() {
@@ -89,12 +77,7 @@ class Signup extends Component {
                             type='input'
                             value={this.state.account.username} 
                             onChange={this.handleChange}
-                              
-                            hintText='(Must be unique)'
-                            hintStyle={{ fontSize: '10px' }}
                         />
-                         {/* <br /> 
-                         <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>  */}
                         <br />
                         <br />
                         <TextField
@@ -151,12 +134,6 @@ const mapDispatch = function (dispatch, ownProps) {
     return {
         createAccount(account, query) {
             dispatch(newUser(account, ownProps.history, query))
-        },
-        usernameAvail(name) {
-            dispatch(checkUsername(name))
-        },
-        clearCheckAvail() {
-            dispatch(clearMessage())
         }
     }
 }
