@@ -31,7 +31,7 @@ class UserRankings extends Component {
             </tr>
             {this.props.rankings.map((user,index) => (
               <tr key={user.id}>
-                <th>{index}</th>
+                <th>{index+1}</th>
                 <th>{user.username}</th>
                 <th>{user.points}</th>
               </tr>
