@@ -53,6 +53,10 @@ class Notes extends Component {
             userNote: '',
             dirty: false
         })
+        if (this.props.currentUser.id) {
+            const newPointsInfo = {userId: this.props.currentUser.id, points: 5}
+            this.props.updatePoints(newPointsInfo)
+        } 
     };
 
     render() {
@@ -144,6 +148,9 @@ const mapDispatch = dispatch => {
     return {
         addNewNote: function (note, experienceId) {
             dispatch(postNote(note, experienceId))
+        },
+        updatePoints: (pointsInfo) => {
+            dispatch(calculatePoints(pointsInfo))
         }
     }
 }
