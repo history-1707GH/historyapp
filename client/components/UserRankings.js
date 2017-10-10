@@ -4,32 +4,49 @@ import { Link } from 'react-router-dom';
 import { fetchRankings } from '../store/index';
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class UserRankings extends Component {
-  
-  constructor(props){
+
+  constructor(props) {
     super(props)
   }
 
-  componentDidMount(props){
+  componentDidMount(props) {
     this.props.getRankings()
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
-        <h1>Top 10 Users</h1>
-         {this.props.rankings.map(user => (
-          <div key={user.id}>
-            <p>
-              {user.username} : {user.points}
-            </p>
-          </div>
-          ))} 
+        <Center>
+          <h1>Rankings</h1>
+        </Center>
+        <br />
+        <Center>
+          <Table>
+            <TableHead>
+              <TableCell>User</TableCell>
+              <TableCell numeric>Points</TableCell>
+            </TableHead>
+            <TableBody>
+              {this.props.rankings.map(user => (
+                <TableRow key={user.id}>
+                  <TableCell>
+                    {user.username}
+                  </TableCell>
+                  <TableCell numeric>
+                    {user.points}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Center>
       </div>
-    )  
+    )
   }
-  
+
 }
 
 const mapState = (state) => {
@@ -40,7 +57,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getRankings(){
+    getRankings() {
       dispatch(fetchRankings())
     }
   }

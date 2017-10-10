@@ -10,7 +10,7 @@ router.route('/')
             .then(users => users.map(user => user.sanitize()))
             .then(users => {
                 function sortByPoints(a,b){
-                    return ((a.points > b.points ? 1 : a.points < b.points ? -1 : 0))
+                    return ((a.points < b.points ? 1 : a.points > b.points ? -1 : 0))
                 }
                 return users.sort(sortByPoints).slice(0,10)
             })
