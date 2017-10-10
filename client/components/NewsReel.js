@@ -35,40 +35,44 @@ class NewsReel extends Component {
     return (
       <div className="newsreel-page">
         <div>
-         {
-          headlinesArr.length ? headlinesArr.map(headline =>  {
-            return (
-              <Slider {...settings}>              
-              <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
-                <CardHeader
-                  title={`${headline.headline.main.slice(0, 25)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
-                <CardMedia>
-                  {
-                    !headline.web_url.includes("query") ? 
-                    <a href={headline.web_url} target="_blank">
-                    {
-                      headline.multimedia.length >= 1 ? 
-                      <img src={`https://static01.nyt.com/${headline.multimedia[0].url}`} alt="" /> : 
-                      <img src="/images/history-pic.jpg" alt="" />
-                    }
-                    </a> : <a href={`http://timesmachine.nytimes.com/svc/tmach/v1/refer?res=${headline.web_url.split("res=")[1]}`} target="_blank">
-                    {
-                      headline.multimedia.length > 1 ? 
-                      <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
-                      <img src="/images/history-pic.jpg" alt="" />
-                    }
-                    </a>
-
-                  }
-                </CardMedia>
-                <CardTitle title={`${headline.headline.main.slice(0, 24)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
-                <CardText>
-                  {headline.snippet}
-                </CardText>
-              </Card>
-              </Slider>
-            )
-          }) : (
+        {
+          headlinesArr.length ? (
+            <Slider {...settings}> 
+            {
+              headlinesArr.map(headline =>  {
+                return (            
+                  <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
+                    <CardHeader
+                      title={`${headline.headline.main.slice(0, 25)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
+                    <CardMedia>
+                      {
+                        !headline.web_url.includes("query") ? 
+                        <a href={headline.web_url} target="_blank">
+                        {
+                          headline.multimedia.length >= 1 ? 
+                          <img src={`https://static01.nyt.com/${headline.multimedia[0].url}`} alt="" /> : 
+                          <img src="/images/history-pic.jpg" alt="" />
+                        }
+                        </a> : <a href={`http://timesmachine.nytimes.com/svc/tmach/v1/refer?res=${headline.web_url.split("res=")[1]}`} target="_blank">
+                        {
+                          headline.multimedia.length > 1 ? 
+                          <img src={`https://static01.nyt.com/${headline.multimedia[1].url}`} alt="" /> : 
+                          <img src="/images/history-pic.jpg" alt="" />
+                        }
+                        </a>
+      
+                      }
+                    </CardMedia>
+                    <CardTitle title={`${headline.headline.main.slice(0, 24)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
+                    <CardText>
+                      {headline.snippet}
+                    </CardText>
+                  </Card>
+                )
+              })
+            } 
+            </Slider>
+          ) : (
             <Card key={0} className="headline-reel">
             <CardHeader
               title={null}/>
