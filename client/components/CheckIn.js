@@ -85,7 +85,7 @@ class CheckIn extends Component {
                 <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
-        else if (this.state.checkin) {
+        else if (this.state.checkin || this.props.currentExperience.lat) {
             return (
                 <div>
                     <div>
@@ -118,7 +118,8 @@ const mapState = state => {
         synopsis: state.synopsis,
         headlines: state.headlines,
         routeId: state.routeId,
-        userId: state.user.id
+        userId: state.user.id,
+        currentExperience: state.experience
     }
 }
 
