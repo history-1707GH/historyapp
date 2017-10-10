@@ -19,7 +19,8 @@ class NextExperience extends Component {
     super(props)
     this.state = {
       open1: false,
-      open2: false
+      open2: false,
+      nextExperiences: []
     }
     this.handleOpen1 = this.handleOpen1.bind(this)
     this.handleOpen2 = this.handleOpen2.bind(this)
@@ -51,104 +52,107 @@ class NextExperience extends Component {
     })
   }
 
-  render() {
-    //get a list of all nouns in the Wiki text 
-    const textToParse = this.props.synopsis.content
-    const topics = nlp(textToParse).nouns().data()
-    const nearbyPlaces = this.props.nearbyPlaces
-    const currentRoute = this.props.currentRoute
-    let nextExperiences = []    
+  componentWillRecieveProps(nextProps) {
+    if (this.props !== nextProps) {
+      //get a list of all nouns in the Wiki text 
+      const textToParse = nextProps.synopsis.content
+      const topics = nlp(textToParse).nouns().data()
+      const nearbyPlaces = nextProps.nearbyPlaces
+      const currentRoute = nextProps.currentRoute
+      let nextExperiences = []
 
-    //determine the topic with the greatest similarity score to each nearby place; add to the nearby place object
-    if (topics[0]) {
-      nearbyPlaces.forEach(place => {
-        place.maxSimilarity = { noun: topics[0].singular, similarity: similarity(place.title, topics[0].singular) }
-        for (let i = 0; i < topics.length; i++) {
-          let newSim = similarity(place.title, topics[i].singular)
-          if (newSim > place.maxSimilarity.similarity) {
-            place.maxSimilarity = { noun: topics[i].singular, similarity: newSim }
-          }
-        }
-      })
-
-      //rank nearby places by maximum similarity score 
-      let rankedNearbyPlaces = nearbyPlaces.sort((a, b) => {
-        return b.maxSimilarity.similarity - a.maxSimilarity.similarity
-      })
-
-      //create an array of next experiences, verifying that user has not visited those epxeriences on that route
-      const isNew = (experience) => {
-        for (var i = 0; i < 5; i++) {
-          if (experience.pageid === currentRoute[i].synopsisId) return false
-        }
-        return true
-      }
-      let i = 0
-      while (nextExperiences.length < 2) {
-        if (isNew(rankedNearbyPlaces[i])) {
-          nextExperiences.push(rankedNearbyPlaces[i])
-        }
-        i++
-      }
-
-      //remove any stray html tags from from the nouns
-      nextExperiences.forEach(place => {
-        let noun = place.maxSimilarity.noun
-        while (noun.indexOf('<') !== -1) {
-          let indexOfEndOfTag = noun.indexOf('>')
-          noun = noun.slice(indexOfEndOfTag + 1)
-          place.maxSimilarity.noun = noun
-        }
-      })
-
-
-      //put the next experiences on the store
-      this.props.getNextExperiences(nextExperiences)
-    }
-
-    //uses editDistance (based on Levenshtein distance algorithm) to calculate a distance score between two strings (0 to 1)
-    function similarity(s1, s2) {
-      var longer = s1;
-      var shorter = s2;
-      if (s1.length < s2.length) {
-        longer = s2;
-        shorter = s1;
-      }
-      var longerLength = longer.length;
-      if (longerLength == 0) {
-        return 1.0;
-      }
-      return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
-    }
-
-    //determines the edit distance between two strings
-    function editDistance(s1, s2) {
-      s1 = s1.toLowerCase();
-      s2 = s2.toLowerCase();
-
-      var costs = new Array();
-      for (var i = 0; i <= s1.length; i++) {
-        var lastValue = i;
-        for (var j = 0; j <= s2.length; j++) {
-          if (i == 0)
-            costs[j] = j;
-          else {
-            if (j > 0) {
-              var newValue = costs[j - 1];
-              if (s1.charAt(i - 1) != s2.charAt(j - 1))
-                newValue = Math.min(Math.min(newValue, lastValue),
-                  costs[j]) + 1;
-              costs[j - 1] = lastValue;
-              lastValue = newValue;
+      //determine the topic with the greatest similarity score to each nearby place; add to the nearby place object
+      if (topics[0]) {
+        nearbyPlaces.forEach(place => {
+          place.maxSimilarity = { noun: topics[0].singular, similarity: similarity(place.title, topics[0].singular) }
+          for (let i = 0; i < topics.length; i++) {
+            let newSim = similarity(place.title, topics[i].singular)
+            if (newSim > place.maxSimilarity.similarity) {
+              place.maxSimilarity = { noun: topics[i].singular, similarity: newSim }
             }
           }
-        }
-        if (i > 0)
-          costs[s2.length] = lastValue;
-      }
-      return costs[s2.length];
-    }
+        })
 
+        //rank nearby places by maximum similarity score 
+        let rankedNearbyPlaces = nearbyPlaces.sort((a, b) => {
+          return b.maxSimilarity.similarity - a.maxSimilarity.similarity
+        })
+
+        //create an array of next experiences, verifying that user has not visited those epxeriences on that route
+        const isNew = (experience) => {
+          for (var i = 0; i < 5; i++) {
+            if (experience.pageid === currentRoute[i].synopsisId) return false
+          }
+          return true
+        }
+        let i = 0
+        while (nextExperiences.length < 2) {
+          if (isNew(rankedNearbyPlaces[i])) {
+            nextExperiences.push(rankedNearbyPlaces[i])
+          }
+          i++
+        }
+
+        //remove any stray html tags from from the nouns
+        nextExperiences.forEach(place => {
+          let noun = place.maxSimilarity.noun
+          while (noun.indexOf('<') !== -1) {
+            let indexOfEndOfTag = noun.indexOf('>')
+            noun = noun.slice(indexOfEndOfTag + 1)
+            place.maxSimilarity.noun = noun
+          }
+        })
+        //put the next experiences on the store
+        nextProps.getNextExperiences(nextExperiences)
+        this.setState({ nextExperiences })
+      }
+
+      //uses editDistance (based on Levenshtein distance algorithm) to calculate a distance score between two strings (0 to 1)
+      function similarity(s1, s2) {
+        var longer = s1;
+        var shorter = s2;
+        if (s1.length < s2.length) {
+          longer = s2;
+          shorter = s1;
+        }
+        var longerLength = longer.length;
+        if (longerLength == 0) {
+          return 1.0;
+        }
+        return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+      }
+
+      //determines the edit distance between two strings
+      function editDistance(s1, s2) {
+        s1 = s1.toLowerCase();
+        s2 = s2.toLowerCase();
+
+        var costs = new Array();
+        for (var i = 0; i <= s1.length; i++) {
+          var lastValue = i;
+          for (var j = 0; j <= s2.length; j++) {
+            if (i == 0)
+              costs[j] = j;
+            else {
+              if (j > 0) {
+                var newValue = costs[j - 1];
+                if (s1.charAt(i - 1) != s2.charAt(j - 1))
+                  newValue = Math.min(Math.min(newValue, lastValue),
+                    costs[j]) + 1;
+                costs[j - 1] = lastValue;
+                lastValue = newValue;
+              }
+            }
+          }
+          if (i > 0)
+            costs[s2.length] = lastValue;
+        }
+        return costs[s2.length];
+      }
+    }
+  }
+
+  render() {
     const styles = {
       root: {
         display: 'flex',
@@ -161,13 +165,16 @@ class NextExperience extends Component {
       },
     }
 
-    const actions1 = [
-      <FlatButton label="OK" primary={true} onClick={this.handleClose1} />
+    const actions = [
+      [
+        <FlatButton label="OK" primary={true} onClick={this.handleClose1} />
+      ],
+      [
+        <FlatButton label="OK" primary={true} onClick={this.handleClose2} />
+      ]
     ]
 
-    const actions2 = [
-      <FlatButton label="OK" primary={true} onClick={this.handleClose2} />
-    ]
+    const nextExperiences = this.state.nextExperiences
 
     return (
       <div>
@@ -192,24 +199,23 @@ class NextExperience extends Component {
               )
             }
           </GridList>
+
         </div>
         <div>
-          <Dialog
-            title={nextExperiences[0].title}
-            actions={actions1}
-            modal={false}
-            open={this.state.open1}
-            onRequestClose={this.handleClose1}
-          >  {`Association: ${nextExperiences[0].maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(nextExperiences[0].maxSimilarity.similarity * 10000) / 100)}%`}`}
-          </Dialog>
-          <Dialog
-            title={nextExperiences[1].title}
-            actions={actions2}
-            modal={false}
-            open={this.state.open2}
-            onRequestClose={this.handleClose2}
-          >  {`Association: ${nextExperiences[1].maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(nextExperiences[1].maxSimilarity.similarity * 10000) / 100)}%`}`}
-          </Dialog>
+          {
+            nextExperiences.length && nextExperiences.map((experience, idx) => {
+              return (
+                <Dialog
+                  title={experience.title}
+                  actions={actions[idx]}
+                  modal={false}
+                  open={this.state.open1}
+                  onRequestClose={this.handleClose1}
+                >  {`Association: ${experience.maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(experience.maxSimilarity.similarity * 10000) / 100)}%`}`}
+                </Dialog>
+              )
+            })
+          }
         </div>
         <Center>
           <Link to={'/map'} >
