@@ -10,6 +10,7 @@ router.route('/')
           res.json({})
       }
   })
+
   .post((req, res, next) => {           // create user
     User.findOrCreate({
         where: {
@@ -21,6 +22,7 @@ router.route('/')
             points: 0
         }
     })
+
     .spread((user, exist) => {
       if (exist) req.login(user, error => {
         if (error) {
@@ -39,6 +41,8 @@ router.route('/')
         where: {
             email: req.body.email
             }
+        }, {
+            include: [{model: Note}]
         })
         .then(user => {
             if (!user) res.status(401).send('Wrong email or password');

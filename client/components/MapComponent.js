@@ -43,7 +43,7 @@ class MapComponent extends React.Component {
     });
 
     var userIcon = L.icon({
-      iconUrl: 'http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-13/512/User-Orange-icon.png',
+      iconUrl: '/images/user-icon.png',
       iconSize: [45, 45],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
@@ -57,7 +57,7 @@ class MapComponent extends React.Component {
         <Map center={position} zoom={mapZoom}>
           <TileLayer
             url={`https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=${TFOREST_API_KEY}`}
-            attribution={`&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
+            attribution={`&copy; <a href="https://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>`}
           />
           <Marker position={position} icon={userIcon}>
             <Popup>

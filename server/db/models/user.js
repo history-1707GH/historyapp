@@ -31,15 +31,15 @@ const User = db.define('user', {
     salt: {
         type: Sequelize.STRING
     },
-    googleId : {
+    googleId: {
         type: Sequelize.STRING
     }
 }, {
-    hooks: {
-        beforeCreate: setSaltAndPassword,
+        hooks: {
+            beforeCreate: setSaltAndPassword,
             beforeUpdate: setSaltAndPassword
-    }
-});
+        }
+    });
 
 // instance methods
 User.prototype.correctPassword = function (candidatePassword) {
