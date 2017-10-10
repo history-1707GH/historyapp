@@ -57,7 +57,9 @@ class NextExperience extends Component {
     const topics = nlp(textToParse).nouns().data()
     const nearbyPlaces = this.props.nearbyPlaces
     const currentRoute = this.props.currentRoute
-    let nextExperiences = []    
+    let nextExperiences = []
+    let exclusions =[]
+
 
     //determine the topic with the greatest similarity score to each nearby place; add to the nearby place object
     if (topics[0]) {
@@ -76,19 +78,25 @@ class NextExperience extends Component {
         return b.maxSimilarity.similarity - a.maxSimilarity.similarity
       })
 
-      //create an array of next experiences, verifying that user has not visited those epxeriences on that route
-      const isNew = (experience) => {
-        for (var i = 0; i < 5; i++) {
-          if (experience.pageid === currentRoute[i].synopsisId) return false
+      //build a list of exlcuded experiences, listed by Wikapedia page ID (wiki ID is chosen because it is the unique identifier in the list of next experience possibilities)
+      exclusions.push(645042) //exclud NYC Wiki page ID
+      currentRoute.forEach(experience=>exclusions.push(experience.synopsisId))  //add all locations in the users current route 
+
+
+      //create an array of next experiences, excluding places on the 'excluded' listv
+      const includeThisExperience = (experience) => {
+        for (var i = 0; i < exclusions.length; i++) {
+          if (experience.pageid === exclusions[i]) return false
         }
         return true
       }
-      let i = 0
+
+      let j = 0
       while (nextExperiences.length < 2) {
-        if (isNew(rankedNearbyPlaces[i])) {
-          nextExperiences.push(rankedNearbyPlaces[i])
+        if (includeThisExperience(rankedNearbyPlaces[j])) {
+          nextExperiences.push(rankedNearbyPlaces[j])
         }
-        i++
+        j++
       }
 
       //remove any stray html tags from from the nouns
