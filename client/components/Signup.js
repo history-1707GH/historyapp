@@ -23,7 +23,7 @@ class Signup extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.usernameCheck = this.usernameCheck.bind(this)
+        // this.usernameCheck = this.usernameCheck.bind(this)
     }
 
     componentDidMount(props) {
@@ -32,11 +32,12 @@ class Signup extends Component {
 
     componentWillUnmount(props){
         this.props.userError.signupError = null
+        this.props.clearCheckAvail()
     }
 
-    usernameCheck() {
-        this.props.usernameAvail({ username: this.state.account.username })
-    }
+    // usernameCheck() {
+    //     this.props.usernameAvail({ username: this.state.account.username })
+    // }
 
     validateEmail(email) {
         return /\S+@\S+\.\S+/.test(email)
@@ -62,6 +63,7 @@ class Signup extends Component {
         e.preventDefault();
         //submitting data to thunker
         let query = this.props.location.search
+        this.props.usernameAvail({ username: this.state.account.username })
         this.props.createAccount(this.state.account, query)
         //clearing local state
         this.setState({
@@ -73,7 +75,7 @@ class Signup extends Component {
             dirtyPassword: false,
             dirtyEmail: false
         })
-        this.props.clearCheckAvail()
+        // this.props.clearCheckAvail()
     }
 
     render() {
@@ -85,15 +87,14 @@ class Signup extends Component {
                             name='username'
                             floatingLabelText='Username'
                             type='input'
-                            value={this.state.account.username}
+                            value={this.state.account.username} 
                             onChange={this.handleChange}
-                            errorStyle={(this.props.message && this.props.message==='Username available') ? {color: 'green'} : {color: 'red'}}
-                            errorText={this.props.message} 
-                            hintText='(Check availability before creating account)'
+                              
+                            hintText='(Must be unique)'
                             hintStyle={{ fontSize: '10px' }}
                         />
-                        <br />
-                        <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>
+                         {/* <br /> 
+                         <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>  */}
                         <br />
                         <br />
                         <TextField
@@ -119,7 +120,7 @@ class Signup extends Component {
                         <br />
                         <Center>
                             <div>
-                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) || (this.props.message==='Username not available') || (this.props.message===''))}>Create Account!</FlatButton> 
+                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) )}>Create Account!</FlatButton> 
                             </div>
                         </Center>
                         <Center>

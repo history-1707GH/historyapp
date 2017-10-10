@@ -30,7 +30,7 @@ router.route('/')
                         res.json(u)
                     }
                 })} else {
-                    res.json({signupError: 'Failed to create account. User might already exist.'})
+                    res.json({signupError: 'Failed to create account. Username might be taken or user might already exist.'})
                 }
             })
             .catch(next)
