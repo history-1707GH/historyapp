@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
-import { postNote, fetchPlaceNotes, fetchExperience } from '../store'
+import { postNote, fetchPlaceNotes, fetchExperience, calculatePoints } from '../store'
 import { Card, CardHeader, CardText } from 'material-ui/Card'
 
 
@@ -51,6 +51,10 @@ class Notes extends Component {
             userNote: '',
             dirty: false
         })
+        if (this.props.currentUser.id) {
+            const newPointsInfo = {userId: this.props.currentUser.id, points: 5}
+            this.props.updatePoints(newPointsInfo)
+        } 
     };
 
     render() {
@@ -62,6 +66,7 @@ class Notes extends Component {
             ];
         let disableSubmit = inputValue.length > 500 || inputValue.length <= 0;
         const notes = this.props.currentExperience.notes
+        const username = this.props.currentUser.username
         return (
             <div className="container notes">
                 <br />
@@ -110,7 +115,7 @@ class Notes extends Component {
                         const time = `${hours}:${minutes}`
                         return (
                             <Card key={note.id}>
-                                <CardHeader title={`${date}, ${time}`}
+                                <CardHeader title={`${username} ${date}, ${time}`}
                                 />
                                 <CardText> {note.content} </CardText>
                             </Card>
@@ -138,6 +143,9 @@ const mapDispatch = dispatch => {
     return {
         addNewNote: function (note, experienceId) {
             dispatch(postNote(note, experienceId))
+        },
+        updatePoints: (pointsInfo) => {
+            dispatch(calculatePoints(pointsInfo))
         }
     }
 }

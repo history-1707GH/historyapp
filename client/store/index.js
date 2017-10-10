@@ -20,6 +20,7 @@ import currentRoute from './currentRoute'
 import userRoutes from './userRoutes'
 import notes from './notes'
 import userRankings from './userRankings'
+import points from './points'
 
 //import stuff here
 
@@ -42,6 +43,7 @@ const reducer = combineReducers({
   userRoutes,
   notes,
   userRankings,
+  points
 });
 
 const store = createStore(
@@ -71,6 +73,7 @@ export * from './currentRoute'
 export * from './userRoutes'
 export * from './notes'
 export * from './userRankings'
+export * from './points'
 
 
 

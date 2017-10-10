@@ -1,5 +1,5 @@
 import axios from 'axios'
-import getUser from './getUser'
+import { getUser } from './user'
 
 
 export function calculatePoints(pointCalculationObj){
