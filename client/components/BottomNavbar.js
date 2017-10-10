@@ -78,53 +78,53 @@ class BottomNavbar extends Component {
       <div>
         <div>
           <Dialog
-            title={'Info: Map'}
+            title={'More information:'}
             actions={actionMap}
             modal={false}
             open={this.state.map}
-            onRequestClose={this.handleCloseMap}>Map info</Dialog>
+            onRequestClose={this.handleCloseMap}>Select a location to start. Navigate there & learn more!</Dialog>
           <Dialog
-            title={'Info: Synopsis'}
+            title={'More information:'}
             actions={actionSynopsis}
             modal={false}
             open={this.state.synopsis}
-            onRequestClose={this.handleCloseSynopsis}>Synopsis Info</Dialog>
+            onRequestClose={this.handleCloseSynopsis}>Explore your destination! Check-in to unlock your next location and leave a note for other Meanderers! </Dialog>
           <Dialog
-            title={'Info: News Reel'}
+            title={'More information:'}
             actions={actionHeadlines}
             modal={false}
             open={this.state.headlines}
-            onRequestClose={this.handleCloseHeadlines}>headlines info</Dialog>
+            onRequestClose={this.handleCloseHeadlines}>Read related news headlines from the New York Times</Dialog>
           <Dialog
-            title={'Info: Archives'}
+            title={'More information:'}
             actions={actionArchives}
             modal={false}
             open={this.state.archives}
-            onRequestClose={this.handleCloseArchives}>archives info</Dialog>
+            onRequestClose={this.handleCloseArchives}>Peruse thru the archives of the New York Times. (*Requires subscription to NYT)</Dialog>
           <Dialog
-            title={'Info: Notes'}
+            title={'More information:'}
             actions={actionNotes}
             modal={false}
             open={this.state.notes}
-            onRequestClose={this.handleCloseNotes}>notes info</Dialog>
+            onRequestClose={this.handleCloseNotes}>Read notes left by other Meanderers. Then, share your favorite or most interesting thing you learned!</Dialog>
           <Dialog
-            title={'Info: Routes'}
+            title={'More information:'}
             actions={actionRoutes}
             modal={false}
             open={this.state.routes}
-            onRequestClose={this.handleCloseRoutes}>routes info</Dialog>
+            onRequestClose={this.handleCloseRoutes}>Explore routes you've already taken or discover new routes recently completed by other users!</Dialog>
           <Dialog
-            title={'Info: Leaderboard'}
+            title={'More information:'}
             actions={actionLeaderboard}
             modal={false}
             open={this.state.leaderboard}
-            onRequestClose={this.handleCloseLeaderboard}>leadership info</Dialog>
+            onRequestClose={this.handleCloseLeaderboard}>Checkout who's on the leaderboard! Are you in the Top 10?</Dialog>
             <Dialog
-            title={'Info'}
+            title={'Hello from Meander!'}
             actions={actionGeneral}
             modal={false}
             open={this.state.general}
-            onRequestClose={this.handleCloseGeneral}>general info</Dialog>
+            onRequestClose={this.handleCloseGeneral}>Turn your Everyday into a quest!  Explore the neighborhood’s gems while you dive into history.  Your interest and our algorithms will select your next location in this choose-your-own-adventure experience. </Dialog>
         </div>
         <Paper zDepth={1} >
           <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900, textDecorationColor:white}} >

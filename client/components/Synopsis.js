@@ -89,7 +89,7 @@ class Synopsis extends Component {
           (!info) ? null : 
           <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
             <CardHeader
-              title={`Location:${num}  -  ${info.displaytitle}`} 
+              title={`Location${num}:  ${info.displaytitle}`} 
               actAsExpander={true}
             />
             <CardMedia>
@@ -125,11 +125,6 @@ class Synopsis extends Component {
                 } 
               </CardActions> : null
             }
-            {/*<CardActions>
-              <NavLink to="/notes">
-                <FlatButton label="Leave a note" fullWidth={true} style={{ color:white, backgroundColor:teal500 }}/> 
-              </NavLink>
-            </CardActions> */}
           </Card>
         }
       </div>
