@@ -85,7 +85,7 @@ class CheckIn extends Component {
                 <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
-        else if (this.state.checkin || this.props.currentExperience.lat) {
+        else if (this.state.checkin || (this.props.currentExperience.synopsisId ? this.props.currentExperience.synopsisId === this.props.synopsis.pageId : false)) {
             return (
                 <div>
                     <div>
