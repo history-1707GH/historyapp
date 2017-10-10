@@ -7,6 +7,7 @@ import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Navbar from './Navbar'
+import BottomNavbar from './BottomNavbar'
 import ProgressBar from './ProgressBar'
 import Login from './Login'
 import Signup from './Signup'
@@ -53,6 +54,7 @@ class Main extends Component {
                     <Route exact path='/notes' component={Notes}/> 
                     
                 </Switch>
+                <BottomNavbar />
             </div>
         )
     }

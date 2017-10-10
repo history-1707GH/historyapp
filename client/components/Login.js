@@ -5,8 +5,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logIn } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import Google from './Google'
+import {  teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
+
 
 
 class Login extends Component {
@@ -33,7 +36,7 @@ class Login extends Component {
 
   render(props) {
     return (
-      <div>
+      <div className="login-page">
         <Center>
           <div>
             <img src="/.png" className="meander-logo"/>
@@ -64,9 +67,15 @@ class Login extends Component {
                 required
               />
               <br />
+              <br />
               <Center>
                 <div>
-                  <FlatButton type='submit'>SIGN IN</FlatButton>
+                  <RaisedButton 
+                  type='submit'
+                  label="SIGN UP" 
+                  backgroundColor={teal900}
+                  labelColor={white}
+                />
                 </div>
               </Center>
               <Center>
@@ -82,7 +91,7 @@ class Login extends Component {
         <Center>
           <div>
             <Link to={this.props.location.search.length ? '/signup?=redirect=map' : '/signup'}>
-              <FlatButton label="Create a new account" />
+              <FlatButton label="Create a new account" labelColor={teal900} color={teal900}/>
             </Link>
           </div>
         </Center>
