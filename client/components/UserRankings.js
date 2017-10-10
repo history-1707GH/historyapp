@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { fetchRankings } from '../store/index';
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class UserRankings extends Component {
 
@@ -24,24 +23,22 @@ class UserRankings extends Component {
         </Center>
         <br />
         <Center>
-          <Table>
-            <TableHead>
-              <TableCell>User</TableCell>
-              <TableCell numeric>Points</TableCell>
-            </TableHead>
-            <TableBody>
-              {this.props.rankings.map(user => (
-                <TableRow key={user.id}>
-                  <TableCell>
-                    {user.username}
-                  </TableCell>
-                  <TableCell numeric>
-                    {user.points}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <table style={{width: '300px', backgroundColor: '#136845'}}>
+            <tr>
+              <th><b>User</b></th>
+              <th><b>Points</b></th>
+            </tr>
+            {this.props.rankings.map(user => (
+              <tr key={user.id}>
+                <th>
+                  {user.username}
+                </th>
+                <th>
+                  {user.points}
+                </th>
+              </tr>
+            ))}
+          </table>
         </Center>
       </div>
     )

@@ -48,6 +48,11 @@ class CheckIn extends Component {
         }
         this.props.gettingExperience(experience, this.props.routeId, this.props.userId)
         this.setState({ checkin: true })
+        if (this.props.userId) {
+            console.log('logged in')
+        } else {
+            console.log('logged out')
+        }
     }
 
 
