@@ -31,7 +31,7 @@ body {
 }
 
 .synopsis-page {
-  min-height: calc(100vh - 64px - 56px);
+  min-height: calc(100vh - 64px - 65px);
   width: 100%;
   margin: 0 auto;
 }
@@ -43,6 +43,7 @@ body {
 .headline-reel {
   height:510px;
 }
+
 .headline-reel img{
   width: 375px; 
 }

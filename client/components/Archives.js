@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 import {List, ListItem} from 'material-ui/List'
 import RaisedButton from 'material-ui/RaisedButton'
-import {  teal500, teal900, white } from 'material-ui/styles/colors'
+import {  teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 import Center from 'react-center'
 
 class Archives extends Component {
@@ -44,7 +44,9 @@ class Archives extends Component {
                 )} 
               } 
             ) : 
-            <div> EMPTY EMPTY EMPTY STATE </div>
+              <Center>
+              <ListItem color={grey800} primaryText="We're sorry. No related archives available."/>
+              </Center>
           }
         </List>
         <br />
@@ -55,6 +57,8 @@ class Archives extends Component {
           </NavLink>
           </Center>
         </div>
+        <br />
+        <br />
       </div>
     )
   }
