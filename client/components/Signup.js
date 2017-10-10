@@ -141,7 +141,7 @@ class Signup extends Component {
 
 const mapState = function (state) {
     return {
-        message: state.checkUsername,
+        message: state.checkUsernameMessage,
         userError: state.userError
     }
 }
