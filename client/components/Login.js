@@ -33,7 +33,7 @@ class Login extends Component {
 
   render(props) {
     return (
-      <div>
+      <div className="login-page">
         <Center>
           <div>
             <img src="/.png" className="meander-logo"/>

@@ -20,6 +20,18 @@ body {
   background-color: #004D40
 } 
 
+.login-page {
+  min-height: calc(100vh - 64px - 56px);  
+  background-color: white;
+  color: red;
+}
+
+.signup-page{
+  min-height: calc(100vh - 64px - 56px);  
+  background-color:white;
+  color:red;
+}
+
 .google-button {
   width:175px
 }

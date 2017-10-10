@@ -78,7 +78,7 @@ class Signup extends Component {
 
     render() {
         return (
-            <div>
+            <div className="signup-page">
                 <Center>
                     <form onSubmit={this.handleSubmit}>
                         <TextField
