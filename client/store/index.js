@@ -14,7 +14,6 @@ import checkUsername from './checkUsername'
 import user from './user'
 import userError from './userError'
 import currentExperience from './experience'
-import route from './route'
 import experience from './experience'
 import routeId from './routeId'
 import currentRoute from './currentRoute'
@@ -34,19 +33,13 @@ const reducer = combineReducers({
   user,
   userError,
   nextExperiences,
-<<<<<<< HEAD
   checkUsername,
   currentExperience,
-  route,
-  checkinPlace
-
-=======
   experience,
   routeId,
   currentRoute,
   userRoutes,
   notes
->>>>>>> master
 });
 
 const store = createStore(

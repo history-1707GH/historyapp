@@ -20,8 +20,6 @@ router.route('/')
                 username: req.body.username,
                 points: 0
             }
-        }, {
-            include: [{model: Note}]
         })
             .spread((user, notExist) => {
                 if (notExist) {req.login(user, error => {
