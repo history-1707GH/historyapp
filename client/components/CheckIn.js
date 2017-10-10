@@ -6,7 +6,7 @@ import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute } fr
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-
+import { CardActions } from 'material-ui/Card'
 
 
 class CheckIn extends Component {
@@ -14,7 +14,7 @@ class CheckIn extends Component {
     constructor(props) {
         super()
         this.state = {
-            lock: false,  //chnage back
+            lock: true,  
             checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
@@ -74,8 +74,8 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        // if (distance <= 2000) this.setState({ lock: false })
-        // if (distance > 2000) this.setState({ lock: true })
+        if (distance <= 2000) this.setState({ lock: false })
+        if (distance > 2000) this.setState({ lock: true })
     }
 
     render() {
@@ -88,17 +88,17 @@ class CheckIn extends Component {
         else if (this.state.checkin) {
             return (
                 <div>
-                    <div>
+                    <CardActions>
                         <Link to={'/next_experience'} >
                             <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900} />
                         </Link>
-                    </div>
+                    </CardActions>
 
-                    <div>
+                    <CardActions>
                         <NavLink to="/notes">
                             <FlatButton label="Leave a note" fullWidth={true} style={{ color: white, backgroundColor: teal500 }} />
                         </NavLink>
-                    </div>
+                    </CardActions>
                 </div>
             )
         }
