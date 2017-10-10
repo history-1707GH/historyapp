@@ -78,7 +78,7 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        if (distance <= 2000) this.setState({ lock: false })
+        if (distance <= 2000) this.setState({ lock: false })  
         if (distance > 2000) this.setState({ lock: true })
     }
 
@@ -89,7 +89,7 @@ class CheckIn extends Component {
                 <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
-        else if (this.state.checkin) {
+        else if (this.state.checkin || (this.props.currentExperience.synopsisId ? this.props.currentExperience.synopsisId === this.props.synopsis.pageId : false)) {
             return (
                 <div>
                     <div>
@@ -122,7 +122,8 @@ const mapState = state => {
         synopsis: state.synopsis,
         headlines: state.headlines,
         routeId: state.routeId,
-        userId: state.user.id
+        userId: state.user.id,
+        currentExperience: state.experience
     }
 }
 

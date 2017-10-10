@@ -66,7 +66,6 @@ class Notes extends Component {
             ];
         let disableSubmit = inputValue.length > 500 || inputValue.length <= 0;
         const notes = this.props.currentExperience.notes
-        const username = this.props.currentUser.username
         return (
             <div className="container notes">
                 <br />
@@ -115,7 +114,7 @@ class Notes extends Component {
                         const time = `${hours}:${minutes}`
                         return (
                             <Card key={note.id}>
-                                <CardHeader title={`${username} ${date}, ${time}`}
+                                <CardHeader title={`${date}, ${time}`}
                                 />
                                 <CardText> {note.content} </CardText>
                             </Card>
