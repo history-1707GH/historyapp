@@ -33,7 +33,6 @@ const reducer = combineReducers({
   user,
   userError,
   nextExperiences,
-  currentExperience,
   experience,
   routeId,
   currentRoute,
