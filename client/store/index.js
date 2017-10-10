@@ -12,17 +12,14 @@ import selectedPlace from './selectedPlace'
 import currentLocation from './currentLocation'
 import checkUsername from './checkUsername'
 import user from './user'
-<<<<<<< HEAD
 import userError from './userError'
 import currentExperience from './experience'
 import route from './route'
-=======
 import experience from './experience'
 import routeId from './routeId'
 import currentRoute from './currentRoute'
 import userRoutes from './userRoutes'
 import notes from './notes'
->>>>>>> master
 
 //import stuff here
 
