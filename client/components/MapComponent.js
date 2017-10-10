@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { TFOREST_API_KEY } from '../../frontend_keys'
 
-
 class MapComponent extends React.Component {
 
   constructor(props) {

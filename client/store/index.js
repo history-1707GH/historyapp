@@ -10,7 +10,10 @@ import nearbyPlaces from './nearbyPlaces'
 import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
 import currentLocation from './currentLocation'
+import checkUsernameMessage from './checkUsernameMessage'
 import user from './user'
+import userError from './userError'
+import currentExperience from './experience'
 import experience from './experience'
 import routeId from './routeId'
 import currentRoute from './currentRoute'
@@ -28,7 +31,10 @@ const reducer = combineReducers({
   selectedPlace,
   currentLocation,
   user,
+  userError,
   nextExperiences,
+  checkUsernameMessage,
+  currentExperience,
   experience,
   routeId,
   currentRoute,
@@ -54,7 +60,9 @@ export * from './nearbyPlaces'
 export * from './selectedPlace'
 export * from './currentLocation'
 export * from './user'
+export * from './userError'
 export * from './nextExperiences'
+export * from './checkUsernameMessage'
 export * from './experience'
 export * from './routeId'
 export * from './currentRoute'
