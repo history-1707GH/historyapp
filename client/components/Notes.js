@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
@@ -118,7 +118,9 @@ class Notes extends Component {
                     }
                     )
                 }
-
+                <NavLink to="/synopsis">
+                    <RaisedButton label="BACK"/>
+                </NavLink>
             </div>
         )
 

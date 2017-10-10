@@ -63,7 +63,7 @@ class NewsReel extends Component {
       
                       }
                     </CardMedia>
-                    <CardTitle title={`${headline.headline.main.slice(0, 24)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
+                    <CardTitle title={`${headline.headline.main.slice(0, 20)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
                     <CardText>
                       {headline.snippet}
                     </CardText>
