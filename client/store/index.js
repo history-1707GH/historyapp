@@ -9,11 +9,13 @@ import synopsisParse from './synopsisParse'
 import nearbyPlaces from './nearbyPlaces'
 import nextExperiences from './nextExperiences'
 import selectedPlace from './selectedPlace'
-import checkinPlace from './checkinPlace'
 import currentLocation from './currentLocation'
 import user from './user'
-import currentExperience from './experience'
-import route from './route'
+import experience from './experience'
+import routeId from './routeId'
+import currentRoute from './currentRoute'
+import userRoutes from './userRoutes'
+import notes from './notes'
 
 //import stuff here
 
@@ -27,10 +29,11 @@ const reducer = combineReducers({
   currentLocation,
   user,
   nextExperiences,
-  currentExperience,
-  route,
-  checkinPlace
-
+  experience,
+  routeId,
+  currentRoute,
+  userRoutes,
+  notes
 });
 
 const store = createStore(
@@ -50,11 +53,13 @@ export * from './synopsisParse'
 export * from './nearbyPlaces'
 export * from './selectedPlace'
 export * from './currentLocation'
-export * from './checkinPlace'
 export * from './user'
 export * from './nextExperiences'
 export * from './experience'
-export * from './route'
+export * from './routeId'
+export * from './currentRoute'
+export * from './userRoutes'
+export * from './notes'
 
 
 

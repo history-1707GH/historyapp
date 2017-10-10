@@ -1,37 +1,49 @@
-import {getSynopsis} from './synopsis'
-import {getSynopsisParse} from './synopsisParse'
+import { getSynopsis } from './synopsis'
+import { getSynopsisParse } from './synopsisParse'
 import { setHeadlines, setArchives } from './'
 import { NYT_API_KEY } from '../../frontend_keys'
 import axios from 'axios'
-import {getRoute} from './route'
+import { getRouteId } from './routeId'
+import { getCurrentRoute } from './currentRoute'
 
 const GET_CURRENT_EXPERIENCE = 'GET_CURRENT_EXPERIENCE'
 
 const getCurrentExperience = experience => {
-    return {type: GET_CURRENT_EXPERIENCE, experience}
+    return { type: GET_CURRENT_EXPERIENCE, experience }
 }
 
 export default function (state = {}, action) {
-    switch(action.type) {
+    switch (action.type) {
         case GET_CURRENT_EXPERIENCE: return action.experience
         default: return state
     }
 }
 
+export const fetchExperience = (experienceId) => {
+    return function thunk(dispatch) {
+        return axios.get(`/api/experience/${experienceId}`)
+            .then(res => {
+                dispatch(getCurrentExperience(res.data))
+            })
+    }
+}
 
-export const gettingExperience = experience => {
+
+export const gettingExperience = (experience, routeId, userId) => {
     return function thunk(dispatch) {
         return axios.post('/api/experience', experience)
-            .then(res=> {
+            .then(res => {
                 const experience = res.data
                 dispatch(getCurrentExperience(experience))
-                return axios.post('/api/route', experience)
+                dispatch(getCurrentRoute(experience))
+                const payload = { experience, routeId, userId }
+                return axios.post('/api/route', payload)
             })
-            .then(res=>{
-                const route = res.data
-                dispatch(getRoute(route))
+            .then(res => {
+                const routeId = res.data
+                dispatch(getRouteId(routeId))
             })
-            .catch(err=>console.log('There was an error in saving the route or experience', err))
+            .catch(err => console.log('There was an error in saving the route or experience', err))
     }
 }
 
@@ -67,10 +79,10 @@ export const fetchExperienceData = (wikiPageId, wikiPageTitle, headlineQuery) =>
             .then(synopsis => {
                 dispatch(getSynopsis(synopsis))
                 return axios.post('api/synopsis', synopsis)
-                    .then(synposis=>{
+                    .then(synposis => {
                         console.log('succesfully saved synopsis')
                     })
-                    .catch(err=>console.log('there was an issue', err))
+                    .catch(err => console.log('there was an issue', err))
             })
             //fetch synopsis info, call synopsis info action creator 
             .then(() => {
