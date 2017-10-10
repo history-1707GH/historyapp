@@ -36,14 +36,16 @@ body {
   margin: 0 auto;
 }
 
-.headline-reel {
-  height: 635px; 
-  margin: 0 auto;
+.slick-track {
+  min-height: calc(100vh - 64px - 80px);  
 }
 
-// .headline-reel img{
-//   height: 350px; 
-// }
+.headline-reel {
+  height:510px;
+}
+.headline-reel img{
+  width: 375px; 
+}
 
 .containerSlider {
   margin: 0 auto;

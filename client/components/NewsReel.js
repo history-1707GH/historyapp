@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import Slider from 'react-slick'
-import {  teal500, teal900, white } from 'material-ui/styles/colors'
+import {  teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 import Center from 'react-center'
+
 
 
 
@@ -34,14 +35,13 @@ class NewsReel extends Component {
     return (
       <div className="newsreel-page">
         <div>
-          <Slider {...settings}>
          {
           headlinesArr.length ? headlinesArr.map(headline =>  {
-            let xlgUrl = headline.multimedia.filter(x => {if (x.subtype === 'xlarge') return x.url})
-            return (              
+            return (
+              <Slider {...settings}>              
               <Card key={headlinesArr.indexOf(headline)} className="headline-reel">
                 <CardHeader
-                  title={`${headline.headline.main.slice(0, 30)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
+                  title={`${headline.headline.main.slice(0, 25)}...`} subtitle={`New York Times - ${this.createDate(headline.pub_date)}`}/>
                 <CardMedia>
                   {
                     !headline.web_url.includes("query") ? 
@@ -61,25 +61,36 @@ class NewsReel extends Component {
 
                   }
                 </CardMedia>
-                <CardTitle title={`${headline.headline.main.slice(0, 35)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
+                <CardTitle title={`${headline.headline.main.slice(0, 24)}...`} subtitle={!headline.byline ? null : headline.byline.original} />
                 <CardText>
                   {headline.snippet}
                 </CardText>
               </Card>
+              </Slider>
             )
-          }) :
-          <div>EMPTY EMPTY EMPTY EMPTY</div>
+          }) : (
+            <Card key={0} className="headline-reel">
+            <CardHeader
+              title={null}/>
+            <Center>
+              <CardText color={ grey800 }>
+                We're sorry. No related news headlines available.
+              </CardText>
+            </Center>
+          </Card>
+          )
         }
-          </Slider>
         </div>
         <br />
         <br />
         <div>
           <Center>
-          <NavLink to="/synopsis">
-            <RaisedButton type="button" label="BACK" backgroundColor={ teal500 } labelColor={white}/>
-          </NavLink>
+            <NavLink to="/synopsis">
+              <RaisedButton type="button" label="BACK" backgroundColor={ teal500 } labelColor={white}/>
+            </NavLink>
           </Center>
+          <br />
+          <br />
         </div>
       </div>
     )
