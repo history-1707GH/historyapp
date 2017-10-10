@@ -77,11 +77,11 @@ class Synopsis extends Component {
 
   render() {
     const html = { __html: this.state.synopsisText }
-    const { info, archives, headlines } = this.props
+    const { info, archives, headlines, route } = this.props
     let getImg='/images/default-synopsis-img.jpg'
-    let num = 1
+    let num = route.filter(x => {return x.id}).length + 1
     if (info) {
-      getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` 
+      info.text['*'].includes('src=') ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg
     }
     return (
       <div className="synopsis-page">
@@ -89,7 +89,7 @@ class Synopsis extends Component {
           (!info) ? null : 
           <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
             <CardHeader
-              title={`${num}  -  ${info.displaytitle}`} 
+              title={`Location:${num}  -  ${info.displaytitle}`} 
               actAsExpander={true}
             />
             <CardMedia>
@@ -145,7 +145,8 @@ const mapState = state => {
     currentLocation: state.currentLocation,
     info: state.synopsisParse.parse,
     headlines: state.headlines,
-    archives: state.archives
+    archives: state.archives,
+    route: state.currentRoute
   }
 }
 

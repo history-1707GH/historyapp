@@ -6,7 +6,9 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import { postNote, fetchPlaceNotes, fetchExperience } from '../store'
+import {  teal500, teal900, white } from 'material-ui/styles/colors'
 import { Card, CardHeader, CardText } from 'material-ui/Card'
+import Center from 'react-center'
 
 
 class Notes extends Component {
@@ -63,7 +65,7 @@ class Notes extends Component {
         let disableSubmit = inputValue.length > 500 || inputValue.length <= 0;
         const notes = this.props.currentExperience.notes
         return (
-            <div className="container notes">
+            <div className="notes-page">
                 <br />
                 <h3 className="note-header"> Notes </h3>
                 {
@@ -81,7 +83,6 @@ class Notes extends Component {
                             autoScrollBodyContent={true}
                         >
                             <form >
-
                                 <TextField
                                     hintText="Write your note here"
                                     floatingLabelText="Note"
@@ -118,9 +119,11 @@ class Notes extends Component {
                     }
                     )
                 }
+                <Center>
                 <NavLink to="/synopsis">
-                    <RaisedButton label="BACK"/>
+                    <RaisedButton label="BACK" backgroundColor={ teal900 } labelColor={ white } />
                 </NavLink>
+                </Center>
             </div>
         )
 
