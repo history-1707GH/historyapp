@@ -1,7 +1,7 @@
 import React from 'react'
 import L from 'leaflet'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { fetchNearbyPlaces, selectedPlace } from '../store'
+import { fetchNearbyPlaces, selectedPlace, removeArchives, removeSynopsis, removeSynopsisParse } from '../store'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { TFOREST_API_KEY } from '../../frontend_keys'
@@ -16,6 +16,10 @@ class MapComponent extends React.Component {
     if (!this.props.nextExperiences.length) {
       this.props.fetchNearbyPlaces(this.props.currentLocation)
     }
+  }
+
+  componentWillUnmount(){
+    this.props.clearSynopsis()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -97,6 +101,11 @@ const mapDispatch = (dispatch, ownProps) => {
     handleClick: function (place) {
       dispatch(selectedPlace(place))
       ownProps.history.push('/synopsis')
+    },
+    clearSynopsis: ()=>{
+      dispatch(removeArchives())
+      dispatch(removeSynopsis())
+      dispatch(removeSynopsisParse())
     }
   }
 }
