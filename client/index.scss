@@ -103,4 +103,14 @@ body {
   margin-left: 10px;
   margin-right: 10px;
   width: 538px;
+} 
+
+.routes-page {
+  min-height: calc(100vh - 64px - 38px)  
+} 
+
+.route-card {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 355px;
 }
