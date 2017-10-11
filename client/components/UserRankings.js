@@ -20,9 +20,9 @@ class UserRankings extends Component {
   render() {
     let leaders = this.props.rankings
     while (leaders.length < 10) {
-      leaders = [...leaders, {username:null, points:0}]
+      leaders = [...leaders, {username:'--', points:'--'}]
     }
-  
+    console.log(leaders);
     return (
       <div className="leaderboard">
         <Center>
@@ -32,24 +32,25 @@ class UserRankings extends Component {
           <div className="leader-table">
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false} > 
-              <TableRow style={{color:teal900}}>
-                <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Rank</b></TableHeaderColumn>
-                <TableHeaderColumn style={{width: '50%', textAlign: 'justify'}}><b>User</b></TableHeaderColumn>
-                <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Points</b></TableHeaderColumn>
+              <TableRow>
+                <TableHeaderColumn style={{width: '25%', textAlign: 'center', color:teal900, height:'35px'}}><b>Rank</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '45%', textAlign: 'justify', color:teal900, height:'35px'}}><b>User</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '30%', textAlign: 'center', color:teal900, height:'35px'}}><b>Points</b></TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-              {this.props.rankings.map((user, index) => (
+              {leaders.map((user, index) => (
                 <TableRow key={user.id}>
-                  <TableRowColumn style={{width: '25%', textAlign: 'center', color:teal900}}>{index + 1}</TableRowColumn>
-                  <TableRowColumn style={{width: '50%', textAlign: 'justify'}}>{user.username}</TableRowColumn>
-                  <TableRowColumn style={{width: '25%', textAlign: 'center'}}>{user.points}</TableRowColumn>
+                  <TableRowColumn style={{width: '25%', textAlign: 'center', color:teal900, height:'25px'}}>{index + 1}</TableRowColumn>
+                  <TableRowColumn style={{width: '45%', textAlign: 'justify', height:'25px'}}>{user.username}</TableRowColumn>
+                  <TableRowColumn style={{width: '30%', textAlign: 'center', height:'25px'}}>{user.points}</TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
           </div>
         </Center>
+        <br/>
       </div>
     )
   }
