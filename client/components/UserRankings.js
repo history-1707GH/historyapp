@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchRankings } from '../store/index';
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
+import Table, { TableBody, TableHeaderColumn, TableHeader, TableRow, TableRowColumn } from 'material-ui/Table';
 
 class UserRankings extends Component {
 
@@ -24,19 +25,21 @@ class UserRankings extends Component {
         <br />
         <Center>
           <Table>
-            <TableHeader>
-              <TableCell><b>Rank</b></TableCell>
-              <TableCell><b>User</b></TableCell>
-              <TableCell><b>Points</b></TableCell>
-            </TableHeader>
-            <TableBody>
-            {this.props.rankings.map((user,index) => (
-              <TableRow key={user.id}>
-                <TableCell>{index+1}</TableCell>
-                <TableCell>{user.username}</TableCell>
-                <TableCell>{user.points}</TableCell>
+            <TableHeader displaySelectAll={false}> 
+              <TableRow>
+                <TableHeaderColumn><b>Rank</b></TableHeaderColumn>
+                <TableHeaderColumn><b>User</b></TableHeaderColumn>
+                <TableHeaderColumn><b>Points</b></TableHeaderColumn>
               </TableRow>
-            ))}
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+              {this.props.rankings.map((user, index) => (
+                <TableRow key={user.id}>
+                  <TableRowColumn>{index + 1}</TableRowColumn>
+                  <TableRowColumn>{user.username}</TableRowColumn>
+                  <TableRowColumn>{user.points}</TableRowColumn>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </Center>
