@@ -10,10 +10,9 @@ class Orientation extends Component {
   constructor(props) {
     super()
     this.state = {
-      webkitalpha: "...",
-      alpha: "...",
-      beta: "...",
-      gamma: "..."
+      webkitalpha: "",
+      alpha: "",
+      
     }
     this.deviceOrientationListener = this.deviceOrientationListener.bind(this)
   }
@@ -25,6 +24,15 @@ class Orientation extends Component {
       alert("Sorry, your browser doesn't support Device Orientation");
     }
 
+    let video = document.getElementById('video');
+    
+    if(navigator.mediaDevices && (navigator.mediaDevices.getUserMedia || navigator.mediaDevices.webkitgetUserMedia)) {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function(stream) {
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+        })
+
+      }
   }
 
 
@@ -37,30 +45,28 @@ class Orientation extends Component {
 
 
 
-    this.setState({ beta: Math.floor(event.beta) })
-    this.setState({ gamma: Math.floor(event.gamma) })
 
   }
 
-  // calculateAngleFromNorthPole(lat1, lon1, lat2, lon2) {
-
-  // }
+  
 
 
 
 
   render() {
-
+    const {currentLocation, selectedPlace} = this.props
     return (
       <div>
-        <h1> webkitalpha is here: </h1>
+        <video className='wrapper'  id="video" autoplay>
+        </video>
+        <p> webkitalpha is here: </p>
         <p>{this.state.webkitalpha}</p>
-        <h1> alpha is here: </h1>
-        <p>{this.state.alpha}</p>
-        <h1> beta is here: </h1>
-        <p>{this.state.beta}</p>
-        <h1> gamma is here: </h1>
-        <p>{this.state.gamma}</p>
+        <p>currentLocationlat:{currentLocation[0]}</p>
+        <p>currentLocationlon:{currentLocation[1]}</p>
+        <p>selectedPlacelat:{selectedPlace.lat}</p>
+        <p>selectedPlacelon:{selectedPlace.lon}</p>
+
+       
       </div>
     )
   }
@@ -68,6 +74,7 @@ class Orientation extends Component {
 
 
 const mapState = state => {
+  console.log('currentLocation', state.currentLocation)
   return {
     currentLocation: state.currentLocation,
     selectedPlace: state.selectedPlace

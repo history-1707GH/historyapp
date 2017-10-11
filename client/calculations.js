@@ -19,48 +19,21 @@ calculations.getDistance = (lat1, lon1, lat2, lon2) => {
 
 
 
-// this returns the relative direction of the POI - for example, if user is facing south
-// but the attraction is due north, then this will return 180
+// calculating angle between two points
 
-calculations.getDirection = (lat1, lon1, lat2, lon2) => {
+
+calculations.getAngle = (lat1, lon1, lat2, lon2) => {
     
     let alpha = Math.atan2(lat2 - lat1, lon2 - lon1); // alpha in radian
     if (alpha < 0){
-        alpha += (2 * (Math.PI))
+        alpha = alpha + 2*(Math.PI)
     }
-    alpha =  alpha * (180 / Math.PI);
+    alpha =  alpha * (180 / Math.PI); //alpha in degree
     return alpha;
 }
-//this converts the direction alpha into a number between -180 and 180
-// such that an object at 0 is directly in front of the user, 90 to the right, etc.
-calculations.convertToOrientation = (userDirection, alphaDirection) => {
-  let relDiff;
-  const absDiff = Math.max((alphaDirection - userDirection), (userDirection - alphaDirection));
-  switch (true) {
-    case (userDirection > alphaDirection) && (absDiff > 180):
-      relDiff = 360 - absDiff;
-    break;
-    case (userDirection > alphaDirection) && (absDiff < 180):
-      relDiff = -(absDiff % 360);
-    break;
-    case (alphaDirection > userDirection) && (absDiff > 180):
-      relDiff = absDiff - 360;
-    break;
-    case (alphaDirection > userDirection) && (absDiff < 180):
-      relDiff = absDiff % 360;
-    break;
-    default:
-      relDiff = absDiff;
-    }
-  return relDiff;
-};
 
-calculations.getRelativePos = (poi, heading, coords) => {
-    return {
-        poi,
-        distance: calculations.getDistanceInMeters(poi, coords),
-        dir: calculations.convertToOrientation(heading, calculations.getDirection(poi, coords))
-    };
-}
+
+
+
 
 export default calculations;
