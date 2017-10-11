@@ -21,7 +21,7 @@ class UserRoutes extends Component {
                 </Center>
                 <br/>
                 {
-                    routes.length > 0 ? routes.map(route => {
+                    routes.length ? routes.map(route => {
                         let rDate = new Date(route.createdAt).toDateString()
                         return <div>
                             <Card className="route-card">

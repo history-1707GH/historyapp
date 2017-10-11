@@ -22,7 +22,6 @@ class UserRankings extends Component {
     while (leaders.length < 10) {
       leaders = [...leaders, {username:'--', points:'--'}]
     }
-    console.log(leaders);
     return (
       <div className="leaderboard">
         <Center>
