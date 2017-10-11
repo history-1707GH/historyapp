@@ -79,7 +79,7 @@ class NextExperience extends Component {
       })
 
       //build a list of exlcuded experiences, listed by Wikapedia page ID (wiki ID is chosen because it is the unique identifier in the list of next experience possibilities)
-      exclusions.push(645042) //exclud NYC Wiki page ID
+      exclusions.push(645042, 455646, 47384) //exclud New York City, Lower Manhattan, and Brooklyn Wiki page ID
       currentRoute.forEach(experience=>exclusions.push(experience.synopsisId))  //add all locations in the users current route 
 
 
