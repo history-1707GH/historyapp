@@ -180,7 +180,7 @@ class NextExperience extends Component {
     return (
       <div>
       <Center>
-        <h3 className="next-title">The path diverges...</h3>
+        <h3 className="title">The path diverges...</h3>
       </Center>
         <div style={styles.root}>
           <GridList

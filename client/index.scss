@@ -82,7 +82,7 @@ body {
   text-decoration: none
 }
 
-.next-title {
+.title {
   font-family: 'Roboto', sans-serif;
   color: white;
 }
@@ -93,4 +93,14 @@ body {
 
 .notes-page {
   min-height: calc(100vh - 64px - 56px);
+} 
+
+.leaderboard {
+  min-height: calc(100vh - 64px - 45px);  
+} 
+
+.leader-table {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 538px;
 }

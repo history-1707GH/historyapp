@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchRankings } from '../store/index';
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
-import Table, { TableBody, TableHeaderColumn, TableHeader, TableRow, TableRowColumn } from 'material-ui/Table';
+import Table, { TableBody, TableHeaderColumn, TableHeader, TableRow, TableRowColumn } from 'material-ui/Table'
 
 class UserRankings extends Component {
 
@@ -18,14 +18,14 @@ class UserRankings extends Component {
 
   render() {
     return (
-      <div>
+      <div className="leaderboard">
         <Center>
-          <h1>Rankings</h1>
+          <h2 className="title">LEADERBOARD</h2>
         </Center>
-        <br />
         <Center>
+          <div className="leader-table">
           <Table>
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false} > 
               <TableRow>
                 <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Rank</b></TableHeaderColumn>
                 <TableHeaderColumn style={{width: '50%', textAlign: 'justify'}}><b>User</b></TableHeaderColumn>
@@ -42,6 +42,7 @@ class UserRankings extends Component {
               ))}
             </TableBody>
           </Table>
+          </div>
         </Center>
       </div>
     )
