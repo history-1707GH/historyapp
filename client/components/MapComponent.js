@@ -13,7 +13,7 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.nextExperiences.length) {
+    if (!this.props.routeId) {
       this.props.fetchNearbyPlaces(this.props.currentLocation)
     }
   }
@@ -29,8 +29,8 @@ class MapComponent extends React.Component {
 
   render() {
     const position = this.props.currentLocation
-    const mapMarkers = this.props.nextExperiences.length ? this.props.nextExperiences : this.props.nearbyPlaces
-    const mapZoom = this.props.nextExperiences.length ? 12 : 25
+    const mapMarkers = this.props.routeId ? this.props.nextExperiences : this.props.nearbyPlaces  //if there is no current route, start a new route by displaying 50 experience options, else display the next two epxerience options 
+    const mapZoom = this.props.routeId  ? 12 : 25 //if there is no current route, zoom out; else zoom in
 
     var placeIcon = L.icon({
       iconUrl: '/images/magnifier.png',
@@ -89,7 +89,8 @@ const mapState = state => {
   return {
     nearbyPlaces: state.nearbyPlaces,
     currentLocation: state.currentLocation,
-    nextExperiences: state.nextExperiences
+    nextExperiences: state.nextExperiences,
+    routeId: state.routeId
   }
 }
 
