@@ -16,6 +16,8 @@ router.route('/')
                 $or: [{email: req.body.email},{username: req.body.username}]
             },
             defaults: {
+                email: req.body.email,
+                username: req.body.username,
                 password: req.body.password,
                 points: 0
             }

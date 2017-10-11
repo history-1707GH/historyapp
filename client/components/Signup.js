@@ -6,7 +6,8 @@ import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
 import Google from './Google'
-import {  teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
+import RaisedButton from 'material-ui/RaisedButton'
+import { teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 
 
 class Signup extends Component {
@@ -30,7 +31,7 @@ class Signup extends Component {
         this.props.userError.signupError = null
     }
 
-    componentWillUnmount(props){
+    componentWillUnmount(props) {
         this.props.userError.signupError = null
     }
 
@@ -84,7 +85,7 @@ class Signup extends Component {
                             name='username'
                             floatingLabelText='Username'
                             type='input'
-                            value={this.state.account.username} 
+                            value={this.state.account.username}
                             onChange={this.handleChange}
                         />
                         <br />
@@ -112,12 +113,13 @@ class Signup extends Component {
                         <br />
                         <Center>
                             <div>
-                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) )}>Create Account!</FlatButton> 
+                                <RaisedButton type='submit' label="Create Account!"
+                                    backgroundColor={teal900} labelColor={white} disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)))} />
                             </div>
                         </Center>
                         <Center>
                             <div>
-                                 {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null} 
+                                {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null}
                             </div>
                         </Center>
                     </form>

@@ -53,7 +53,7 @@ class Main extends Component {
                     <Route exact path='/end' component={EndRoute}/>  
                     <Route exact path='/routes' component={UserRoutes}/>
                     <Route exact path='/notes' component={Notes}/> 
-                    <Route exact path='/rankings' component={UserRankings}/>
+                    <Route exact path='/leaderboard' component={UserRankings}/>
                 </Switch>
                 <BottomNavbar />
             </div>

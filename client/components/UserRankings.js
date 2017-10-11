@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchRankings } from '../store/index';
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
+import Table, { TableBody, TableHeaderColumn, TableHeader, TableRow, TableRowColumn } from 'material-ui/Table';
 
 class UserRankings extends Component {
 
@@ -23,20 +24,24 @@ class UserRankings extends Component {
         </Center>
         <br />
         <Center>
-          <table style={{width: '300px', backgroundColor: '#136845'}}>
-            <tr>
-              <th><b>Rank</b></th>
-              <th><b>User</b></th>
-              <th><b>Points</b></th>
-            </tr>
-            {this.props.rankings.map((user,index) => (
-              <tr key={user.id}>
-                <th>{index+1}</th>
-                <th>{user.username}</th>
-                <th>{user.points}</th>
-              </tr>
-            ))}
-          </table>
+          <Table>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
+              <TableRow>
+                <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Rank</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '50%', textAlign: 'justify'}}><b>User</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Points</b></TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+              {this.props.rankings.map((user, index) => (
+                <TableRow key={user.id}>
+                  <TableRowColumn style={{width: '25%', textAlign: 'center'}}>{index + 1}</TableRowColumn>
+                  <TableRowColumn style={{width: '50%', textAlign: 'justify'}}>{user.username}</TableRowColumn>
+                  <TableRowColumn style={{width: '25%', textAlign: 'center'}}>{user.points}</TableRowColumn>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </Center>
       </div>
     )
