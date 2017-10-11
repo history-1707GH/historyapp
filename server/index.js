@@ -40,14 +40,6 @@ app.use('/auth', require('./auth'));
 //errorhandling
 app.use(require('./middleware/error'))
 
-// Middleware to return .js.gz so you can still load bundle.js from HTML but will receive bundle.js.gz
-// needed to reduce bundle size and improve performance
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
-
 // serve index.html for all non-api routes
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
