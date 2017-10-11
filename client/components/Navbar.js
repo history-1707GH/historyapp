@@ -21,12 +21,12 @@ export const Navbar = (props) => {
         : 
         iconRight=(<Link to='/login'><FlatButton label='Login' style={{backgroundColor:teal500, color:white}} /> </Link>)
     return (
-        <div>
+        <div >
             <AppBar
                 title={<span style={styles.title}>meander</span>}
                 iconElementLeft={<NavLink to="/map"><IconButton touch={true} className="map-icon"> <MapIcon color={white} /></IconButton></NavLink>}
                 iconElementRight={iconRight}
-                style={{backgroundColor:teal900}}
+                style={{backgroundColor:teal900, position:"fixed", top:0}}
             />
         </div>
     )

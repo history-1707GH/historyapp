@@ -26,7 +26,8 @@ class BottomNavbar extends Component {
       notes:false,
       routes:false,
       leaderboard:false,
-      general:false
+      general:false,
+      next:false
     }
   }
   state = {
@@ -44,7 +45,8 @@ class BottomNavbar extends Component {
   handleCloseRoutes = () => this.setState({routes:false})
   handleCloseLeaderboard = () => this.setState({leaderboard:false})
   handleCloseGeneral = () => this.setState({general:false})
-  
+  handleCloseNext = () => this.setState({next:false})
+   
   handleclickInfo = (index) => {
     this.setState({selectedIndex:index})
     const currentPath= this.props.location.pathname
@@ -56,6 +58,7 @@ class BottomNavbar extends Component {
       case('/notes'): return this.setState({notes:true})
       case('/routes'): return this.setState({routes:true})
       case('/leaderboard'): return this.setState({leaderboard:true})
+      case('/next_experience'): return this.setState({next:true})
       default: return this.setState({general:true})
     }
   }
@@ -69,6 +72,7 @@ class BottomNavbar extends Component {
     const actionGeneral = [<FlatButton label="OK" primary={true} onClick={this.handleCloseGeneral} />]
     const actionLeaderboard = [<FlatButton label="OK" primary={true} onClick={this.handleCloseLeaderboard} />]
     const actionNotes = [<FlatButton label="OK" primary={true} onClick={this.handleCloseLeaderboard} />]
+    const actionNext = [<FlatButton label="OK" primary={true} onClick={this.handleCloseNext} />]
     return (
       <div>
         <div>
@@ -120,8 +124,14 @@ class BottomNavbar extends Component {
             modal={false}
             open={this.state.general}
             onRequestClose={this.handleCloseGeneral}>Turn your Everyday into a quest!  Explore the neighborhood’s gems while you dive into history.  Your interest and our algorithms will select your next location in this choose-your-own-adventure experience. </Dialog>
+            <Dialog
+            title={'More information:'}
+            actions={actionNext}
+            modal={false}
+            open={this.state.next}
+            onRequestClose={this.handleCloseNext}>You're well on your your way! Choose your next location and tap the info icon to learn more about why this location was chosen!</Dialog>
         </div>
-        <Paper zDepth={1} >
+        <Paper zDepth={1} style={{position:"fixed", bottom:0, zIndex:100}}>
           <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900, textDecorationColor:white}} >
           <NavLink to="/routes">
             <BottomNavigationItem

@@ -65,8 +65,7 @@ class Archives extends Component {
           </NavLink>
           </Center>
         </div>
-        <br />
-        <br />
+        <br/>
       </div>
     )
   }

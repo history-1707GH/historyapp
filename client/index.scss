@@ -10,26 +10,23 @@ body {
   width: 250px
 }
 
+.content {
+  min-height: calc(100vh - 64px - 56px);
+  margin-top: 64px;
+}
 .home-root {
   background-color: #004D40;
-  min-height: calc(100vh - 64px - 56px);
   color: white;
 }
 
 .appBar {
-  background-color: #004D40
+  background-color: #004D40;
+  position: fixed
 } 
 
-.login-page {
-  min-height: calc(100vh - 64px - 56px);  
+.login-page, .signup-page {
   background-color: white;
   color: red;
-}
-
-.signup-page{
-  min-height: calc(100vh - 64px - 56px);  
-  background-color:white;
-  color:red;
 }
 
 .google-button {
@@ -43,13 +40,15 @@ body {
 }
 
 .synopsis-page {
-  min-height: calc(100vh - 64px - 65px);
   width: 100%;
+  height:100%;
   margin: 0 auto;
+  background-color: white;
+  margin-bottom: 90px;  
 }
 
-.slick-track {
-  min-height: calc(100vh - 64px - 80px);  
+.next-page {
+  margin-bottom: 100px;  
 }
 
 .headline-reel {
@@ -69,8 +68,8 @@ body {
 }
 
 .archives-page {
-  min-height: calc(100vh - 64px - 56px);
   background-color: white;  
+  margin-bottom: 70px;
 }
 
 .archives-banner {
@@ -92,11 +91,7 @@ body {
 }
 
 .notes-page {
-  min-height: calc(100vh - 64px - 56px);
-} 
-
-.leaderboard {
-  min-height: calc(100vh - 64px - 45px);  
+  margin-bottom: 70px;
 } 
 
 .leader-table {
@@ -105,12 +100,12 @@ body {
   width: 538px;
 } 
 
-.routes-page {
-  min-height: calc(100vh - 64px - 38px)  
-} 
-
 .route-card {
   margin-left: 10px;
   margin-right: 10px;
-  width: 355px;
+  width: 355px;  
+}
+
+.routes-page {
+  margin-bottom: 70px;  
 }

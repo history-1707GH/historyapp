@@ -110,10 +110,12 @@ class Notes extends Component {
                     notes && notes.map(note => {
                         let date = new Date(note.createdAt).toDateString();
                         let time = new Date(note.createdAt).toLocaleTimeString();
+                        let user;
+                        this.state.currentUser ? user = this.state.currentUser.userName : user = 'AnonymousMeanderer'
                         return (
                             <div>
                             <Card key={note.id}>
-                                <CardHeader subtitle={`${date}, ${time}        Username`}/>
+                                <CardHeader subtitle={`${date}, ${time} by ${user}`}/>
                                 <CardText> {note.content} </CardText>
                             </Card>
                             </div>
