@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { teal900, teal500, white } from 'material-ui/styles/colors'
-import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute } from '../store'
+import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute, calculatePoints } from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
@@ -48,6 +48,10 @@ class CheckIn extends Component {
         }
         this.props.gettingExperience(experience, this.props.routeId, this.props.userId)
         this.setState({ checkin: true })
+        if (this.props.userId) {
+            const newPointsInfo = {userId: this.props.userId, points: 10}
+            this.props.updatePoints(newPointsInfo)
+        } 
     }
 
 
@@ -85,7 +89,7 @@ class CheckIn extends Component {
                 <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
-        else if (this.state.checkin || this.props.currentExperience.lat) {
+        else if (this.state.checkin || (this.props.currentExperience.synopsisId ? this.props.currentExperience.synopsisId === this.props.synopsis.pageId : false)) {
             return (
                 <div>
                     <CardActions>
@@ -133,6 +137,9 @@ const mapDispatch = dispatch => {
         },
         deleteCurrentRoute: () => {
             dispatch(deleteCurrentRoute())
+        },
+        updatePoints: (pointsInfo) => {
+            dispatch(calculatePoints(pointsInfo))
         }
     }
 }
