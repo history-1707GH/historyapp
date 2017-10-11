@@ -26,6 +26,7 @@ body {
 
 .login-page, .signup-page {
   background-color: white;
+  min-height: calc(100vh - 64px - 56px);
   color: red;
 }
 
