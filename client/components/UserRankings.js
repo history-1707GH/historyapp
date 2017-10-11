@@ -25,19 +25,19 @@ class UserRankings extends Component {
         <br />
         <Center>
           <Table>
-            <TableHeader displaySelectAll={false}> 
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
               <TableRow>
-                <TableHeaderColumn><b>Rank</b></TableHeaderColumn>
-                <TableHeaderColumn><b>User</b></TableHeaderColumn>
-                <TableHeaderColumn><b>Points</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Rank</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '50%', textAlign: 'justify'}}><b>User</b></TableHeaderColumn>
+                <TableHeaderColumn style={{width: '25%', textAlign: 'center'}}><b>Points</b></TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
               {this.props.rankings.map((user, index) => (
                 <TableRow key={user.id}>
-                  <TableRowColumn>{index + 1}</TableRowColumn>
-                  <TableRowColumn>{user.username}</TableRowColumn>
-                  <TableRowColumn>{user.points}</TableRowColumn>
+                  <TableRowColumn style={{width: '25%', textAlign: 'center'}}>{index + 1}</TableRowColumn>
+                  <TableRowColumn style={{width: '50%', textAlign: 'justify'}}>{user.username}</TableRowColumn>
+                  <TableRowColumn style={{width: '25%', textAlign: 'center'}}>{user.points}</TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>
