@@ -14,7 +14,6 @@ function ProgressBar(props) {
 
   const nextRouteIndex = props.currentRoute.findIndex(experience => !experience.id)
   const placeIndex = nextRouteIndex > 0 ? nextRouteIndex - 1 : 4
-  console.log('placeIndex', placeIndex)
 
   return (
 
