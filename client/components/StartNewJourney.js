@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
-import { deleteRouteId } from '../store'
+import { deleteRouteId, deleteCurrentRoute } from '../store'
 
 
 class ProgressBar extends Component {
@@ -13,7 +13,8 @@ class ProgressBar extends Component {
 
     handleClick(event) {
         event.preventDefault()
-        this.props.deleteRoute()
+        this.props.deleteRouteId()
+        this.props.deleteCurrentRoute()
     }
 
     render() {
@@ -36,8 +37,11 @@ class ProgressBar extends Component {
 
 const mapDispatch = dispatch => {
     return {
-        deleteRoute: () => {
+        deleteRouteId: () => {
             dispatch(deleteRouteId())
+        },
+        deleteCurrentRoute: () => {
+            dispatch(deleteCurrentRoute())
         }
     }
 }

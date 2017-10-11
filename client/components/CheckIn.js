@@ -6,7 +6,7 @@ import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute, cal
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-
+import { CardActions } from 'material-ui/Card'
 
 
 class CheckIn extends Component {
@@ -14,7 +14,7 @@ class CheckIn extends Component {
     constructor(props) {
         super()
         this.state = {
-             lock: false,  //CHANGE TO TRUE
+            lock: false,  //CHANGE TO TRUE
             checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
@@ -35,10 +35,6 @@ class CheckIn extends Component {
 
     handleClick(event) {
         event.preventDefault()
-        if (this.props.routeId < 1) {
-            this.props.deleteCurrentRoute()
-        }
-        this.setState({ hideNextPlaces: false, hideGame: false })
         const place = this.props.place
         const experience = {
             lat: place.lat,
@@ -46,12 +42,20 @@ class CheckIn extends Component {
             wikiPageId: place.pageid,
             headlines: this.props.headlines,
         }
+
         this.props.gettingExperience(experience, this.props.routeId, this.props.userId)
-        this.setState({ checkin: true })
+                
         if (this.props.userId) {
-            const newPointsInfo = {userId: this.props.userId, points: 10}
+            const newPointsInfo = { userId: this.props.userId, points: 10 }
             this.props.updatePoints(newPointsInfo)
-        } 
+        }
+        
+        if (this.props.routeId < 1) {
+            this.props.deleteCurrentRoute()
+        }
+        
+        this.setState({ hideNextPlaces: false, hideGame: false })
+        this.setState({ checkin: true })        
     }
 
 
@@ -92,17 +96,17 @@ class CheckIn extends Component {
         else if (this.state.checkin || (this.props.currentExperience.synopsisId ? this.props.currentExperience.synopsisId === this.props.synopsis.pageId : false)) {
             return (
                 <div>
-                    <div>
+                    <CardActions>
                         <Link to={'/next_experience'} >
                             <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900} />
                         </Link>
-                    </div>
+                    </CardActions>
 
-                    <div>
+                    <CardActions>
                         <NavLink to="/notes">
                             <FlatButton label="Leave a note" fullWidth={true} style={{ color: white, backgroundColor: teal500 }} />
                         </NavLink>
-                    </div>
+                    </CardActions>
                 </div>
             )
         }
