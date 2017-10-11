@@ -23,20 +23,22 @@ class UserRankings extends Component {
         </Center>
         <br />
         <Center>
-          <table style={{width: '300px', backgroundColor: '#136845'}}>
-            <tr>
-              <th><b>Rank</b></th>
-              <th><b>User</b></th>
-              <th><b>Points</b></th>
-            </tr>
+          <Table>
+            <TableHeader>
+              <TableCell><b>Rank</b></TableCell>
+              <TableCell><b>User</b></TableCell>
+              <TableCell><b>Points</b></TableCell>
+            </TableHeader>
+            <TableBody>
             {this.props.rankings.map((user,index) => (
-              <tr key={user.id}>
-                <th>{index+1}</th>
-                <th>{user.username}</th>
-                <th>{user.points}</th>
-              </tr>
+              <TableRow key={user.id}>
+                <TableCell>{index+1}</TableCell>
+                <TableCell>{user.username}</TableCell>
+                <TableCell>{user.points}</TableCell>
+              </TableRow>
             ))}
-          </table>
+            </TableBody>
+          </Table>
         </Center>
       </div>
     )
