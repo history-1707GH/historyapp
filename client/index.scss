@@ -82,10 +82,35 @@ body {
   text-decoration: none
 }
 
+.title {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
 .progress-next {
   margin: 20px;
 }
 
 .notes-page {
   min-height: calc(100vh - 64px - 56px);
+} 
+
+.leaderboard {
+  min-height: calc(100vh - 64px - 45px);  
+} 
+
+.leader-table {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 538px;
+} 
+
+.routes-page {
+  min-height: calc(100vh - 64px - 38px)  
+} 
+
+.route-card {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 355px;
 }

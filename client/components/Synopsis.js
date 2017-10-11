@@ -89,7 +89,7 @@ class Synopsis extends Component {
           (!info) ? null : 
           <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
             <CardHeader
-              title={`Location${num}:  ${info.displaytitle}`} 
+              title={`Location ${num}:  ${info.displaytitle}`} 
               actAsExpander={true}
             />
             <CardMedia>

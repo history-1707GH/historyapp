@@ -11,7 +11,8 @@ import InfoIcon from 'material-ui/svg-icons/action/info'
 import IconButton from 'material-ui/IconButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-
+import Header from 'material-ui/Card/CardHeader'
+import Center from 'react-center'
 
 class NextExperience extends Component {
   constructor(props) {
@@ -178,6 +179,9 @@ class NextExperience extends Component {
 
     return (
       <div>
+      <Center>
+        <h3 className="title">The path diverges...</h3>
+      </Center>
         <div style={styles.root}>
           <GridList
             style={styles.gridList}
