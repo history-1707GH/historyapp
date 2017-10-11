@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import { logOut } from '../store'
 import MapIcon from 'material-ui/svg-icons/maps/map'
-import Menu from './Menu'
 
 
 export const Navbar = (props) => {

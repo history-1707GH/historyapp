@@ -6,7 +6,7 @@ import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute, cal
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-
+import { CardActions } from 'material-ui/Card'
 
 
 class CheckIn extends Component {
@@ -92,17 +92,17 @@ class CheckIn extends Component {
         else if (this.state.checkin || (this.props.currentExperience.synopsisId ? this.props.currentExperience.synopsisId === this.props.synopsis.pageId : false)) {
             return (
                 <div>
-                    <div>
+                    <CardActions>
                         <Link to={'/next_experience'} >
                             <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900} />
                         </Link>
-                    </div>
+                    </CardActions>
 
-                    <div>
+                    <CardActions>
                         <NavLink to="/notes">
                             <FlatButton label="Leave a note" fullWidth={true} style={{ color: white, backgroundColor: teal500 }} />
                         </NavLink>
-                    </div>
+                    </CardActions>
                 </div>
             )
         }

@@ -77,19 +77,19 @@ class Synopsis extends Component {
 
   render() {
     const html = { __html: this.state.synopsisText }
-    const { info, archives, headlines } = this.props
-    let getImg='https://media.timeout.com/images/101705313/image.jpg'
-    let num = 1;
+    const { info, archives, headlines, route } = this.props
+    let getImg='/images/default-synopsis-img.jpg'
+    let num = route.filter(x => {return x.id}).length + 1
     if (info) {
-      getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` 
+      info.text['*'].includes('src=') ? getImg = `https://${info.text['*'].split("src=")[1].split('width')[0].slice(3, -2)}` : getImg
     }
     return (
-      <div>
+      <div className="synopsis-page">
         {
           (!info) ? null : 
           <Card className="synopsis" expanded={this.state.expanded} onExpandChange={this.handleChange}>
             <CardHeader
-              title={`${num}  -  ${info.displaytitle}`} 
+              title={`Location${num}:  ${info.displaytitle}`} 
               actAsExpander={true}
             />
             <CardMedia>
@@ -97,18 +97,12 @@ class Synopsis extends Component {
             </CardMedia>
             <CardTitle title={info.displaytitle} />
             <CardActions>
-              {
-                headlines.length > 1 ? 
-                <NavLink to='/headlines'>
-                  <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
-                </NavLink> : null
-              }
-              {
-                archives.length > 0 ? 
-                <NavLink to='/archives'>
-                  <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-                </NavLink> : null            
-              }
+              <NavLink to='/headlines'>
+                <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
+              </NavLink> 
+              <NavLink to='/archives'>
+                <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+              </NavLink> 
               <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
             </CardActions>
             <CardActions>
@@ -131,11 +125,6 @@ class Synopsis extends Component {
                 } 
               </CardActions> : null
             }
-            {/*<CardActions>
-              <NavLink to="/notes">
-                <FlatButton label="Leave a note" fullWidth={true} style={{ color:white, backgroundColor:teal500 }}/> 
-              </NavLink>
-            </CardActions> */}
           </Card>
         }
       </div>
@@ -151,7 +140,8 @@ const mapState = state => {
     currentLocation: state.currentLocation,
     info: state.synopsisParse.parse,
     headlines: state.headlines,
-    archives: state.archives
+    archives: state.archives,
+    route: state.currentRoute
   }
 }
 

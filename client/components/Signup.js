@@ -6,6 +6,8 @@ import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
 import Google from './Google'
+import {  teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
+
 
 class Signup extends Component {
 
@@ -68,7 +70,14 @@ class Signup extends Component {
 
     render() {
         return (
-            <div>
+            <div className="signup-page">
+                <br />
+                <Center>
+                    <div>
+                        <Google />
+                    </div>
+                </Center>
+                <br />
                 <Center>
                     <form onSubmit={this.handleSubmit}>
                         <TextField
@@ -112,11 +121,6 @@ class Signup extends Component {
                             </div>
                         </Center>
                     </form>
-                </Center>
-                <Center>
-                    <div>
-                        <Google />
-                    </div>
                 </Center>
             </div>
         )
