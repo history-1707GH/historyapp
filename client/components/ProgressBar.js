@@ -45,7 +45,6 @@ function ProgressBar(props) {
           }
 
         </Stepper>
-        <UserRoutes />
       </div>
     </div>
 
