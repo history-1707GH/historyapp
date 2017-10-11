@@ -178,7 +178,7 @@ class NextExperience extends Component {
     ]
 
     return (
-      <div>
+      <div className ='next-page'>
       <Center>
         <h3 className="title">The path diverges...</h3>
       </Center>

@@ -42,6 +42,14 @@ class Archives extends Component {
                               secondaryText={this.createDate(entry.pub_date)}> </ListItem>
                   </a>
                 )} 
+              else if (entry.byline) {
+                return (
+                  <a href={entry.web_url} target="_blank" className="archive-link">
+                    <ListItem primaryText={`${entry.headline.main.slice(0,35)}...`}
+                              secondaryText={`${entry.byline.original} ${this.createDate(entry.pub_date)}`}> </ListItem>
+                  </a>
+                )
+              } 
               } 
             ) : 
               <Center>
@@ -57,8 +65,7 @@ class Archives extends Component {
           </NavLink>
           </Center>
         </div>
-        <br />
-        <br />
+        <br/>
       </div>
     )
   }

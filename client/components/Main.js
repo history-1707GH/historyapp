@@ -41,11 +41,12 @@ class Main extends Component {
         return (
             <div className="main">
                 <Navbar />
+                <div className="content">
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/> 
-                    <Route path='/headlines' component={NewsReel}/>
-                    <Route path='/synopsis' component={Synopsis} />
+                    <Route exact path='/headlines' component={NewsReel}/>
+                    <Route exact path='/synopsis' component={Synopsis} />
                     <Route exact path='/progress' component={ProgressBar} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
@@ -57,6 +58,7 @@ class Main extends Component {
                     <Route exact path='/notes' component={Notes}/> 
                     <Route exact path='/leaderboard' component={UserRankings}/>
                 </Switch>
+                </div>
                 <BottomNavbar />
             </div>
         )
