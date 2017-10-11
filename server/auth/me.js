@@ -13,16 +13,17 @@ router.route('/')
     .post((req, res, next) => {           // create user
         User.findOrCreate({
             where: {
-                email: req.body.email
+                $or: [{email: req.body.email},{username: req.body.username}]
             },
             defaults: {
-                password: req.body.password,
+                email: req.body.email,
                 username: req.body.username,
+                password: req.body.password,
                 points: 0
             }
         })
-            .spread((user, notExist) => {
-                if (notExist) {req.login(user, error => {
+            .spread((user, accountCreated) => {
+                if (accountCreated) {req.login(user, error => {
                     if (error) {
                         next(error)
                     } else {
@@ -30,7 +31,7 @@ router.route('/')
                         res.json(u)
                     }
                 })} else {
-                    res.json({signupError: 'Failed to create account. User might already exist.'})
+                    res.json({signupError: 'Username taken or user might already exist.'})
                 }
             })
             .catch(next)
@@ -43,8 +44,8 @@ router.route('/')
             }
         })
             .then(user => {
-                if (!user) res.json({loginError:'Failed to log in. Wrong email or password'});
-                if (user && !user.correctPassword(req.body.password)) res.json({loginError:'Failed to log in. Wrong email or password'});
+                if (!user) res.json({loginError:'Wrong email or password'});
+                if (user && !user.correctPassword(req.body.password)) res.json({loginError:'Wrong email or password'});
                 if (user && user.correctPassword(req.body.password)) req.login(user, error => {
                     if (error) {
                         next(error)
@@ -59,23 +60,6 @@ router.route('/')
     .delete((req, res, next) => {
         req.logout();
         res.sendStatus(204);
-    })
-
-router.route('/checkUsername')
-    .put((req,res,next)=>{
-        User.findOne({
-            where: {
-                username: req.body.username
-            }
-        })
-        .then(user => {
-            if (user) {
-                res.status(200).json({userAvailability: 'Username not available'})
-            } else {
-                res.status(200).json({userAvailability: 'Username available'})
-            }
-                       
-        })
     })
 
 module.exports = router;

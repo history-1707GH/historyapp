@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { teal900, teal500, white } from 'material-ui/styles/colors'
-import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute } from '../store'
+import { fetchSynopsis, fetchAllNext, gettingExperience, deleteCurrentRoute, calculatePoints } from '../store'
 import NextExperience from './NextExperience'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-
+import { CardActions } from 'material-ui/Card'
 
 
 class CheckIn extends Component {
@@ -14,7 +14,7 @@ class CheckIn extends Component {
     constructor(props) {
         super()
         this.state = {
-            lock: false,  //CHANGE BACK  
+            lock: true,  
             checkin: false
         }
         this.getDistance = this.getDistance.bind(this)
@@ -35,10 +35,6 @@ class CheckIn extends Component {
 
     handleClick(event) {
         event.preventDefault()
-        if (this.props.routeId < 1) {
-            this.props.deleteCurrentRoute()
-        }
-        this.setState({ hideNextPlaces: false, hideGame: false })
         const place = this.props.place
         const experience = {
             lat: place.lat,
@@ -46,8 +42,20 @@ class CheckIn extends Component {
             wikiPageId: place.pageid,
             headlines: this.props.headlines,
         }
+
         this.props.gettingExperience(experience, this.props.routeId, this.props.userId)
-        this.setState({ checkin: true })
+                
+        if (this.props.userId) {
+            const newPointsInfo = { userId: this.props.userId, points: 10 }
+            this.props.updatePoints(newPointsInfo)
+        }
+        
+        if (this.props.routeId < 1) {
+            this.props.deleteCurrentRoute()
+        }
+        
+        this.setState({ hideNextPlaces: false, hideGame: false })
+        this.setState({ checkin: true })        
     }
 
 
@@ -74,8 +82,8 @@ class CheckIn extends Component {
         const lat2 = this.props.currentLocation[0]
         const lon2 = this.props.currentLocation[1]
         const distance = this.getDistance(lat1, lon1, lat2, lon2)
-        // if (distance <= 2000) this.setState({ lock: false })  //CHANGE BACK
-        // if (distance > 2000) this.setState({ lock: true })
+        if (distance <= 500) this.setState({ lock: false })  
+        if (distance > 500) this.setState({ lock: true })
     }
 
     render() {
@@ -85,20 +93,20 @@ class CheckIn extends Component {
                 <RaisedButton type="button" disabled={true} fullWidth={true}> You are too far to check in!</RaisedButton>
             )
         }
-        else if (this.state.checkin || this.props.currentExperience.lat) {
+        else if (this.state.checkin || (this.props.currentExperience.synopsisId ? this.props.currentExperience.synopsisId === this.props.synopsis.pageId : false)) {
             return (
                 <div>
-                    <div>
+                    <CardActions>
                         <Link to={'/next_experience'} >
                             <RaisedButton type="button" label="Onward!" fullWidth={true} labelColor={teal900} />
                         </Link>
-                    </div>
+                    </CardActions>
 
-                    <div>
+                    <CardActions>
                         <NavLink to="/notes">
                             <FlatButton label="Leave a note" fullWidth={true} style={{ color: white, backgroundColor: teal500 }} />
                         </NavLink>
-                    </div>
+                    </CardActions>
                 </div>
             )
         }
@@ -133,6 +141,9 @@ const mapDispatch = dispatch => {
         },
         deleteCurrentRoute: () => {
             dispatch(deleteCurrentRoute())
+        },
+        updatePoints: (pointsInfo) => {
+            dispatch(calculatePoints(pointsInfo))
         }
     }
 }

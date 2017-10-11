@@ -4,86 +4,54 @@ import { Link } from 'react-router-dom'
 import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-import {  teal500, teal900, white, grey400 } from 'material-ui/styles/colors'
-import EndRoute from './EndRoute'
+import { teal500, teal900, white, grey400 } from 'material-ui/styles/colors'
+import StartNewJourney from './StartNewJourney'
 import UserRoutes from './UserRoutes'
+import Center from 'react-center'
 
 
+function ProgressBar(props) {
 
+  const nextRouteIndex = props.currentRoute.findIndex(experience => !experience.id)
+  const placeIndex = nextRouteIndex > 0 ? nextRouteIndex - 1 : 4
+  console.log('placeIndex', placeIndex)
 
-class ProgressBar extends React.Component {
+  return (
 
-  constructor(props) {
-    super()
-    this.state = {
-      finished: false,
-      placeIndex: 0
-    }
-  }
+    <div>
+      <Center>
+        <Link to={'/map'} >
+          {placeIndex<4 ? <RaisedButton label="Take Me To The Map!" labelColor={white} backgroundColor={teal500} /> : <StartNewJourney/>}
+        </Link>
+      </Center>
 
-  handleNext = () => {
-    const { placeIndex } = this.state;
-    this.setState({
-      placeIndex: placeIndex + 1,
-      finished: placeIndex >= 4
-    })
-  }
-
-  render() {
-    const { finished, placeIndex } = this.state
-    return (
       <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
-
-
         <Stepper activeStep={placeIndex} orientation="vertical">
           {
-            this.props.currentRoute.map((experience, idx) => {
+            props.currentRoute.map((experience, idx) => {
+              let date = new Date(experience.createdAt).toLocaleString
               return (
-              <Step key={idx} style={{ color:grey400, backgroundColor:teal900}}>
-                <StepLabel style={{color:white}}>{experience.synopsis ? experience.synopsis.title : "To Be Explored"}</StepLabel>
-                <StepContent>
-                  <p>
-                    User's notes show here.
-                        </p>
-                  <div style={{ margin: '12px 0' }}>
+                <Step key={idx} style={{ color: grey400, backgroundColor: teal900 }}>
+                  <StepLabel style={{ color: white }}>{experience.synopsis ? experience.synopsis.title : "To Be Explored"}</StepLabel>
+                  <StepContent>
+                    <p>
+                      {date}
+                    </p>
 
-                    <FlatButton
-                      label={placeIndex === 4 ? 'Congratulations!' : 'Next'}
-                      disableTouchRipple={true}
-                      disableFocusRipple={true}
-                      primary={true}
-                      onClick={this.handleNext}
-                      style={{ marginRight: 12 }}
-                    />
-
-                  </div>
-                </StepContent>
-              </Step>
-
-            )})
+                  </StepContent>
+                </Step>
+              )
+            })
           }
+
         </Stepper>
-
-        {finished && (
-          <Link to='/map'>
-            <RaisedButton
-              label={'START A NEW JOURNEY'}
-              disableTouchRipple={true}
-              disableFocusRipple={true}
-              primary={true}
-
-              style={{ marginRight: 12 }}
-            />
-          </Link>
-
-        )}
-        <EndRoute/>
         <UserRoutes />
       </div>
-    );
-  }
-  
+    </div>
+
+  );
 }
+
 
 
 

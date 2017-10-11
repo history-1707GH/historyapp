@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { newUser, checkUsername, clearMessage } from '../store/index';
+import { newUser } from '../store/index';
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Center from 'react-center'
 import Google from './Google'
+import RaisedButton from 'material-ui/RaisedButton'
+import { teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
+
 
 class Signup extends Component {
 
@@ -19,23 +22,17 @@ class Signup extends Component {
             },
             dirtyPassword: false,
             dirtyEmail: false,
-            dirtyUsername: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.usernameCheck = this.usernameCheck.bind(this)
     }
 
     componentDidMount(props) {
         this.props.userError.signupError = null
     }
 
-    componentWillUnmount(props){
+    componentWillUnmount(props) {
         this.props.userError.signupError = null
-    }
-
-    usernameCheck() {
-        this.props.usernameAvail({ username: this.state.account.username })
     }
 
     validateEmail(email) {
@@ -52,9 +49,6 @@ class Signup extends Component {
         }
         if (field === 'email') {
             this.setState({ dirtyEmail: true })
-        }
-        if (field === 'username') {
-            this.setState({ dirtyUsername: true })
         }
     }
 
@@ -73,12 +67,18 @@ class Signup extends Component {
             dirtyPassword: false,
             dirtyEmail: false
         })
-        this.props.clearCheckAvail()
     }
 
     render() {
         return (
-            <div>
+            <div className="signup-page">
+                <br />
+                <Center>
+                    <div>
+                        <Google />
+                    </div>
+                </Center>
+                <br />
                 <Center>
                     <form onSubmit={this.handleSubmit}>
                         <TextField
@@ -87,13 +87,7 @@ class Signup extends Component {
                             type='input'
                             value={this.state.account.username}
                             onChange={this.handleChange}
-                            errorStyle={(this.props.message && this.props.message==='Username available') ? {color: 'green'} : {color: 'red'}}
-                            errorText={this.props.message} 
-                            hintText='(Check availability before creating account)'
-                            hintStyle={{ fontSize: '10px' }}
                         />
-                        <br />
-                        <FlatButton type='button' onClick={this.usernameCheck}>Check Availability</FlatButton>
                         <br />
                         <br />
                         <TextField
@@ -119,20 +113,16 @@ class Signup extends Component {
                         <br />
                         <Center>
                             <div>
-                                 <FlatButton type='submit' disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)) || (this.props.message==='Username not available') || (this.props.message===''))}>Create Account!</FlatButton> 
+                                <RaisedButton type='submit' label="Create Account!"
+                                    backgroundColor={teal900} labelColor={white} disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)))} />
                             </div>
                         </Center>
                         <Center>
                             <div>
-                                 {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null} 
+                                {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null}
                             </div>
                         </Center>
                     </form>
-                </Center>
-                <Center>
-                    <div>
-                        <Google />
-                    </div>
                 </Center>
             </div>
         )
@@ -150,12 +140,6 @@ const mapDispatch = function (dispatch, ownProps) {
     return {
         createAccount(account, query) {
             dispatch(newUser(account, ownProps.history, query))
-        },
-        usernameAvail(name) {
-            dispatch(checkUsername(name))
-        },
-        clearCheckAvail() {
-            dispatch(clearMessage())
         }
     }
 }
