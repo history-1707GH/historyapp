@@ -12,6 +12,7 @@ import Login from './Login'
 import Signup from './Signup'
 import Archives from './Archives'
 import Home from './Home'
+import Orientation from './Orientation'
 import EndRoute from './EndRoute'
 import UserRoutes from './UserRoutes'
 import Notes from './Notes'
@@ -44,6 +45,7 @@ class Main extends Component {
                     <Route path='/headlines' component={NewsReel}/>
                     <Route path='/synopsis' component={Synopsis} />
                     <Route exact path='/progress' component={ProgressBar} />
+                    <Route exact path='/orientation' component={Orientation} />
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={Signup} />
                     <Route exact path='/next_experience' component={NextExperience} />  
