@@ -12,7 +12,7 @@ body {
 
 .home-root {
   background-color: #004D40;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px - 56px);
   color: white;
 }
 
@@ -20,23 +20,44 @@ body {
   background-color: #004D40
 } 
 
+.login-page {
+  min-height: calc(100vh - 64px - 56px);  
+  background-color: white;
+  color: red;
+}
+
+.signup-page{
+  min-height: calc(100vh - 64px - 56px);  
+  background-color:white;
+  color:red;
+}
+
 .google-button {
   width:175px
 }
 
 .leaflet-container {
-  height: 1000px;
+  min-height: calc(100vh - 64px - 56px);
   width: 100%;
   margin: 0 auto;
 }
 
-.headline-reel {
-  height: 635px; 
+.synopsis-page {
+  min-height: calc(100vh - 64px - 65px);
+  width: 100%;
   margin: 0 auto;
 }
 
+.slick-track {
+  min-height: calc(100vh - 64px - 80px);  
+}
+
+.headline-reel {
+  height:510px;
+}
+
 .headline-reel img{
-  height: 350px; 
+  width: 375px; 
 }
 
 .containerSlider {
@@ -47,11 +68,24 @@ body {
   background: white;
 }
 
+.archives-page {
+  min-height: calc(100vh - 64px - 56px);
+  background-color: white;  
+}
+
 .archives-banner {
   width: 100%;
   height: 100%
 }
 
+.archive-link {
+  text-decoration: none
+}
+
 .progress-next {
   margin: 20px;
+}
+
+.notes-page {
+  min-height: calc(100vh - 64px - 56px);
 }
