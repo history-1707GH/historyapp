@@ -25,7 +25,6 @@ class Home extends Component {
         <Center>
           <div>
             <br/>
-            <br/>
             <Center>
               <div><img src="/images/girl.png"/></div>
             </Center>

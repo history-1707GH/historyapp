@@ -40,7 +40,6 @@ self.addEventListener('install', function(event) {
                 "/",
                 "/images/*",
                 "/bundle.js",
-                "/bundle.js.gz",
                 "/bundle.js.map",
                 assets["main.js"]
               ]

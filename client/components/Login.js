@@ -72,7 +72,7 @@ class Login extends Component {
                 <div>
                   <RaisedButton 
                   type='submit'
-                  label="SIGN UP" 
+                  label="SIGN IN" 
                   backgroundColor={teal900}
                   labelColor={white}
                 />
