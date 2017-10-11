@@ -7,7 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { teal500, teal900, white } from 'material-ui/styles/colors'
 import { GridList, GridTile } from 'material-ui/GridList'
 import ProgressBar from './ProgressBar'
-import Center from 'react-center'
 import InfoIcon from 'material-ui/svg-icons/action/info'
 import IconButton from 'material-ui/IconButton'
 import Dialog from 'material-ui/Dialog'
@@ -219,11 +218,6 @@ class NextExperience extends Component {
           >  {`Association: ${nextExperiences[1].maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(nextExperiences[1].maxSimilarity.similarity * 10000) / 100)}%`}`}
           </Dialog>
         </div>
-        <Center>
-          <Link to={'/map'} >
-            <RaisedButton label="Take Me To The Map!" labelColor={white} backgroundColor={teal500} />
-          </Link>
-        </Center>
         <div className="progress-next">
           <ProgressBar />
         </div>

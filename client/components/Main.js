@@ -16,6 +16,7 @@ import EndRoute from './EndRoute'
 import UserRoutes from './UserRoutes'
 import Notes from './Notes'
 import UserRankings from './UserRankings'
+import StartNewJourney from './StartNewJourney'
 
 
 import NextExperience from './NextExperience'
@@ -50,6 +51,7 @@ class Main extends Component {
                     <Route exact path='/next_experience' component={NextExperience} />  
                     <Route exact path='/archives' component={Archives}/>
                     <Route exact path='/end' component={EndRoute}/>  
+                    <Route exact path='/start' component={StartNewJourney}/>
                     <Route exact path='/routes' component={UserRoutes}/>
                     <Route exact path='/notes' component={Notes}/> 
                     <Route exact path='/rankings' component={UserRankings}/>
