@@ -73,12 +73,13 @@ class Signup extends Component {
         return (
             <div className="signup-page">
                 <br />
+                <br />
+                <br />
                 <Center>
                     <div>
                         <Google />
                     </div>
                 </Center>
-                <br />
                 <Center>
                     <form onSubmit={this.handleSubmit}>
                         <TextField
@@ -89,7 +90,6 @@ class Signup extends Component {
                             onChange={this.handleChange}
                         />
                         <br />
-                        <br />
                         <TextField
                             name='email'
                             floatingLabelText='Email'
@@ -98,7 +98,6 @@ class Signup extends Component {
                             onChange={this.handleChange}
                             errorText={(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? 'Please enter an email of format: this@example.com' : null}
                         />
-                        <br />
                         <br />
                         <TextField
                             name='password'
@@ -110,6 +109,8 @@ class Signup extends Component {
                             onChange={this.handleChange}
                             errorText={this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? 'Invalid password' : null}
                         />
+                        <br />
+                        <br />
                         <br />
                         <Center>
                             <div>
