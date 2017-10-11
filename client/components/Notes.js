@@ -93,7 +93,7 @@ class Notes extends Component {
                 </div>
                 <div>
                     <Card style={{backgroundColor:teal900}}>
-                        <CardHeader title={`${this.props.currentPlace.title}`} color={white} style={{color:white}} titleColor={white}/>
+                        <CardHeader title={`${this.props.currentPlace.title}`} titleColor={white}/>
                         <CardMedia> 
                             <img src='/images/notes.jpg' alt="" />
                         </CardMedia>
