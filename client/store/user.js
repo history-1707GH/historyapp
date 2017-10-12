@@ -59,6 +59,9 @@ export function logOut() {
         return axios.delete('/auth/me')
             .then(() => {
                 dispatch(removeUser())
+                if (typeof window !== 'undefined') {
+                    window.location.pathname = '/'
+                }
             })
             .catch(err => console.error(`Unable to log out user`, err))
     }
@@ -78,7 +81,7 @@ export function updateUser(account) {
     return function thunk(dispatch) {
         return axios.put('/auth/me/update', account)
             .then(res => {
-                if (res.data.updateError){
+                if (res.data.updateError) {
                     dispatch(errorUser(res.data))
                 } else {
                     dispatch(getUser(res.data))

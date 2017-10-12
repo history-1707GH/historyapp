@@ -23,6 +23,7 @@ class Account extends Component {
     this.props.userError.updateError = null
     const { user, fetchAllRoutes } = this.props
     if (user.id) return fetchAllRoutes(user.id);
+    this.setState({username: this.props.user.username})
   }
 
   componentWillUnmount(props) {
@@ -73,7 +74,7 @@ class Account extends Component {
                       hintStyle={{ fontSize: '10px' }}
                       onChange={this.handleChange}
                       required
-                      errorText={(!this.state.username.length) ? 'Username required' : null}
+                      errorText={(!this.state.username || this.state.username==='') ? 'Username required' : null}
                     />
                   </Center>
                   <br />
@@ -83,7 +84,7 @@ class Account extends Component {
                       <RaisedButton
                         type='submit'
                         label="SAVE"
-                        disabled={!this.state.username.length}
+                        disabled={!this.state.username || this.state.username===''}
                         backgroundColor={teal900}
                         labelColor={white}
                       />
