@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 import { GridList, GridTile } from 'material-ui/GridList'
-import { fetchAllRoutes, updateUser } from '../store'
+import { fetchAllRoutes, updateUser, clearError } from '../store'
 
 class Account extends Component {
   constructor(props) {
@@ -135,6 +135,9 @@ export const mapDispatch = dispatch => {
     },
     updateAccount: accInfo => {
       dispatch(updateUser(accInfo))
+    },
+    clearUserError: () => {
+      dispatch(clearError())
     }
   }
 }
