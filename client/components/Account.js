@@ -7,16 +7,42 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 import { GridList, GridTile } from 'material-ui/GridList'
-import { fetchAllRoutes } from '../store'
+import { fetchAllRoutes, updateUser } from '../store'
 
 class Account extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      username: props.user.username
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
-  componentDidMount(){
+
+  componentDidMount(props) {
+    this.props.userError.updateError = null
     const { user, fetchAllRoutes } = this.props
     if (user.id) return fetchAllRoutes(user.id);
+  }
+
+  componentWillUnmount(props) {
+    this.props.clearUserError()
+  }
+
+  validateEmail(email) {
+    return /\S+@\S+\.\S+/.test(email)
+  }
+
+  handleChange(e) {
+    const field = e.target.name;
+    const content = e.target.value;
+    this.setState({ [field]: content })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let query = this.props.location.search
+    this.props.updateAccount({ username: this.state.username, userId: this.props.user.id })
   }
 
   render() {
@@ -36,42 +62,47 @@ class Account extends Component {
     return (
       <div className="account-page">
         {
-          user.id ? 
+          user.id ?
             <div>
-             <Center> <h3 className="account-title">Account Info</h3> </Center>
+              <Center> <h3 className="account-title">Account Info</h3> </Center>
               <Center>
-              <form>
-                <Center>
-                <TextField 
-                  type = "input" 
-                  name= "username" 
-                  defaultValue = {user.username ? user.username : null}
-                  floatingLabelText="Username"
-                />
-                </Center>
-                <Center>
-                <TextField 
-                  type = "email" 
-                  name= "email" 
-                  defaultValue = {user.email ? user.email : null}
-                  floatingLabelText="Email"
-                />
-                </Center>
-                <Center>
-                <div>
-                  <RaisedButton 
-                  type='submit'
-                  label="SAVE" 
-                  backgroundColor={teal900}
-                  labelColor={white}
-                />
-                </div>
-              </Center>
-                <br/>
-                <br/>
+                <form onSubmit={this.handleSubmit}>
+                  <Center>
+                    <TextField
+                      type="input"
+                      name="username"
+                      defaultValue={this.state.username ? this.state.username : null}
+                      floatingLabelText="Username"
+                      hintText='(Please enter a username)'
+                      hintStyle={{ fontSize: '10px' }}
+                      onChange={this.handleChange}
+                      required
+                      errorText={(!this.state.username.length) ? 'Username required' : null}
+                    />
+                  </Center>
+                  <br />
+                  <br />
+                  <Center>
+                    <div>
+                      <RaisedButton
+                        type='submit'
+                        label="SAVE"
+                        disabled={!this.state.username.length}
+                        backgroundColor={teal900}
+                        labelColor={white}
+                      />
+                    </div>
+                  </Center>
+                  <Center>
+                    <div>
+                      {(this.props.userError.updateError) ? <p>{this.props.userError.updateError}</p> : null}
+                    </div>
+                  </Center>
+                  <br />
+                  <br />
                 </form>
               </Center>
-              <br/>
+              <br />
               <GridList style={styles.gridList}>
                 <GridTile
                   title={user.points}
@@ -89,14 +120,15 @@ class Account extends Component {
             </div>
             : <div>Please Login</div>
         }
-        </div>
+      </div>
     )
   }
 }
 export const mapState = state => {
   return {
     user: state.user,
-    routes: state.userRoutes
+    routes: state.userRoutes,
+    userError: state.userError
   }
 }
 
@@ -104,6 +136,9 @@ export const mapDispatch = dispatch => {
   return {
     fetchAllRoutes: userId => {
       dispatch(fetchAllRoutes(userId))
+    },
+    updateAccount: accInfo => {
+      dispatch(updateUser(accInfo))
     }
   }
 }
