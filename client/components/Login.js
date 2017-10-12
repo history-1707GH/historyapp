@@ -19,12 +19,10 @@ class Login extends Component {
   }
 
   componentDidMount(props) {
-    document.body.className = "home";
     this.props.userError.loginError = null
   }
 
   componentWillUnmount(props) {
-    document.body.className = null;
     this.props.userError.loginError = null
   }
 
