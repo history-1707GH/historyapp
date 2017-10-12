@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
 import { deleteRouteId, deleteCurrentRoute } from '../store'
-
+import { teal500 } from 'material-ui/styles/colors'
 
 class ProgressBar extends Component {
     constructor(props) {
@@ -20,13 +20,15 @@ class ProgressBar extends Component {
     render() {
         return (
             <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }} onClick = {this.handleClick}>
+                <br />
                 <Link to='/map' >
                     <RaisedButton
-                        label={'START A NEW JOURNEY'}
+                        label="START A NEW JOURNEY"
                         disableTouchRipple={true}
                         disableFocusRipple={true}
                         primary={true}
                         style={{ marginRight: 12 }}
+                        backgroundColor={teal500}
                     />
                 </Link>
             </div>

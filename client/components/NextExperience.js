@@ -13,6 +13,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import Header from 'material-ui/Card/CardHeader'
 import Center from 'react-center'
+import StartNewJourney from './StartNewJourney'
 
 class NextExperience extends Component {
   constructor(props) {
@@ -110,8 +111,6 @@ class NextExperience extends Component {
           place.maxSimilarity.noun = noun
         }
       })
-
-
       //put the next experiences on the store
       this.props.getNextExperiences(nextExperiences)
     }
@@ -182,29 +181,34 @@ class NextExperience extends Component {
     return (
       <div className ='next-page'>
       <Center>
-        <h3 className="title">The path diverges...</h3>
+       { placeIndex < 4 ?
+        <h3 className="title">The path diverges...</h3> : 
+        <h3 className="title">Congrats! Route completed!</h3>  }
       </Center>
         <div style={styles.root}>
-          <GridList
-            style={styles.gridList}
-          >
-            {
-              nextExperiences.length > 1 && nextExperiences.map(nextPlaceChoice => {
-                return (
-                  <GridTile
-                    key={nextPlaceChoice.pageid}
-                    title={nextPlaceChoice.title}
-                    actionIcon={<IconButton onClick={nextExperiences.indexOf(nextPlaceChoice) === 0 ? this.handleOpen1 : this.handleOpen2}><InfoIcon color="white" /></IconButton>}
-                    subtitle={<span>Distance: <b>{Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}
-                    </b></span>}
-                  >
-                    <img className="next-icon" src="/images/cityscape.png" />
-                  </GridTile>
-                )
-              }
-              )
-            }
-          </GridList>
+          {
+            placeIndex < 4 ? (
+              <GridList
+                style={styles.gridList}
+              >
+                {
+                  nextExperiences.length > 1 && nextExperiences.map(nextPlaceChoice => {
+                    return (
+                      <GridTile
+                        key={nextPlaceChoice.pageid}
+                        title={nextPlaceChoice.title}
+                        actionIcon={<IconButton onClick={nextExperiences.indexOf(nextPlaceChoice) === 0 ? this.handleOpen1 : this.handleOpen2}><InfoIcon color="white" /></IconButton>}
+                        subtitle={<span>Distance: <b>{Math.floor((nextPlaceChoice.dist * 100 / 5280)) / 100}
+                        </b></span>}
+                      >
+                        <img className="next-icon" src="/images/cityscape.png" />
+                      </GridTile>
+                    )
+                  })
+                }
+              </GridList>
+            ) : <Center><div><img className="finish-icon" src="/images/finish.png"/></div><br/></Center>
+          }
         </div>
         <div>
           <Dialog

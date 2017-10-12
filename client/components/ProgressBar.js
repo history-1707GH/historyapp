@@ -5,20 +5,16 @@ import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import { teal500, teal900, white, grey400 } from 'material-ui/styles/colors'
-import StartNewJourney from './StartNewJourney'
 import UserRoutes from './UserRoutes'
 import Center from 'react-center'
 
 
 function ProgressBar(props) {
-
   const nextRouteIndex = props.currentRoute.findIndex(experience => !experience.id)
   const placeIndex = nextRouteIndex > 0 ? nextRouteIndex - 1 : 4
-
   return (
-
-    <div>
-      <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
+    <div className="progress-next">
+      <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }} >
         <Stepper activeStep={placeIndex} orientation="vertical">
           {
             props.currentRoute.map((experience, idx) => {
@@ -36,12 +32,10 @@ function ProgressBar(props) {
               )
             })
           }
-
         </Stepper>
       </div>
     </div>
-
-  );
+  )
 }
 
 
