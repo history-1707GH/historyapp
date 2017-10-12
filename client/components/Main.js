@@ -7,6 +7,7 @@ import MapComponent from './MapComponent'
 import NewsReel from './NewsReel'
 import Synopsis from './Synopsis'
 import Navbar from './Navbar'
+import BottomNavbar from './BottomNavbar'
 import ProgressBar from './ProgressBar'
 import Login from './Login'
 import Signup from './Signup'
@@ -16,6 +17,8 @@ import Orientation from './Orientation'
 import EndRoute from './EndRoute'
 import UserRoutes from './UserRoutes'
 import Notes from './Notes'
+import UserRankings from './UserRankings'
+import StartNewJourney from './StartNewJourney'
 
 
 import NextExperience from './NextExperience'
@@ -39,11 +42,12 @@ class Main extends Component {
         return (
             <div className="main">
                 <Navbar />
+                <div className="content">
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/> 
-                    <Route path='/headlines' component={NewsReel}/>
-                    <Route path='/synopsis' component={Synopsis} />
+                    <Route exact path='/headlines' component={NewsReel}/>
+                    <Route exact path='/synopsis' component={Synopsis} />
                     <Route exact path='/progress' component={ProgressBar} />
                     <Route exact path='/orientation' component={Orientation} />
                     <Route exact path='/login' component={Login} />
@@ -51,10 +55,13 @@ class Main extends Component {
                     <Route exact path='/next_experience' component={NextExperience} />  
                     <Route exact path='/archives' component={Archives}/>
                     <Route exact path='/end' component={EndRoute}/>  
+                    <Route exact path='/start' component={StartNewJourney}/>
                     <Route exact path='/routes' component={UserRoutes}/>
                     <Route exact path='/notes' component={Notes}/> 
-                    
+                    <Route exact path='/leaderboard' component={UserRankings}/>
                 </Switch>
+                </div>
+                <BottomNavbar />
             </div>
         )
     }

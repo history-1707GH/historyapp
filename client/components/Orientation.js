@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-
-
+import { NavLink } from 'react-router-dom'
+import { teal900, teal500, white } from 'material-ui/styles/colors'
+import calculations from '../calculations'
+import FlatButton from 'material-ui/FlatButton'
 
 
 class Orientation extends Component {
@@ -12,9 +14,12 @@ class Orientation extends Component {
     this.state = {
       webkitalpha: "",
       alpha: "",
+      video: "",
+      angle:""
       
     }
     this.deviceOrientationListener = this.deviceOrientationListener.bind(this)
+    this.drawStar = this.drawStar.bind(this)
   }
 
   componentDidMount() {
@@ -23,30 +28,83 @@ class Orientation extends Component {
     } else {
       alert("Sorry, your browser doesn't support Device Orientation");
     }
-
-    let video = document.getElementById('video');
     
-    if(navigator.mediaDevices && (navigator.mediaDevices.getUserMedia || navigator.mediaDevices.webkitgetUserMedia)) {
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(function(stream) {
-            video.src = window.URL.createObjectURL(stream);
-            video.play();
-        })
+    this.setState({video: document.getElementById('video')})
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    
+    const facingMode = "enviroment";
+    const constraints = {
+         audio: false,
+         video: {
+             facingMode: facingMode
+         }
+    }
 
-      }
+    navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+        video.srcObject = stream;
+        video.play();
+    });
+  }
+  componentWillUnmount(){
+
+    this.setState({video: ""})
   }
 
 
   deviceOrientationListener(event) {
     if (event.webkitCompassHeading) {
-      this.setState({ webkitalpha: Math.floor(event.webkitCompassHeading) })
+      this.setState({ webkitalpha: event.webkitCompassHeading })
 
     }
-    else this.setState({ alpha: Math.floor(event.alpha) })
-
-
-
+    else this.setState({ alpha: event.alpha })
+    const {currentLocation, selectedPlace} = this.props
+    const c = document.getElementById("myCanvas");
+    const ctx = c.getContext("2d");
+    const angle = calculations.getAngle(currentLocation[0], currentLocation[1], selectedPlace.lat,  selectedPlace.lon)
+    this.setState({angle: angle})
+    const title = selectedPlace.title
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.fillStyle = "green";
+    ctx.font = "900 25px impact";
+    console.log('!!!!!', -this.state.webkitalpha )
+   
+    
+    ctx.fillText(title, 10 + (angle - this.state.webkitalpha)*5 , 150);
+    this.drawStar(50 + (angle - this.state.webkitalpha)*5, 110, 5, 10, 6)
 
   }
+
+ drawStar(cx, cy, spikes, outerRadius, innerRadius) {
+    var rot = Math.PI / 2 * 3;
+    var x = cx;
+    var y = cy;
+    var step = Math.PI / spikes;
+    const c = document.getElementById("myCanvas");
+    const ctx = c.getContext("2d");
+    ctx.strokeSyle = "#000";
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius)
+    for (let i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x, y)
+        rot += step
+
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x, y)
+        rot += step
+    }
+    ctx.lineTo(cx, cy - outerRadius)
+    ctx.closePath();
+    ctx.lineWidth=5;
+    ctx.strokeStyle='#EDF364';
+    ctx.stroke();
+    ctx.fillStyle='#EDF364';
+    ctx.fill();
+
+}
 
   
 
@@ -55,22 +113,30 @@ class Orientation extends Component {
 
   render() {
     const {currentLocation, selectedPlace} = this.props
+   const distance =  calculations.getDistance(currentLocation[0],currentLocation[1], selectedPlace.lat,  selectedPlace.lon)
+   console.log('distance', distance)
+   console.log()
     return (
       <div>
-        <video className='wrapper'  id="video" autoplay>
+        <video className='wrapper'  id="video" width={window.innerWidth} height={window.innerHeight} autoplay>
         </video>
-        <p> webkitalpha is here: </p>
-        <p>{this.state.webkitalpha}</p>
-        <p>currentLocationlat:{currentLocation[0]}</p>
-        <p>currentLocationlon:{currentLocation[1]}</p>
-        <p>selectedPlacelat:{selectedPlace.lat}</p>
-        <p>selectedPlacelon:{selectedPlace.lon}</p>
+        <canvas id="myCanvas" width={window.innerWidth} height={window.innerHeight} >
+    </canvas>
 
-       
+
+      
+
+       <div id="mybutton">
+         {distance <= 500? (<NavLink to='/synopsis'>
+                <FlatButton  id="mybutton" type="button" label="Unlock" labelColor={teal900}/>
+              </NavLink> ): null }
+              </div> 
       </div>
     )
   }
 }
+
+
 
 
 const mapState = state => {
