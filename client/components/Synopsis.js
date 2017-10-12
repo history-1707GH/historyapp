@@ -123,7 +123,7 @@ class Synopsis extends Component {
             <CardActions>
             </CardActions>
             <CardText expandable={true}>
-            <div dangerouslySetInnerHTML={html} />
+              <div dangerouslySetInnerHTML={html} />
             </CardText>
             {
               this.state.expanded ? 

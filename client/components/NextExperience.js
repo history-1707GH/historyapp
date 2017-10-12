@@ -59,6 +59,8 @@ class NextExperience extends Component {
     const currentRoute = this.props.currentRoute
     let nextExperiences = []
     let exclusions =[]
+    const nextRouteIndex = currentRoute.findIndex(experience => !experience.id)
+    const placeIndex = nextRouteIndex > 0 ? nextRouteIndex - 1 : 4
 
 
     //determine the topic with the greatest similarity score to each nearby place; add to the nearby place object
@@ -222,9 +224,12 @@ class NextExperience extends Component {
           >  {`Association: ${nextExperiences[1].maxSimilarity.noun.toUpperCase()} \nAssociation Score:${`${(Math.ceil(nextExperiences[1].maxSimilarity.similarity * 10000) / 100)}%`}`}
           </Dialog>
         </div>
-        <div className="progress-next">
-          <ProgressBar />
-        </div>
+        <Center>
+          <Link to={'/map'} >
+            {placeIndex<4 ? <RaisedButton label="Take Me To The Map!" labelColor={white} backgroundColor={teal500} /> : <StartNewJourney/>}
+          </Link>
+        </Center>
+        <ProgressBar />
       </div>
     )
 

@@ -14,17 +14,10 @@ function ProgressBar(props) {
 
   const nextRouteIndex = props.currentRoute.findIndex(experience => !experience.id)
   const placeIndex = nextRouteIndex > 0 ? nextRouteIndex - 1 : 4
-  console.log('placeIndex', placeIndex)
 
   return (
 
     <div>
-      <Center>
-        <Link to={'/map'} >
-          {placeIndex<4 ? <RaisedButton label="Take Me To The Map!" labelColor={white} backgroundColor={teal500} /> : <StartNewJourney/>}
-        </Link>
-      </Center>
-
       <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
         <Stepper activeStep={placeIndex} orientation="vertical">
           {
