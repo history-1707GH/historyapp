@@ -58,16 +58,12 @@ class Login extends Component {
                 type='text'
                 required
               />
-              <br />
-              <br />
               <TextField
                 name='password'
                 floatingLabelText='Password'
                 type='password'
                 required
               />
-              <br />
-              <br />
               <Center>
                 <div>
                   <RaisedButton 
