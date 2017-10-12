@@ -73,6 +73,7 @@ class BottomNavbar extends Component {
     const actionLeaderboard = [<FlatButton label="OK" primary={true} onClick={this.handleCloseLeaderboard} />]
     const actionNotes = [<FlatButton label="OK" primary={true} onClick={this.handleCloseLeaderboard} />]
     const actionNext = [<FlatButton label="OK" primary={true} onClick={this.handleCloseNext} />]
+    const { user } = this.props
     return (
       <div>
         <div>
@@ -133,7 +134,7 @@ class BottomNavbar extends Component {
         </div>
         <Paper zDepth={1} style={{position:"fixed", bottom:0, zIndex:100}}>
           <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900, textDecorationColor:white}} >
-            <NavLink to="/account">
+            <NavLink to={user.id ? "/account" : "/login"}>
               <BottomNavigationItem
                 label="Account"
                 icon={<AccountIcon color={white} />}
@@ -166,4 +167,10 @@ class BottomNavbar extends Component {
   }
 }
 
-export default withRouter(BottomNavbar)
+export const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default withRouter(connect(mapState)(BottomNavbar))
