@@ -134,7 +134,7 @@ class BottomNavbar extends Component {
         </div>
         <Paper zDepth={1} style={{position:"fixed", bottom:0, zIndex:100}}>
           <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900, textDecorationColor:white}} >
-            <NavLink to={user.id ? "/account" : "/login"}>
+            <NavLink to={user.id ? "/account" : ((this.props.location.pathname==='/') ? '/login?redirect=map' : '/login')}>
               <BottomNavigationItem
                 label="Account"
                 icon={<AccountIcon color={white} />}
