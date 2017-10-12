@@ -3,7 +3,7 @@ import store from '../store'
 import Center from 'react-center'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { logIn } from '../store/index'
+import { logIn, clearError } from '../store/index'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
@@ -23,7 +23,7 @@ class Login extends Component {
   }
 
   componentWillUnmount(props) {
-    this.props.userError.loginError = null
+    this.props.clearUserError()
   }
 
   checkRedirect(e) {
@@ -109,6 +109,9 @@ const mapDispatch = function (dispatch, ownProps) {
   return {
     logInUser: (logInInfo, query) => {
       dispatch(logIn(logInInfo, ownProps.history, query))
+    },
+    clearUserError: () => {
+      dispatch(clearError())
     }
   }
 }

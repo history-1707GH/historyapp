@@ -74,6 +74,21 @@ export function fetchUser() {
     }
 }
 
+export function updateUser(account) {
+    return function thunk(dispatch) {
+        return axios.put('/auth/me/update', account)
+            .then(res => {
+                if (res.data.updateError){
+                    dispatch(errorUser(res.data))
+                } else {
+                    dispatch(getUser(res.data))
+                    dispatch(errorUser({}))
+                }
+            })
+            .catch(err => console.error(`Unable to udpate user`, err))
+    }
+}
+
 //REDUCER
 export default function reducer(state = {}, action) {
     switch (action.type) {
