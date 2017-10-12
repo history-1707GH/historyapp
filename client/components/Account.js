@@ -87,7 +87,18 @@ class Account extends Component {
                         disabled={!this.state.username || this.state.username===''}
                         backgroundColor={teal900}
                         labelColor={white}
+                        style={{margin:"12px"}}
                       />
+                      {
+                        user.username ? 
+                          <Link to="/map">
+                          <RaisedButton
+                            label="MAP"
+                            backgroundColor={teal900}
+                            labelColor={white}
+                            style={{margin:"12px"}}
+                          /> </Link>: null
+                      }
                     </div>
                   </Center>
                   <Center>
@@ -115,7 +126,7 @@ class Account extends Component {
                 </GridTile>
               </GridList>
             </div>
-            : <div>Please Login</div>
+            : null
         }
       </div>
     )
