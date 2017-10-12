@@ -18,6 +18,7 @@ import UserRoutes from './UserRoutes'
 import Notes from './Notes'
 import UserRankings from './UserRankings'
 import StartNewJourney from './StartNewJourney'
+import Account from './Account'
 
 
 import NextExperience from './NextExperience'
@@ -45,6 +46,7 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/map' component={MapComponent}/> 
+                    <Route exact path='/account' component={Account}/>
                     <Route exact path='/headlines' component={NewsReel}/>
                     <Route exact path='/synopsis' component={Synopsis} />
                     <Route exact path='/progress' component={ProgressBar} />

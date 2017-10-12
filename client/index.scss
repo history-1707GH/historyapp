@@ -24,7 +24,7 @@ body {
   position: fixed
 } 
 
-.login-page, .signup-page {
+.login-page, .signup-page, .account-page{
   background-color: white;
   min-height: calc(100vh - 64px - 56px);
   color: red;
@@ -87,10 +87,18 @@ body {
   color: white;
 }
 
+.account-title {
+  font-family: 'Roboto', sans-serif;
+  color: #004D40
+}
+
 .progress-next {
   margin: 20px;
 }
 
+.finish-icon {
+  height:50%;
+}
 .notes-page {
   margin-bottom: 70px;
 } 

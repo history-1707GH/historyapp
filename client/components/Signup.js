@@ -80,51 +80,53 @@ class Signup extends Component {
                         <Google />
                     </div>
                 </Center>
-                <Center>
-                    <form onSubmit={this.handleSubmit}>
-                        <TextField
-                            name='username'
-                            floatingLabelText='Username'
-                            type='input'
-                            value={this.state.account.username}
-                            onChange={this.handleChange}
+                <form onSubmit={this.handleSubmit}>
+                    <Center>
+                    <TextField
+                        name='username'
+                        floatingLabelText='Username'
+                        type='input'
+                        value={this.state.account.username}
+                        onChange={this.handleChange}
+                    />
+                    </Center>
+                    <Center>
+                    <TextField
+                        name='email'
+                        floatingLabelText='Email'
+                        type='email'
+                        value={this.state.account.email}
+                        onChange={this.handleChange}
+                        errorText={(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? 'Please enter an email of format: this@example.com' : null}
+                    />
+                    </Center>
+                    <Center>
+                    <TextField
+                        name='password'
+                        type='password'
+                        floatingLabelText='Password'
+                        hintText='(Must be at least 6 characters long)'
+                        hintStyle={{ fontSize: '10px' }}
+                        value={this.state.account.password}
+                        onChange={this.handleChange}
+                        errorText={this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? 'Invalid password' : null}
                         />
-                        <br />
-                        <TextField
-                            name='email'
-                            floatingLabelText='Email'
-                            type='email'
-                            value={this.state.account.email}
-                            onChange={this.handleChange}
-                            errorText={(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? 'Please enter an email of format: this@example.com' : null}
-                        />
-                        <br />
-                        <TextField
-                            name='password'
-                            type='password'
-                            floatingLabelText='Password'
-                            hintText='(Must be at least 6 characters long)'
-                            hintStyle={{ fontSize: '10px' }}
-                            value={this.state.account.password}
-                            onChange={this.handleChange}
-                            errorText={this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? 'Invalid password' : null}
-                        />
-                        <br />
-                        <br />
-                        <br />
-                        <Center>
-                            <div>
-                                <RaisedButton type='submit' label="Create Account!"
-                                    backgroundColor={teal900} labelColor={white} disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)))} />
-                            </div>
-                        </Center>
-                        <Center>
-                            <div>
-                                {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null}
-                            </div>
-                        </Center>
-                    </form>
-                </Center>
+                    </Center>
+                    <br />
+                    <br />
+                    <br />
+                    <Center>
+                        <div>
+                            <RaisedButton type='submit' label="Create Account!"
+                                backgroundColor={teal900} labelColor={white} disabled={((this.state.account.password.length < 6) || (this.state.account.password.length > 50) || (!this.validateEmail(this.state.account.email)))} />
+                        </div>
+                    </Center>
+                    <Center>
+                        <div>
+                            {(this.props.userError.signupError) ? <p>{this.props.userError.signupError}</p> : null}
+                        </div>
+                    </Center>
+                </form>
             </div>
         )
     }

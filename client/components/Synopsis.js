@@ -96,33 +96,39 @@ class Synopsis extends Component {
               <img src={getImg} className="synopsis-main-image" alt="" />
             </CardMedia>
             <CardTitle title={info.displaytitle} />
-            <CardActions>
-              <NavLink to='/headlines'>
-                <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
-              </NavLink> 
-              <NavLink to='/archives'>
-                <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
-              </NavLink> 
-              <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
-            </CardActions>
-            <CardActions>
             <CheckIn style={{labelColor:teal500, color:teal900}}/>
-            </CardActions>
-            <CardText expandable={true}>
-            <div dangerouslySetInnerHTML={html} />
-            </CardText>
-            {
-              this.state.expanded ? 
+            <Center>
               <CardActions>
-                <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
+                <NavLink to='/headlines'>
+                  <FlatButton type="button" label="News Reel" style={{ color:white, backgroundColor:teal500 }}/>
+                </NavLink> 
+                <NavLink to='/archives'>
+                  <FlatButton type="button" label="Archives" style={{ color:white, backgroundColor:teal500 }}/>
+                </NavLink> 
                 {
                   !this.state.voice ? 
                   <FlatButton label="Listen" onClick={this.handleListen} style={{ color:white, backgroundColor:teal500 }}/> : 
                   <FlatButton label="Stop" onClick={this.handleStopListen} style={{ color:white, backgroundColor:teal500 }} /> 
                 }
+              </CardActions>
+              </Center>
+              <Center>
+              <CardActions>
                 {
-                  this.state.voice && !this.state.pauseVoice ? <IconButton onClick={this.handlePause}><Pause color={teal900} /></IconButton> : <IconButton onClick={this.handleResume}><Play  color={teal900} /></IconButton>
+                  !this.state.voice ? null : ( !this.state.pauseVoice ? <IconButton onClick={this.handlePause}><Pause color={teal900} /></IconButton> : <IconButton onClick={this.handleResume}><Play  color={teal900} /></IconButton>)
                 } 
+                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
+            </CardActions>
+            </Center>
+            <CardActions>
+            </CardActions>
+            <CardText expandable={true}>
+              <div dangerouslySetInnerHTML={html} />
+            </CardText>
+            {
+              this.state.expanded ? 
+              <CardActions>
+                <FlatButton label="Reduce" onClick={this.handleReduce} style={{ color:white, backgroundColor:teal500 }} />
               </CardActions> : null
             }
           </Card>

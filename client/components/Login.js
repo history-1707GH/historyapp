@@ -19,12 +19,10 @@ class Login extends Component {
   }
 
   componentDidMount(props) {
-    document.body.className = "home";
     this.props.userError.loginError = null
   }
 
   componentWillUnmount(props) {
-    document.body.className = null;
     this.props.userError.loginError = null
   }
 
@@ -52,21 +50,22 @@ class Login extends Component {
         <div>
           <Center>
             <form onSubmit={this.checkRedirect}>
+              <Center>
               <TextField
                 name='email'
                 floatingLabelText='Email'
                 type='text'
                 required
               />
-              <br />
-              <br />
+              </Center>
+              <Center>
               <TextField
                 name='password'
                 floatingLabelText='Password'
                 type='password'
                 required
               />
-              <br />
+              </Center>
               <br />
               <Center>
                 <div>
