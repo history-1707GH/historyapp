@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 import { GridList, GridTile } from 'material-ui/GridList'
@@ -11,22 +12,12 @@ import { fetchAllRoutes } from '../store'
 class Account extends Component {
   constructor(props) {
     super(props)
-    // this.handleSubmit = this.handleSubmit.bind(this)
   }
   
   componentDidMount(){
     const { user, fetchAllRoutes } = this.props
     if (user.id) return fetchAllRoutes(user.id);
   }
-  // handleSubmit(event) {
-  //   event.preventDefault()
-  //   const user = {
-  //     firstName: event.target.firstName.value,
-  //     lastName: event.target.lastName.value,
-  //     email: event.target.email.value,
-  //     address: event.target.address.value
-  //   }
-  // }
 
   render() {
     const { user, routes } = this.props
@@ -49,7 +40,7 @@ class Account extends Component {
             <div>
              <Center> <h3 className="account-title">Account Info</h3> </Center>
               <Center>
-              <form onSubmit = {this.handleSubmit}>
+              <form>
                 <Center>
                 <TextField 
                   type = "input" 
@@ -67,12 +58,17 @@ class Account extends Component {
                 />
                 </Center>
                 <Center>
-                <TextField 
-                  type = "password" 
-                  name= "password" 
-                  floatingLabelText="Password"
+                <div>
+                  <RaisedButton 
+                  type='submit'
+                  label="SAVE" 
+                  backgroundColor={teal900}
+                  labelColor={white}
                 />
-                </Center>
+                </div>
+              </Center>
+                <br/>
+                <br/>
                 </form>
               </Center>
               <br/>
