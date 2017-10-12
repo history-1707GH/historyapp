@@ -52,18 +52,23 @@ class Login extends Component {
         <div>
           <Center>
             <form onSubmit={this.checkRedirect}>
+              <Center>
               <TextField
                 name='email'
                 floatingLabelText='Email'
                 type='text'
                 required
               />
+              </Center>
+              <Center>
               <TextField
                 name='password'
                 floatingLabelText='Password'
                 type='password'
                 required
               />
+              </Center>
+              <br />
               <Center>
                 <div>
                   <RaisedButton 
