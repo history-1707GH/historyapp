@@ -29,10 +29,6 @@ class Account extends Component {
     this.props.clearUserError()
   }
 
-  validateEmail(email) {
-    return /\S+@\S+\.\S+/.test(email)
-  }
-
   handleChange(e) {
     const field = e.target.name;
     const content = e.target.value;
