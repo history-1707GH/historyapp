@@ -16,7 +16,7 @@ class Account extends Component {
   
   componentDidMount(){
     const { user, fetchAllRoutes } = this.props
-    if (user) return fetchAllRoutes(user.id);
+    if (user.id) return fetchAllRoutes(user.id);
   }
   // handleSubmit(event) {
   //   event.preventDefault()
@@ -45,7 +45,7 @@ class Account extends Component {
     return (
       <div className="account-page">
         {
-          user ? 
+          user.id ? 
             <div>
              <Center> <h3 className="account-title">Account Info</h3> </Center>
               <Center>
