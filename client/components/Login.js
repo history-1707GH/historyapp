@@ -35,11 +35,6 @@ class Login extends Component {
   render(props) {
     return (
       <div className="login-page">
-        <Center>
-          <div>
-            <img src="/.png" className="meander-logo"/>
-          </div>
-        </Center>
         <br />
         <br />
         <Center>
@@ -84,6 +79,7 @@ class Login extends Component {
               </Center>
             </form>
           </Center>
+          <br />
           <br />
           <br />
         </div>
