@@ -73,7 +73,7 @@ class Account extends Component {
                       hintText='(Please enter a username)'
                       hintStyle={{ fontSize: '10px' }}
                       onChange={this.handleChange}
-                      errorText={(!user.username || !this.state.username || this.state.username==='') ? 'Username required' : null}
+                      errorText={( user.username ||this.state.username ) ? null : 'Username required'}
                     />
                   </Center>
                   <br />
