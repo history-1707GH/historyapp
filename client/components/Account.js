@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Center from 'react-center'
 import { teal500, teal900, white, grey800 } from 'material-ui/styles/colors'
 import { GridList, GridTile } from 'material-ui/GridList'
-import { fetchAllRoutes, updateUser } from '../store'
+import { fetchAllRoutes, updateUser, clearError } from '../store'
 
 class Account extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class Account extends Component {
     this.props.userError.updateError = null
     const { user, fetchAllRoutes } = this.props
     if (user.id) return fetchAllRoutes(user.id);
+    this.setState({username: this.props.user.username})
   }
 
   componentWillUnmount(props) {
@@ -67,13 +68,12 @@ class Account extends Component {
                     <TextField
                       type="input"
                       name="username"
-                      defaultValue={this.state.username ? this.state.username : null}
+                      defaultValue={user.username ? user.username : null}
                       floatingLabelText="Username"
                       hintText='(Please enter a username)'
                       hintStyle={{ fontSize: '10px' }}
                       onChange={this.handleChange}
-                      required
-                      errorText={(!this.state.username.length) ? 'Username required' : null}
+                      errorText={(!user.username || !this.state.username || this.state.username==='') ? 'Username required' : null}
                     />
                   </Center>
                   <br />
@@ -83,10 +83,21 @@ class Account extends Component {
                       <RaisedButton
                         type='submit'
                         label="SAVE"
-                        disabled={!this.state.username.length}
+                        disabled={!this.state.username || this.state.username===''}
                         backgroundColor={teal900}
                         labelColor={white}
+                        style={{margin:"12px"}}
                       />
+                      {
+                        user.username ? 
+                          <Link to="/map">
+                          <RaisedButton
+                            label="MAP"
+                            backgroundColor={teal900}
+                            labelColor={white}
+                            style={{margin:"12px"}}
+                          /> </Link>: null
+                      }
                     </div>
                   </Center>
                   <Center>
@@ -114,7 +125,7 @@ class Account extends Component {
                 </GridTile>
               </GridList>
             </div>
-            : <div>Please Login</div>
+            : null
         }
       </div>
     )
@@ -135,6 +146,9 @@ export const mapDispatch = dispatch => {
     },
     updateAccount: accInfo => {
       dispatch(updateUser(accInfo))
+    },
+    clearUserError: () => {
+      dispatch(clearError())
     }
   }
 }
