@@ -117,7 +117,10 @@ class Synopsis extends Component {
                 {
                   !this.state.voice ? null : ( !this.state.pauseVoice ? <IconButton onClick={this.handlePause}><Pause color={teal900} /></IconButton> : <IconButton onClick={this.handleResume}><Play  color={teal900} /></IconButton>)
                 } 
-                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/>    
+                <FlatButton label="Expand" onClick={this.handleExpand} style={{ color:teal900, backgroundColor:white }}/> 
+                <NavLink to='/orientation'>
+                <FlatButton label="Camera"  style={{ color:teal900, backgroundColor:white }}/> 
+                </NavLink >  
             </CardActions>
             </Center>
             <CardActions>

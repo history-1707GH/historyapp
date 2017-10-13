@@ -118,3 +118,21 @@ body {
 .routes-page {
   margin-bottom: 70px;  
 }
+
+div.wrapper {
+     float:left; 
+    position:relative;
+    
+  }
+  
+  #myCanvas {
+    position:absolute; 
+    top:20%; 
+    left:20px;
+  }
+
+  #mybutton {
+    position:absolute; 
+    top:70%; 
+    left:40%;
+  }
