@@ -68,6 +68,7 @@ class Notes extends Component {
             ];
         let disableSubmit = inputValue.length > 500 || inputValue.length <= 0;
         const notes = this.props.currentExperience.notes
+        const { currentUser } = this.props
         return (
             <div className="notes-page">
                 <div className='add-note-form'>
@@ -111,7 +112,7 @@ class Notes extends Component {
                         let date = new Date(note.createdAt).toDateString();
                         let time = new Date(note.createdAt).toLocaleTimeString();
                         let user;
-                        this.state.currentUser ? user = this.state.currentUser.userName || 'AnonymousMeanderer' : user = 'AnonymousMeanderer'
+                        currentUser.id ? user = currentUser.username || 'AnonymousMeanderer' : user = 'AnonymousMeanderer'
                         return (
                             <div>
                             <Card key={note.id}>

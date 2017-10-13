@@ -68,13 +68,12 @@ class Account extends Component {
                     <TextField
                       type="input"
                       name="username"
-                      defaultValue={this.state.username ? this.state.username : null}
+                      defaultValue={user.username ? user.username : null}
                       floatingLabelText="Username"
                       hintText='(Please enter a username)'
                       hintStyle={{ fontSize: '10px' }}
                       onChange={this.handleChange}
-                      required
-                      errorText={(!this.state.username || this.state.username==='') ? 'Username required' : null}
+                      errorText={(!user.username || !this.state.username || this.state.username==='') ? 'Username required' : null}
                     />
                   </Center>
                   <br />
