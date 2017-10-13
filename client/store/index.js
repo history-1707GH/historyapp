@@ -39,7 +39,7 @@ const reducer = combineReducers({
   userRoutes,
   notes,
   userRankings,
-  points
+  points, 
 });
 
 const store = createStore(
@@ -69,6 +69,7 @@ export * from './userRoutes'
 export * from './notes'
 export * from './userRankings'
 export * from './points'
+
 
 
 

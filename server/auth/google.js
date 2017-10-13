@@ -16,11 +16,12 @@ const googleConfig = {
 const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
   const googleId = profile.id
   const email = profile.emails[0].value
+  const points = 0;
 
   User.find({where: {googleId}})
     .then(user => user
       ? done(null, user)
-      : User.create({email, googleId})
+      : User.create({email, googleId, points})
         .then(user => done(null, user))
     )
     .catch(done)
@@ -31,6 +32,6 @@ passport.use(strategy)
 router.get('/', passport.authenticate('google', {scope: 'email'}))
 
 router.get('/callback', passport.authenticate('google', {
-  successRedirect: '/',
+  successRedirect: '/account',
   failureRedirect: '/login'
 }))

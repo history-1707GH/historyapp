@@ -19,7 +19,7 @@ export const Navbar = (props) => {
     props.currentUser.id ? 
         iconRight=(<Link to='/'><FlatButton type="button" label='Logout' onClick={props.handleLogout} style={{backgroundColor:teal500, color:white}}/></Link>) 
         : 
-        iconRight=(<Link to='/login'><FlatButton label='Login' style={{backgroundColor:teal500, color:white}} /> </Link>)
+        iconRight=(<Link to={(props.currentURL==='/') ? '/login?redirect=map' : '/login'}><FlatButton label='Login' style={{backgroundColor:teal500, color:white}} /> </Link>)
     return (
         <div >
             <AppBar
@@ -32,9 +32,14 @@ export const Navbar = (props) => {
     )
 }
 
-const mapState = state => {
+const mapState = (state) => {
+    let currentURL
+    if (typeof window !== 'undefined') {
+           currentURL = window.location.pathname
+    }
     return {
-        currentUser: state.user
+        currentUser: state.user,
+        currentURL: currentURL
     }
 }
 

@@ -7,8 +7,8 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on'
 import { teal500, teal900, white } from 'material-ui/styles/colors'
 import InfoIcon from 'material-ui/svg-icons/action/info'
 import AccountIcon from 'material-ui/svg-icons/action/account-box'
-import RouteIcon from 'material-ui/svg-icons/maps/person-pin-circle'
-import StarIcon from 'material-ui/svg-icons/action/stars'
+import RouteIcon from 'material-ui/svg-icons/maps/add-location'
+import StarIcon from 'material-ui/svg-icons/toggle/star'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import FlatButton from 'material-ui/FlatButton'
@@ -73,6 +73,7 @@ class BottomNavbar extends Component {
     const actionLeaderboard = [<FlatButton label="OK" primary={true} onClick={this.handleCloseLeaderboard} />]
     const actionNotes = [<FlatButton label="OK" primary={true} onClick={this.handleCloseLeaderboard} />]
     const actionNext = [<FlatButton label="OK" primary={true} onClick={this.handleCloseNext} />]
+    const { user } = this.props
     return (
       <div>
         <div>
@@ -133,26 +134,32 @@ class BottomNavbar extends Component {
         </div>
         <Paper zDepth={1} style={{position:"fixed", bottom:0, zIndex:100}}>
           <BottomNavigation selectedIndex={this.state.selectedIndex} style={{backgroundColor:teal900, textDecorationColor:white}} >
-          <NavLink to="/routes">
+            <NavLink to={user.id ? "/account" : ((this.props.location.pathname==='/') ? '/login?redirect=map' : '/login')}>
+              <BottomNavigationItem
+                label="Account"
+                icon={<AccountIcon color={white} />}
+                onClick={() => this.select(0)}
+              />
+            </NavLink>
+            <NavLink to="/routes">
+              <BottomNavigationItem
+                label="Routes"
+                icon={<RouteIcon color={white} />}
+                onClick={() => this.select(1)}
+              />
+            </NavLink>
+            <NavLink to="/leaderboard">
+              <BottomNavigationItem
+                label="Leaderboard"
+                icon={<StarIcon color={white} />}          
+                onClick={() => this.select(2)}
+              />
+            </NavLink>
             <BottomNavigationItem
-              label="Routes"
-
-              icon={<RouteIcon color={white} />}
-              onClick={() => this.select(0)}
+              label="Info"          
+              icon={<InfoIcon color={white} />}
+              onClick={() => this.handleclickInfo(3)}
             />
-          </NavLink>
-          <NavLink to="/leaderboard">
-            <BottomNavigationItem
-              label="Leaderboard"
-              icon={<StarIcon color={white} />}          
-              onClick={() => this.select(1)}
-            />
-          </NavLink>
-            <BottomNavigationItem
-            label="Info"          
-            icon={<InfoIcon color={white} />}
-            onClick={() => this.handleclickInfo(2)}
-          />
           </BottomNavigation>
         </Paper>
       </div>
@@ -160,4 +167,10 @@ class BottomNavbar extends Component {
   }
 }
 
-export default withRouter(BottomNavbar)
+export const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default withRouter(connect(mapState)(BottomNavbar))

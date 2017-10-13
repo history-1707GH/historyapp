@@ -111,7 +111,7 @@ class Notes extends Component {
                         let date = new Date(note.createdAt).toDateString();
                         let time = new Date(note.createdAt).toLocaleTimeString();
                         let user;
-                        this.state.currentUser ? user = this.state.currentUser.userName : user = 'AnonymousMeanderer'
+                        this.state.currentUser ? user = this.state.currentUser.userName || 'AnonymousMeanderer' : user = 'AnonymousMeanderer'
                         return (
                             <div>
                             <Card key={note.id}>

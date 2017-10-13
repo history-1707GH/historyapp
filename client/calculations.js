@@ -18,10 +18,6 @@ calculations.getDistance = (lat1, lon1, lat2, lon2) => {
 }
 
 
-
-// calculating angle between two points
-
-
 calculations.getAngle = (lat1, lon1, lat2, lon2) => {
     
     let alpha = Math.atan2(lat2 - lat1, lon2 - lon1); // alpha in radian

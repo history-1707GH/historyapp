@@ -69,9 +69,9 @@ class CheckIn extends Component {
         const lon2 = this.props.currentLocation[1]
 
         const distance = calculations.getDistance(lat1, lon1, lat2, lon2)
-        console.log(distance)
-        if (distance <= 2000) this.setState({ lock: false })  
-        if (distance > 2000) this.setState({ lock: true })
+       
+        if (distance <= 500) this.setState({ lock: false })  
+        if (distance > 500) this.setState({ lock: true })
 
     }
 
@@ -101,8 +101,7 @@ class CheckIn extends Component {
         }
         else return (
             <div>
-                <RaisedButton type="button" onClick={this.handleClick} fullWidth={false} label="Check In" labelColor={white} backgroundColor={teal900} />
-                
+                <RaisedButton type="button" onClick={this.handleClick} fullWidth={true} label="Check In" labelColor={white} backgroundColor={teal900} />
             </div>
         )
     }

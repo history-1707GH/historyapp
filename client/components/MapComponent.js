@@ -30,7 +30,7 @@ class MapComponent extends React.Component {
   render() {
     const position = this.props.currentLocation
     const mapMarkers = this.props.routeId ? this.props.nextExperiences : this.props.nearbyPlaces  //if there is no current route, start a new route by displaying 50 experience options, else display the next two epxerience options 
-    const mapZoom = this.props.routeId  ? 12 : 25 //if there is no current route, zoom out; else zoom in
+    const mapZoom = this.props.routeId  ? 14 : 21 //if there is no current route, zoom out; else zoom in
 
     var placeIcon = L.icon({
       iconUrl: '/images/magnifier.png',
@@ -101,7 +101,7 @@ const mapDispatch = (dispatch, ownProps) => {
     },
     handleClick: function (place) {
       dispatch(selectedPlace(place))
-      ownProps.history.push('/orientation')
+      ownProps.history.push('/synopsis')
     },
     clearSynopsis: ()=>{
       dispatch(removeArchives())

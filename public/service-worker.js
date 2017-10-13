@@ -1,5 +1,5 @@
 // Set this to true for production
-let doCache = false;
+let doCache = true;
 
 // Name our cache
 const CACHE_NAME = 'meander-cache-v1';
