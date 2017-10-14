@@ -71,8 +71,8 @@ class CheckIn extends Component {
 
         const distance = calculations.getDistance(lat1, lon1, lat2, lon2)
        
-        if (distance <= 500) this.setState({ lock: false })  
-        if (distance > 500) this.setState({ lock: true })
+        if (distance <= 150) this.setState({ lock: false })  
+        if (distance > 150) this.setState({ lock: true })
 
 
     }

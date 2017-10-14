@@ -44,6 +44,7 @@ class Notes extends Component {
         evt.preventDefault();
         const note = {
             content: this.state.userNote,
+            author: this.props.currentUser.username || 'AnonymousMeanderer',
             experienceId: this.props.currentExperience.id,
             userId: this.props.currentUser.id || null
         }
@@ -87,7 +88,6 @@ class Notes extends Component {
                                 fullWidth={true}
                                 multiLine={true}
                                 onChange={this.changeNote}
-
                             />
                         </form>
                     </Dialog>
@@ -111,12 +111,10 @@ class Notes extends Component {
                     notes && notes.map(note => {
                         let date = new Date(note.createdAt).toDateString();
                         let time = new Date(note.createdAt).toLocaleTimeString();
-                        let user;
-                        currentUser.id ? user = currentUser.username || 'AnonymousMeanderer' : user = 'AnonymousMeanderer'
                         return (
                             <div>
                             <Card key={note.id}>
-                                <CardHeader subtitle={`${date}, ${time} by ${user}`}/>
+                                <CardHeader subtitle={`${date}, ${time} by ${note.author}`}/>
                                 <CardText> {note.content} </CardText>
                             </Card>
                             </div>
