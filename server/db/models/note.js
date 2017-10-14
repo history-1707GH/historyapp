@@ -11,8 +11,7 @@ const Note = db.define('note', {
     }
   },
     author: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: Sequelize.STRING
     }
   });
 
