@@ -21,8 +21,9 @@ export function removeUser() {
 
 //THUNK
 export function newUser(account, history, query) {
+    let acc = Object.assign({}, account, {email: account.email.toLowerCase()})
     return function thunk(dispatch) {
-        return axios.post('/auth/me', account)
+        return axios.post('/auth/me', acc)
             .then(res => {
                 if (res.data.signupError) {
                     dispatch(errorUser(res.data))
@@ -40,8 +41,9 @@ export function newUser(account, history, query) {
 }
 
 export function logIn(account, history, query) {
+    let acc = Object.assign({}, account, {email: account.email.toLowerCase()})
     return function thunk(dispatch) {
-        return axios.put('/auth/me', account)
+        return axios.put('/auth/me', acc)
             .then(res => {
                 if (res.data.loginError) {
                     dispatch(errorUser(res.data))
