@@ -9,9 +9,10 @@ const Note = db.define('note', {
       notEmpty: true,
       len: [1, 500]
     }
-  }
-
-
+  },
+    author: {
+      type: Sequelize.STRING
+    }
   });
 
 module.exports = Note;
