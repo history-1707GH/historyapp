@@ -79,7 +79,6 @@ class Signup extends Component {
     }
 
     render() {
-        console.log(this.state.passwordFocus)
         return (
             <div className="signup-page">
                 <br />
