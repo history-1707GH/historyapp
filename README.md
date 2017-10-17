@@ -8,3 +8,5 @@ When they are ready to move onto the next experience, they can choose from locat
 To create an interactive experience, we want to encourage users to physically explore the locations about which they are learning.  In order to unlock features based on geolocation, we used the HTML5 Geo Locaiton API.    We further enhanced the app’s interactivity with augmented reality.  We determined the heading of the user’s camera and guide users to the correct location.
   
 We were excited about the idea that a user’s journey would be neither deterministic nor random.  We provided users the option between the two locations with the maximum association.   
+
+http://bit.ly/meanderappvideo
