@@ -1,0 +1,8 @@
+Meander is an interactive, guided tour application that takes users on a historical journey, directing them such that each experience builds a story.  We found that creating an immersive experience relied on providing quality content, which is curated from queries to the Wikipedia and New York Times APIs to keep users visually and physically a part of their experience.  
+
+Meander is a Fullstack javascript application.  Our backend is built with Node, Express, Postgres, pg and Sequelize. For our front-end, we used React and Redux as our foundation. 
+
+To create an interactive experience, we want to encourage users to physically explore the locations about which they are learning.   In order to unlock features based on geolocation, we used the HTML5 Geo Locaiton API.  We implemented haversine algorithm to determine the user’s distance between their current and selected locations using latitude and longitude. We then used methods supplied by the API to get and watch the user’s current location and to continually update the distance, unlocking features appropriately.  We further enhanced the app’s interactivity with augmented reality.  We determined the heading of the user’s camera using the HTML5 device orientation API and calculated the angle between the user’s heading and their intended location These calculations allowed us to guide users to the correct location.
+   
+In storing our data, we have content and media that need to be stored independently of one another and of users; these data pieces come together in different combinations to create unique -what we call experiences- which, in turn, build users routes.
+
