@@ -1,0 +1,1 @@
+Meander is an interactive, guided tour application that takes users on a historical journey, directing them such that each experience builds a story.  We found that creating an immersive experience relied on providing quality content, which is curated from queries to the Wikipedia and New York Times APIs to keep users visually and physically a part of their experience.  
