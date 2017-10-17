@@ -22,9 +22,12 @@ class Signup extends Component {
             },
             dirtyPassword: false,
             dirtyEmail: false,
+            emailFocus: false,
+            passwordFocus: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleFocus = this.handleFocus.bind(this)
     }
 
     componentDidMount(props) {
@@ -37,6 +40,12 @@ class Signup extends Component {
 
     validateEmail(email) {
         return /\S+@\S+\.\S+/.test(email)
+    }
+
+    handleFocus(e){
+        if (e.target.name === 'username') this.setState({ emailFocus: false, passwordFocus: false})
+        if (e.target.name === 'email') this.setState({ emailFocus: true, passwordFocus: false})
+        if (e.target.name === 'password') this.setState({ emailFocus: false, passwordFocus: true})
     }
 
     handleChange(e) {
@@ -86,6 +95,7 @@ class Signup extends Component {
                             name='username'
                             floatingLabelText='Username'
                             type='input'
+                            onFocus={this.handleFocus}
                             value={this.state.account.username}
                             onChange={this.handleChange}
                             required
@@ -96,21 +106,25 @@ class Signup extends Component {
                             name='email'
                             floatingLabelText='Email'
                             type='email'
+                            ref='emailfocus'
                             value={this.state.account.email}
                             onChange={this.handleChange}
-                            errorText={(this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? 'Please enter an email of format: this@example.com' : null}
+                            onFocus={this.handleFocus}
+                            errorText={ (!this.state.emailFocus && this.state.dirtyEmail && !(this.validateEmail(this.state.account.email))) ? 'Please enter an email of format: this@example.com' : null}
                         />
                     </Center>
                     <Center>
                         <TextField
                             name='password'
                             type='password'
+                            ref='passwordfocus'
                             floatingLabelText='Password'
                             hintText='(Must be at least 6 characters long)'
                             hintStyle={{ fontSize: '10px' }}
                             value={this.state.account.password}
                             onChange={this.handleChange}
-                            errorText={this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50) ? 'Invalid password' : null}
+                            onFocus={this.handleFocus}
+                            errorText={(!this.state.passwordFocus && this.state.dirtyPassword && (this.state.account.password.length < 6 || this.state.account.password.length > 50)) ? 'Invalid password' : null}
                         />
                     </Center>
                     <br />
