@@ -1,17 +1,17 @@
-#meander
+# meander
 
-##Link to Web App
+## Link to Web App
 bit.ly/meanderapp
 
-##Link to presentation
+## Link to presentation
 bit.ly/meanderappvideo
 
-##Description
+## Description
 
 Meander is an interactive, guided tour application that takes users on a historical journey, directing them such that each experience builds a story.  Explore the neighborhood’s gems while you dive into history.  Your interest and our algorithms will select your next location in this choose-your-own-adventure experience. 
 
-##Frameworks and libraries
-###Font-End
+## Frameworks and libraries
+### Font-End
 -React
 -Redux
 -React-Redux
@@ -19,17 +19,17 @@ Meander is an interactive, guided tour application that takes users on a histori
 -nlp-comprimise
 -Leaflet
 
-###Back-End
+### Back-End
 -Node
 -Express
 -Postgres
 -pg
 -Sequelize
 
-###APIs
+### APIs
 -HTML5 Device Orientation and Geolocation
 -Wikapedia 
 -New York Times
 
-###Progressive Web App Tools
+### Progressive Web App Tools
 -Google Chrome Lighthouse
